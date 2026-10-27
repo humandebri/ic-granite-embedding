@@ -1,0 +1,1575 @@
+{
+  "cases": [
+    {
+      "cols": 384,
+      "hash": [
+        234,
+        32,
+        221,
+        105,
+        163,
+        213,
+        21,
+        80
+      ],
+      "instructions": 670301,
+      "pattern": 0,
+      "phases": [
+        [
+          "micro",
+          655580,
+          1
+        ],
+        [
+          "micro/linear_1x384x1152",
+          640272,
+          1
+        ],
+        [
+          "micro/linear_1x384x1152/gemm_and_scale",
+          617002,
+          1
+        ],
+        [
+          "micro/linear_1x384x1152/quantize",
+          17118,
+          1
+        ],
+        [
+          "micro/linear_1x384x1152/quantize/max_abs",
+          1669,
+          1
+        ],
+        [
+          "micro/linear_1x384x1152/quantize/round_and_cast",
+          3878,
+          1
+        ]
+      ],
+      "projection": 0,
+      "rows": 1
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        61,
+        35,
+        28,
+        63,
+        77,
+        254,
+        54
+      ],
+      "instructions": 670301,
+      "pattern": 1,
+      "phases": [
+        [
+          "micro",
+          655580,
+          1
+        ],
+        [
+          "micro/linear_1x384x1152",
+          640272,
+          1
+        ],
+        [
+          "micro/linear_1x384x1152/gemm_and_scale",
+          617002,
+          1
+        ],
+        [
+          "micro/linear_1x384x1152/quantize",
+          17118,
+          1
+        ],
+        [
+          "micro/linear_1x384x1152/quantize/max_abs",
+          1669,
+          1
+        ],
+        [
+          "micro/linear_1x384x1152/quantize/round_and_cast",
+          3878,
+          1
+        ]
+      ],
+      "projection": 0,
+      "rows": 1
+    },
+    {
+      "cols": 384,
+      "hash": [
+        162,
+        34,
+        31,
+        150,
+        207,
+        115,
+        191,
+        94
+      ],
+      "instructions": 248320,
+      "pattern": 0,
+      "phases": [
+        [
+          "micro",
+          241272,
+          1
+        ],
+        [
+          "micro/linear_1x384x384",
+          226023,
+          1
+        ],
+        [
+          "micro/linear_1x384x384/gemm_and_scale",
+          205930,
+          1
+        ],
+        [
+          "micro/linear_1x384x384/quantize",
+          13995,
+          1
+        ],
+        [
+          "micro/linear_1x384x384/quantize/max_abs",
+          1669,
+          1
+        ],
+        [
+          "micro/linear_1x384x384/quantize/round_and_cast",
+          3878,
+          1
+        ]
+      ],
+      "projection": 1,
+      "rows": 1
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        129,
+        238,
+        192,
+        69,
+        195,
+        110,
+        200
+      ],
+      "instructions": 248320,
+      "pattern": 1,
+      "phases": [
+        [
+          "micro",
+          241272,
+          1
+        ],
+        [
+          "micro/linear_1x384x384",
+          226023,
+          1
+        ],
+        [
+          "micro/linear_1x384x384/gemm_and_scale",
+          205930,
+          1
+        ],
+        [
+          "micro/linear_1x384x384/quantize",
+          13995,
+          1
+        ],
+        [
+          "micro/linear_1x384x384/quantize/max_abs",
+          1669,
+          1
+        ],
+        [
+          "micro/linear_1x384x384/quantize/round_and_cast",
+          3878,
+          1
+        ]
+      ],
+      "projection": 1,
+      "rows": 1
+    },
+    {
+      "cols": 384,
+      "hash": [
+        4,
+        6,
+        14,
+        108,
+        231,
+        183,
+        141,
+        102
+      ],
+      "instructions": 1724843,
+      "pattern": 0,
+      "phases": [
+        [
+          "micro",
+          1690917,
+          1
+        ],
+        [
+          "micro/linear_1x384x3072",
+          1675609,
+          1
+        ],
+        [
+          "micro/linear_1x384x3072/gemm_and_scale",
+          1644682,
+          1
+        ],
+        [
+          "micro/linear_1x384x3072/quantize",
+          24775,
+          1
+        ],
+        [
+          "micro/linear_1x384x3072/quantize/max_abs",
+          1669,
+          1
+        ],
+        [
+          "micro/linear_1x384x3072/quantize/round_and_cast",
+          3878,
+          1
+        ]
+      ],
+      "projection": 2,
+      "rows": 1
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        19,
+        53,
+        132,
+        167,
+        15,
+        142,
+        126
+      ],
+      "instructions": 1724843,
+      "pattern": 1,
+      "phases": [
+        [
+          "micro",
+          1690917,
+          1
+        ],
+        [
+          "micro/linear_1x384x3072",
+          1675609,
+          1
+        ],
+        [
+          "micro/linear_1x384x3072/gemm_and_scale",
+          1644682,
+          1
+        ],
+        [
+          "micro/linear_1x384x3072/quantize",
+          24775,
+          1
+        ],
+        [
+          "micro/linear_1x384x3072/quantize/max_abs",
+          1669,
+          1
+        ],
+        [
+          "micro/linear_1x384x3072/quantize/round_and_cast",
+          3878,
+          1
+        ]
+      ],
+      "projection": 2,
+      "rows": 1
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        12,
+        54,
+        0,
+        47,
+        217,
+        124,
+        85,
+        154
+      ],
+      "instructions": 837063,
+      "pattern": 0,
+      "phases": [
+        [
+          "micro",
+          829929,
+          1
+        ],
+        [
+          "micro/linear_1x1536x384",
+          785851,
+          1
+        ],
+        [
+          "micro/linear_1x1536x384/gemm_and_scale",
+          748522,
+          1
+        ],
+        [
+          "micro/linear_1x1536x384/quantize",
+          31119,
+          1
+        ],
+        [
+          "micro/linear_1x1536x384/quantize/max_abs",
+          5557,
+          1
+        ],
+        [
+          "micro/linear_1x1536x384/quantize/round_and_cast",
+          14678,
+          1
+        ]
+      ],
+      "projection": 3,
+      "rows": 1
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        129,
+        238,
+        192,
+        69,
+        195,
+        110,
+        200
+      ],
+      "instructions": 837063,
+      "pattern": 1,
+      "phases": [
+        [
+          "micro",
+          829929,
+          1
+        ],
+        [
+          "micro/linear_1x1536x384",
+          785851,
+          1
+        ],
+        [
+          "micro/linear_1x1536x384/gemm_and_scale",
+          748522,
+          1
+        ],
+        [
+          "micro/linear_1x1536x384/quantize",
+          31119,
+          1
+        ],
+        [
+          "micro/linear_1x1536x384/quantize/max_abs",
+          5557,
+          1
+        ],
+        [
+          "micro/linear_1x1536x384/quantize/round_and_cast",
+          14678,
+          1
+        ]
+      ],
+      "projection": 3,
+      "rows": 1
+    },
+    {
+      "cols": 384,
+      "hash": [
+        155,
+        131,
+        126,
+        232,
+        209,
+        91,
+        166,
+        147
+      ],
+      "instructions": 2838147,
+      "pattern": 0,
+      "phases": [
+        [
+          "micro",
+          2742788,
+          1
+        ],
+        [
+          "micro/linear_8x384x1152",
+          2660409,
+          1
+        ],
+        [
+          "micro/linear_8x384x1152/gemm_and_scale",
+          2512742,
+          1
+        ],
+        [
+          "micro/linear_8x384x1152/quantize",
+          141549,
+          1
+        ],
+        [
+          "micro/linear_8x384x1152/quantize/max_abs",
+          13352,
+          8
+        ],
+        [
+          "micro/linear_8x384x1152/quantize/round_and_cast",
+          31024,
+          8
+        ]
+      ],
+      "projection": 0,
+      "rows": 8
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        243,
+        90,
+        235,
+        109,
+        106,
+        251,
+        243
+      ],
+      "instructions": 2838147,
+      "pattern": 1,
+      "phases": [
+        [
+          "micro",
+          2742788,
+          1
+        ],
+        [
+          "micro/linear_8x384x1152",
+          2660409,
+          1
+        ],
+        [
+          "micro/linear_8x384x1152/gemm_and_scale",
+          2512742,
+          1
+        ],
+        [
+          "micro/linear_8x384x1152/quantize",
+          141549,
+          1
+        ],
+        [
+          "micro/linear_8x384x1152/quantize/max_abs",
+          13352,
+          8
+        ],
+        [
+          "micro/linear_8x384x1152/quantize/round_and_cast",
+          31024,
+          8
+        ]
+      ],
+      "projection": 0,
+      "rows": 8
+    },
+    {
+      "cols": 384,
+      "hash": [
+        201,
+        91,
+        126,
+        117,
+        31,
+        111,
+        21,
+        35
+      ],
+      "instructions": 1076524,
+      "pattern": 0,
+      "phases": [
+        [
+          "micro",
+          1042599,
+          1
+        ],
+        [
+          "micro/linear_8x384x384",
+          960279,
+          1
+        ],
+        [
+          "micro/linear_8x384x384/gemm_and_scale",
+          837830,
+          1
+        ],
+        [
+          "micro/linear_8x384x384/quantize",
+          116385,
+          1
+        ],
+        [
+          "micro/linear_8x384x384/quantize/max_abs",
+          13352,
+          8
+        ],
+        [
+          "micro/linear_8x384x384/quantize/round_and_cast",
+          31024,
+          8
+        ]
+      ],
+      "projection": 1,
+      "rows": 8
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        19,
+        53,
+        132,
+        167,
+        15,
+        142,
+        126
+      ],
+      "instructions": 1076524,
+      "pattern": 1,
+      "phases": [
+        [
+          "micro",
+          1042599,
+          1
+        ],
+        [
+          "micro/linear_8x384x384",
+          960279,
+          1
+        ],
+        [
+          "micro/linear_8x384x384/gemm_and_scale",
+          837830,
+          1
+        ],
+        [
+          "micro/linear_8x384x384/quantize",
+          116385,
+          1
+        ],
+        [
+          "micro/linear_8x384x384/quantize/max_abs",
+          13352,
+          8
+        ],
+        [
+          "micro/linear_8x384x384/quantize/round_and_cast",
+          31024,
+          8
+        ]
+      ],
+      "projection": 1,
+      "rows": 8
+    },
+    {
+      "cols": 384,
+      "hash": [
+        0,
+        178,
+        118,
+        11,
+        78,
+        247,
+        190,
+        133
+      ],
+      "instructions": 7240471,
+      "pattern": 0,
+      "phases": [
+        [
+          "micro",
+          6991508,
+          1
+        ],
+        [
+          "micro/linear_8x384x3072",
+          6909129,
+          1
+        ],
+        [
+          "micro/linear_8x384x3072/gemm_and_scale",
+          6700022,
+          1
+        ],
+        [
+          "micro/linear_8x384x3072/quantize",
+          202989,
+          1
+        ],
+        [
+          "micro/linear_8x384x3072/quantize/max_abs",
+          13352,
+          8
+        ],
+        [
+          "micro/linear_8x384x3072/quantize/round_and_cast",
+          31024,
+          8
+        ]
+      ],
+      "projection": 2,
+      "rows": 8
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        163,
+        185,
+        240,
+        106,
+        192,
+        47,
+        51
+      ],
+      "instructions": 7240471,
+      "pattern": 1,
+      "phases": [
+        [
+          "micro",
+          6991508,
+          1
+        ],
+        [
+          "micro/linear_8x384x3072",
+          6909129,
+          1
+        ],
+        [
+          "micro/linear_8x384x3072/gemm_and_scale",
+          6700022,
+          1
+        ],
+        [
+          "micro/linear_8x384x3072/quantize",
+          202989,
+          1
+        ],
+        [
+          "micro/linear_8x384x3072/quantize/max_abs",
+          13352,
+          8
+        ],
+        [
+          "micro/linear_8x384x3072/quantize/round_and_cast",
+          31024,
+          8
+        ]
+      ],
+      "projection": 2,
+      "rows": 8
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        82,
+        217,
+        16,
+        173,
+        235,
+        164,
+        49,
+        92
+      ],
+      "instructions": 3531632,
+      "pattern": 0,
+      "phases": [
+        [
+          "micro",
+          3497571,
+          1
+        ],
+        [
+          "micro/linear_8x1536x384",
+          3184930,
+          1
+        ],
+        [
+          "micro/linear_8x1536x384/gemm_and_scale",
+          2925494,
+          1
+        ],
+        [
+          "micro/linear_8x1536x384/quantize",
+          253316,
+          1
+        ],
+        [
+          "micro/linear_8x1536x384/quantize/max_abs",
+          44456,
+          8
+        ],
+        [
+          "micro/linear_8x1536x384/quantize/round_and_cast",
+          117424,
+          8
+        ]
+      ],
+      "projection": 3,
+      "rows": 8
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        19,
+        53,
+        132,
+        167,
+        15,
+        142,
+        126
+      ],
+      "instructions": 3531632,
+      "pattern": 1,
+      "phases": [
+        [
+          "micro",
+          3497571,
+          1
+        ],
+        [
+          "micro/linear_8x1536x384",
+          3184930,
+          1
+        ],
+        [
+          "micro/linear_8x1536x384/gemm_and_scale",
+          2925494,
+          1
+        ],
+        [
+          "micro/linear_8x1536x384/quantize",
+          253316,
+          1
+        ],
+        [
+          "micro/linear_8x1536x384/quantize/max_abs",
+          44456,
+          8
+        ],
+        [
+          "micro/linear_8x1536x384/quantize/round_and_cast",
+          117424,
+          8
+        ]
+      ],
+      "projection": 3,
+      "rows": 8
+    },
+    {
+      "cols": 384,
+      "hash": [
+        33,
+        47,
+        248,
+        130,
+        14,
+        248,
+        137,
+        65
+      ],
+      "instructions": 22612570,
+      "pattern": 0,
+      "phases": [
+        [
+          "micro",
+          21871865,
+          1
+        ],
+        [
+          "micro/linear_64x384x1152",
+          21251979,
+          1
+        ],
+        [
+          "micro/linear_64x384x1152/gemm_and_scale",
+          20099612,
+          1
+        ],
+        [
+          "micro/linear_64x384x1152/quantize",
+          1146208,
+          1
+        ],
+        [
+          "micro/linear_64x384x1152/quantize/max_abs",
+          106816,
+          64
+        ],
+        [
+          "micro/linear_64x384x1152/quantize/round_and_cast",
+          248192,
+          64
+        ]
+      ],
+      "projection": 0,
+      "rows": 64
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        163,
+        232,
+        137,
+        145,
+        103,
+        104,
+        6
+      ],
+      "instructions": 22612570,
+      "pattern": 1,
+      "phases": [
+        [
+          "micro",
+          21871865,
+          1
+        ],
+        [
+          "micro/linear_64x384x1152",
+          21251979,
+          1
+        ],
+        [
+          "micro/linear_64x384x1152/gemm_and_scale",
+          20099612,
+          1
+        ],
+        [
+          "micro/linear_64x384x1152/quantize",
+          1146208,
+          1
+        ],
+        [
+          "micro/linear_64x384x1152/quantize/max_abs",
+          106816,
+          64
+        ],
+        [
+          "micro/linear_64x384x1152/quantize/round_and_cast",
+          248192,
+          64
+        ]
+      ],
+      "projection": 0,
+      "rows": 64
+    },
+    {
+      "cols": 384,
+      "hash": [
+        202,
+        57,
+        254,
+        36,
+        175,
+        229,
+        246,
+        175
+      ],
+      "instructions": 8519971,
+      "pattern": 0,
+      "phases": [
+        [
+          "micro",
+          8270780,
+          1
+        ],
+        [
+          "micro/linear_64x384x384",
+          7650953,
+          1
+        ],
+        [
+          "micro/linear_64x384x384/gemm_and_scale",
+          6700316,
+          1
+        ],
+        [
+          "micro/linear_64x384x384/quantize",
+          944532,
+          1
+        ],
+        [
+          "micro/linear_64x384x384/quantize/max_abs",
+          106816,
+          64
+        ],
+        [
+          "micro/linear_64x384x384/quantize/round_and_cast",
+          248192,
+          64
+        ]
+      ],
+      "projection": 1,
+      "rows": 64
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        163,
+        185,
+        240,
+        106,
+        192,
+        47,
+        51
+      ],
+      "instructions": 8519971,
+      "pattern": 1,
+      "phases": [
+        [
+          "micro",
+          8270780,
+          1
+        ],
+        [
+          "micro/linear_64x384x384",
+          7650953,
+          1
+        ],
+        [
+          "micro/linear_64x384x384/gemm_and_scale",
+          6700316,
+          1
+        ],
+        [
+          "micro/linear_64x384x384/quantize",
+          944532,
+          1
+        ],
+        [
+          "micro/linear_64x384x384/quantize/max_abs",
+          106816,
+          64
+        ],
+        [
+          "micro/linear_64x384x384/quantize/round_and_cast",
+          248192,
+          64
+        ]
+      ],
+      "projection": 1,
+      "rows": 64
+    },
+    {
+      "cols": 384,
+      "hash": [
+        66,
+        78,
+        151,
+        227,
+        37,
+        169,
+        56,
+        5
+      ],
+      "instructions": 57831134,
+      "pattern": 0,
+      "phases": [
+        [
+          "micro",
+          55861625,
+          1
+        ],
+        [
+          "micro/linear_64x384x3072",
+          55241739,
+          1
+        ],
+        [
+          "micro/linear_64x384x3072/gemm_and_scale",
+          53597852,
+          1
+        ],
+        [
+          "micro/linear_64x384x3072/quantize",
+          1637728,
+          1
+        ],
+        [
+          "micro/linear_64x384x3072/quantize/max_abs",
+          106816,
+          64
+        ],
+        [
+          "micro/linear_64x384x3072/quantize/round_and_cast",
+          248192,
+          64
+        ]
+      ],
+      "projection": 2,
+      "rows": 64
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        35,
+        222,
+        232,
+        178,
+        100,
+        5,
+        26
+      ],
+      "instructions": 57831134,
+      "pattern": 1,
+      "phases": [
+        [
+          "micro",
+          55861625,
+          1
+        ],
+        [
+          "micro/linear_64x384x3072",
+          55241739,
+          1
+        ],
+        [
+          "micro/linear_64x384x3072/gemm_and_scale",
+          53597852,
+          1
+        ],
+        [
+          "micro/linear_64x384x3072/quantize",
+          1637728,
+          1
+        ],
+        [
+          "micro/linear_64x384x3072/quantize/max_abs",
+          106816,
+          64
+        ],
+        [
+          "micro/linear_64x384x3072/quantize/round_and_cast",
+          248192,
+          64
+        ]
+      ],
+      "projection": 2,
+      "rows": 64
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        27,
+        99,
+        131,
+        56,
+        189,
+        83,
+        147,
+        204
+      ],
+      "instructions": 28157152,
+      "pattern": 0,
+      "phases": [
+        [
+          "micro",
+          27907961,
+          1
+        ],
+        [
+          "micro/linear_64x1536x384",
+          25444875,
+          1
+        ],
+        [
+          "micro/linear_64x1536x384/gemm_and_scale",
+          23401628,
+          1
+        ],
+        [
+          "micro/linear_64x1536x384/quantize",
+          2037088,
+          1
+        ],
+        [
+          "micro/linear_64x1536x384/quantize/max_abs",
+          355648,
+          64
+        ],
+        [
+          "micro/linear_64x1536x384/quantize/round_and_cast",
+          939392,
+          64
+        ]
+      ],
+      "projection": 3,
+      "rows": 64
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        163,
+        185,
+        240,
+        106,
+        192,
+        47,
+        51
+      ],
+      "instructions": 28157152,
+      "pattern": 1,
+      "phases": [
+        [
+          "micro",
+          27907961,
+          1
+        ],
+        [
+          "micro/linear_64x1536x384",
+          25444875,
+          1
+        ],
+        [
+          "micro/linear_64x1536x384/gemm_and_scale",
+          23401628,
+          1
+        ],
+        [
+          "micro/linear_64x1536x384/quantize",
+          2037088,
+          1
+        ],
+        [
+          "micro/linear_64x1536x384/quantize/max_abs",
+          355648,
+          64
+        ],
+        [
+          "micro/linear_64x1536x384/quantize/round_and_cast",
+          939392,
+          64
+        ]
+      ],
+      "projection": 3,
+      "rows": 64
+    },
+    {
+      "cols": 384,
+      "hash": [
+        115,
+        0,
+        19,
+        99,
+        199,
+        177,
+        232,
+        101
+      ],
+      "instructions": 90427894,
+      "pattern": 0,
+      "phases": [
+        [
+          "micro",
+          87475346,
+          1
+        ],
+        [
+          "micro/linear_256x384x1152",
+          85011673,
+          1
+        ],
+        [
+          "micro/linear_256x384x1152/gemm_and_scale",
+          80397452,
+          1
+        ],
+        [
+          "micro/linear_256x384x1152/quantize",
+          4607980,
+          1
+        ],
+        [
+          "micro/linear_256x384x1152/quantize/max_abs",
+          427264,
+          256
+        ],
+        [
+          "micro/linear_256x384x1152/quantize/round_and_cast",
+          992768,
+          256
+        ]
+      ],
+      "projection": 0,
+      "rows": 256
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        35,
+        60,
+        27,
+        104,
+        201,
+        113,
+        169
+      ],
+      "instructions": 90427894,
+      "pattern": 1,
+      "phases": [
+        [
+          "micro",
+          87475346,
+          1
+        ],
+        [
+          "micro/linear_256x384x1152",
+          85011673,
+          1
+        ],
+        [
+          "micro/linear_256x384x1152/gemm_and_scale",
+          80397452,
+          1
+        ],
+        [
+          "micro/linear_256x384x1152/quantize",
+          4607980,
+          1
+        ],
+        [
+          "micro/linear_256x384x1152/quantize/max_abs",
+          427264,
+          256
+        ],
+        [
+          "micro/linear_256x384x1152/quantize/round_and_cast",
+          992768,
+          256
+        ]
+      ],
+      "projection": 0,
+      "rows": 256
+    },
+    {
+      "cols": 384,
+      "hash": [
+        94,
+        89,
+        23,
+        7,
+        192,
+        21,
+        189,
+        18
+      ],
+      "instructions": 34057142,
+      "pattern": 0,
+      "phases": [
+        [
+          "micro",
+          33070668,
+          1
+        ],
+        [
+          "micro/linear_256x384x384",
+          30607599,
+          1
+        ],
+        [
+          "micro/linear_256x384x384/gemm_and_scale",
+          26800268,
+          1
+        ],
+        [
+          "micro/linear_256x384x384/quantize",
+          3801120,
+          1
+        ],
+        [
+          "micro/linear_256x384x384/quantize/max_abs",
+          427264,
+          256
+        ],
+        [
+          "micro/linear_256x384x384/quantize/round_and_cast",
+          992768,
+          256
+        ]
+      ],
+      "projection": 1,
+      "rows": 256
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        35,
+        128,
+        182,
+        49,
+        171,
+        237,
+        245
+      ],
+      "instructions": 34057142,
+      "pattern": 1,
+      "phases": [
+        [
+          "micro",
+          33070668,
+          1
+        ],
+        [
+          "micro/linear_256x384x384",
+          30607599,
+          1
+        ],
+        [
+          "micro/linear_256x384x384/gemm_and_scale",
+          26800268,
+          1
+        ],
+        [
+          "micro/linear_256x384x384/quantize",
+          3801120,
+          1
+        ],
+        [
+          "micro/linear_256x384x384/quantize/max_abs",
+          427264,
+          256
+        ],
+        [
+          "micro/linear_256x384x384/quantize/round_and_cast",
+          992768,
+          256
+        ]
+      ],
+      "projection": 1,
+      "rows": 256
+    },
+    {
+      "cols": 384,
+      "hash": [
+        109,
+        161,
+        109,
+        102,
+        207,
+        219,
+        40,
+        9
+      ],
+      "instructions": 231302138,
+      "pattern": 0,
+      "phases": [
+        [
+          "micro",
+          223434386,
+          1
+        ],
+        [
+          "micro/linear_256x384x3072",
+          220970713,
+          1
+        ],
+        [
+          "micro/linear_256x384x3072/gemm_and_scale",
+          214390412,
+          1
+        ],
+        [
+          "micro/linear_256x384x3072/quantize",
+          6574060,
+          1
+        ],
+        [
+          "micro/linear_256x384x3072/quantize/max_abs",
+          427264,
+          256
+        ],
+        [
+          "micro/linear_256x384x3072/quantize/round_and_cast",
+          992768,
+          256
+        ]
+      ],
+      "projection": 2,
+      "rows": 256
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        35,
+        18,
+        23,
+        254,
+        200,
+        45,
+        59
+      ],
+      "instructions": 231302138,
+      "pattern": 1,
+      "phases": [
+        [
+          "micro",
+          223434386,
+          1
+        ],
+        [
+          "micro/linear_256x384x3072",
+          220970713,
+          1
+        ],
+        [
+          "micro/linear_256x384x3072/gemm_and_scale",
+          214390412,
+          1
+        ],
+        [
+          "micro/linear_256x384x3072/quantize",
+          6574060,
+          1
+        ],
+        [
+          "micro/linear_256x384x3072/quantize/max_abs",
+          427264,
+          256
+        ],
+        [
+          "micro/linear_256x384x3072/quantize/round_and_cast",
+          992768,
+          256
+        ]
+      ],
+      "projection": 2,
+      "rows": 256
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        109,
+        187,
+        110,
+        237,
+        83,
+        146,
+        43,
+        245
+      ],
+      "instructions": 112606204,
+      "pattern": 0,
+      "phases": [
+        [
+          "micro",
+          111619730,
+          1
+        ],
+        [
+          "micro/linear_256x1536x384",
+          101783257,
+          1
+        ],
+        [
+          "micro/linear_256x1536x384/gemm_and_scale",
+          93605516,
+          1
+        ],
+        [
+          "micro/linear_256x1536x384/quantize",
+          8171500,
+          1
+        ],
+        [
+          "micro/linear_256x1536x384/quantize/max_abs",
+          1422592,
+          256
+        ],
+        [
+          "micro/linear_256x1536x384/quantize/round_and_cast",
+          3757568,
+          256
+        ]
+      ],
+      "projection": 3,
+      "rows": 256
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        35,
+        128,
+        182,
+        49,
+        171,
+        237,
+        245
+      ],
+      "instructions": 112606204,
+      "pattern": 1,
+      "phases": [
+        [
+          "micro",
+          111619730,
+          1
+        ],
+        [
+          "micro/linear_256x1536x384",
+          101783257,
+          1
+        ],
+        [
+          "micro/linear_256x1536x384/gemm_and_scale",
+          93605516,
+          1
+        ],
+        [
+          "micro/linear_256x1536x384/quantize",
+          8171500,
+          1
+        ],
+        [
+          "micro/linear_256x1536x384/quantize/max_abs",
+          1422592,
+          256
+        ],
+        [
+          "micro/linear_256x1536x384/quantize/round_and_cast",
+          3757568,
+          256
+        ]
+      ],
+      "projection": 3,
+      "rows": 256
+    }
+  ],
+  "exact_native_matches": 32,
+  "kind": "linear-micro",
+  "wasm_sha256": "617a5cb60074038df1eb91d14b380e60eebcd27d353fa6bbe5ad9c257f91e0ae"
+}

@@ -1,0 +1,161 @@
+{
+  "cases": [
+    {
+      "heads": 1,
+      "instructions": 8838485,
+      "keys": 256,
+      "output_sha256": "33c2c5b9759ea1556486454d9b7fac71045a0d9f4847439e5fbf5f533abf9697",
+      "phases": [
+        [
+          "/av_weighted_sum",
+          2281216,
+          256
+        ],
+        [
+          "/qk_scores",
+          3058688,
+          256
+        ],
+        [
+          "/softmax",
+          2174720,
+          256
+        ],
+        [
+          "quantize_k",
+          147939,
+          1
+        ],
+        [
+          "quantize_q",
+          142141,
+          1
+        ],
+        [
+          "transpose_quantize_v",
+          238375,
+          1
+        ]
+      ],
+      "rows": 256
+    },
+    {
+      "heads": 1,
+      "instructions": 31980897,
+      "keys": 512,
+      "output_sha256": "3e6051816ca8ad4d42c0d145eed2c67427ed4f2ca3d0088474d8a989a3b6c85e",
+      "phases": [
+        [
+          "/av_weighted_sum",
+          8760832,
+          512
+        ],
+        [
+          "/qk_scores",
+          12048384,
+          512
+        ],
+        [
+          "/softmax",
+          8560128,
+          512
+        ],
+        [
+          "quantize_k",
+          294542,
+          1
+        ],
+        [
+          "quantize_q",
+          283332,
+          1
+        ],
+        [
+          "transpose_quantize_v",
+          461534,
+          1
+        ]
+      ],
+      "rows": 512
+    },
+    {
+      "heads": 1,
+      "instructions": 232961395,
+      "keys": 1365,
+      "output_sha256": "f8fb8c4ad9c7368fba3ebeb1a468556e42da1fe2fab93bb05fe3a1bf7d50711e",
+      "phases": [
+        [
+          "/av_weighted_sum",
+          80147340,
+          1365
+        ],
+        [
+          "/qk_scores",
+          84871605,
+          1365
+        ],
+        [
+          "/softmax",
+          61041435,
+          1365
+        ],
+        [
+          "quantize_k",
+          783230,
+          1
+        ],
+        [
+          "quantize_q",
+          753281,
+          1
+        ],
+        [
+          "transpose_quantize_v",
+          1204875,
+          1
+        ]
+      ],
+      "rows": 1365
+    },
+    {
+      "heads": 1,
+      "instructions": 3025565434,
+      "keys": 5000,
+      "output_sha256": "69984f97b066f5a010d425d9f9d78bdfe4757eb2272bc6a366c8df1e7089205a",
+      "phases": [
+        [
+          "/av_weighted_sum",
+          1062830000,
+          5000
+        ],
+        [
+          "/qk_scores",
+          1133070000,
+          5000
+        ],
+        [
+          "/softmax",
+          804480000,
+          5000
+        ],
+        [
+          "quantize_k",
+          2865932,
+          1
+        ],
+        [
+          "quantize_q",
+          2755932,
+          1
+        ],
+        [
+          "transpose_quantize_v",
+          4375339,
+          1
+        ]
+      ],
+      "rows": 5000
+    }
+  ],
+  "wasm_sha256": "e165f618f892512c124ff33b779ecc93722546f9cc4f1953a50dab4d3556a87d"
+}

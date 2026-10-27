@@ -1,0 +1,21 @@
+{
+  "deleted": [
+    "target/debug/deps",
+    "target/debug/build",
+    "target/debug/incremental",
+    "target/release/deps",
+    "target/release/build",
+    "target/release/incremental"
+  ],
+  "free_before_bytes": 174710784,
+  "free_after_bytes": 1181544448,
+  "free_delta_bytes": 1006833664,
+  "retained": [
+    "source",
+    "model fixtures",
+    "benchmarks",
+    "target/release/granite-bench",
+    "target/wasm32-unknown-unknown/release/granite_canister.wasm"
+  ],
+  "rebuild": "Native intermediate dependencies can be regenerated; active builds use an internal SSD target."
+}

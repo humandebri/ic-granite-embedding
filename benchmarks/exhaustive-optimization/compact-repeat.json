@@ -1,0 +1,128 @@
+{
+  "cache_bypass": "unused fused-request kstart nonce",
+  "cases": [
+    {
+      "case": "256",
+      "instructions": 4408392166,
+      "iteration": 0,
+      "seconds": 0.451515125
+    },
+    {
+      "case": "256",
+      "instructions": 4408392166,
+      "iteration": 1,
+      "seconds": 0.455419208
+    },
+    {
+      "case": "256",
+      "instructions": 4408392166,
+      "iteration": 2,
+      "seconds": 0.454385375
+    },
+    {
+      "case": "256",
+      "instructions": 4408392166,
+      "iteration": 3,
+      "seconds": 0.451537791
+    },
+    {
+      "case": "256",
+      "instructions": 4408392166,
+      "iteration": 4,
+      "seconds": 0.453184709
+    },
+    {
+      "case": "space-256",
+      "instructions": 4408392166,
+      "iteration": 0,
+      "seconds": 0.493713083
+    },
+    {
+      "case": "space-256",
+      "instructions": 4408392166,
+      "iteration": 1,
+      "seconds": 0.462202542
+    },
+    {
+      "case": "space-256",
+      "instructions": 4408392166,
+      "iteration": 2,
+      "seconds": 0.453106666
+    },
+    {
+      "case": "space-256",
+      "instructions": 4408392166,
+      "iteration": 3,
+      "seconds": 0.453334041
+    },
+    {
+      "case": "space-256",
+      "instructions": 4408392166,
+      "iteration": 4,
+      "seconds": 0.448096
+    },
+    {
+      "case": "cooking-256",
+      "instructions": 4408392166,
+      "iteration": 0,
+      "seconds": 0.452117
+    },
+    {
+      "case": "cooking-256",
+      "instructions": 4408392166,
+      "iteration": 1,
+      "seconds": 0.453051042
+    },
+    {
+      "case": "cooking-256",
+      "instructions": 4408392166,
+      "iteration": 2,
+      "seconds": 0.454397292
+    },
+    {
+      "case": "cooking-256",
+      "instructions": 4408392166,
+      "iteration": 3,
+      "seconds": 0.454935167
+    },
+    {
+      "case": "cooking-256",
+      "instructions": 4408392166,
+      "iteration": 4,
+      "seconds": 0.453852916
+    },
+    {
+      "case": "weather-256",
+      "instructions": 4408392166,
+      "iteration": 0,
+      "seconds": 0.483085958
+    },
+    {
+      "case": "weather-256",
+      "instructions": 4408392166,
+      "iteration": 1,
+      "seconds": 0.459397792
+    },
+    {
+      "case": "weather-256",
+      "instructions": 4408392166,
+      "iteration": 2,
+      "seconds": 0.455342625
+    },
+    {
+      "case": "weather-256",
+      "instructions": 4408392166,
+      "iteration": 3,
+      "seconds": 0.453090042
+    },
+    {
+      "case": "weather-256",
+      "instructions": 4408392166,
+      "iteration": 4,
+      "seconds": 0.457198375
+    }
+  ],
+  "install_seconds": 3.78696275,
+  "setup_seconds": 12.727543459,
+  "wasm_sha256": "4d3da7f5ad5ce15e21689a92b9eeac8ac056d2d550666782488d2da46c6c6716"
+}

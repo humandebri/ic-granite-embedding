@@ -1,0 +1,58 @@
+[
+  {
+    "configuration": "default",
+    "cases": [
+      {
+        "case_id": "256",
+        "tokens": 256,
+        "seconds": 0.522496208,
+        "cosine_to_f32": 0.9996170883969944,
+        "queries": 1,
+        "instructions": 4274785648,
+        "max_instructions": 4274785648
+      },
+      {
+        "case_id": "512",
+        "tokens": 512,
+        "seconds": 1.013500708,
+        "cosine_to_f32": 0.9995526629671576,
+        "queries": 2,
+        "instructions": 8836065163,
+        "max_instructions": 4699486897
+      }
+    ],
+    "worst_query": {
+      "tokens": 287,
+      "instructions": 4871607769
+    },
+    "single_query_288": 4826633982
+  },
+  {
+    "configuration": "instruction-gemm",
+    "cases": [
+      {
+        "case_id": "256",
+        "tokens": 256,
+        "seconds": 1.017598292,
+        "cosine_to_f32": 0.9996170883969944,
+        "queries": 1,
+        "instructions": 4230646590,
+        "max_instructions": 4230646590
+      },
+      {
+        "case_id": "512",
+        "tokens": 512,
+        "seconds": 1.187872458,
+        "cosine_to_f32": 0.9995526629671576,
+        "queries": 2,
+        "instructions": 8751099369,
+        "max_instructions": 4655320677
+      }
+    ],
+    "worst_query": {
+      "tokens": 287,
+      "instructions": 4812141180
+    },
+    "single_query_288": 4776151904
+  }
+]

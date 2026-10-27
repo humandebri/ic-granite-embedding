@@ -1,0 +1,21 @@
+{
+  "public_256_before_instructions": 4166069524,
+  "public_256_after_instructions": 4064727088,
+  "public_256_reduction_percent": 2.4325670855031123,
+  "single_query_published_limit": 304,
+  "single_query_max_success": 309,
+  "single_query_first_failure": 310,
+  "single_query_published_worst_sweep_instructions": 4902457898,
+  "single_query_published_worst_margin_percent": 1.9508420400000004,
+  "initial_5000_queries": 687,
+  "current_5000_queries": 182,
+  "initial_5000_instructions": 1123612208589,
+  "current_5000_instructions": 177813740538,
+  "cumulative_5000_instruction_reduction_percent": 84.17481234372725,
+  "initial_5000_transfer_bytes": 1348483940,
+  "current_5000_transfer_bytes": 589677652,
+  "cumulative_5000_transfer_reduction_percent": 56.27106600913616,
+  "wasm_before_bytes": 6152406,
+  "wasm_after_bytes": 3602937,
+  "wasm_reduction_percent": 41.43856891108941
+}

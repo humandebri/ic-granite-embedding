@@ -1,0 +1,14 @@
+{
+  "wasm_sha256": "df0dc61b1aec685f4d82180a6a4e54abf336a2c6da3d3b1d8c71d9ed4cb7b887",
+  "wasm_bytes": 6152406,
+  "path": "target/wasm32-unknown-unknown/release/granite_canister.wasm",
+  "features": [
+    "approx-gelu",
+    "integer-attention",
+    "strassen",
+    "chunked-gemm",
+    "strassen-wo"
+  ],
+  "profile_wasm_sha256": "9a65754d1101cf42ffb8b9110726f1caf191e4fbe8731e56639bfe753370e802",
+  "validation": "../validation/environment.json"
+}

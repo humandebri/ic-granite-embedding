@@ -1,0 +1,72 @@
+[
+  {
+    "variant": "wide",
+    "wasm_sha256": "620aa0008ce19c5c3b7be5f0144dfe41f79832648730c6662386a0dcb17b65aa",
+    "instructions": 4290742210,
+    "saved_vs_baseline": 11798364,
+    "exact_documents": 4,
+    "exact_linear": 112,
+    "install_seconds": 25.575472,
+    "wasm_bytes": 3543801
+  },
+  {
+    "variant": "wider",
+    "wasm_sha256": "b75e7e0f3215e0a0e794362e5f4070d1e2cabe2926159b63f7116b15a311636f",
+    "instructions": 4281436438,
+    "saved_vs_baseline": 21104136,
+    "exact_documents": 4,
+    "exact_linear": 112,
+    "install_seconds": 70.925718666,
+    "wasm_bytes": 4188279
+  },
+  {
+    "variant": "leaf",
+    "wasm_sha256": "f4b09c1220f0683095b9d687a64a9d970cb8913fbecc4b5e027e2923774b7b28",
+    "instructions": 4273924570,
+    "saved_vs_baseline": 28616004,
+    "exact_documents": 4,
+    "exact_linear": 112,
+    "install_seconds": 94.155573875,
+    "wasm_bytes": 4863321
+  },
+  {
+    "variant": "tails",
+    "wasm_sha256": "88785dbca35013db0bcfc484889b1e593ce57a600daa700b9120047b93778dc3",
+    "instructions": 4274067438,
+    "saved_vs_baseline": 28473136,
+    "exact_documents": 4,
+    "exact_linear": 112,
+    "install_seconds": 93.493913417,
+    "wasm_bytes": 5597368
+  },
+  {
+    "variant": "selected",
+    "wasm_sha256": "26a74ca7246429c8c5c91ea564c4efb55a24f06287a554b1db8af05866104f31",
+    "instructions": 4273924620,
+    "saved_vs_baseline": 28615954,
+    "exact_documents": 4,
+    "exact_linear": 112,
+    "install_seconds": 99.758304292,
+    "wasm_bytes": 5507995
+  },
+  {
+    "variant": "streamed",
+    "wasm_sha256": "c980098bcb9519f29e857140ff6d7aa1867a801379dc43ac4d070d7284a6de8f",
+    "instructions": 4258401420,
+    "saved_vs_baseline": 44139154,
+    "exact_documents": 4,
+    "exact_linear": 112,
+    "install_seconds": 47.297501917,
+    "wasm_bytes": 5454531
+  },
+  {
+    "variant": "balanced",
+    "wasm_sha256": "f4886fff4d72f524972e991a1e2af2504f9d4e77a590d8e510760f06e6daf6c5",
+    "instructions": 4287783196,
+    "saved_vs_baseline": 14757378,
+    "exact_documents": 4,
+    "exact_linear": 112,
+    "install_seconds": 29.236550375,
+    "wasm_bytes": 3812802
+  }
+]

@@ -1,0 +1,43 @@
+{
+  "tokens": 5000,
+  "mode": "pocketic-production-wasm-w8a8",
+  "stats": {
+    "instructions": 1123612208589,
+    "max_instructions": 2889127550,
+    "max_request_bytes": 2067500,
+    "max_response_bytes": 1769518,
+    "operations": {
+      "0": {
+        "instructions": 74975318,
+        "max_instructions": 5757929,
+        "queries": 14
+      },
+      "1": {
+        "instructions": 90683316028,
+        "max_instructions": 581023050,
+        "queries": 168
+      },
+      "2": {
+        "instructions": 634282634772,
+        "max_instructions": 2889127550,
+        "queries": 336
+      },
+      "3": {
+        "instructions": 398571247690,
+        "max_instructions": 2579200494,
+        "queries": 168
+      },
+      "4": {
+        "instructions": 34781,
+        "max_instructions": 34781,
+        "queries": 1
+      }
+    },
+    "queries": 687,
+    "query_seconds": 73.93822796299989,
+    "request_bytes": 879970840,
+    "response_bytes": 468513100
+  },
+  "cosine_to_f32": 0.9996813863634715,
+  "cosine_to_int8_reference": 0.9997755558696869
+}

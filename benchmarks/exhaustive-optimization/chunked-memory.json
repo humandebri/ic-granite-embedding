@@ -1,0 +1,8 @@
+{
+  "install_seconds": 21.491538125,
+  "setup_seconds": 29.736216875,
+  "total_memory_size_bytes": "320_305_826",
+  "wasm_binary_size_bytes": "3_242_180",
+  "wasm_memory_size_bytes": "312_868_864",
+  "wasm_sha256": "6d12830a3bf7e978368b7b3e06adfec206c1ff44748a6cc69ea73eabf537ae6b"
+}

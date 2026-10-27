@@ -1,0 +1,39 @@
+{
+  "removed_files": [
+    "scripts/validate_single_query.py",
+    "scripts/validate_goal.py",
+    "scripts/validate_optimized.py",
+    "scripts/validate_further.py",
+    "scripts/collect_results.py",
+    "benchmarks/goal-profile/rejected/strassen.rs"
+  ],
+  "renamed": {
+    "scripts/validate_exhaustive.py": "scripts/validate_regression.py"
+  },
+  "removed_features": [
+    "strassen2",
+    "strassen3",
+    "compact-gemm",
+    "compressed-carry",
+    "instruction-gemm"
+  ],
+  "preserved": [
+    "public Candid",
+    "current diagnostic operations",
+    "native reference",
+    "profiling",
+    "compressed state decoder",
+    "historical benchmark data"
+  ],
+  "removed_artifacts": [
+    "target/wasm32-unknown-unknown/release/granite_canister_instruction.wasm"
+  ],
+  "removed_cli": [
+    "--legacy",
+    "--fused",
+    "--plan",
+    "--stress-extended",
+    "--sweep-extended",
+    "positional tile argument"
+  ]
+}

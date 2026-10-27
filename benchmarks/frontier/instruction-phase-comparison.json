@@ -1,0 +1,46 @@
+{
+  "linear.gemm_and_scale": {
+    "before": 3122629267,
+    "after": 3058921077
+  },
+  "attention.qk": {
+    "before": 234115920,
+    "after": 234115920
+  },
+  "attention.av": {
+    "before": 215721156,
+    "after": 183927132
+  },
+  "attention.softmax": {
+    "before": 174595224,
+    "after": 174625212
+  },
+  "gelu": {
+    "before": 171832411,
+    "after": 171832411
+  },
+  "other_including_profile_overhead": {
+    "before": 167259496,
+    "after": 166744779
+  },
+  "linear.quantize": {
+    "before": 95959298,
+    "after": 95959298
+  },
+  "attention.quantize_qk": {
+    "before": 35482520,
+    "after": 35482520
+  },
+  "attention.quantize_v": {
+    "before": 30705472,
+    "after": 30705460
+  },
+  "rope": {
+    "before": 22187574,
+    "after": 22187574
+  },
+  "attention.prepare": {
+    "before": 18746378,
+    "after": 18746378
+  }
+}

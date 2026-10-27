@@ -1,0 +1,24 @@
+# Local model downloads, references, and build outputs
+/.cache/
+/target/
+/.icp/
+/*.log
+*.wasm
+*.pack
+*.safetensors
+*.onnx
+*.pt
+*.pth
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python and macOS generated files
+__pycache__/
+*.py[cod]
+.DS_Store
+._*

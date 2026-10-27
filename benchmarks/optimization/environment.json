@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-26",
+  "architecture": "arm64",
+  "cpu": "Apple M6",
+  "ram_bytes": 34359738368,
+  "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "pocket_ic": "pocket-ic-server 11.0.0",
+  "subnet": "application / Production",
+  "wasm_sha256": "2b51d7490ceda654e71849515d769a79c08dae17fdb5a3a0b9a704d0f1147cec",
+  "wasm_bytes": 784037,
+  "source_sha256": {
+    "Cargo.toml": "695b650210c8b6097c2ca97ff79faedfd3a320f03c793dd57cbc84d7bb7d9dad",
+    "Cargo.lock": "3ceee74f7958c01e7a44e7d615d877cd92117757f9e78b990d3f240b625b4000",
+    "rust-toolchain.toml": "ae90ff053fadbe8e68cca6c2bef6d3705166557d830f319547b5f8511c8dfd5d",
+    ".cargo/config.toml": "91a502066e179b2525929d903b188b1b6bb10e6b105a81b33a834497c50481a4",
+    "requirements.txt": "3121a37dff7a19aebd90b579d141574bd4118bce847edec16cccaf7a2c7a03ae",
+    "crates/bench/src/main.rs": "a065a1682bd46d2dc9aaae53b82e1d83f38e13f780a3067a532fedbb96d4c19b",
+    "crates/canister/src/lib.rs": "86a2dfdfe2f1964f0f2cef831c8f3a99a9d4ab1fe7d1fe2f7e3375bfe23072a1",
+    "crates/core/src/lib.rs": "6dde770b9ad90349200cc99bc17b601fd688af2816212da8a5930865686caff7",
+    "crates/bench/Cargo.toml": "b2b7cf4afcdf6c6770cf0d85cb263aaf21d5ab2bcc53ec2614e3356fab81740a",
+    "crates/canister/Cargo.toml": "a357a28902d04ed534ba088d57a844b42b6dc2f8c293dcd6965919255bef4232",
+    "crates/core/Cargo.toml": "c7a702528ca5e36cf5d3d3d458098c3b29dc4dbc7a1f245b331324902962c6b8",
+    "scripts/prepare.py": "111bc5b766aadd1c1f0e494fd4cab68fa2f3819e2b4eaab1ad79d1bdc1a363c6",
+    "scripts/validate_optimized.py": "1639d3e73d93ed06c5ca06a4fe2a069f22614044bd22bdfb7578a1220338d130"
+  },
+  "typed_vs_raw_max_abs_512": 0,
+  "fused_vs_diagnostic_max_abs_32": 0,
+  "api_input_validation_cases": 3,
+  "unit_tests": 6
+}

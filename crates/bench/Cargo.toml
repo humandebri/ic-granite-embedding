@@ -1,0 +1,13 @@
+[package]
+name = "granite-bench"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+granite-core = { path = "../core" }
+pocket-ic = "=11.0.0"
+candid.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+serde_bytes.workspace = true
+sha2 = "=0.10.9"

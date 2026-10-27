@@ -1,0 +1,226 @@
+{
+  "cases": [
+    {
+      "instructions": 5071,
+      "pattern": 0,
+      "tokens": 1
+    },
+    {
+      "instructions": 5071,
+      "pattern": 1,
+      "tokens": 1
+    },
+    {
+      "instructions": 5075,
+      "pattern": 2,
+      "tokens": 1
+    },
+    {
+      "instructions": 5724,
+      "pattern": 3,
+      "tokens": 1
+    },
+    {
+      "instructions": 8191,
+      "pattern": 0,
+      "tokens": 7
+    },
+    {
+      "instructions": 8191,
+      "pattern": 1,
+      "tokens": 7
+    },
+    {
+      "instructions": 8219,
+      "pattern": 2,
+      "tokens": 7
+    },
+    {
+      "instructions": 12762,
+      "pattern": 3,
+      "tokens": 7
+    },
+    {
+      "instructions": 8711,
+      "pattern": 0,
+      "tokens": 8
+    },
+    {
+      "instructions": 8711,
+      "pattern": 1,
+      "tokens": 8
+    },
+    {
+      "instructions": 8743,
+      "pattern": 2,
+      "tokens": 8
+    },
+    {
+      "instructions": 13935,
+      "pattern": 3,
+      "tokens": 8
+    },
+    {
+      "instructions": 319846,
+      "pattern": 0,
+      "tokens": 511
+    },
+    {
+      "instructions": 319846,
+      "pattern": 1,
+      "tokens": 511
+    },
+    {
+      "instructions": 321890,
+      "pattern": 2,
+      "tokens": 511
+    },
+    {
+      "instructions": 653529,
+      "pattern": 3,
+      "tokens": 511
+    },
+    {
+      "instructions": 320366,
+      "pattern": 0,
+      "tokens": 512
+    },
+    {
+      "instructions": 320366,
+      "pattern": 1,
+      "tokens": 512
+    },
+    {
+      "instructions": 322414,
+      "pattern": 2,
+      "tokens": 512
+    },
+    {
+      "instructions": 654702,
+      "pattern": 3,
+      "tokens": 512
+    },
+    {
+      "instructions": 327375,
+      "pattern": 0,
+      "tokens": 513
+    },
+    {
+      "instructions": 327375,
+      "pattern": 1,
+      "tokens": 513
+    },
+    {
+      "instructions": 329427,
+      "pattern": 2,
+      "tokens": 513
+    },
+    {
+      "instructions": 662364,
+      "pattern": 3,
+      "tokens": 513
+    },
+    {
+      "instructions": 330495,
+      "pattern": 0,
+      "tokens": 519
+    },
+    {
+      "instructions": 330495,
+      "pattern": 1,
+      "tokens": 519
+    },
+    {
+      "instructions": 332571,
+      "pattern": 2,
+      "tokens": 519
+    },
+    {
+      "instructions": 669402,
+      "pattern": 3,
+      "tokens": 519
+    },
+    {
+      "instructions": 647485,
+      "pattern": 0,
+      "tokens": 1024
+    },
+    {
+      "instructions": 647485,
+      "pattern": 1,
+      "tokens": 1024
+    },
+    {
+      "instructions": 651581,
+      "pattern": 2,
+      "tokens": 1024
+    },
+    {
+      "instructions": 1316157,
+      "pattern": 3,
+      "tokens": 1024
+    },
+    {
+      "instructions": 808571,
+      "pattern": 0,
+      "tokens": 1280
+    },
+    {
+      "instructions": 808571,
+      "pattern": 1,
+      "tokens": 1280
+    },
+    {
+      "instructions": 813691,
+      "pattern": 2,
+      "tokens": 1280
+    },
+    {
+      "instructions": 1644411,
+      "pattern": 3,
+      "tokens": 1280
+    },
+    {
+      "instructions": 862231,
+      "pattern": 0,
+      "tokens": 1365
+    },
+    {
+      "instructions": 862231,
+      "pattern": 1,
+      "tokens": 1365
+    },
+    {
+      "instructions": 867691,
+      "pattern": 2,
+      "tokens": 1365
+    },
+    {
+      "instructions": 1753576,
+      "pattern": 3,
+      "tokens": 1365
+    },
+    {
+      "instructions": 3145674,
+      "pattern": 0,
+      "tokens": 5000
+    },
+    {
+      "instructions": 3145674,
+      "pattern": 1,
+      "tokens": 5000
+    },
+    {
+      "instructions": 3165674,
+      "pattern": 2,
+      "tokens": 5000
+    },
+    {
+      "instructions": 6410674,
+      "pattern": 3,
+      "tokens": 5000
+    }
+  ],
+  "exact_i64_cases": 44,
+  "wasm_sha256": "5f169a73a47d19da9a50dc02bb32400deac61bcfb5ff47d2001ea88a118252f8"
+}

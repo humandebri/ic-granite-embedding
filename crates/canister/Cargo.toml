@@ -1,0 +1,26 @@
+[package]
+name = "granite-canister"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+granite-core = { path = "../core" }
+ic-cdk = "=0.20.3"
+candid.workspace = true
+serde.workspace = true
+serde_bytes.workspace = true
+
+[features]
+default = ["approx-gelu", "integer-attention", "strassen", "chunked-gemm", "strassen-wo", "strassen-qkv", "strassen-out"]
+profiling = ["granite-core/profiling"]
+approx-gelu = ["granite-core/approx-gelu"]
+integer-attention = ["granite-core/integer-attention"]
+strassen = ["granite-core/strassen"]
+chunked-gemm = ["granite-core/chunked-gemm"]
+strassen-wo = ["strassen", "granite-core/strassen-wo"]
+
+strassen-qkv = ["strassen", "granite-core/strassen-qkv"]
+strassen-out = ["strassen", "granite-core/strassen-out"]

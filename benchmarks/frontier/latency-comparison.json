@@ -1,0 +1,30 @@
+{
+  "order": [
+    "before",
+    "after"
+  ],
+  "variants": [
+    {
+      "variant": "before",
+      "wasm_sha256": "faa1c76da109a72f59cddef91e2e889c6c471d7b2cf65188a443ec44c3d27121",
+      "instructions": 4230642197,
+      "median_seconds": 0.5792235205,
+      "min_seconds": 0.568879709,
+      "max_seconds": 0.870056125,
+      "install_seconds": 41.405562791,
+      "samples": 20
+    },
+    {
+      "variant": "after",
+      "wasm_sha256": "fb922e5ce45bc5128fcb9dffbbe19a486b9acec6ad0d3b39d56459e04f473c00",
+      "instructions": 4166093068,
+      "median_seconds": 0.5607643959999999,
+      "min_seconds": 0.552402041,
+      "max_seconds": 0.582391458,
+      "install_seconds": 43.109001708,
+      "samples": 20
+    }
+  ],
+  "cache_bypass": "unused fused-request kstart nonce",
+  "notes": "Sequential runs after all builds and validation, no concurrent benchmark or build from this task. OS/thermal state not controlled."
+}

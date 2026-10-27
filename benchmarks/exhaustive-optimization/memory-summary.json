@@ -1,0 +1,214 @@
+{
+  "wasm_sha256": "770415e4c136756557cad6df31df9198e15f896d2d8dffcf0bda0568b8a4e575",
+  "instructions": 4467625817,
+  "stages": {
+    "linear.gemm_and_scale": {
+      "instructions": 3284872313,
+      "percent": 73.5261288109796
+    },
+    "attention.qk": {
+      "instructions": 233935992,
+      "percent": 5.2362485486102655
+    },
+    "attention.av": {
+      "instructions": 232449048,
+      "percent": 5.2029659045190355
+    },
+    "attention.softmax": {
+      "instructions": 174595224,
+      "percent": 3.908009111587601
+    },
+    "gelu": {
+      "instructions": 171830234,
+      "percent": 3.8461196402384386
+    },
+    "other_including_profile_overhead": {
+      "instructions": 166868341,
+      "percent": 3.735056332717938
+    },
+    "linear.quantize": {
+      "instructions": 95948758,
+      "percent": 2.147645347443832
+    },
+    "attention.quantize_qk": {
+      "instructions": 35486240,
+      "percent": 0.7942974961101135
+    },
+    "attention.quantize_v": {
+      "instructions": 30705715,
+      "percent": 0.6872937944614801
+    },
+    "rope": {
+      "instructions": 22187574,
+      "percent": 0.49663008740734027
+    },
+    "attention.prepare": {
+      "instructions": 18746378,
+      "percent": 0.4196049259243503
+    }
+  },
+  "layers": {
+    "layer0": {
+      "attention.av": 34228224,
+      "attention.qk": 36685824,
+      "attention.quantize_qk": 3455079,
+      "attention.softmax": 26093568,
+      "attention.quantize_v": 2831458,
+      "gelu": 17602312,
+      "linear.gemm_and_scale": 329960768,
+      "linear.quantize": 9666949,
+      "attention.prepare": 1781457,
+      "rope": 2062422
+    },
+    "layer1": {
+      "attention.av": 18066432,
+      "attention.qk": 16934016,
+      "attention.quantize_qk": 3455079,
+      "attention.softmax": 13348608,
+      "attention.quantize_v": 2831413,
+      "gelu": 17602312,
+      "linear.gemm_and_scale": 329960768,
+      "linear.quantize": 9666950,
+      "attention.prepare": 1781457,
+      "rope": 2062422
+    },
+    "layer2": {
+      "attention.av": 18066432,
+      "attention.qk": 16934016,
+      "attention.quantize_qk": 3455079,
+      "attention.softmax": 13348608,
+      "attention.quantize_v": 2831413,
+      "gelu": 17602312,
+      "linear.gemm_and_scale": 329960768,
+      "linear.quantize": 9666950,
+      "attention.prepare": 1781457,
+      "rope": 2062422
+    },
+    "layer3": {
+      "attention.av": 34228224,
+      "attention.qk": 36685824,
+      "attention.quantize_qk": 3455079,
+      "attention.softmax": 26093568,
+      "attention.quantize_v": 2831413,
+      "gelu": 17602312,
+      "linear.gemm_and_scale": 329960768,
+      "linear.quantize": 9666950,
+      "attention.prepare": 1781457,
+      "rope": 2062422
+    },
+    "layer4": {
+      "attention.av": 18066432,
+      "attention.qk": 16934016,
+      "attention.quantize_qk": 3455079,
+      "attention.softmax": 13348608,
+      "attention.quantize_v": 2831413,
+      "gelu": 17602312,
+      "linear.gemm_and_scale": 329960768,
+      "linear.quantize": 9666950,
+      "attention.prepare": 1781457,
+      "rope": 2062422
+    },
+    "layer5": {
+      "attention.av": 18066432,
+      "attention.qk": 16934016,
+      "attention.quantize_qk": 3455079,
+      "attention.softmax": 13348608,
+      "attention.quantize_v": 2831413,
+      "gelu": 17602312,
+      "linear.gemm_and_scale": 329960768,
+      "linear.quantize": 9666950,
+      "attention.prepare": 1781457,
+      "rope": 2062422
+    },
+    "layer6": {
+      "attention.av": 34228224,
+      "attention.qk": 36685824,
+      "attention.quantize_qk": 3455079,
+      "attention.softmax": 26093568,
+      "attention.quantize_v": 2831413,
+      "gelu": 17602312,
+      "linear.gemm_and_scale": 329960768,
+      "linear.quantize": 9666950,
+      "attention.prepare": 1781457,
+      "rope": 2062422
+    },
+    "layer7": {
+      "attention.av": 18066432,
+      "attention.qk": 16934016,
+      "attention.quantize_qk": 3455079,
+      "attention.softmax": 13348608,
+      "attention.quantize_v": 2831413,
+      "gelu": 17602312,
+      "linear.gemm_and_scale": 329960768,
+      "linear.quantize": 9666950,
+      "attention.prepare": 1781457,
+      "rope": 2062422
+    },
+    "layer8": {
+      "attention.av": 18066432,
+      "attention.qk": 16934016,
+      "attention.quantize_qk": 3455079,
+      "attention.softmax": 13348608,
+      "attention.quantize_v": 2831413,
+      "gelu": 17602312,
+      "linear.gemm_and_scale": 329960768,
+      "linear.quantize": 9666950,
+      "attention.prepare": 1781457,
+      "rope": 2062422
+    },
+    "layer9": {
+      "attention.av": 17247816,
+      "attention.qk": 18486216,
+      "attention.quantize_qk": 2615558,
+      "attention.softmax": 13148712,
+      "attention.quantize_v": 2831413,
+      "gelu": 8870173,
+      "linear.gemm_and_scale": 197659525,
+      "linear.quantize": 5624608,
+      "attention.prepare": 1572413,
+      "rope": 2062422
+    },
+    "layer10": {
+      "attention.av": 4069320,
+      "attention.qk": 3748056,
+      "attention.quantize_qk": 1319381,
+      "attention.softmax": 3042120,
+      "attention.quantize_v": 1529196,
+      "gelu": 4469773,
+      "linear.gemm_and_scale": 100027919,
+      "linear.quantize": 2862838,
+      "attention.prepare": 792920,
+      "rope": 1039437
+    },
+    "layer11": {
+      "attention.av": 48648,
+      "attention.qk": 40152,
+      "attention.quantize_qk": 455590,
+      "attention.softmax": 32040,
+      "attention.quantize_v": 862344,
+      "gelu": 69480,
+      "linear.gemm_and_scale": 17537957,
+      "linear.quantize": 458763,
+      "attention.prepare": 347932,
+      "rope": 523917
+    }
+  },
+  "projections": {
+    "mlp_wi": {
+      "linear.gemm_and_scale": 1617342688,
+      "linear.quantize": 14421891
+    },
+    "mlp_wo": {
+      "linear.gemm_and_scale": 797139213,
+      "linear.quantize": 51222775
+    },
+    "out_projection": {
+      "linear.gemm_and_scale": 202174192,
+      "linear.quantize": 14449504
+    },
+    "projection": {
+      "linear.gemm_and_scale": 668216220,
+      "linear.quantize": 15854588
+    }
+  }
+}

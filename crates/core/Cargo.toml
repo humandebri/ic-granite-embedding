@@ -1,0 +1,21 @@
+[package]
+name = "granite-core"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+libm = "0.2"
+miniz_oxide = "=0.9.1"
+
+[features]
+profiling = []
+approx-gelu = []
+integer-attention = []
+strassen = []
+chunked-gemm = []
+strassen-wo = ["strassen"]
+
+strassen-qkv = ["strassen"]
+strassen-out = ["strassen"]

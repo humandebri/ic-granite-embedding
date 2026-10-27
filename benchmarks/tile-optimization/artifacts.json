@@ -1,0 +1,27 @@
+[
+  {
+    "configuration": "default",
+    "path": "target/wasm32-unknown-unknown/release/granite_canister.wasm",
+    "sha256": "c1ba65ae15c1868d210394e10123bc7c80d6942a1c003def9ac714f6214ee8f4",
+    "bytes": 3194652,
+    "features": [
+      "approx-gelu",
+      "integer-attention",
+      "strassen",
+      "chunked-gemm"
+    ]
+  },
+  {
+    "configuration": "instruction-gemm",
+    "path": "target/wasm32-unknown-unknown/release/granite_canister_instruction.wasm",
+    "sha256": "faa1c76da109a72f59cddef91e2e889c6c471d7b2cf65188a443ec44c3d27121",
+    "bytes": 5434900,
+    "features": [
+      "approx-gelu",
+      "integer-attention",
+      "strassen",
+      "chunked-gemm",
+      "instruction-gemm"
+    ]
+  }
+]

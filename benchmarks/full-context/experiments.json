@@ -1,0 +1,135 @@
+[
+  {
+    "name": "attn",
+    "wasm_sha256": "f69b728aed96d02b3f505a5c9d41e57dfd911d9e658910e40e8bd3a6d361aa11",
+    "wasm_bytes": 6830874,
+    "decision": "adopt projection extension",
+    "raw_256_instructions": [
+      4123984968,
+      4123984968,
+      4123984968,
+      4123984968
+    ]
+  },
+  {
+    "name": "compact",
+    "wasm_sha256": "c5614f9ae937a7b678c35c5a9a4569d2946605578429b6cc29bd15717e76614a",
+    "wasm_bytes": 2618593,
+    "decision": "reject four-channel loop",
+    "raw_256_instructions": [
+      4161834108,
+      4161834108,
+      4161834108,
+      4161834108
+    ]
+  },
+  {
+    "name": "balanced-v1",
+    "wasm_sha256": "c8e43d15d90401c77030330279183cef1ebecd045cfe706d5c7572c66f606b71",
+    "wasm_bytes": 3577703,
+    "decision": "intermediate",
+    "sharded_5000_stats": {
+      "instructions": 177972619230,
+      "max_instructions": 2936288068,
+      "max_request_bytes": 2093356,
+      "max_response_bytes": 3072047,
+      "queries": 218,
+      "query_seconds": 20.312675287000012,
+      "request_bytes": 310601791,
+      "response_bytes": 300726621
+    },
+    "sharded_5000_cosine": 0.9996693769000721
+  },
+  {
+    "name": "qk",
+    "wasm_sha256": "ceed209122c01e56768d23b5966ff302e57e2ca2b02aeb29bc7258e7c7d78acb",
+    "wasm_bytes": 3586546,
+    "decision": "reject long-context regression",
+    "raw_256_instructions": [
+      4084214648,
+      4084214648,
+      4084214648,
+      4084214648
+    ],
+    "sharded_5000_stats": {
+      "instructions": 181661037054,
+      "max_instructions": 3040324477,
+      "max_request_bytes": 2093356,
+      "max_response_bytes": 3072047,
+      "queries": 182,
+      "query_seconds": 24.501671998999985,
+      "request_bytes": 288952687,
+      "response_bytes": 300724965
+    },
+    "sharded_5000_cosine": 0.9996693769000721
+  },
+  {
+    "name": "qk-short",
+    "wasm_sha256": "6d6cf787be55a7e2472fea96d16c189526d43d84c2b80114e54353a09ce92d66",
+    "wasm_bytes": 3585501,
+    "decision": "reject shared-kernel long-context regression",
+    "raw_256_instructions": [
+      4048783939,
+      4048783939,
+      4048783939,
+      4048783939
+    ],
+    "sharded_5000_stats": {
+      "instructions": 180543010458,
+      "max_instructions": 3021427961,
+      "max_request_bytes": 2093356,
+      "max_response_bytes": 3072047,
+      "queries": 182,
+      "query_seconds": 20.279184667,
+      "request_bytes": 288952687,
+      "response_bytes": 300724965
+    },
+    "sharded_5000_cosine": 0.9996693769000721
+  },
+  {
+    "name": "qk-inline",
+    "wasm_sha256": "f8089de1f26f482416e9fcc68e295e32171053ac8f6e562adf5dd1dc1153ac5c",
+    "wasm_bytes": 3599087,
+    "decision": "reject inline controls",
+    "raw_256_instructions": [
+      4065007062,
+      4065007062,
+      4065007062,
+      4065007062
+    ],
+    "sharded_5000_stats": {
+      "instructions": 181067778102,
+      "max_instructions": 3025793150,
+      "max_request_bytes": 2093356,
+      "max_response_bytes": 3072047,
+      "queries": 182,
+      "query_seconds": 18.526897462999997,
+      "request_bytes": 288952687,
+      "response_bytes": 300724965
+    },
+    "sharded_5000_cosine": 0.9996693769000721
+  },
+  {
+    "name": "qk-isolated",
+    "wasm_sha256": "7ef5b8a917c9d993a30ca09d49f1603f4260875ac8d135c0ac607c024d85c515",
+    "wasm_bytes": 3602937,
+    "decision": "adopt isolated small-context batching",
+    "raw_256_instructions": [
+      4064722696,
+      4064722696,
+      4064722696,
+      4064722696
+    ],
+    "sharded_5000_stats": {
+      "instructions": 177813740538,
+      "max_instructions": 2936313152,
+      "max_request_bytes": 2093356,
+      "max_response_bytes": 3072047,
+      "queries": 182,
+      "query_seconds": 18.988175413999993,
+      "request_bytes": 288952687,
+      "response_bytes": 300724965
+    },
+    "sharded_5000_cosine": 0.9996693769000721
+  }
+]

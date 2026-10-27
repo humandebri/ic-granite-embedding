@@ -1,0 +1,41 @@
+{
+  "order": [
+    "baseline",
+    "aggressive",
+    "balanced"
+  ],
+  "variants": [
+    {
+      "variant": "baseline",
+      "wasm_sha256": "cab8d077f6e8980dfb2333e12c18fc08834c6965d62583a015a0fa9d5bc70265",
+      "instructions": 4274781255,
+      "median_seconds": 0.47554429200000004,
+      "min_seconds": 0.472294458,
+      "max_seconds": 0.650654,
+      "install_seconds": 21.807936833,
+      "samples": 20
+    },
+    {
+      "variant": "aggressive",
+      "wasm_sha256": "334e4a875ff07e44556ef5367cfdad1b2dc0df1aaa35e3f9d9f1995d21af6b81",
+      "instructions": 4230642197,
+      "median_seconds": 0.635186042,
+      "min_seconds": 0.562732083,
+      "max_seconds": 0.684290917,
+      "install_seconds": 40.850689583,
+      "samples": 20
+    },
+    {
+      "variant": "balanced",
+      "wasm_sha256": "55c2fb357b42fc3658b3e7e7bda5b106e18eb35b3f1471fb488e7ad9297cf96b",
+      "instructions": 4260023973,
+      "median_seconds": 0.5312509169999999,
+      "min_seconds": 0.526092375,
+      "max_seconds": 0.803953542,
+      "install_seconds": 23.811066792,
+      "samples": 20
+    }
+  ],
+  "cache_bypass": "unused fused-request kstart nonce",
+  "notes": "Sequential runs, no concurrent build or benchmark from this task; OS/thermal state not controlled."
+}

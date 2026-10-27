@@ -1,0 +1,26 @@
+[
+  {
+    "variant": "depth2",
+    "wasm_sha256": "01de7ee8d484d9f71e3f4be660387d0136947f531090ef791e283183c8736cd6",
+    "raw_profile_step_instructions_256": 4267541062,
+    "delta_vs_adopted": 9139642,
+    "exact_documents": 4,
+    "exact_native_linear_cases": 112
+  },
+  {
+    "variant": "wo",
+    "wasm_sha256": "bd9193b6776ab68ba522d496b88e676160e4b05653b6a00aa38b0e6e08ca4594",
+    "raw_profile_step_instructions_256": 4193372316,
+    "delta_vs_adopted": -65029104,
+    "exact_documents": 4,
+    "exact_native_linear_cases": 112
+  },
+  {
+    "variant": "wo-and-wide-av",
+    "wasm_sha256": "5f169a73a47d19da9a50dc02bb32400deac61bcfb5ff47d2001ea88a118252f8",
+    "raw_profile_step_instructions_256": 4161073689,
+    "delta_vs_adopted": -97327731,
+    "exact_documents": 4,
+    "exact_native_linear_cases": 112
+  }
+]

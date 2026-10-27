@@ -1,0 +1,54 @@
+use std::{env, fs, path::PathBuf};
+
+// Exact integer products; balanced sums avoid accumulator local.get/local.set
+// instructions in the Wasm hot path. No SIMD reassociation of floats.
+fn tree(parts: &[String]) -> String {
+    if parts.len() == 1 {
+        return parts[0].clone();
+    }
+    let m = parts.len() / 2;
+    format!("i32x4_add({}, {})", tree(&parts[..m]), tree(&parts[m..]))
+}
+fn main() {
+    let mut s = String::new();
+    for (cols, tokens, outputs) in [(384, 8, 8), (1536, 8, 8), (384, 32, 16), (1536, 32, 16)] {
+        s.push_str(&format!("#[cfg(target_arch=\"wasm32\")]\n#[inline(never)]\n#[allow(unsafe_op_in_unsafe_fn)]\nunsafe fn tree_{cols}_{tokens}(x:*const i16,w:*const i16,y:*mut f32,stride:usize,sx:*const f32,sw:*const f32) {{\nuse core::arch::wasm32::*;\n"));
+        for prefix in ["x", "w"] {
+            for a in 0..if prefix == "x" { tokens } else { outputs } {
+                for k in 0..cols / 8 {
+                    s.push_str(&format!(
+                        "let {prefix}{a}_{k}=v128_load({prefix}.add({}).cast());\n",
+                        a * cols + k * 8
+                    ));
+                }
+            }
+        }
+        for a in 0..tokens {
+            for b in 0..outputs {
+                let terms: Vec<_> = (0..cols / 8)
+                    .map(|k| format!("i32x4_dot_i16x8(x{a}_{k},w{b}_{k})"))
+                    .collect();
+                s.push_str(&format!("let a{a}_{b}={};\n", tree(&terms)));
+            }
+        }
+        s.push_str("#[inline(always)]\nfn sum4(a:v128,b:v128,c:v128,d:v128)->v128 { let ab=i32x4_add(i32x4_shuffle::<0,1,4,5>(a,b),i32x4_shuffle::<2,3,6,7>(a,b));let cd=i32x4_add(i32x4_shuffle::<0,1,4,5>(c,d),i32x4_shuffle::<2,3,6,7>(c,d));i32x4_add(i32x4_shuffle::<0,2,4,6>(ab,cd),i32x4_shuffle::<1,3,5,7>(ab,cd)) }\n");
+        for b in (0..outputs).step_by(4) {
+            s.push_str(&format!("let sw{}=v128_load(sw.add({b}).cast());\n", b / 4));
+        }
+        for a in 0..tokens {
+            s.push_str(&format!(
+                "let sx{a}=f32x4_splat(*sx.add({a}));let y{a}=y.add({a}*stride);\n"
+            ));
+            for b in (0..outputs).step_by(4) {
+                s.push_str(&format!("v128_store(y{a}.add({b}).cast(),f32x4_mul(f32x4_convert_i32x4(sum4(a{a}_{b},a{a}_{},a{a}_{},a{a}_{})),f32x4_mul(sx{a},sw{})));\n",b+1,b+2,b+3,b/4));
+            }
+        }
+        s.push_str("}\n");
+    }
+    fs::write(
+        PathBuf::from(env::var_os("OUT_DIR").unwrap()).join("tree.rs"),
+        s,
+    )
+    .unwrap();
+    println!("cargo:rerun-if-changed=build.rs");
+}

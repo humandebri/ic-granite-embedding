@@ -1,0 +1,146 @@
+[
+  {
+    "case_id": "32",
+    "tokens": 32,
+    "seconds": 0.10416325,
+    "cosine_to_f32": 0.9994868987731115,
+    "queries": 1,
+    "instructions": 554156463,
+    "max_instructions": 554156463
+  },
+  {
+    "case_id": "64",
+    "tokens": 64,
+    "seconds": 0.151057875,
+    "cosine_to_f32": 0.9995460706262481,
+    "queries": 1,
+    "instructions": 1104134170,
+    "max_instructions": 1104134170
+  },
+  {
+    "case_id": "128",
+    "tokens": 128,
+    "seconds": 0.284524916,
+    "cosine_to_f32": 0.9996528840942438,
+    "queries": 1,
+    "instructions": 2199360247,
+    "max_instructions": 2199360247
+  },
+  {
+    "case_id": "160",
+    "tokens": 160,
+    "seconds": 0.384683542,
+    "cosine_to_f32": 0.9996542781487251,
+    "queries": 1,
+    "instructions": 2720196434,
+    "max_instructions": 2720196434
+  },
+  {
+    "case_id": "176",
+    "tokens": 176,
+    "seconds": 0.383602958,
+    "cosine_to_f32": 0.999552342975903,
+    "queries": 1,
+    "instructions": 2999779780,
+    "max_instructions": 2999779780
+  },
+  {
+    "case_id": "256",
+    "tokens": 256,
+    "seconds": 0.522496208,
+    "cosine_to_f32": 0.9996170883969944,
+    "queries": 1,
+    "instructions": 4274785648,
+    "max_instructions": 4274785648
+  },
+  {
+    "case_id": "512",
+    "tokens": 512,
+    "seconds": 1.013500708,
+    "cosine_to_f32": 0.9995526629671576,
+    "queries": 2,
+    "instructions": 8836065163,
+    "max_instructions": 4699486897
+  },
+  {
+    "case_id": "space-160",
+    "tokens": 160,
+    "seconds": 0.362563333,
+    "cosine_to_f32": 0.9996146336225471,
+    "queries": 1,
+    "instructions": 2720196434,
+    "max_instructions": 2720196434
+  },
+  {
+    "case_id": "space-256",
+    "tokens": 256,
+    "seconds": 0.498501042,
+    "cosine_to_f32": 0.9996156280789884,
+    "queries": 1,
+    "instructions": 4274785648,
+    "max_instructions": 4274785648
+  },
+  {
+    "case_id": "space-512",
+    "tokens": 512,
+    "seconds": 0.9978615,
+    "cosine_to_f32": 0.9995779375226209,
+    "queries": 2,
+    "instructions": 8836065163,
+    "max_instructions": 4699486897
+  },
+  {
+    "case_id": "cooking-160",
+    "tokens": 160,
+    "seconds": 0.358163375,
+    "cosine_to_f32": 0.9996325349013353,
+    "queries": 1,
+    "instructions": 2720196434,
+    "max_instructions": 2720196434
+  },
+  {
+    "case_id": "cooking-256",
+    "tokens": 256,
+    "seconds": 0.502241209,
+    "cosine_to_f32": 0.9996686028686802,
+    "queries": 1,
+    "instructions": 4274785648,
+    "max_instructions": 4274785648
+  },
+  {
+    "case_id": "cooking-512",
+    "tokens": 512,
+    "seconds": 1.026113958,
+    "cosine_to_f32": 0.9995959472254071,
+    "queries": 2,
+    "instructions": 8836065163,
+    "max_instructions": 4699486897
+  },
+  {
+    "case_id": "weather-160",
+    "tokens": 160,
+    "seconds": 0.351612708,
+    "cosine_to_f32": 0.9996177156831237,
+    "queries": 1,
+    "instructions": 2720196434,
+    "max_instructions": 2720196434
+  },
+  {
+    "case_id": "weather-256",
+    "tokens": 256,
+    "seconds": 0.506983542,
+    "cosine_to_f32": 0.9996369918455851,
+    "queries": 1,
+    "instructions": 4274785648,
+    "max_instructions": 4274785648
+  },
+  {
+    "case_id": "weather-512",
+    "tokens": 512,
+    "seconds": 1.036051625,
+    "cosine_to_f32": 0.999503959557143,
+    "queries": 2,
+    "instructions": 8836065163,
+    "max_instructions": 4699486897
+  }
+]

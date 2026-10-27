@@ -1,0 +1,62 @@
+{
+  "cases": [
+    {
+      "instructions": 608387,
+      "max_abs_error": 0.0,
+      "mean_abs_error": 0.0,
+      "phases": [
+        [
+          "gelu",
+          521770,
+          1
+        ]
+      ],
+      "rows": 1,
+      "values": 1536
+    },
+    {
+      "instructions": 4638559,
+      "max_abs_error": 0.0,
+      "mean_abs_error": 0.0,
+      "phases": [
+        [
+          "gelu",
+          3971385,
+          1
+        ]
+      ],
+      "rows": 8,
+      "values": 12288
+    },
+    {
+      "instructions": 37059837,
+      "max_abs_error": 0.0,
+      "mean_abs_error": 0.0,
+      "phases": [
+        [
+          "gelu",
+          31747799,
+          1
+        ]
+      ],
+      "rows": 64,
+      "values": 98304
+    },
+    {
+      "instructions": 74017291,
+      "max_abs_error": 0.0,
+      "mean_abs_error": 0.0,
+      "phases": [
+        [
+          "gelu",
+          63396837,
+          1
+        ]
+      ],
+      "rows": 128,
+      "values": 196608
+    }
+  ],
+  "kind": "gelu-micro",
+  "wasm_sha256": "2cfcb5f7ec652a04402da57e494715fd7f126b5118d9e3e2ebb6a9372e7c212e"
+}

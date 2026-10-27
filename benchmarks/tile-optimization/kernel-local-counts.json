@@ -1,0 +1,92 @@
+{
+  "baseline_profile": {
+    "wasm_bytes": 3214287,
+    "max_v128_locals": 4616,
+    "largest_bodies": [
+      {
+        "defined_function": 245,
+        "body_bytes": 681219,
+        "v128_locals": 2307,
+        "all_locals": 2307
+      },
+      {
+        "defined_function": 258,
+        "body_bytes": 658595,
+        "v128_locals": 3084,
+        "all_locals": 3084
+      },
+      {
+        "defined_function": 257,
+        "body_bytes": 343904,
+        "v128_locals": 4616,
+        "all_locals": 4616
+      },
+      {
+        "defined_function": 259,
+        "body_bytes": 343030,
+        "v128_locals": 1328,
+        "all_locals": 1331
+      }
+    ]
+  },
+  "large_before_stream": {
+    "wasm_bytes": 5507995,
+    "max_v128_locals": 7692,
+    "largest_bodies": [
+      {
+        "defined_function": 245,
+        "body_bytes": 1356259,
+        "v128_locals": 3843,
+        "all_locals": 3843
+      },
+      {
+        "defined_function": 258,
+        "body_bytes": 1303011,
+        "v128_locals": 4628,
+        "all_locals": 4628
+      },
+      {
+        "defined_function": 257,
+        "body_bytes": 675876,
+        "v128_locals": 7692,
+        "all_locals": 7692
+      },
+      {
+        "defined_function": 259,
+        "body_bytes": 672606,
+        "v128_locals": 2608,
+        "all_locals": 2611
+      }
+    ]
+  },
+  "large_stream": {
+    "wasm_bytes": 5454531,
+    "max_v128_locals": 2608,
+    "largest_bodies": [
+      {
+        "defined_function": 245,
+        "body_bytes": 1350121,
+        "v128_locals": 867,
+        "all_locals": 896
+      },
+      {
+        "defined_function": 258,
+        "body_bytes": 1295405,
+        "v128_locals": 1764,
+        "all_locals": 1792
+      },
+      {
+        "defined_function": 259,
+        "body_bytes": 672606,
+        "v128_locals": 2608,
+        "all_locals": 2611
+      },
+      {
+        "defined_function": 257,
+        "body_bytes": 659806,
+        "v128_locals": 2316,
+        "all_locals": 2320
+      }
+    ]
+  }
+}

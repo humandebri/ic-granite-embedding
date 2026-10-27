@@ -1,0 +1,6 @@
+Oct 26 06:13:31.593 WARN s:/n:/ic_query_stats/payload_builder Current stats are uninitialized. This warning should go away after some minutes if the replica is processing query calls.
+activated lxzze-o7777-77777-aaaaa-cai, tokens=256, tile=384
+
+thread 'main' (80107495) panicked at crates/bench/src/main.rs:291:33:
+query fields=[7, 0, 0, 256, 5, 0, 0, 256]: RejectResponse { reject_code: CanisterError, reject_message: "Error from Canister lxzze-o7777-77777-aaaaa-cai: Canister exceeded the limit of 5000000000 instructions for single message execution..\nTry optimizing this method to consume fewer instructions or split the work across multiple messages. See documentation: https://internetcomputer.org/docs/current/references/execution-errors#instruction-limit-exceeded", error_code: CanisterInstructionLimitExceeded, certified: false }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

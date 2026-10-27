@@ -1,0 +1,8 @@
+{
+  "source_sha256": {
+    "crates/core/src/lib.rs": "c7834c8c6ed6fb438dcdc7b6235b806f7d2865c38248b8f5c136ec4d69ac06d9",
+    "crates/core/src/integer_attention.rs": "d62f9fdacfaafa9b3bcf331b8bcaeac7e4f70e2b6bcb684e886d1cb7135f0b00",
+    "crates/core/build.rs": "f485aae9b6e88ce461debf162f4ca1fe0929a75079fd8a1fb7be83f876771857"
+  },
+  "wasm_sha256": "da5893b49df10b0f6dda17ab8b8782983ccc1ce3f91aa0bbc8392b084b0e76e1"
+}

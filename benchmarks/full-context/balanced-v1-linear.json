@@ -1,0 +1,2359 @@
+{
+  "cases": [
+    {
+      "cols": 384,
+      "hash": [
+        234,
+        32,
+        221,
+        105,
+        163,
+        213,
+        21,
+        80
+      ],
+      "instructions": 410474,
+      "pattern": 0,
+      "phases": [],
+      "projection": 0,
+      "rows": 1,
+      "uncached_seconds": [
+        0.003756083
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        61,
+        35,
+        28,
+        63,
+        77,
+        254,
+        54
+      ],
+      "instructions": 410474,
+      "pattern": 1,
+      "phases": [],
+      "projection": 0,
+      "rows": 1,
+      "uncached_seconds": [
+        0.004109666
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        162,
+        34,
+        31,
+        150,
+        207,
+        115,
+        191,
+        94
+      ],
+      "instructions": 149290,
+      "pattern": 0,
+      "phases": [],
+      "projection": 1,
+      "rows": 1,
+      "uncached_seconds": [
+        0.004239667
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        129,
+        238,
+        192,
+        69,
+        195,
+        110,
+        200
+      ],
+      "instructions": 149290,
+      "pattern": 1,
+      "phases": [],
+      "projection": 1,
+      "rows": 1,
+      "uncached_seconds": [
+        0.004010875
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        4,
+        6,
+        14,
+        108,
+        231,
+        183,
+        141,
+        102
+      ],
+      "instructions": 1063082,
+      "pattern": 0,
+      "phases": [],
+      "projection": 2,
+      "rows": 1,
+      "uncached_seconds": [
+        0.006680125
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        19,
+        53,
+        132,
+        167,
+        15,
+        142,
+        126
+      ],
+      "instructions": 1063082,
+      "pattern": 1,
+      "phases": [],
+      "projection": 2,
+      "rows": 1,
+      "uncached_seconds": [
+        0.004110583
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        12,
+        54,
+        0,
+        47,
+        217,
+        124,
+        85,
+        154
+      ],
+      "instructions": 558850,
+      "pattern": 0,
+      "phases": [],
+      "projection": 3,
+      "rows": 1,
+      "uncached_seconds": [
+        0.005816208
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        129,
+        238,
+        192,
+        69,
+        195,
+        110,
+        200
+      ],
+      "instructions": 558850,
+      "pattern": 1,
+      "phases": [],
+      "projection": 3,
+      "rows": 1,
+      "uncached_seconds": [
+        0.004677333
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        66,
+        180,
+        9,
+        218,
+        211,
+        33,
+        211,
+        107
+      ],
+      "instructions": 1173522,
+      "pattern": 0,
+      "phases": [],
+      "projection": 0,
+      "rows": 4,
+      "uncached_seconds": [
+        0.007767834
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        139,
+        30,
+        17,
+        60,
+        195,
+        78,
+        181
+      ],
+      "instructions": 1173522,
+      "pattern": 1,
+      "phases": [],
+      "projection": 0,
+      "rows": 4,
+      "uncached_seconds": [
+        0.0037005
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        49,
+        138,
+        235,
+        30,
+        175,
+        137,
+        128,
+        203
+      ],
+      "instructions": 432744,
+      "pattern": 0,
+      "phases": [],
+      "projection": 1,
+      "rows": 4,
+      "uncached_seconds": [
+        0.003580917
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        155,
+        139,
+        170,
+        249,
+        94,
+        176,
+        106
+      ],
+      "instructions": 432744,
+      "pattern": 1,
+      "phases": [],
+      "projection": 1,
+      "rows": 4,
+      "uncached_seconds": [
+        0.003768125
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        19,
+        113,
+        255,
+        140,
+        109,
+        167,
+        103,
+        6
+      ],
+      "instructions": 3025486,
+      "pattern": 0,
+      "phases": [],
+      "projection": 2,
+      "rows": 4,
+      "uncached_seconds": [
+        0.004998583
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        227,
+        109,
+        82,
+        81,
+        23,
+        67,
+        110
+      ],
+      "instructions": 3025486,
+      "pattern": 1,
+      "phases": [],
+      "projection": 2,
+      "rows": 4,
+      "uncached_seconds": [
+        0.004469542
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        110,
+        43,
+        191,
+        41,
+        236,
+        64,
+        138
+      ],
+      "instructions": 1622446,
+      "pattern": 0,
+      "phases": [],
+      "projection": 3,
+      "rows": 4,
+      "uncached_seconds": [
+        0.004703167
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        155,
+        139,
+        170,
+        249,
+        94,
+        176,
+        106
+      ],
+      "instructions": 1622446,
+      "pattern": 1,
+      "phases": [],
+      "projection": 3,
+      "rows": 4,
+      "uncached_seconds": [
+        0.004406208
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        57,
+        179,
+        98,
+        194,
+        152,
+        114,
+        61,
+        210
+      ],
+      "instructions": 2392904,
+      "pattern": 0,
+      "phases": [],
+      "projection": 0,
+      "rows": 7,
+      "uncached_seconds": [
+        0.004054959
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        217,
+        141,
+        209,
+        15,
+        91,
+        133,
+        91
+      ],
+      "instructions": 2392904,
+      "pattern": 1,
+      "phases": [],
+      "projection": 0,
+      "rows": 7,
+      "uncached_seconds": [
+        0.00387325
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        7,
+        211,
+        255,
+        246,
+        184,
+        116,
+        186,
+        254
+      ],
+      "instructions": 868622,
+      "pattern": 0,
+      "phases": [],
+      "projection": 1,
+      "rows": 7,
+      "uncached_seconds": [
+        0.003542458
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        181,
+        252,
+        120,
+        127,
+        217,
+        194,
+        19
+      ],
+      "instructions": 868622,
+      "pattern": 1,
+      "phases": [],
+      "projection": 1,
+      "rows": 7,
+      "uncached_seconds": [
+        0.004811375
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        160,
+        124,
+        219,
+        96,
+        182,
+        181,
+        91,
+        163
+      ],
+      "instructions": 6203628,
+      "pattern": 0,
+      "phases": [],
+      "projection": 2,
+      "rows": 7,
+      "uncached_seconds": [
+        0.004994084
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        179,
+        166,
+        85,
+        60,
+        185,
+        249,
+        37
+      ],
+      "instructions": 6203628,
+      "pattern": 1,
+      "phases": [],
+      "projection": 2,
+      "rows": 7,
+      "uncached_seconds": [
+        0.004684208
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        137,
+        38,
+        254,
+        56,
+        26,
+        97,
+        139,
+        138
+      ],
+      "instructions": 3287891,
+      "pattern": 0,
+      "phases": [],
+      "projection": 3,
+      "rows": 7,
+      "uncached_seconds": [
+        0.004019334
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        181,
+        252,
+        120,
+        127,
+        217,
+        194,
+        19
+      ],
+      "instructions": 3287891,
+      "pattern": 1,
+      "phases": [],
+      "projection": 3,
+      "rows": 7,
+      "uncached_seconds": [
+        0.004212458
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        155,
+        131,
+        126,
+        232,
+        209,
+        91,
+        166,
+        147
+      ],
+      "instructions": 2229443,
+      "pattern": 0,
+      "phases": [],
+      "projection": 0,
+      "rows": 8,
+      "uncached_seconds": [
+        0.003710542
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        243,
+        90,
+        235,
+        109,
+        106,
+        251,
+        243
+      ],
+      "instructions": 2229443,
+      "pattern": 1,
+      "phases": [],
+      "projection": 0,
+      "rows": 8,
+      "uncached_seconds": [
+        0.003590167
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        201,
+        91,
+        126,
+        117,
+        31,
+        111,
+        21,
+        35
+      ],
+      "instructions": 823673,
+      "pattern": 0,
+      "phases": [],
+      "projection": 1,
+      "rows": 8,
+      "uncached_seconds": [
+        0.003626542
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        19,
+        53,
+        132,
+        167,
+        15,
+        142,
+        126
+      ],
+      "instructions": 823673,
+      "pattern": 1,
+      "phases": [],
+      "projection": 1,
+      "rows": 8,
+      "uncached_seconds": [
+        0.003391167
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        0,
+        178,
+        118,
+        11,
+        78,
+        247,
+        190,
+        133
+      ],
+      "instructions": 5743887,
+      "pattern": 0,
+      "phases": [],
+      "projection": 2,
+      "rows": 8,
+      "uncached_seconds": [
+        0.004469292
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        163,
+        185,
+        240,
+        106,
+        192,
+        47,
+        51
+      ],
+      "instructions": 5743887,
+      "pattern": 1,
+      "phases": [],
+      "projection": 2,
+      "rows": 8,
+      "uncached_seconds": [
+        0.005092958
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        82,
+        217,
+        16,
+        173,
+        235,
+        164,
+        49,
+        92
+      ],
+      "instructions": 3093119,
+      "pattern": 0,
+      "phases": [],
+      "projection": 3,
+      "rows": 8,
+      "uncached_seconds": [
+        0.005347916
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        19,
+        53,
+        132,
+        167,
+        15,
+        142,
+        126
+      ],
+      "instructions": 3093119,
+      "pattern": 1,
+      "phases": [],
+      "projection": 3,
+      "rows": 8,
+      "uncached_seconds": [
+        0.00446575
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        140,
+        69,
+        245,
+        46,
+        205,
+        253,
+        154,
+        4
+      ],
+      "instructions": 9071342,
+      "pattern": 0,
+      "phases": [],
+      "projection": 0,
+      "rows": 31,
+      "uncached_seconds": [
+        0.0036625
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        73,
+        88,
+        177,
+        58,
+        121,
+        169,
+        189
+      ],
+      "instructions": 9071342,
+      "pattern": 1,
+      "phases": [],
+      "projection": 0,
+      "rows": 31,
+      "uncached_seconds": [
+        0.003421333
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        113,
+        192,
+        150,
+        107,
+        86,
+        44,
+        14,
+        122
+      ],
+      "instructions": 3329732,
+      "pattern": 0,
+      "phases": [],
+      "projection": 1,
+      "rows": 31,
+      "uncached_seconds": [
+        0.003218083
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        133,
+        85,
+        218,
+        126,
+        26,
+        104,
+        22
+      ],
+      "instructions": 3329732,
+      "pattern": 1,
+      "phases": [],
+      "projection": 1,
+      "rows": 31,
+      "uncached_seconds": [
+        0.003798709
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        59,
+        1,
+        210,
+        11,
+        16,
+        190,
+        252,
+        186
+      ],
+      "instructions": 23425386,
+      "pattern": 0,
+      "phases": [],
+      "projection": 2,
+      "rows": 31,
+      "uncached_seconds": [
+        0.008315292
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        51,
+        109,
+        227,
+        63,
+        83,
+        128,
+        31
+      ],
+      "instructions": 23425386,
+      "pattern": 1,
+      "phases": [],
+      "projection": 2,
+      "rows": 31,
+      "uncached_seconds": [
+        0.0073195
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        149,
+        233,
+        135,
+        142,
+        143,
+        92,
+        240,
+        105
+      ],
+      "instructions": 12557560,
+      "pattern": 0,
+      "phases": [],
+      "projection": 3,
+      "rows": 31,
+      "uncached_seconds": [
+        0.007602709
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        133,
+        85,
+        218,
+        126,
+        26,
+        104,
+        22
+      ],
+      "instructions": 12557560,
+      "pattern": 1,
+      "phases": [],
+      "projection": 3,
+      "rows": 31,
+      "uncached_seconds": [
+        0.009578125
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        20,
+        32,
+        210,
+        91,
+        147,
+        246,
+        198,
+        18
+      ],
+      "instructions": 8478295,
+      "pattern": 0,
+      "phases": [],
+      "projection": 0,
+      "rows": 32,
+      "uncached_seconds": [
+        0.005183875
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        99,
+        5,
+        95,
+        49,
+        52,
+        113,
+        190
+      ],
+      "instructions": 8478295,
+      "pattern": 1,
+      "phases": [],
+      "projection": 0,
+      "rows": 32,
+      "uncached_seconds": [
+        0.004485208
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        184,
+        196,
+        7,
+        246,
+        250,
+        31,
+        206,
+        91
+      ],
+      "instructions": 3141661,
+      "pattern": 0,
+      "phases": [],
+      "projection": 1,
+      "rows": 32,
+      "uncached_seconds": [
+        0.004710291
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        227,
+        109,
+        82,
+        81,
+        23,
+        67,
+        110
+      ],
+      "instructions": 3141661,
+      "pattern": 1,
+      "phases": [],
+      "projection": 1,
+      "rows": 32,
+      "uncached_seconds": [
+        0.004500167
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        174,
+        209,
+        223,
+        144,
+        84,
+        118,
+        112,
+        132
+      ],
+      "instructions": 21819899,
+      "pattern": 0,
+      "phases": [],
+      "projection": 2,
+      "rows": 32,
+      "uncached_seconds": [
+        0.008900667
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        35,
+        128,
+        182,
+        49,
+        171,
+        237,
+        245
+      ],
+      "instructions": 21819899,
+      "pattern": 1,
+      "phases": [],
+      "projection": 2,
+      "rows": 32,
+      "uncached_seconds": [
+        0.008857917
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        158,
+        153,
+        97,
+        50,
+        68,
+        191,
+        62,
+        48
+      ],
+      "instructions": 11975937,
+      "pattern": 0,
+      "phases": [],
+      "projection": 3,
+      "rows": 32,
+      "uncached_seconds": [
+        0.011671916
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        227,
+        109,
+        82,
+        81,
+        23,
+        67,
+        110
+      ],
+      "instructions": 11975937,
+      "pattern": 1,
+      "phases": [],
+      "projection": 3,
+      "rows": 32,
+      "uncached_seconds": [
+        0.006790292
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        245,
+        234,
+        185,
+        91,
+        13,
+        201,
+        46,
+        166
+      ],
+      "instructions": 17546707,
+      "pattern": 0,
+      "phases": [],
+      "projection": 0,
+      "rows": 63,
+      "uncached_seconds": [
+        0.005699333
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        137,
+        187,
+        193,
+        248,
+        157,
+        223,
+        69
+      ],
+      "instructions": 17546707,
+      "pattern": 1,
+      "phases": [],
+      "projection": 0,
+      "rows": 63,
+      "uncached_seconds": [
+        0.006730541
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        240,
+        75,
+        57,
+        174,
+        238,
+        146,
+        209,
+        6
+      ],
+      "instructions": 6468457,
+      "pattern": 0,
+      "phases": [],
+      "projection": 1,
+      "rows": 63,
+      "uncached_seconds": [
+        0.005269334
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        69,
+        33,
+        146,
+        198,
+        15,
+        80,
+        224
+      ],
+      "instructions": 6468457,
+      "pattern": 1,
+      "phases": [],
+      "projection": 1,
+      "rows": 63,
+      "uncached_seconds": [
+        0.004766333
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        183,
+        247,
+        130,
+        222,
+        24,
+        3,
+        89,
+        214
+      ],
+      "instructions": 45242351,
+      "pattern": 0,
+      "phases": [],
+      "projection": 2,
+      "rows": 63,
+      "uncached_seconds": [
+        0.017467084
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        51,
+        203,
+        117,
+        103,
+        110,
+        160,
+        207
+      ],
+      "instructions": 45242351,
+      "pattern": 1,
+      "phases": [],
+      "projection": 2,
+      "rows": 63,
+      "uncached_seconds": [
+        0.010341625
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        237,
+        170,
+        185,
+        54,
+        244,
+        60,
+        4,
+        49
+      ],
+      "instructions": 24530561,
+      "pattern": 0,
+      "phases": [],
+      "projection": 3,
+      "rows": 63,
+      "uncached_seconds": [
+        0.008757416
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        69,
+        33,
+        146,
+        198,
+        15,
+        80,
+        224
+      ],
+      "instructions": 24530561,
+      "pattern": 1,
+      "phases": [],
+      "projection": 3,
+      "rows": 63,
+      "uncached_seconds": [
+        0.008776292
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        33,
+        47,
+        248,
+        130,
+        14,
+        248,
+        137,
+        65
+      ],
+      "instructions": 16069039,
+      "pattern": 0,
+      "phases": [],
+      "projection": 0,
+      "rows": 64,
+      "uncached_seconds": [
+        0.0080815
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        163,
+        232,
+        137,
+        145,
+        103,
+        104,
+        6
+      ],
+      "instructions": 16069039,
+      "pattern": 1,
+      "phases": [],
+      "projection": 0,
+      "rows": 64,
+      "uncached_seconds": [
+        0.006513542
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        202,
+        57,
+        254,
+        36,
+        175,
+        229,
+        246,
+        175
+      ],
+      "instructions": 6067657,
+      "pattern": 0,
+      "phases": [],
+      "projection": 1,
+      "rows": 64,
+      "uncached_seconds": [
+        0.004337042
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        163,
+        185,
+        240,
+        106,
+        192,
+        47,
+        51
+      ],
+      "instructions": 6067657,
+      "pattern": 1,
+      "phases": [],
+      "projection": 1,
+      "rows": 64,
+      "uncached_seconds": [
+        0.004147792
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        66,
+        78,
+        151,
+        227,
+        37,
+        169,
+        56,
+        5
+      ],
+      "instructions": 40860987,
+      "pattern": 0,
+      "phases": [],
+      "projection": 2,
+      "rows": 64,
+      "uncached_seconds": [
+        0.011331083
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        35,
+        222,
+        232,
+        178,
+        100,
+        5,
+        26
+      ],
+      "instructions": 40860987,
+      "pattern": 1,
+      "phases": [],
+      "projection": 2,
+      "rows": 64,
+      "uncached_seconds": [
+        0.015732834
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        27,
+        99,
+        131,
+        56,
+        189,
+        83,
+        147,
+        204
+      ],
+      "instructions": 22286888,
+      "pattern": 0,
+      "phases": [],
+      "projection": 3,
+      "rows": 64,
+      "uncached_seconds": [
+        0.010588833
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        163,
+        185,
+        240,
+        106,
+        192,
+        47,
+        51
+      ],
+      "instructions": 22286888,
+      "pattern": 1,
+      "phases": [],
+      "projection": 3,
+      "rows": 64,
+      "uncached_seconds": [
+        0.010509
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        79,
+        28,
+        200,
+        135,
+        151,
+        28,
+        110,
+        11
+      ],
+      "instructions": 16475549,
+      "pattern": 0,
+      "phases": [],
+      "projection": 0,
+      "rows": 65,
+      "uncached_seconds": [
+        0.008807083
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        189,
+        233,
+        86,
+        202,
+        141,
+        216,
+        184
+      ],
+      "instructions": 16475549,
+      "pattern": 1,
+      "phases": [],
+      "projection": 0,
+      "rows": 65,
+      "uncached_seconds": [
+        0.008834417
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        249,
+        202,
+        105,
+        142,
+        142,
+        112,
+        121,
+        219
+      ],
+      "instructions": 6212999,
+      "pattern": 0,
+      "phases": [],
+      "projection": 1,
+      "rows": 65,
+      "uncached_seconds": [
+        0.004788417
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        1,
+        134,
+        250,
+        221,
+        197,
+        112,
+        169
+      ],
+      "instructions": 6212999,
+      "pattern": 1,
+      "phases": [],
+      "projection": 1,
+      "rows": 65,
+      "uncached_seconds": [
+        0.004448625
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        56,
+        165,
+        139,
+        233,
+        108,
+        42,
+        87,
+        9
+      ],
+      "instructions": 41920417,
+      "pattern": 0,
+      "phases": [],
+      "projection": 2,
+      "rows": 65,
+      "uncached_seconds": [
+        0.010907292
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        19,
+        241,
+        40,
+        41,
+        240,
+        62,
+        23
+      ],
+      "instructions": 41920417,
+      "pattern": 1,
+      "phases": [],
+      "projection": 2,
+      "rows": 65,
+      "uncached_seconds": [
+        0.012395208
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        128,
+        252,
+        249,
+        207,
+        150,
+        199,
+        12,
+        88
+      ],
+      "instructions": 22842059,
+      "pattern": 0,
+      "phases": [],
+      "projection": 3,
+      "rows": 65,
+      "uncached_seconds": [
+        0.008969625
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        1,
+        134,
+        250,
+        221,
+        197,
+        112,
+        169
+      ],
+      "instructions": 22842059,
+      "pattern": 1,
+      "phases": [],
+      "projection": 3,
+      "rows": 65,
+      "uncached_seconds": [
+        0.010280042
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        81,
+        217,
+        63,
+        181,
+        116,
+        44,
+        49,
+        94
+      ],
+      "instructions": 33612028,
+      "pattern": 0,
+      "phases": [],
+      "projection": 0,
+      "rows": 127,
+      "uncached_seconds": [
+        0.012190792
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        9,
+        130,
+        210,
+        206,
+        32,
+        170,
+        24
+      ],
+      "instructions": 33612028,
+      "pattern": 1,
+      "phases": [],
+      "projection": 0,
+      "rows": 127,
+      "uncached_seconds": [
+        0.012834666
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        28,
+        21,
+        229,
+        44,
+        110,
+        163,
+        195
+      ],
+      "instructions": 12532390,
+      "pattern": 0,
+      "phases": [],
+      "projection": 1,
+      "rows": 127,
+      "uncached_seconds": [
+        0.006294083
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        197,
+        184,
+        113,
+        188,
+        135,
+        253,
+        27
+      ],
+      "instructions": 12532390,
+      "pattern": 1,
+      "phases": [],
+      "projection": 1,
+      "rows": 127,
+      "uncached_seconds": [
+        0.007651625
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        28,
+        246,
+        45,
+        56,
+        72,
+        115,
+        161,
+        180
+      ],
+      "instructions": 86099616,
+      "pattern": 0,
+      "phases": [],
+      "projection": 2,
+      "rows": 127,
+      "uncached_seconds": [
+        0.016699833
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        51,
+        135,
+        154,
+        82,
+        102,
+        121,
+        214
+      ],
+      "instructions": 86099616,
+      "pattern": 1,
+      "phases": [],
+      "projection": 2,
+      "rows": 127,
+      "uncached_seconds": [
+        0.024614583
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        41,
+        190,
+        249,
+        144,
+        80,
+        214,
+        170,
+        114
+      ],
+      "instructions": 46813725,
+      "pattern": 0,
+      "phases": [],
+      "projection": 3,
+      "rows": 127,
+      "uncached_seconds": [
+        0.019131792
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        197,
+        184,
+        113,
+        188,
+        135,
+        253,
+        27
+      ],
+      "instructions": 46813725,
+      "pattern": 1,
+      "phases": [],
+      "projection": 3,
+      "rows": 127,
+      "uncached_seconds": [
+        0.016154125
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        247,
+        58,
+        146,
+        240,
+        84,
+        12,
+        78,
+        177
+      ],
+      "instructions": 32125295,
+      "pattern": 0,
+      "phases": [],
+      "projection": 0,
+      "rows": 128,
+      "uncached_seconds": [
+        0.009593208
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        35,
+        175,
+        207,
+        139,
+        114,
+        162,
+        1
+      ],
+      "instructions": 32125295,
+      "pattern": 1,
+      "phases": [],
+      "projection": 0,
+      "rows": 128,
+      "uncached_seconds": [
+        0.01296025
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        149,
+        35,
+        64,
+        150,
+        129,
+        145,
+        22,
+        95
+      ],
+      "instructions": 12122525,
+      "pattern": 0,
+      "phases": [],
+      "projection": 1,
+      "rows": 128,
+      "uncached_seconds": [
+        0.009323542
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        35,
+        81,
+        157,
+        164,
+        14,
+        192,
+        104
+      ],
+      "instructions": 12122525,
+      "pattern": 1,
+      "phases": [],
+      "projection": 1,
+      "rows": 128,
+      "uncached_seconds": [
+        0.007495958
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        229,
+        165,
+        201,
+        215,
+        84,
+        95,
+        139,
+        15
+      ],
+      "instructions": 81709201,
+      "pattern": 0,
+      "phases": [],
+      "projection": 2,
+      "rows": 128,
+      "uncached_seconds": [
+        0.017609625
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        35,
+        154,
+        77,
+        81,
+        217,
+        106,
+        21
+      ],
+      "instructions": 81709201,
+      "pattern": 1,
+      "phases": [],
+      "projection": 2,
+      "rows": 128,
+      "uncached_seconds": [
+        0.020681375
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        197,
+        34,
+        201,
+        68,
+        123,
+        110,
+        114,
+        236
+      ],
+      "instructions": 44560992,
+      "pattern": 0,
+      "phases": [],
+      "projection": 3,
+      "rows": 128,
+      "uncached_seconds": [
+        0.013343334
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        35,
+        81,
+        157,
+        164,
+        14,
+        192,
+        104
+      ],
+      "instructions": 44560992,
+      "pattern": 1,
+      "phases": [],
+      "projection": 3,
+      "rows": 128,
+      "uncached_seconds": [
+        0.016256584
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        219,
+        192,
+        99,
+        69,
+        61,
+        125,
+        97,
+        239
+      ],
+      "instructions": 32531805,
+      "pattern": 0,
+      "phases": [],
+      "projection": 0,
+      "rows": 129,
+      "uncached_seconds": [
+        0.012371125
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        61,
+        176,
+        209,
+        34,
+        157,
+        24,
+        6
+      ],
+      "instructions": 32531805,
+      "pattern": 1,
+      "phases": [],
+      "projection": 0,
+      "rows": 129,
+      "uncached_seconds": [
+        0.011877959
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        106,
+        83,
+        62,
+        167,
+        119,
+        58,
+        149,
+        106
+      ],
+      "instructions": 12267867,
+      "pattern": 0,
+      "phases": [],
+      "projection": 1,
+      "rows": 129,
+      "uncached_seconds": [
+        0.007018958
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        129,
+        29,
+        116,
+        169,
+        134,
+        103,
+        207
+      ],
+      "instructions": 12267867,
+      "pattern": 1,
+      "phases": [],
+      "projection": 1,
+      "rows": 129,
+      "uncached_seconds": [
+        0.005867125
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        133,
+        31,
+        8,
+        105,
+        45,
+        222,
+        165,
+        90
+      ],
+      "instructions": 82768631,
+      "pattern": 0,
+      "phases": [],
+      "projection": 2,
+      "rows": 129,
+      "uncached_seconds": [
+        0.022487333
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        19,
+        173,
+        205,
+        122,
+        125,
+        105,
+        19
+      ],
+      "instructions": 82768631,
+      "pattern": 1,
+      "phases": [],
+      "projection": 2,
+      "rows": 129,
+      "uncached_seconds": [
+        0.026695209
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        215,
+        61,
+        251,
+        17,
+        48,
+        106,
+        100,
+        28
+      ],
+      "instructions": 45116163,
+      "pattern": 0,
+      "phases": [],
+      "projection": 3,
+      "rows": 129,
+      "uncached_seconds": [
+        0.013206959
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        129,
+        29,
+        116,
+        169,
+        134,
+        103,
+        207
+      ],
+      "instructions": 45116163,
+      "pattern": 1,
+      "phases": [],
+      "projection": 3,
+      "rows": 129,
+      "uncached_seconds": [
+        0.016079958
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        199,
+        201,
+        204,
+        15,
+        8,
+        223,
+        152,
+        204
+      ],
+      "instructions": 65724716,
+      "pattern": 0,
+      "phases": [],
+      "projection": 0,
+      "rows": 255,
+      "uncached_seconds": [
+        0.019380833
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        9,
+        15,
+        180,
+        226,
+        187,
+        132,
+        111
+      ],
+      "instructions": 65724716,
+      "pattern": 1,
+      "phases": [],
+      "projection": 0,
+      "rows": 255,
+      "uncached_seconds": [
+        0.016041167
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        106,
+        70,
+        37,
+        190,
+        207,
+        239,
+        227,
+        28
+      ],
+      "instructions": 24642302,
+      "pattern": 0,
+      "phases": [],
+      "projection": 1,
+      "rows": 255,
+      "uncached_seconds": [
+        0.009325583
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        197,
+        231,
+        240,
+        65,
+        189,
+        159,
+        135
+      ],
+      "instructions": 24642302,
+      "pattern": 1,
+      "phases": [],
+      "projection": 1,
+      "rows": 255,
+      "uncached_seconds": [
+        0.008394583
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        113,
+        22,
+        33,
+        125,
+        174,
+        148,
+        196,
+        172
+      ],
+      "instructions": 167796220,
+      "pattern": 0,
+      "phases": [],
+      "projection": 2,
+      "rows": 255,
+      "uncached_seconds": [
+        0.040733792
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        51,
+        255,
+        227,
+        152,
+        92,
+        174,
+        224
+      ],
+      "instructions": 167796220,
+      "pattern": 1,
+      "phases": [],
+      "projection": 2,
+      "rows": 255,
+      "uncached_seconds": [
+        0.032568834
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        200,
+        21,
+        173,
+        40,
+        19,
+        43,
+        127,
+        47
+      ],
+      "instructions": 91362109,
+      "pattern": 0,
+      "phases": [],
+      "projection": 3,
+      "rows": 255,
+      "uncached_seconds": [
+        0.024885792
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        197,
+        231,
+        240,
+        65,
+        189,
+        159,
+        135
+      ],
+      "instructions": 91362109,
+      "pattern": 1,
+      "phases": [],
+      "projection": 3,
+      "rows": 255,
+      "uncached_seconds": [
+        0.024635125
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        115,
+        0,
+        19,
+        99,
+        199,
+        177,
+        232,
+        101
+      ],
+      "instructions": 64237983,
+      "pattern": 0,
+      "phases": [],
+      "projection": 0,
+      "rows": 256,
+      "uncached_seconds": [
+        0.015322209
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        35,
+        60,
+        27,
+        104,
+        201,
+        113,
+        169
+      ],
+      "instructions": 64237983,
+      "pattern": 1,
+      "phases": [],
+      "projection": 0,
+      "rows": 256,
+      "uncached_seconds": [
+        0.014921375
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        94,
+        89,
+        23,
+        7,
+        192,
+        21,
+        189,
+        18
+      ],
+      "instructions": 24232437,
+      "pattern": 0,
+      "phases": [],
+      "projection": 1,
+      "rows": 256,
+      "uncached_seconds": [
+        0.009366042
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        35,
+        128,
+        182,
+        49,
+        171,
+        237,
+        245
+      ],
+      "instructions": 24232437,
+      "pattern": 1,
+      "phases": [],
+      "projection": 1,
+      "rows": 256,
+      "uncached_seconds": [
+        0.010359375
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        109,
+        161,
+        109,
+        102,
+        207,
+        219,
+        40,
+        9
+      ],
+      "instructions": 163405805,
+      "pattern": 0,
+      "phases": [],
+      "projection": 2,
+      "rows": 256,
+      "uncached_seconds": [
+        0.0456985
+      ]
+    },
+    {
+      "cols": 384,
+      "hash": [
+        37,
+        35,
+        18,
+        23,
+        254,
+        200,
+        45,
+        59
+      ],
+      "instructions": 163405805,
+      "pattern": 1,
+      "phases": [],
+      "projection": 2,
+      "rows": 256,
+      "uncached_seconds": [
+        0.039422958
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        109,
+        187,
+        110,
+        237,
+        83,
+        146,
+        43,
+        245
+      ],
+      "instructions": 89109376,
+      "pattern": 0,
+      "phases": [],
+      "projection": 3,
+      "rows": 256,
+      "uncached_seconds": [
+        0.025169792
+      ]
+    },
+    {
+      "cols": 1536,
+      "hash": [
+        37,
+        35,
+        128,
+        182,
+        49,
+        171,
+        237,
+        245
+      ],
+      "instructions": 89109376,
+      "pattern": 1,
+      "phases": [],
+      "projection": 3,
+      "rows": 256,
+      "uncached_seconds": [
+        0.027027834
+      ]
+    }
+  ],
+  "exact_native_matches": 112,
+  "kind": "linear-micro",
+  "wasm_sha256": "c8e43d15d90401c77030330279183cef1ebecd045cfe706d5c7572c66f606b71"
+}

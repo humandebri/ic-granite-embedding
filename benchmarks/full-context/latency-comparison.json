@@ -1,0 +1,12 @@
+{
+  "before_wasm_sha256": "df0dc61b1aec685f4d82180a6a4e54abf336a2c6da3d3b1d8c71d9ed4cb7b887",
+  "after_wasm_sha256": "6c56483bfd1b669971b15a76f2c2a58491593fed28988759822ad3eec84679b3",
+  "cases_per_build": 20,
+  "protocol": "Four documents x five sequential queries after warmup; fused kstart nonce defeats cache; builds and other test suites completed before timing.",
+  "before_median_seconds": 0.592869604,
+  "after_median_seconds": 0.489996854,
+  "observed_reduction_percent": 17.351665409380644,
+  "before_install_seconds": 46.8469135,
+  "after_install_seconds": 17.989797666,
+  "limitations": "One before/after sequence on localhost; OS, background processes and thermal state are uncontrolled. Not a mainnet latency estimate."
+}

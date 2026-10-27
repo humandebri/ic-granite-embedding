@@ -1,0 +1,10 @@
+{
+  "tile": [
+    64,
+    48
+  ],
+  "cols": 384,
+  "status": "rejected",
+  "reason": "PocketIC Production install: Compilation error: Code for function is too large",
+  "log": ".cache/further-tile-micro.log"
+}

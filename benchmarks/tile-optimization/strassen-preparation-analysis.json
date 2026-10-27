@@ -1,0 +1,19 @@
+{
+  "wasm_sha256": "5016931235155790536a7dace6ad7f7a4a1fd3c08309d278da9d02853fa000f5",
+  "profile_instructions": 4333373870,
+  "stages": {
+    "combine_and_scale": {
+      "instructions": 51871615,
+      "percent": 1.197026071512265
+    },
+    "packed_leaf": {
+      "instructions": 1443725975,
+      "percent": 33.316441606733555
+    },
+    "prepare_input": {
+      "instructions": 4405625,
+      "percent": 0.10166731817211054
+    }
+  },
+  "note": "12 profiling calls, distinct from the ordinary single-query instruction total."
+}

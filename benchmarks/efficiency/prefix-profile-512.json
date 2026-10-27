@@ -1,0 +1,132 @@
+{
+  "case_id": "512",
+  "cosine_to_f32": 0.99959179302883,
+  "cosine_to_int8_reference": 0.999727095956993,
+  "layers": 12,
+  "mode": "pocketic-production-fused-w8a8",
+  "plan": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "seconds": 1.6584220840000001,
+  "stats": {
+    "instructions": 19784047440,
+    "max_instructions": 2675849091,
+    "max_request_bytes": 786476,
+    "max_response_bytes": 786478,
+    "operations": {
+      "6": {
+        "instructions": 17128362621,
+        "max_instructions": 2675849091,
+        "queries": 11
+      },
+      "7": {
+        "instructions": 2655684819,
+        "max_instructions": 2655684819,
+        "queries": 1
+      }
+    },
+    "queries": 12,
+    "query_seconds": 1.6566704589999999,
+    "request_bytes": 7378447,
+    "response_bytes": 7377959
+  },
+  "tokens": 512,
+  "trace": [
+    {
+      "instructions": 2655684819,
+      "layer": 0,
+      "layer_count": 1,
+      "op": 7,
+      "seconds": 0.245530459
+    },
+    {
+      "instructions": 1753776816,
+      "layer": 1,
+      "layer_count": 1,
+      "op": 6,
+      "seconds": 0.142489
+    },
+    {
+      "instructions": 1755238027,
+      "layer": 2,
+      "layer_count": 1,
+      "op": 6,
+      "seconds": 0.134117084
+    },
+    {
+      "instructions": 2664727321,
+      "layer": 3,
+      "layer_count": 1,
+      "op": 6,
+      "seconds": 0.2370025
+    },
+    {
+      "instructions": 1766201684,
+      "layer": 4,
+      "layer_count": 1,
+      "op": 6,
+      "seconds": 0.138603
+    },
+    {
+      "instructions": 1760286047,
+      "layer": 5,
+      "layer_count": 1,
+      "op": 6,
+      "seconds": 0.136710708
+    },
+    {
+      "instructions": 2675849091,
+      "layer": 6,
+      "layer_count": 1,
+      "op": 6,
+      "seconds": 0.245881208
+    },
+    {
+      "instructions": 1777080722,
+      "layer": 7,
+      "layer_count": 1,
+      "op": 6,
+      "seconds": 0.136656125
+    },
+    {
+      "instructions": 1780894354,
+      "layer": 8,
+      "layer_count": 1,
+      "op": 6,
+      "seconds": 0.132876958
+    },
+    {
+      "instructions": 897341046,
+      "layer": 9,
+      "layer_count": 1,
+      "op": 6,
+      "seconds": 0.07834325
+    },
+    {
+      "instructions": 256840161,
+      "layer": 10,
+      "layer_count": 1,
+      "op": 6,
+      "seconds": 0.022521625
+    },
+    {
+      "instructions": 40127352,
+      "layer": 11,
+      "layer_count": 1,
+      "op": 6,
+      "seconds": 0.006606833
+    }
+  ],
+  "wasm_sha256": "fa4eeb116eafdcafc5654874462e7cc8cd0ba0a3d36f6fb8cea831364610676c"
+}

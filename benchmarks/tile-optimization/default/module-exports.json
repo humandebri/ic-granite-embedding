@@ -1,0 +1,12 @@
+{
+  "wasm_sha256": "c1ba65ae15c1868d210394e10123bc7c80d6942a1c003def9ac714f6214ee8f4",
+  "exports": [
+    "memory",
+    "canister_query continueEmbedding",
+    "canister_query startEmbedding",
+    "canister_query step",
+    "canister_update activate",
+    "canister_update upload",
+    "get_candid_pointer"
+  ]
+}
