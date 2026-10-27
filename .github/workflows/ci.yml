@@ -24,9 +24,9 @@ jobs:
         run: cargo test --locked -p granite-core --features approx-gelu,strassen,chunked-gemm,strassen-wo,strassen-qkv,strassen-out
       - name: Check benchmark client
         run: cargo check --locked -p granite-bench
-      - name: Build production Wasm
-        run: cargo build --release --locked -p granite-canister --target wasm32-unknown-unknown
       - name: Check public Candid
         run: |
           cargo run --quiet --release --locked -p granite-canister --example export_candid > "$RUNNER_TEMP/granite.did"
           diff -u crates/canister/granite.did "$RUNNER_TEMP/granite.did"
+      - name: Build production Wasm
+        run: cargo build --release --locked -p granite-canister --target wasm32-unknown-unknown

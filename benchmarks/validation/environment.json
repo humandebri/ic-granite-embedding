@@ -20,7 +20,7 @@
     "requirements.txt": "3121a37dff7a19aebd90b579d141574bd4118bce847edec16cccaf7a2c7a03ae",
     "crates/bench/src/main.rs": "2f7124fb73435a8d4a1f7595f8f62a1b4b2c47fe8b7c10f08c58e3b0eecb2fdb",
     "crates/bench/src/sharded.rs": "3c0f1a3fab9f6d3c5cff5541d87b18bfeafc11514e1fba41a3793bd618fcdd8d",
-    "crates/canister/examples/export_candid.rs": "bba757118132de3147e1ea4fca10d7c954dd670c20908750d8949bb5a63a31dc",
+    "crates/canister/examples/export_candid.rs": "3bbfe306e8b21bb1820bb4ab6219003bfe932fc4f225471526550fd20aea8829",
     "crates/canister/src/lib.rs": "e45d3b6f571cad10773780eddf4abcaf3bb4185b4ed7edb0c08b88a139f936ba",
     "crates/core/build.rs": "b79595c94228c5a0952613b53a12b5a2d0b16460e1c97972b83ae4038ca71f3f",
     "crates/core/src/attention_rows.rs": "cbd9e9975fbfc0b3a7207b3b48a28347632b060e4a9a661140f7ab3264ac8e69",
