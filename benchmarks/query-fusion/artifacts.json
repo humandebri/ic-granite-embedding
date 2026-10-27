@@ -1,0 +1,17 @@
+{
+  "normal": {
+    "path": "target/wasm32-unknown-unknown/release/granite_canister.wasm",
+    "sha256": "4591daf010e1722026cb334120b8d4b7ffa2f723431d2387a95ad6c8033f182b",
+    "bytes": 3605841
+  },
+  "profiling": {
+    "path": ".cache/fusion/profile.wasm",
+    "sha256": "2e18be3fdc3805a2fb5acac28e7c0ab6e3677edeaf8b5efc37ec5953ef72f249",
+    "bytes": 3629934
+  },
+  "native_benchmark": {
+    "path": "target/release/granite-bench",
+    "sha256": "5fdde0ce06420e608e185cbd93ea0edd69998f3f39595459437ca64303aef5a5",
+    "bytes": 7458432
+  }
+}

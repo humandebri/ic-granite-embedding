@@ -83,7 +83,7 @@ Candid一致、通常Wasmの`profileStep`非公開、上限超過入力・不正
 結果は[benchmarks/validation](../benchmarks/validation/)に保存します。
 検証suite同士が並行するため、その実行時間はレイテンシ比較には使いません。
 
-計測版のAV 44ケースと1,365 tokensの層別結果は、保存済みの[av.json](../benchmarks/full-context/av.json)・[qk.json](../benchmarks/full-context/qk.json)・[profile-1365.json](../benchmarks/full-context/profile-1365.json)を照合します。
+計測版のAV 44ケースと1,365 tokensの層別結果は、保存済みの[av.json](../benchmarks/query-fusion/av.json)・[qk.json](../benchmarks/query-fusion/qk.json)・[profile-1365.json](../benchmarks/query-fusion/profile-1365.json)を照合します。
 通常検証が、この2つのprofiling測定を自動で再実行するわけではありません。
 現在のソースからすべて測り直す場合は、先に[計測版の手順](#計測版を再実行する)でこれらを更新してください。
 過去段階との比較に使う`benchmarks/exhaustive-optimization/`の記録は保持します。
@@ -131,11 +131,12 @@ CARGO_TARGET_DIR=.cache/profiling-target cargo build --release --locked \
   -p granite-canister --target wasm32-unknown-unknown --features profiling
 
 GRANITE_WASM="$PWD/.cache/profiling-target/wasm32-unknown-unknown/release/granite_canister.wasm" \
-  target/release/granite-bench 1365 --micro-av --micro-attention --micro-qk --micro --micro-extended --probe
+  target/release/granite-bench 1365 --micro-codec --micro-av --micro-attention --micro-qk --micro --micro-extended --probe
 ```
 
 | 出力 | 内容 |
 | --- | --- |
+| `.cache/micro-codec.json` | BF16 SIMD codecをscalar参照と比較する30ケース。NaN・符号・丸めの境界を含む |
 | `.cache/micro-av.json` | 512/513境界から5,000要素まで、i64参照と比較する44ケース |
 | `.cache/micro-qk.json` | QKを旧SIMD経路・独立したi64積和と比較する44ケース |
 | `.cache/micro-linear.json` | 独立したnative整数参照と比較するGEMM 112ケース（通常版でも実行可能） |
@@ -148,10 +149,11 @@ AVの5,000要素検査はAttentionの積和単体です。全文推論は別途[
 過去の測定を残す場合は、コピー前に退避してください。
 
 ```sh
-cp .cache/micro-av.json benchmarks/full-context/av.json
-cp .cache/micro-linear.json benchmarks/full-context/linear.json
-cp .cache/micro-qk.json benchmarks/full-context/qk.json
-cp .cache/probe-profile.json benchmarks/full-context/profile-1365.json
+cp .cache/micro-codec.json benchmarks/query-fusion/codec.json
+cp .cache/micro-av.json benchmarks/query-fusion/av.json
+cp .cache/micro-linear.json benchmarks/query-fusion/linear.json
+cp .cache/micro-qk.json benchmarks/query-fusion/qk.json
+cp .cache/probe-profile.json benchmarks/query-fusion/profile-1365.json
 
 python3 scripts/summarize_profile.py .cache/probe-profile.json
 ```
@@ -215,10 +217,12 @@ Wasmのkernel形状は採用済みの384列32×64、1536列32×32に固定して
 
 [分割クライアントとバイナリ形式](SHARDED.md)に、追加の参照生成・実行・8ケースの検証手順をまとめています。通常の公開APIの1,365 tokens上限と、分割経路の5,000 tokens上限は別です。
 
-全域Attentionのキー長が512以下のときは、4つのQ行でKのロードを共有します。長文経路のコンパイル結果への影響を避けるため、同じ行kernelのソースを通常経路とbatch経路で別々にコンパイルします。profiling版の差を通常版の削減量として加算せず、通常Wasmで命令数を確認してください。
+全域Attentionはキー長5,000まで、4つのQ行でKのロードを共有します。長文経路のコンパイル結果への影響を避けるため、同じ行kernelのソースを局所・余り行の経路とbatch経路で別々にコンパイルします。profiling版の差を通常版の削減量として加算せず、通常Wasmで命令数を確認してください。
 
 ## GitとCI
 
 モデル重み・`.cache/`・`target/`・ローカル環境設定はGitの管理対象外です。重みと参照fixtureはこの文書の手順で生成します。`benchmarks/`には測定結果とそのSHAを保存しています。
 
 GitHub Actionsはformat・Rust unit test・通常Wasm build・Candid一致を検査します。モデルをロードするPocketIC検証はCIには含めず、ローカルの検証手順で実行します。
+
+融合queryの小入力・tile境界・最大replyを検査する場合は、`target/release/granite-bench 256 --chained-stress`を使います。54の入力ケースに加え、680行の初回・継続queryを分離演算と照合します。最大replyだけを確認する`--chained-limits`もあります。`validate_sharded.py`は8参照ケースとこのstressを実行します。

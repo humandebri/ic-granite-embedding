@@ -1,0 +1,156 @@
+{
+  "cases": [
+    {
+      "instructions": 1546,
+      "pattern": 0,
+      "values": 1
+    },
+    {
+      "instructions": 1546,
+      "pattern": 1,
+      "values": 1
+    },
+    {
+      "instructions": 1596,
+      "pattern": 0,
+      "values": 2
+    },
+    {
+      "instructions": 1596,
+      "pattern": 1,
+      "values": 2
+    },
+    {
+      "instructions": 1647,
+      "pattern": 0,
+      "values": 3
+    },
+    {
+      "instructions": 1647,
+      "pattern": 1,
+      "values": 3
+    },
+    {
+      "instructions": 1585,
+      "pattern": 0,
+      "values": 4
+    },
+    {
+      "instructions": 1585,
+      "pattern": 1,
+      "values": 4
+    },
+    {
+      "instructions": 1758,
+      "pattern": 0,
+      "values": 7
+    },
+    {
+      "instructions": 1758,
+      "pattern": 1,
+      "values": 7
+    },
+    {
+      "instructions": 1589,
+      "pattern": 0,
+      "values": 8
+    },
+    {
+      "instructions": 1589,
+      "pattern": 1,
+      "values": 8
+    },
+    {
+      "instructions": 1673,
+      "pattern": 0,
+      "values": 9
+    },
+    {
+      "instructions": 1673,
+      "pattern": 1,
+      "values": 9
+    },
+    {
+      "instructions": 1860,
+      "pattern": 0,
+      "values": 15
+    },
+    {
+      "instructions": 1860,
+      "pattern": 1,
+      "values": 15
+    },
+    {
+      "instructions": 1683,
+      "pattern": 0,
+      "values": 16
+    },
+    {
+      "instructions": 1683,
+      "pattern": 1,
+      "values": 16
+    },
+    {
+      "instructions": 1767,
+      "pattern": 0,
+      "values": 17
+    },
+    {
+      "instructions": 1767,
+      "pattern": 1,
+      "values": 17
+    },
+    {
+      "instructions": 3668,
+      "pattern": 0,
+      "values": 127
+    },
+    {
+      "instructions": 3668,
+      "pattern": 1,
+      "values": 127
+    },
+    {
+      "instructions": 3529,
+      "pattern": 0,
+      "values": 128
+    },
+    {
+      "instructions": 3529,
+      "pattern": 1,
+      "values": 128
+    },
+    {
+      "instructions": 3676,
+      "pattern": 0,
+      "values": 129
+    },
+    {
+      "instructions": 3676,
+      "pattern": 1,
+      "values": 129
+    },
+    {
+      "instructions": 13743,
+      "pattern": 0,
+      "values": 1023
+    },
+    {
+      "instructions": 13743,
+      "pattern": 1,
+      "values": 1023
+    },
+    {
+      "instructions": 49278,
+      "pattern": 0,
+      "values": 4096
+    },
+    {
+      "instructions": 49278,
+      "pattern": 1,
+      "values": 4096
+    }
+  ],
+  "exact_scalar_cases": 30,
+  "wasm_sha256": "2e18be3fdc3805a2fb5acac28e7c0ab6e3677edeaf8b5efc37ec5953ef72f249"
+}

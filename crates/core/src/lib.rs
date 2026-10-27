@@ -18,6 +18,9 @@ mod integer_attention;
 #[cfg(feature = "strassen")]
 mod strassen;
 
+mod packed;
+pub use packed::PackedQkv;
+
 pub const H: usize = 384;
 pub const D: usize = 32;
 pub const I: usize = 1536;
@@ -117,20 +120,25 @@ fn floats(b: &[u8]) -> Result<Vec<f32>, String> {
     }
     Ok(v)
 }
-pub fn float_bytes(x: &[f32]) -> Vec<u8> {
+fn append_float_bytes(out: &mut Vec<u8>, x: &[f32]) {
     #[cfg(target_endian = "little")]
     unsafe {
-        let len = x.len().checked_mul(4).expect("F32 byte length overflow");
-        let mut out = Vec::<u8>::with_capacity(len);
-        // The fresh destination is disjoint; all len bytes are initialized.
-        std::ptr::copy_nonoverlapping(x.as_ptr().cast::<u8>(), out.as_mut_ptr(), len);
-        out.set_len(len);
-        out
+        let bytes = x.len().checked_mul(4).expect("F32 byte length overflow");
+        let start = out.len();
+        out.reserve(bytes);
+        // The disjoint source and fresh capacity cover exactly bytes elements.
+        std::ptr::copy_nonoverlapping(x.as_ptr().cast::<u8>(), out.as_mut_ptr().add(start), bytes);
+        out.set_len(start + bytes);
     }
     #[cfg(not(target_endian = "little"))]
-    {
-        x.iter().flat_map(|v| v.to_le_bytes()).collect()
+    for v in x {
+        out.extend(v.to_le_bytes());
     }
+}
+pub fn float_bytes(x: &[f32]) -> Vec<u8> {
+    let mut out = Vec::with_capacity(x.len() * 4);
+    append_float_bytes(&mut out, x);
+    out
 }
 
 pub fn bf16(x: f32) -> u16 {
@@ -138,10 +146,45 @@ pub fn bf16(x: f32) -> u16 {
     ((b.wrapping_add(0x7fff + ((b >> 16) & 1))) >> 16) as u16
 }
 pub fn append_bf16(out: &mut Vec<u8>, x: &[f32]) {
-    for v in x {
-        out.extend(bf16(*v).to_le_bytes());
+    let start = out.len();
+    out.reserve(x.len() * 2);
+    let mut i = 0;
+    #[cfg(target_arch = "wasm32")]
+    unsafe {
+        use core::arch::wasm32::*;
+        while i + 8 <= x.len() {
+            let round = |bits: v128| {
+                u32x4_shr(
+                    i32x4_add(
+                        bits,
+                        i32x4_add(
+                            i32x4_splat(0x7fff),
+                            v128_and(u32x4_shr(bits, 16), i32x4_splat(1)),
+                        ),
+                    ),
+                    16,
+                )
+            };
+            let a = round(v128_load(x.as_ptr().add(i).cast()));
+            let b = round(v128_load(x.as_ptr().add(i + 4).cast()));
+            v128_store(
+                out.as_mut_ptr().add(start + i * 2).cast(),
+                u16x8_narrow_i32x4(a, b),
+            );
+            i += 8;
+        }
+    }
+    // Every byte in the new capacity is written before exposing its length.
+    unsafe {
+        while i < x.len() {
+            let bytes = bf16(x[i]).to_le_bytes();
+            std::ptr::copy_nonoverlapping(bytes.as_ptr(), out.as_mut_ptr().add(start + i * 2), 2);
+            i += 1;
+        }
+        out.set_len(start + x.len() * 2);
     }
 }
+
 fn read_bf16(b: &[u8]) -> Vec<f32> {
     b.chunks_exact(2)
         .map(|v| f32::from_bits((u16::from_le_bytes(v.try_into().unwrap()) as u32) << 16))
@@ -404,6 +447,14 @@ impl Model {
         }
     }
 
+    fn hidden_and_qkv(&self, layer: usize, start: usize, hidden: &[f32]) -> Vec<u8> {
+        let qkv = self.qkv(layer, start, hidden);
+        let mut out = Vec::with_capacity(hidden.len() * 12);
+        append_float_bytes(&mut out, hidden);
+        append_packed_qkv(&mut out, &qkv);
+        out
+    }
+
     /// Binary request: 8 little-endian u32 fields, then token IDs or float/BF16 payload.
     pub fn run(&self, request: &[u8]) -> Result<Vec<u8>, String> {
         if request.len() < 32 || request.len() > 2 * 1024 * 1024 - 128 {
@@ -449,6 +500,19 @@ impl Model {
             return Ok(integer_attention::qk_test(total, head)
                 .to_le_bytes()
                 .to_vec());
+        }
+        #[cfg(all(target_arch = "wasm32", feature = "profiling"))]
+        if op == 18 {
+            if rows != total || start != 0 || b.len() != rows * 4 {
+                return Err("codec micro bounds".into());
+            }
+            let x: Vec<f32> = b
+                .chunks_exact(4)
+                .map(|v| f32::from_bits(u32::from_le_bytes(v.try_into().unwrap())))
+                .collect();
+            let mut out = Vec::with_capacity(rows * 2);
+            append_bf16(&mut out, &x);
+            return Ok(out);
         }
         if op == 9 {
             if total > 128 || rows != total || b.len() != rows * 2 * I * 4 {
@@ -518,6 +582,17 @@ impl Model {
                     self.full(&ids)?
                 }
             }
+            15 => {
+                if layer != 0 || rows > 680 || b.len() != rows * 4 {
+                    return Err("initial projection bounds".into());
+                }
+                let ids: Vec<u32> = b
+                    .chunks_exact(4)
+                    .map(|b| u32::from_le_bytes(b.try_into().unwrap()))
+                    .collect();
+                let x = self.embed(&ids)?;
+                return Ok(self.hidden_and_qkv(0, start, &x));
+            }
             1 | 11 => {
                 if op == 11 && rows > 1023 {
                     return Err("packed qkv rows".into());
@@ -582,7 +657,10 @@ impl Model {
                 let v = floats(b)?;
                 self.finish(layer, &v[..rows * H], &v[rows * H..])
             }
-            12 => {
+            12 | 16 => {
+                if op == 16 && (rows > 680 || (layer == 11 && (start != 0 || rows != 1))) {
+                    return Err("chained finish bounds".into());
+                }
                 if rows > 1088 || b.len() != rows * (H * 5 + 4) {
                     return Err("packed finish length".into());
                 }
@@ -594,7 +672,15 @@ impl Model {
                 }
                 let quant: Vec<i16> = b[end_scales..].iter().map(|q| *q as i8 as i16).collect();
                 let projection = self.layers[layer].out.apply_quantized(&quant, &scales);
-                self.finish_projected(layer, &residual, projection)
+                let x = self.finish_projected(layer, &residual, projection);
+                if op == 16 {
+                    return if layer == 11 {
+                        Ok(float_bytes(&self.final_embedding(&x)))
+                    } else {
+                        Ok(self.hidden_and_qkv(layer + 1, start, &x))
+                    };
+                }
+                x
             }
             4 => {
                 if b.len() != H * 4 {
@@ -1404,31 +1490,45 @@ pub fn key_range(layer: usize, start: usize, rows: usize, total: usize) -> (usiz
 /// This is exactly the dynamic quantization performed by the output linear.
 pub fn pack_finish(residual: &[f32], context: &[f32]) -> Vec<u8> {
     assert_eq!(residual.len(), context.len());
+    let mut out = Vec::with_capacity(context.len() / H * (H * 5 + 4));
+    append_float_bytes(&mut out, residual);
+    append_context(&mut out, context);
+    out
+}
+pub fn pack_finish_bytes(residual: &[u8], context: &[f32]) -> Vec<u8> {
+    assert_eq!(residual.len(), context.len() * 4);
+    let mut out = Vec::with_capacity(context.len() / H * (H * 5 + 4));
+    out.extend_from_slice(residual);
+    append_context(&mut out, context);
+    out
+}
+fn append_context(out: &mut Vec<u8>, context: &[f32]) {
     assert_eq!(context.len() % H, 0);
-    let mut out = float_bytes(residual);
     let scales: Vec<_> = context
         .chunks_exact(H)
         .map(|row| (max_abs(row) / 127.).max(1e-12))
         .collect();
-    out.extend(float_bytes(&scales));
+    append_float_bytes(out, &scales);
     for (row, scale) in context.chunks_exact(H).zip(scales) {
         out.extend(
             row.iter()
                 .map(|x| (x / scale).round_ties_even().clamp(-127., 127.) as i8 as u8),
         );
     }
-    out
 }
 
 /// Each row is Q:384 F32, K:384 BF16, V:384 BF16. K/V already
 /// use BF16 on the attention wire; packing here introduces no new rounding.
-pub fn pack_qkv(qkv: &[f32]) -> Vec<u8> {
+fn append_packed_qkv(out: &mut Vec<u8>, qkv: &[f32]) {
     assert_eq!(qkv.len() % (3 * H), 0);
-    let mut out = Vec::with_capacity(qkv.len() / (3 * H) * H * 8);
     for row in qkv.chunks_exact(3 * H) {
-        out.extend(float_bytes(&row[..H]));
-        append_bf16(&mut out, &row[H..]);
+        append_float_bytes(out, &row[..H]);
+        append_bf16(out, &row[H..]);
     }
+}
+pub fn pack_qkv(qkv: &[f32]) -> Vec<u8> {
+    let mut out = Vec::with_capacity(qkv.len() / (3 * H) * H * 8);
+    append_packed_qkv(&mut out, qkv);
     out
 }
 pub fn unpack_qkv(bytes: &[u8]) -> Result<Vec<f32>, String> {
@@ -1458,21 +1558,23 @@ pub fn packed_attention_wire(
     ks: usize,
     ke: usize,
 ) -> Vec<u8> {
-    let wire = attention_wire(qkv, start, rows, head, heads, ks, ke);
-    let qb = rows * heads * D * 4;
-    let q = floats(&wire[..qb]).expect("finite Q");
-    let scales: Vec<_> = q
-        .chunks_exact(D)
-        .map(|q| (max_abs(q) / 8191.).max(1e-12))
-        .collect();
     let mut out = Vec::with_capacity(rows * heads * (D * 2 + 4) + (ke - ks) * heads * D * 4);
-    for (q, s) in q.chunks_exact(D).zip(&scales) {
-        for v in q {
-            out.extend(((v / s).round_ties_even().clamp(-8191., 8191.) as i16).to_le_bytes());
+    packed::append_q14(
+        &mut out,
+        (start..start + rows).flat_map(|t| {
+            qkv[t * 3 * H + head * D..t * 3 * H + (head + heads) * D]
+                .chunks_exact(D)
+                .map(packed::finite_query)
+        }),
+    );
+    for side in 1..=2 {
+        for t in ks..ke {
+            append_bf16(
+                &mut out,
+                &qkv[t * 3 * H + side * H + head * D..t * 3 * H + side * H + (head + heads) * D],
+            );
         }
     }
-    out.extend(float_bytes(&scales));
-    out.extend_from_slice(&wire[qb..]);
     out
 }
 
@@ -1638,6 +1740,28 @@ mod tests {
     use super::*;
 
     #[cfg(feature = "approx-gelu")]
+    #[test]
+    fn append_codecs_preserve_prefix_and_ieee_rounding() {
+        let bits = [
+            0u32, 0x80000000, 0x3f808000, 0x3f818000, 0x7f7fffff, 0xff7fffff, 0x7f800000,
+            0xff800000, 0x7fc01234, 1, 0xffffabcd,
+        ];
+        for n in 1..=bits.len() {
+            let x: Vec<_> = bits[..n].iter().map(|v| f32::from_bits(*v)).collect();
+            let mut actual = vec![7, 9, 11];
+            append_bf16(&mut actual, &x);
+            let mut expected = vec![7, 9, 11];
+            expected.extend(x.iter().flat_map(|v| bf16(*v).to_le_bytes()));
+            assert_eq!(actual, expected);
+        }
+        let residual = vec![0.25; 3 * H];
+        let context: Vec<_> = (0..3 * H).map(|i| (i % 17) as f32 - 8.).collect();
+        assert_eq!(
+            pack_finish(&residual, &context),
+            pack_finish_bytes(&float_bytes(&residual), &context)
+        );
+    }
+
     #[test]
     fn packed_finish_matches_dynamic_quantization() {
         let n = 3;

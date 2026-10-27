@@ -12,7 +12,7 @@ from validate_regression import wasm_exports
 
 ROOT = Path(__file__).resolve().parents[1]
 CACHE = ROOT / '.cache'
-OUT = ROOT / 'benchmarks/full-context/sharded'
+OUT = ROOT / 'benchmarks/query-fusion/sharded'
 KEYS = ['1365', '1366', '2048', '4096', '5000', 'space-5000', 'cooking-5000', 'weather-5000']
 
 
@@ -35,6 +35,7 @@ def main():
     target = Path(os.environ.get('CARGO_TARGET_DIR', ROOT/'target'))
     wasm = Path(os.environ.get('GRANITE_WASM', target/'wasm32-unknown-unknown/release/granite_canister.wasm')).resolve()
     sha = digest(wasm)
+    (CACHE/"fusion").mkdir(parents=True,exist_ok=True)
     assert 'canister_query profileStep' not in wasm_exports(wasm.read_bytes())
     reference_dir = CACHE/'next/references'
     manifest = json.loads((reference_dir/'references.json').read_text())
@@ -46,12 +47,13 @@ def main():
             name = prefix+key+suffix
             assert (reference_dir/name).read_bytes() == (CACHE/name).read_bytes()
     if not args.summarize_only:
-        with (CACHE/'next/sharded-validation.log').open('w') as log:
+        with (CACHE/'fusion/sharded-validation.log').open('w') as log:
             subprocess.run([str(target/'release/granite-bench'),'5000','--sharded-suite'],cwd=ROOT,stdout=log,stderr=subprocess.STDOUT,check=True)
+            subprocess.run([str(target/'release/granite-bench'),'256','--chained-stress'],cwd=ROOT,stdout=log,stderr=subprocess.STDOUT,check=True)
     OUT.mkdir(parents=True,exist_ok=True)
     summary = []
     for key in KEYS:
-        path = CACHE/f'sharded-{key}-packed-{sha}.json'
+        path = CACHE/f'chained-{key}-{sha}.json'
         result = json.loads(path.read_text())
         assert result['wasm_sha256'] == sha and result['case_id'] == key
         ids = json.loads((CACHE/f'tokens-{key}.json').read_text())
@@ -69,6 +71,9 @@ def main():
         assert stats['max_instructions'] < 5_000_000_000
         assert stats['max_request_bytes'] < 2*1024**2 and stats['max_response_bytes'] < 3*1024**2
         assert [t['layer'] for t in result['trace']] == list(range(12))
+        assert result['mode'] == 'chained-query'
+        baseline=json.loads((ROOT/'benchmarks/full-context/sharded'/f'{key}.json').read_text())
+        assert bits(embedding)==bits(baseline['embedding']), 'Fusing query boundaries changed output'
         if key == '5000':
             baseline = json.loads((ROOT/'benchmarks/full-context/sharded-baseline.json').read_text())
             assert bits(embedding) == bits(baseline['embedding']), 'Packing changed the full-context result'
@@ -77,9 +82,35 @@ def main():
             assert bits(embedding) == bits(baseline['embedding']), 'Sharding changed public API output'
         shutil.copyfile(path,OUT/f'{key}.json')
         summary.append({'case_id':key,'tokens':len(ids),'cosine_to_f32':actual_cosine,**stats})
+    stress=json.loads((CACHE/f'chained-stress-{sha}.json').read_text())
+    assert stress['wasm_sha256']==sha and stress['bit_exact_cases']==len(stress['cases'])==54
+    baseline_cases={}
+    for path in ['benchmarks/frontier/final/regression/stress.json','benchmarks/frontier/final/stress-long.json']:
+        for case in json.loads((ROOT/path).read_text())['cases']:
+            baseline_cases[f"stress-{case['tokens']}-{case['pattern']}"]=case
+    for result in stress['cases']:
+        assert result['wasm_sha256']==sha
+        previous=baseline_cases[result['case_id']]
+        assert bits(result['embedding'])==bits(previous['embedding'])
+        expected_hash=hashlib.sha256(b''.join(struct.pack('<I',v) for v in previous['ids'])).hexdigest()
+        assert result['token_ids_sha256']==expected_hash
+        assert result['stats']['max_instructions']<5_000_000_000
+        assert result['stats']['max_request_bytes']<2*1024**2 and result['stats']['max_response_bytes']<3*1024**2
+    if 'boundary_cases' in stress:
+        boundary=stress['boundary_cases']
+    else:
+        boundary_record=json.loads((CACHE/f'chained-limits-{sha}.json').read_text())
+        assert boundary_record['wasm_sha256']==sha
+        boundary=boundary_record['boundaries']
+        stress['boundary_cases']=boundary
+        stress['boundary_validation_separate_run']=True
+    assert boundary['exact_cases']==2 and boundary['rows']==680
+    assert boundary['stats']['max_instructions']<5_000_000_000
+    assert boundary['stats']['max_request_bytes']<2*1024**2 and boundary['stats']['max_response_bytes']<3*1024**2
+    (OUT/'stress.json').write_text(json.dumps(stress,indent=2)+'\n')
     shutil.copyfile(reference_dir/'references.json',OUT/'references.json')
     (OUT/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
-    (OUT/'environment.json').write_text(json.dumps({'wasm_sha256':sha,'query_instruction_limit':5_000_000_000,'subnet':'Application / Production','cases':len(KEYS),'malformed_requests_checked_per_case':9,'reference_pack_sha256':manifest['pack_sha256'],'fixture_sha256':{name:digest(CACHE/name) for key in KEYS for name in [f'tokens-{key}.json',f'reference-{key}.f32',f'reference-int8-{key}.f32']},'bit_exact_5000_raw_to_packed':True,'bit_exact_1365_public_to_sharded':True},indent=2)+'\n')
+    (OUT/'environment.json').write_text(json.dumps({'wasm_sha256':sha,'query_instruction_limit':5_000_000_000,'subnet':'Application / Production','cases':len(KEYS), 'chained_stress_bit_exact_cases':54, 'chained_boundary_bit_exact_cases':2,'malformed_requests_checked_per_case':15,'reference_pack_sha256':manifest['pack_sha256'],'fixture_sha256':{name:digest(CACHE/name) for key in KEYS for name in [f'tokens-{key}.json',f'reference-{key}.f32',f'reference-int8-{key}.f32']},'bit_exact_previous_sharded_cases':len(KEYS), 'bit_exact_5000_raw_to_packed':True,'bit_exact_1365_public_to_sharded':True},indent=2)+'\n')
     print(f'Sharded validation passed: {len(KEYS)} cases; max 5000 tokens.')
 
 

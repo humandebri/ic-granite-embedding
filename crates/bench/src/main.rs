@@ -184,7 +184,7 @@ fn main() {
     println!("benchmark_pid={}", std::process::id());
     if args.iter().any(|s| s == "--help" || s == "-h") {
         println!(
-            "Usage: granite-bench [TOKENS] [OPTIONS]\nModes: --sharded, --sharded-suite, --native, --validate-regression, --validate-long, --stress, --sweep, --stress-long\nDiagnostics: --probe, --probe-single, --micro, --micro-av, --micro-qk, --micro-attention, --micro-gelu\nOptions: --case=NAME, --micro-extended, --micro-repeat=N, --repeat-single, --repeat-count=N\nCapacity: --capacity, --capacity-range=FIRST:LAST, --capacity-patterns=N"
+            "Usage: granite-bench [TOKENS] [OPTIONS]\nModes: --sharded, --sharded-split, --sharded-raw, --sharded-suite, --chained-stress, --chained-limits, --native, --validate-regression, --validate-long, --stress, --sweep, --stress-long\nDiagnostics: --probe, --probe-single, --micro, --micro-av, --micro-qk, --micro-attention, --micro-codec, --micro-gelu\nOptions: --case=NAME, --micro-extended, --micro-repeat=N, --repeat-single, --repeat-count=N\nCapacity: --capacity, --capacity-range=FIRST:LAST, --capacity-patterns=N"
         );
         return;
     }
@@ -196,6 +196,10 @@ fn main() {
             "--native",
             "--sharded",
             "--sharded-raw",
+            "--sharded-split",
+            "--chained-stress",
+            "--chained-limits",
+            "--micro-codec",
             "--sharded-suite",
             "--validate-regression",
             "--validate-long",
@@ -319,6 +323,64 @@ fn main() {
     println!(
         "activated {id}, tokens={length}, install={install_seconds:.3}s, setup={setup_seconds:.3}s"
     );
+    if args.iter().any(|s| s == "--chained-limits") {
+        let boundaries = sharded::check_fused_limits(&pic, id);
+        fs::write(
+            cache.join(format!("chained-limits-{wasm_hash}.json")),
+            serde_json::to_vec_pretty(&json!({"wasm_sha256":wasm_hash,"boundaries":boundaries}))
+                .unwrap(),
+        )
+        .unwrap();
+        return;
+    }
+    if args.iter().any(|s| s == "--chained-stress") {
+        let boundaries = sharded::check_fused_limits(&pic, id);
+        let mut cases = Vec::new();
+        for file in [
+            "benchmarks/frontier/final/regression/stress.json",
+            "benchmarks/frontier/final/stress-long.json",
+        ] {
+            let baseline: serde_json::Value =
+                serde_json::from_slice(&fs::read(root.join(file)).unwrap()).unwrap();
+            for case in baseline["cases"].as_array().unwrap() {
+                let n = case["tokens"].as_u64().unwrap() as usize;
+                if ![
+                    2, 3, 7, 8, 31, 32, 63, 64, 65, 127, 128, 129, 255, 256, 257, 639, 640, 641,
+                ]
+                .contains(&n)
+                {
+                    continue;
+                }
+                let ids: Vec<u32> = serde_json::from_value(case["ids"].clone()).unwrap();
+                let expected: Vec<f32> = serde_json::from_value(case["embedding"].clone()).unwrap();
+                let key = format!("stress-{n}-{}", case["pattern"].as_u64().unwrap());
+                sharded::run(
+                    &pic, id, &ids, &expected, &expected, &cache, &wasm_hash, true, &key,
+                );
+                let result: serde_json::Value = serde_json::from_slice(
+                    &fs::read(cache.join(format!("chained-{key}-{wasm_hash}.json"))).unwrap(),
+                )
+                .unwrap();
+                let got: Vec<f32> = serde_json::from_value(result["embedding"].clone()).unwrap();
+                assert_eq!(
+                    float_bytes(&got),
+                    float_bytes(&expected),
+                    "chained stress {key}"
+                );
+                cases.push(result);
+            }
+        }
+        assert_eq!(cases.len(), 54);
+        fs::write(
+            cache.join(format!("chained-stress-{wasm_hash}.json")),
+            serde_json::to_vec_pretty(
+                &json!({"wasm_sha256":wasm_hash,"bit_exact_cases":cases.len(),"boundary_cases":boundaries,"cases":cases}),
+            )
+            .unwrap(),
+        )
+        .unwrap();
+        return;
+    }
     if args.iter().any(|s| s == "--sharded-suite") {
         for key in [
             "1365",
@@ -344,6 +406,20 @@ fn main() {
                 &pic, id, &ids, &reference, &int8, &cache, &wasm_hash, true, key,
             );
         }
+        return;
+    }
+    if args.iter().any(|s| s == "--sharded-split") {
+        sharded::run_split(
+            &pic,
+            id,
+            &ids,
+            &reference,
+            &int8_reference,
+            &cache,
+            &wasm_hash,
+            true,
+            &key,
+        );
         return;
     }
     if args
@@ -527,6 +603,62 @@ fn main() {
         println!("AV micro: all {} i64 reference cases passed", results.len());
         if !args.iter().any(|s| {
             s == "--micro" || s == "--micro-qk" || s == "--probe" || s == "--validate-long"
+        }) {
+            return;
+        }
+    }
+    if args.iter().any(|s| s == "--micro-codec") {
+        let mut cases = Vec::new();
+        let special = [
+            0u32, 0x80000000, 0x3f808000, 0x3f818000, 0x7f7fffff, 0xff7fffff, 0x7f800000,
+            0xff800000, 0x7fc01234, 1, 0xffffabcd,
+        ];
+        for n in [1, 2, 3, 4, 7, 8, 9, 15, 16, 17, 127, 128, 129, 1023, 4096] {
+            for pattern in 0..2 {
+                let x: Vec<f32> = (0..n)
+                    .map(|i| {
+                        f32::from_bits(if pattern == 0 {
+                            special[i % special.len()]
+                        } else {
+                            (i as u32).wrapping_mul(2654435761)
+                        })
+                    })
+                    .collect();
+                let expected: Vec<u8> = x
+                    .iter()
+                    .flat_map(|v| granite_core::bf16(*v).to_le_bytes())
+                    .collect();
+                let response = pic
+                    .query_call(
+                        id,
+                        Principal::anonymous(),
+                        "profileStep",
+                        Encode!(&serde_bytes::ByteBuf::from(request(
+                            [18, 0, 0, n, 0, 0, 0, n],
+                            &float_bytes(&x)
+                        )))
+                        .unwrap(),
+                    )
+                    .unwrap();
+                let measured = Decode!(&response,Result<ProfileMeasurement,String>)
+                    .unwrap()
+                    .unwrap();
+                assert_eq!(measured.data, expected, "BF16 n={n} pattern={pattern}");
+                cases.push(
+                    json!({"values":n,"pattern":pattern,"instructions":measured.instructions}),
+                );
+            }
+        }
+        fs::write(
+            cache.join("micro-codec.json"),
+            serde_json::to_vec_pretty(
+                &json!({"wasm_sha256":wasm_hash,"exact_scalar_cases":cases.len(),"cases":cases}),
+            )
+            .unwrap(),
+        )
+        .unwrap();
+        if !args.iter().any(|s| {
+            s == "--micro-attention" || s == "--micro-qk" || s == "--micro" || s == "--probe"
         }) {
             return;
         }

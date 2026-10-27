@@ -212,7 +212,7 @@ pub fn run_quantized_q(
         }
         (packed, scales)
     });
-    if layer % 3 == 0 && kn <= 512 && rows >= 4 {
+    if layer % 3 == 0 && rows >= 4 {
         return batched::run(rows, heads, kn, qq, qs, &qk, &k_scales, &qv, &vs);
     }
     // Every token/head writes its full D-channel output below.
@@ -298,14 +298,14 @@ pub fn run_quantized_q(
     Ok(out)
 }
 
-// Shared source is compiled in two modules so small-context batching cannot
-// change inlining of the established long-context AV and softmax loops.
+// Compile shared row kernels separately for batched global and local/tail
+// attention so changes to one path do not disrupt inlining in the other.
 mod batched {
     use super::*;
     include!("attention_rows.rs");
     include!(concat!(env!("OUT_DIR"), "/weighted.rs"));
     include!(concat!(env!("OUT_DIR"), "/score_four.rs"));
-    // Isolate register/code pressure from the existing long-context AV path.
+    // Global rows share K loads; local windows stay on their row-wise path.
     #[inline(never)]
     #[allow(clippy::too_many_arguments)]
     pub(super) fn run(

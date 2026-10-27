@@ -393,14 +393,14 @@
   "plan": [
     12
   ],
-  "seconds": 0.298321125,
+  "seconds": 0.2801545,
   "stats": {
-    "instructions": 2097831642,
-    "max_instructions": 2097831642,
+    "instructions": 2097843934,
+    "max_instructions": 2097843934,
     "max_request_bytes": 523,
     "max_response_bytes": 1610,
     "queries": 1,
-    "query_seconds": 0.298282416,
+    "query_seconds": 0.280120292,
     "request_bytes": 523,
     "response_bytes": 1610
   },
@@ -408,16 +408,16 @@
   "trace": [
     {
       "first_layer": 0,
-      "instructions": 2097831642,
+      "instructions": 2097843934,
       "method": "startEmbedding",
       "next_layer": 12,
-      "seconds": 0.298282416
+      "seconds": 0.280120292
     }
   ],
   "validation_checks": 3,
-  "wasm_sha256": "6c56483bfd1b669971b15a76f2c2a58491593fed28988759822ad3eec84679b3",
+  "wasm_sha256": "4591daf010e1722026cb334120b8d4b7ffa2f723431d2387a95ad6c8033f182b",
   "cosine_to_previous": 0.9996671040689881,
   "max_abs_to_previous": 0.004268944263458252,
   "baseline_instructions": 2314298974,
-  "instructions_saved": 216467332
+  "instructions_saved": 216455040
 }

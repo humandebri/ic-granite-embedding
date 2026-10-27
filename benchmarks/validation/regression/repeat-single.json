@@ -3,126 +3,126 @@
   "cases": [
     {
       "case": "256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 0,
-      "seconds": 0.491089333
+      "seconds": 0.491373125
     },
     {
       "case": "256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 1,
-      "seconds": 0.479490708
+      "seconds": 0.526237167
     },
     {
       "case": "256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 2,
-      "seconds": 0.505267875
+      "seconds": 0.486806625
     },
     {
       "case": "256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 3,
-      "seconds": 0.500765458
+      "seconds": 0.481030333
     },
     {
       "case": "256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 4,
-      "seconds": 0.475940666
+      "seconds": 0.494173
     },
     {
       "case": "space-256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 0,
-      "seconds": 0.488325208
+      "seconds": 0.4795745
     },
     {
       "case": "space-256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 1,
-      "seconds": 0.482796166
+      "seconds": 0.485484459
     },
     {
       "case": "space-256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 2,
-      "seconds": 0.51589175
+      "seconds": 0.486675792
     },
     {
       "case": "space-256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 3,
-      "seconds": 0.492145917
+      "seconds": 0.492872625
     },
     {
       "case": "space-256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 4,
-      "seconds": 0.484791958
+      "seconds": 0.47686325
     },
     {
       "case": "cooking-256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 0,
-      "seconds": 0.4803405
+      "seconds": 0.483074375
     },
     {
       "case": "cooking-256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 1,
-      "seconds": 0.482079542
+      "seconds": 0.492067875
     },
     {
       "case": "cooking-256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 2,
-      "seconds": 0.606852084
+      "seconds": 0.50170675
     },
     {
       "case": "cooking-256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 3,
-      "seconds": 0.917245334
+      "seconds": 0.496286417
     },
     {
       "case": "cooking-256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 4,
-      "seconds": 0.486646833
+      "seconds": 0.493763417
     },
     {
       "case": "weather-256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 0,
-      "seconds": 0.477850917
+      "seconds": 0.504712791
     },
     {
       "case": "weather-256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 1,
-      "seconds": 0.477404917
+      "seconds": 0.489080958
     },
     {
       "case": "weather-256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 2,
-      "seconds": 0.480338625
+      "seconds": 0.488314791
     },
     {
       "case": "weather-256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 3,
-      "seconds": 0.484089667
+      "seconds": 0.493324708
     },
     {
       "case": "weather-256",
-      "instructions": 4064722696,
+      "instructions": 4064744228,
       "iteration": 4,
-      "seconds": 0.653468833
+      "seconds": 0.494864416
     }
   ],
-  "install_seconds": 23.782604708,
-  "setup_seconds": 34.068107041,
-  "wasm_sha256": "6c56483bfd1b669971b15a76f2c2a58491593fed28988759822ad3eec84679b3"
+  "install_seconds": 24.648563625,
+  "setup_seconds": 34.581485792,
+  "wasm_sha256": "4591daf010e1722026cb334120b8d4b7ffa2f723431d2387a95ad6c8033f182b"
 }

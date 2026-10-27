@@ -902,8 +902,8 @@
         46136,
         50282
       ],
-      "instructions": 8630046311,
-      "max_instructions": 2701890625,
+      "instructions": 8501007048,
+      "max_instructions": 2662182607,
       "pattern": 0,
       "queries": 4,
       "tokens": 513
@@ -1810,8 +1810,8 @@
         0,
         50282
       ],
-      "instructions": 8630046311,
-      "max_instructions": 2701890625,
+      "instructions": 8501008022,
+      "max_instructions": 2662181801,
       "pattern": 1,
       "queries": 4,
       "tokens": 513
@@ -2718,8 +2718,8 @@
         50367,
         50282
       ],
-      "instructions": 8630046311,
-      "max_instructions": 2701890625,
+      "instructions": 8501008380,
+      "max_instructions": 2662181801,
       "pattern": 2,
       "queries": 4,
       "tokens": 513
@@ -3627,8 +3627,8 @@
         47966,
         50282
       ],
-      "instructions": 8659214031,
-      "max_instructions": 2711322217,
+      "instructions": 8529883427,
+      "max_instructions": 2671525814,
       "pattern": 0,
       "queries": 4,
       "tokens": 514
@@ -4536,8 +4536,8 @@
         0,
         50282
       ],
-      "instructions": 8659214031,
-      "max_instructions": 2711322217,
+      "instructions": 8529888143,
+      "max_instructions": 2671524752,
       "pattern": 1,
       "queries": 4,
       "tokens": 514
@@ -5445,8 +5445,8 @@
         50367,
         50282
       ],
-      "instructions": 8659214031,
-      "max_instructions": 2711322217,
+      "instructions": 8529888513,
+      "max_instructions": 2671524782,
       "pattern": 2,
       "queries": 4,
       "tokens": 514
@@ -6359,8 +6359,8 @@
         47636,
         50282
       ],
-      "instructions": 8772411567,
-      "max_instructions": 2748028048,
+      "instructions": 8640781344,
+      "max_instructions": 2707498170,
       "pattern": 0,
       "queries": 4,
       "tokens": 519
@@ -7273,8 +7273,8 @@
         0,
         50282
       ],
-      "instructions": 8772411567,
-      "max_instructions": 2748028048,
+      "instructions": 8640782640,
+      "max_instructions": 2707497510,
       "pattern": 1,
       "queries": 4,
       "tokens": 519
@@ -8187,8 +8187,8 @@
         50367,
         50282
       ],
-      "instructions": 8772411567,
-      "max_instructions": 2748028048,
+      "instructions": 8640782828,
+      "max_instructions": 2707497536,
       "pattern": 2,
       "queries": 4,
       "tokens": 519
@@ -9102,8 +9102,8 @@
         2754,
         50282
       ],
-      "instructions": 8748401625,
-      "max_instructions": 2740559044,
+      "instructions": 8615715861,
+      "max_instructions": 2699682255,
       "pattern": 0,
       "queries": 4,
       "tokens": 520
@@ -10017,8 +10017,8 @@
         0,
         50282
       ],
-      "instructions": 8748401625,
-      "max_instructions": 2740559044,
+      "instructions": 8615715861,
+      "max_instructions": 2699682255,
       "pattern": 1,
       "queries": 4,
       "tokens": 520
@@ -10932,8 +10932,8 @@
         50367,
         50282
       ],
-      "instructions": 8748401625,
-      "max_instructions": 2740559044,
+      "instructions": 8615715861,
+      "max_instructions": 2699682255,
       "pattern": 2,
       "queries": 4,
       "tokens": 520
@@ -11902,8 +11902,8 @@
         25652,
         50282
       ],
-      "instructions": 9880648821,
-      "max_instructions": 3108358261,
+      "instructions": 9720722554,
+      "max_instructions": 3058745723,
       "pattern": 0,
       "queries": 4,
       "tokens": 575
@@ -12872,8 +12872,8 @@
         0,
         50282
       ],
-      "instructions": 9880648821,
-      "max_instructions": 3108358261,
+      "instructions": 9720724470,
+      "max_instructions": 3058744785,
       "pattern": 1,
       "queries": 4,
       "tokens": 575
@@ -13842,8 +13842,8 @@
         50367,
         50282
       ],
-      "instructions": 9880648821,
-      "max_instructions": 3108358261,
+      "instructions": 9720724524,
+      "max_instructions": 3058744809,
       "pattern": 2,
       "queries": 4,
       "tokens": 575
@@ -14813,8 +14813,8 @@
         33666,
         50282
       ],
-      "instructions": 9784521432,
-      "max_instructions": 3077291644,
+      "instructions": 9623429274,
+      "max_instructions": 3027295283,
       "pattern": 0,
       "queries": 4,
       "tokens": 576
@@ -15784,8 +15784,8 @@
         0,
         50282
       ],
-      "instructions": 9784521432,
-      "max_instructions": 3077291644,
+      "instructions": 9623429274,
+      "max_instructions": 3027295283,
       "pattern": 1,
       "queries": 4,
       "tokens": 576
@@ -16755,8 +16755,8 @@
         50367,
         50282
       ],
-      "instructions": 9784521432,
-      "max_instructions": 3077291644,
+      "instructions": 9623429274,
+      "max_instructions": 3027295283,
       "pattern": 2,
       "queries": 4,
       "tokens": 576
@@ -17727,8 +17727,8 @@
         48632,
         50282
       ],
-      "instructions": 9826950847,
-      "max_instructions": 3090898843,
+      "instructions": 9665649196,
+      "max_instructions": 3040835801,
       "pattern": 0,
       "queries": 4,
       "tokens": 577
@@ -18699,8 +18699,8 @@
         0,
         50282
       ],
-      "instructions": 9826950847,
-      "max_instructions": 3090898843,
+      "instructions": 9665650712,
+      "max_instructions": 3040834851,
       "pattern": 1,
       "queries": 4,
       "tokens": 577
@@ -19671,8 +19671,8 @@
         50367,
         50282
       ],
-      "instructions": 9826950847,
-      "max_instructions": 3090898843,
+      "instructions": 9665650924,
+      "max_instructions": 3040834851,
       "pattern": 2,
       "queries": 4,
       "tokens": 577
@@ -20705,8 +20705,8 @@
         32052,
         50282
       ],
-      "instructions": 11111481269,
-      "max_instructions": 3508673533,
+      "instructions": 10915847708,
+      "max_instructions": 3447557249,
       "pattern": 0,
       "queries": 4,
       "tokens": 639
@@ -21739,8 +21739,8 @@
         0,
         50282
       ],
-      "instructions": 11111481269,
-      "max_instructions": 3508673533,
+      "instructions": 10915849018,
+      "max_instructions": 3447556383,
       "pattern": 1,
       "queries": 4,
       "tokens": 639
@@ -22773,8 +22773,8 @@
         50367,
         50282
       ],
-      "instructions": 11111481269,
-      "max_instructions": 3508673533,
+      "instructions": 10915849392,
+      "max_instructions": 3447556399,
       "pattern": 2,
       "queries": 4,
       "tokens": 639
@@ -23808,8 +23808,8 @@
         17474,
         50282
       ],
-      "instructions": 11013414143,
-      "max_instructions": 3476960356,
+      "instructions": 10816488159,
+      "max_instructions": 3415418467,
       "pattern": 0,
       "queries": 4,
       "tokens": 640
@@ -24843,8 +24843,8 @@
         0,
         50282
       ],
-      "instructions": 11013414143,
-      "max_instructions": 3476960356,
+      "instructions": 10816488159,
+      "max_instructions": 3415418467,
       "pattern": 1,
       "queries": 4,
       "tokens": 640
@@ -25878,8 +25878,8 @@
         50367,
         50282
       ],
-      "instructions": 11013414143,
-      "max_instructions": 3476960356,
+      "instructions": 10816488159,
+      "max_instructions": 3415418467,
       "pattern": 2,
       "queries": 4,
       "tokens": 640
@@ -26914,8 +26914,8 @@
         43128,
         50282
       ],
-      "instructions": 11057809278,
-      "max_instructions": 3491222755,
+      "instructions": 10860646389,
+      "max_instructions": 3429605603,
       "pattern": 0,
       "queries": 4,
       "tokens": 641
@@ -27950,8 +27950,8 @@
         0,
         50282
       ],
-      "instructions": 11057809278,
-      "max_instructions": 3491222755,
+      "instructions": 10860652855,
+      "max_instructions": 3429605555,
       "pattern": 1,
       "queries": 4,
       "tokens": 641
@@ -28986,8 +28986,8 @@
         50367,
         50282
       ],
-      "instructions": 11057809278,
-      "max_instructions": 3491222755,
+      "instructions": 10860653057,
+      "max_instructions": 3429605555,
       "pattern": 2,
       "queries": 4,
       "tokens": 641
@@ -30148,8 +30148,8 @@
         49076,
         50282
       ],
-      "instructions": 13674995161,
-      "max_instructions": 4343257087,
+      "instructions": 13397161330,
+      "max_instructions": 4255538679,
       "pattern": 0,
       "queries": 4,
       "tokens": 767
@@ -31310,8 +31310,8 @@
         0,
         50282
       ],
-      "instructions": 13674995161,
-      "max_instructions": 4343257087,
+      "instructions": 13397165412,
+      "max_instructions": 4255538189,
       "pattern": 1,
       "queries": 4,
       "tokens": 767
@@ -32472,8 +32472,8 @@
         50367,
         50282
       ],
-      "instructions": 13674995161,
-      "max_instructions": 4343257087,
+      "instructions": 13397165536,
+      "max_instructions": 4255538201,
       "pattern": 2,
       "queries": 4,
       "tokens": 767
@@ -33635,8 +33635,8 @@
         8066,
         50282
       ],
-      "instructions": 13573048636,
-      "max_instructions": 4310249512,
+      "instructions": 13293671842,
+      "max_instructions": 4222022185,
       "pattern": 0,
       "queries": 4,
       "tokens": 768
@@ -34798,8 +34798,8 @@
         0,
         50282
       ],
-      "instructions": 13573048636,
-      "max_instructions": 4310249512,
+      "instructions": 13293671842,
+      "max_instructions": 4222022185,
       "pattern": 1,
       "queries": 4,
       "tokens": 768
@@ -35961,8 +35961,8 @@
         50367,
         50282
       ],
-      "instructions": 13573048636,
-      "max_instructions": 4310249512,
+      "instructions": 13293671842,
+      "max_instructions": 4222022185,
       "pattern": 2,
       "queries": 4,
       "tokens": 768
@@ -37125,8 +37125,8 @@
         20344,
         50282
       ],
-      "instructions": 13642334601,
-      "max_instructions": 3122251787,
+      "instructions": 13362680208,
+      "max_instructions": 3033935122,
       "pattern": 0,
       "queries": 5,
       "tokens": 769
@@ -38289,8 +38289,8 @@
         0,
         50282
       ],
-      "instructions": 13642334601,
-      "max_instructions": 3122251787,
+      "instructions": 13362683390,
+      "max_instructions": 3033933789,
       "pattern": 1,
       "queries": 5,
       "tokens": 769
@@ -39453,8 +39453,8 @@
         50367,
         50282
       ],
-      "instructions": 13642334601,
-      "max_instructions": 3122251787,
+      "instructions": 13362683602,
+      "max_instructions": 3033933789,
       "pattern": 2,
       "queries": 5,
       "tokens": 769
@@ -40743,8 +40743,8 @@
         3316,
         50282
       ],
-      "instructions": 16398707963,
-      "max_instructions": 3812806879,
+      "instructions": 16024299152,
+      "max_instructions": 3693695000,
       "pattern": 0,
       "queries": 5,
       "tokens": 895
@@ -42033,8 +42033,8 @@
         0,
         50282
       ],
-      "instructions": 16398707963,
-      "max_instructions": 3812806879,
+      "instructions": 16024303688,
+      "max_instructions": 3693694023,
       "pattern": 1,
       "queries": 5,
       "tokens": 895
@@ -43323,8 +43323,8 @@
         50367,
         50282
       ],
-      "instructions": 16398707963,
-      "max_instructions": 3812806879,
+      "instructions": 16024303764,
+      "max_instructions": 3693694097,
       "pattern": 2,
       "queries": 5,
       "tokens": 895
@@ -44614,8 +44614,8 @@
         31234,
         50282
       ],
-      "instructions": 16292911661,
-      "max_instructions": 3786914573,
+      "instructions": 15916707245,
+      "max_instructions": 3667209580,
       "pattern": 0,
       "queries": 5,
       "tokens": 896
@@ -45905,8 +45905,8 @@
         0,
         50282
       ],
-      "instructions": 16292911661,
-      "max_instructions": 3786914573,
+      "instructions": 15916707245,
+      "max_instructions": 3667209580,
       "pattern": 1,
       "queries": 5,
       "tokens": 896
@@ -47196,8 +47196,8 @@
         50367,
         50282
       ],
-      "instructions": 16292911661,
-      "max_instructions": 3786914573,
+      "instructions": 15916707245,
+      "max_instructions": 3667209580,
       "pattern": 2,
       "queries": 5,
       "tokens": 896
@@ -48488,8 +48488,8 @@
         15672,
         50282
       ],
-      "instructions": 16345193427,
-      "max_instructions": 3801087451,
+      "instructions": 15968662190,
+      "max_instructions": 3681276536,
       "pattern": 0,
       "queries": 5,
       "tokens": 897
@@ -49780,8 +49780,8 @@
         0,
         50282
       ],
-      "instructions": 16345193427,
-      "max_instructions": 3801087451,
+      "instructions": 15968670498,
+      "max_instructions": 3681276451,
       "pattern": 1,
       "queries": 5,
       "tokens": 897
@@ -51072,8 +51072,8 @@
         50367,
         50282
       ],
-      "instructions": 16345193427,
-      "max_instructions": 3801087451,
+      "instructions": 15968670688,
+      "max_instructions": 3681276527,
       "pattern": 2,
       "queries": 5,
       "tokens": 897
@@ -52490,8 +52490,8 @@
         28980,
         50282
       ],
-      "instructions": 19237321111,
-      "max_instructions": 4536894627,
+      "instructions": 18751955983,
+      "max_instructions": 4381596308,
       "pattern": 0,
       "queries": 5,
       "tokens": 1023
@@ -53908,8 +53908,8 @@
         0,
         50282
       ],
-      "instructions": 19237321111,
-      "max_instructions": 4536894627,
+      "instructions": 18751964987,
+      "max_instructions": 4381595460,
       "pattern": 1,
       "queries": 5,
       "tokens": 1023
@@ -55326,8 +55326,8 @@
         50367,
         50282
       ],
-      "instructions": 19237321111,
-      "max_instructions": 4536894627,
+      "instructions": 18751965193,
+      "max_instructions": 4381595476,
       "pattern": 2,
       "queries": 5,
       "tokens": 1023
@@ -56745,8 +56745,8 @@
         32450,
         50282
       ],
-      "instructions": 19127642077,
-      "max_instructions": 4509708541,
+      "instructions": 18640233102,
+      "max_instructions": 4353733502,
       "pattern": 0,
       "queries": 5,
       "tokens": 1024
@@ -58164,8 +58164,8 @@
         0,
         50282
       ],
-      "instructions": 19127642077,
-      "max_instructions": 4509708541,
+      "instructions": 18640233102,
+      "max_instructions": 4353733502,
       "pattern": 1,
       "queries": 5,
       "tokens": 1024
@@ -59583,8 +59583,8 @@
         50367,
         50282
       ],
-      "instructions": 19127642077,
-      "max_instructions": 4509708541,
+      "instructions": 18640233102,
+      "max_instructions": 4353733502,
       "pattern": 2,
       "queries": 5,
       "tokens": 1024
@@ -61003,7 +61003,7 @@
         24696,
         50282
       ],
-      "instructions": 19261707594,
+      "instructions": 18773928842,
       "max_instructions": 3239219698,
       "pattern": 0,
       "queries": 7,
@@ -62423,7 +62423,7 @@
         0,
         50282
       ],
-      "instructions": 19261707594,
+      "instructions": 18773935650,
       "max_instructions": 3239219698,
       "pattern": 1,
       "queries": 7,
@@ -63843,7 +63843,7 @@
         50367,
         50282
       ],
-      "instructions": 19261707594,
+      "instructions": 18773935746,
       "max_instructions": 3239219698,
       "pattern": 2,
       "queries": 7,
@@ -65389,7 +65389,7 @@
         43892,
         50282
       ],
-      "instructions": 22299059878,
+      "instructions": 21688368990,
       "max_instructions": 3656115098,
       "pattern": 0,
       "queries": 7,
@@ -66935,7 +66935,7 @@
         0,
         50282
       ],
-      "instructions": 22299059878,
+      "instructions": 21688375146,
       "max_instructions": 3656115098,
       "pattern": 1,
       "queries": 7,
@@ -68481,7 +68481,7 @@
         50367,
         50282
       ],
-      "instructions": 22299059878,
+      "instructions": 21688375384,
       "max_instructions": 3656115098,
       "pattern": 2,
       "queries": 7,
@@ -70028,7 +70028,7 @@
         22018,
         50282
       ],
-      "instructions": 22185578500,
+      "instructions": 21572587893,
       "max_instructions": 3639327956,
       "pattern": 0,
       "queries": 7,
@@ -71575,7 +71575,7 @@
         0,
         50282
       ],
-      "instructions": 22185578500,
+      "instructions": 21572587893,
       "max_instructions": 3639327956,
       "pattern": 1,
       "queries": 7,
@@ -73122,7 +73122,7 @@
         50367,
         50282
       ],
-      "instructions": 22185578500,
+      "instructions": 21572587893,
       "max_instructions": 3639327956,
       "pattern": 2,
       "queries": 7,
@@ -74670,7 +74670,7 @@
         21240,
         50282
       ],
-      "instructions": 22245800620,
+      "instructions": 21632393094,
       "max_instructions": 3644776240,
       "pattern": 0,
       "queries": 7,
@@ -76218,7 +76218,7 @@
         0,
         50282
       ],
-      "instructions": 22245800620,
+      "instructions": 21632402790,
       "max_instructions": 3644776240,
       "pattern": 1,
       "queries": 7,
@@ -77766,7 +77766,7 @@
         50367,
         50282
       ],
-      "instructions": 22245800620,
+      "instructions": 21632403002,
       "max_instructions": 3644776240,
       "pattern": 2,
       "queries": 7,
@@ -79440,8 +79440,8 @@
         34420,
         50282
       ],
-      "instructions": 25418897537,
-      "max_instructions": 4116241254,
+      "instructions": 24668493039,
+      "max_instructions": 4061670323,
       "pattern": 0,
       "queries": 7,
       "tokens": 1279
@@ -81114,8 +81114,8 @@
         0,
         50282
       ],
-      "instructions": 25418897537,
-      "max_instructions": 4116241254,
+      "instructions": 24668506891,
+      "max_instructions": 4061670323,
       "pattern": 1,
       "queries": 7,
       "tokens": 1279
@@ -82788,8 +82788,8 @@
         50367,
         50282
       ],
-      "instructions": 25418897537,
-      "max_instructions": 4116241254,
+      "instructions": 24668507261,
+      "max_instructions": 4061670323,
       "pattern": 2,
       "queries": 7,
       "tokens": 1279
@@ -84463,8 +84463,8 @@
         25282,
         50282
       ],
-      "instructions": 25301536665,
-      "max_instructions": 4094883625,
+      "instructions": 24548587556,
+      "max_instructions": 4044883153,
       "pattern": 0,
       "queries": 7,
       "tokens": 1280
@@ -86138,8 +86138,8 @@
         0,
         50282
       ],
-      "instructions": 25301536665,
-      "max_instructions": 4094883625,
+      "instructions": 24548587556,
+      "max_instructions": 4044883153,
       "pattern": 1,
       "queries": 7,
       "tokens": 1280
@@ -87813,8 +87813,8 @@
         50367,
         50282
       ],
-      "instructions": 25301536665,
-      "max_instructions": 4094883625,
+      "instructions": 24548587556,
+      "max_instructions": 4044883153,
       "pattern": 2,
       "queries": 7,
       "tokens": 1280
@@ -89489,8 +89489,8 @@
         22008,
         50282
       ],
-      "instructions": 25365688804,
-      "max_instructions": 4110284234,
+      "instructions": 24612278862,
+      "max_instructions": 4050331059,
       "pattern": 0,
       "queries": 7,
       "tokens": 1281
@@ -91165,8 +91165,8 @@
         0,
         50282
       ],
-      "instructions": 25365688804,
-      "max_instructions": 4110284234,
+      "instructions": 24612287936,
+      "max_instructions": 4050331059,
       "pattern": 1,
       "queries": 7,
       "tokens": 1281
@@ -92841,8 +92841,8 @@
         50367,
         50282
       ],
-      "instructions": 25365688804,
-      "max_instructions": 4110284234,
+      "instructions": 24612288274,
+      "max_instructions": 4050331059,
       "pattern": 2,
       "queries": 7,
       "tokens": 1281
@@ -94595,8 +94595,8 @@
         12468,
         50282
       ],
-      "instructions": 27389798136,
-      "max_instructions": 4518042019,
+      "instructions": 26544783188,
+      "max_instructions": 4304680573,
       "pattern": 0,
       "queries": 7,
       "tokens": 1359
@@ -96349,8 +96349,8 @@
         0,
         50282
       ],
-      "instructions": 27389798136,
-      "max_instructions": 4518042019,
+      "instructions": 26544790808,
+      "max_instructions": 4304680573,
       "pattern": 1,
       "queries": 7,
       "tokens": 1359
@@ -98103,8 +98103,8 @@
         50367,
         50282
       ],
-      "instructions": 27389798136,
-      "max_instructions": 4518042019,
+      "instructions": 26544791102,
+      "max_instructions": 4304680573,
       "pattern": 2,
       "queries": 7,
       "tokens": 1359
@@ -99858,8 +99858,8 @@
         6530,
         50282
       ],
-      "instructions": 27340431748,
-      "max_instructions": 4503553621,
+      "instructions": 26492707959,
+      "max_instructions": 4303248265,
       "pattern": 0,
       "queries": 7,
       "tokens": 1360
@@ -101613,8 +101613,8 @@
         0,
         50282
       ],
-      "instructions": 27340431748,
-      "max_instructions": 4503553621,
+      "instructions": 26492707959,
+      "max_instructions": 4303248265,
       "pattern": 1,
       "queries": 7,
       "tokens": 1360
@@ -103368,8 +103368,8 @@
         50367,
         50282
       ],
-      "instructions": 27340431748,
-      "max_instructions": 4503553621,
+      "instructions": 26492707959,
+      "max_instructions": 4303248265,
       "pattern": 2,
       "queries": 7,
       "tokens": 1360
@@ -105124,8 +105124,8 @@
         23288,
         50282
       ],
-      "instructions": 27407030198,
-      "max_instructions": 4519771900,
+      "instructions": 26558818660,
+      "max_instructions": 4308693511,
       "pattern": 0,
       "queries": 7,
       "tokens": 1361
@@ -106880,8 +106880,8 @@
         0,
         50282
       ],
-      "instructions": 27407030198,
-      "max_instructions": 4519771900,
+      "instructions": 26558826804,
+      "max_instructions": 4308693511,
       "pattern": 1,
       "queries": 7,
       "tokens": 1361
@@ -108636,8 +108636,8 @@
         50367,
         50282
       ],
-      "instructions": 27407030198,
-      "max_instructions": 4519771900,
+      "instructions": 26558827078,
+      "max_instructions": 4308693511,
       "pattern": 2,
       "queries": 7,
       "tokens": 1361
@@ -110393,8 +110393,8 @@
         5982,
         50282
       ],
-      "instructions": 27448212244,
-      "max_instructions": 4528422426,
+      "instructions": 26599285601,
+      "max_instructions": 4313479307,
       "pattern": 0,
       "queries": 7,
       "tokens": 1362
@@ -112150,8 +112150,8 @@
         0,
         50282
       ],
-      "instructions": 27448212244,
-      "max_instructions": 4528422426,
+      "instructions": 26599294015,
+      "max_instructions": 4313479307,
       "pattern": 1,
       "queries": 7,
       "tokens": 1362
@@ -113907,8 +113907,8 @@
         50367,
         50282
       ],
-      "instructions": 27448212244,
-      "max_instructions": 4528422426,
+      "instructions": 26599294333,
+      "max_instructions": 4313479307,
       "pattern": 2,
       "queries": 7,
       "tokens": 1362
@@ -115665,8 +115665,8 @@
         33788,
         50282
       ],
-      "instructions": 27489413820,
-      "max_instructions": 4537079528,
+      "instructions": 26639520018,
+      "max_instructions": 4318265055,
       "pattern": 0,
       "queries": 7,
       "tokens": 1363
@@ -117423,8 +117423,8 @@
         0,
         50282
       ],
-      "instructions": 27489413820,
-      "max_instructions": 4537079528,
+      "instructions": 26639528236,
+      "max_instructions": 4318265055,
       "pattern": 1,
       "queries": 7,
       "tokens": 1363
@@ -119181,8 +119181,8 @@
         50367,
         50282
       ],
-      "instructions": 27489413820,
-      "max_instructions": 4537079528,
+      "instructions": 26639528514,
+      "max_instructions": 4318265055,
       "pattern": 2,
       "queries": 7,
       "tokens": 1363
@@ -120940,8 +120940,8 @@
         41386,
         50282
       ],
-      "instructions": 27481102316,
-      "max_instructions": 4534512118,
+      "instructions": 26628492361,
+      "max_instructions": 4318200547,
       "pattern": 0,
       "queries": 7,
       "tokens": 1364
@@ -122699,8 +122699,8 @@
         0,
         50282
       ],
-      "instructions": 27481102316,
-      "max_instructions": 4534512118,
+      "instructions": 26628492361,
+      "max_instructions": 4318200547,
       "pattern": 1,
       "queries": 7,
       "tokens": 1364
@@ -124458,8 +124458,8 @@
         50367,
         50282
       ],
-      "instructions": 27481102316,
-      "max_instructions": 4534512118,
+      "instructions": 26628492361,
+      "max_instructions": 4318200547,
       "pattern": 2,
       "queries": 7,
       "tokens": 1364
@@ -126218,8 +126218,8 @@
         19824,
         50282
       ],
-      "instructions": 27523652347,
-      "max_instructions": 4543682065,
+      "instructions": 26670552995,
+      "max_instructions": 4322917417,
       "pattern": 0,
       "queries": 7,
       "tokens": 1365
@@ -127978,8 +127978,8 @@
         0,
         50282
       ],
-      "instructions": 27523652347,
-      "max_instructions": 4543682065,
+      "instructions": 26670561359,
+      "max_instructions": 4322917417,
       "pattern": 1,
       "queries": 7,
       "tokens": 1365
@@ -129738,12 +129738,12 @@
         50367,
         50282
       ],
-      "instructions": 27523652347,
-      "max_instructions": 4543682065,
+      "instructions": 26670561673,
+      "max_instructions": 4322917417,
       "pattern": 2,
       "queries": 7,
       "tokens": 1365
     }
   ],
-  "wasm_sha256": "6c56483bfd1b669971b15a76f2c2a58491593fed28988759822ad3eec84679b3"
+  "wasm_sha256": "4591daf010e1722026cb334120b8d4b7ffa2f723431d2387a95ad6c8033f182b"
 }

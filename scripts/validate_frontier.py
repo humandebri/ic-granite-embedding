@@ -45,7 +45,7 @@ def main():
         run('build', ['cargo', 'build', '--release', '--locked', '-p', 'granite-canister',
                      '--target', 'wasm32-unknown-unknown'])
         run('bench', ['cargo', 'build', '--release', '--locked', '-p', 'granite-bench'])
-    assert '12 passed; 0 failed' in (CACHE / 'frontier/final-tests.log').read_text()
+    assert '16 passed; 0 failed' in (CACHE / 'frontier/final-tests.log').read_text()
     shutil.copyfile(CACHE / 'frontier/final-tests.log', CACHE / 'regression-final-tests.log')
     wasm = Path(os.environ.get('GRANITE_WASM', TARGET / 'wasm32-unknown-unknown/release/granite_canister.wasm')).resolve()
     digest = hashlib.sha256(wasm.read_bytes()).hexdigest()
@@ -106,12 +106,14 @@ def main():
     prof = json.loads((ROOT / 'benchmarks/frontier/profile-1365.json').read_text())
     public = json.loads((OUT / 'api-1365.json').read_text())
     assert bits(prof['embedding']) == bits(public['embedding']), 'Layer-by-layer and public long-query output differ'
-    current_profile = json.loads((ROOT/'benchmarks/full-context/profile-1365.json').read_text())
+    current_profile = json.loads((ROOT/'benchmarks/query-fusion/profile-1365.json').read_text())
     assert bits(current_profile['embedding']) == bits(public['embedding'])
-    av = json.loads((ROOT/'benchmarks/full-context/av.json').read_text())
-    qk = json.loads((ROOT/'benchmarks/full-context/qk.json').read_text())
-    linear = json.loads((ROOT/'benchmarks/full-context/linear.json').read_text())
+    av = json.loads((ROOT/'benchmarks/query-fusion/av.json').read_text())
+    qk = json.loads((ROOT/'benchmarks/query-fusion/qk.json').read_text())
+    linear = json.loads((ROOT/'benchmarks/query-fusion/linear.json').read_text())
     assert av['exact_i64_cases'] == qk['exact_i64_cases'] == qk['exact_previous_cases'] == 44
+    codec=json.loads((ROOT/'benchmarks/query-fusion/codec.json').read_text())
+    assert codec['exact_scalar_cases'] == 30 and codec['wasm_sha256'] == current_profile['wasm_sha256']
     assert linear['exact_native_matches'] == 112
     assert av['wasm_sha256'] == qk['wasm_sha256'] == linear['wasm_sha256'] == current_profile['wasm_sha256']
     source = [ROOT/'Cargo.toml', ROOT/'Cargo.lock', ROOT/'rust-toolchain.toml', ROOT/'.cargo/config.toml', ROOT/'requirements.txt']
@@ -126,7 +128,7 @@ def main():
             'old_domain_lengths_bit_exact': 511, 'old_domain_stress_cases': 57, 'old_domain_api_cases': 16,
             'long_stress_cases': 96, 'long_stress_distinct_lengths': len({c['tokens'] for c in stress['cases']}),
             'capacity_cases':96, 'long_reference_cases': len(keys), 'long_stress_bit_exact_cases':96, 'long_reference_bit_exact_cases':len(keys), 'av_i64_exact_cases': 44, 'long_layer_boundary_bit_exact_cases': 1,
-            'qk_i64_exact_cases':44, 'linear_native_exact_cases':112, 'profile_wasm_sha256': current_profile['wasm_sha256'], 'exports': exports,
+            'codec_scalar_exact_cases':30, 'qk_i64_exact_cases':44, 'linear_native_exact_cases':112, 'profile_wasm_sha256': current_profile['wasm_sha256'], 'exports': exports,
             'query_instruction_limit': 5_000_000_000, 'subnet': 'Application / Production',
             'timing_note': 'Regression and long validation ran concurrently; use separate uncached sequential measurements for latency.'}
     (OUT/'environment.json').write_text(json.dumps(meta, indent=2)+'\n')
