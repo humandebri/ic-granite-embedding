@@ -1,0 +1,10 @@
+{
+  "model": "hotchpotch/bekko-embedding-v1-a8m",
+  "revision": "c721113d59a1d91b447450324f51c4b3332c924a",
+  "pack_sha256": "1feddfa11f8e232a30b39c4965328a396fa9388dc65bb06cad043045e2dc56ef",
+  "pack_bytes": 400967494,
+  "cases_sha256": "bd26ef17aad08d45136169a42c9044885819991987595a397901d78e267a4c00",
+  "cases": 15,
+  "retrieval_inputs": 252,
+  "retrieval_sha256": "0b57d7d3890381fb470775c4a3a7c0f0c202922a4dab39e90e5f06d8a30ce576"
+}

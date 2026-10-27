@@ -1,0 +1,26 @@
+[
+  {
+    "model": "granite",
+    "file": "tree.rs",
+    "sha256": "93ff3b44861be74052fb5b310cbfaf0731f3f8184de8a41c2609354c38137cc7",
+    "byte_identical": true
+  },
+  {
+    "model": "granite",
+    "file": "weighted.rs",
+    "sha256": "cb5578f9fecea25974bf7b98b4a90e2b1834692b18bcc6aabd973fcbc794aac5",
+    "byte_identical": true
+  },
+  {
+    "model": "granite",
+    "file": "score_four.rs",
+    "sha256": "fb6a272d77ac96606e5c7fdd871eba4f6d10d701607dd1d81db8ca4b83cde61d",
+    "byte_identical": true
+  },
+  {
+    "model": "bekko",
+    "file": "tree.rs",
+    "sha256": "6dffc5fad42425c0719c9011000ab6fb69def5032e6121f5878c55826d676003",
+    "byte_identical": true
+  }
+]

@@ -30,3 +30,14 @@ jobs:
           diff -u crates/canister/granite.did "$RUNNER_TEMP/granite.did"
       - name: Build production Wasm
         run: cargo build --release --locked -p granite-canister --target wasm32-unknown-unknown
+
+      - name: Test Bekko input bounds and numerical kernels
+        run: cargo test --locked -p bekko-core
+      - name: Check Bekko clients
+        run: cargo check --locked -p bekko-bench
+      - name: Check Bekko public Candid
+        run: |
+          cargo run --quiet --release --locked -p bekko-canister --example export_candid > "$RUNNER_TEMP/bekko.did"
+          diff -u crates/bekko-canister/bekko.did "$RUNNER_TEMP/bekko.did"
+      - name: Build Bekko Wasm
+        run: cargo build --release --locked -p bekko-canister --target wasm32-unknown-unknown

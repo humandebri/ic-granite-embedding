@@ -1,0 +1,18 @@
+[package]
+name = "bekko-core"
+version = "0.1.0"
+edition = "2024"
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+libm = "0.2"
+[build-dependencies]
+embedding-kernel-gen = { path = "../kernel-gen" }
+[features]
+default = ["approx-gelu", "strassen", "chunked-gemm", "strassen-wo", "strassen-qkv", "strassen-out"]
+approx-gelu = []
+strassen = []
+chunked-gemm = []
+strassen-wo = ["strassen"]
+strassen-qkv = ["strassen"]
+strassen-out = ["strassen"]

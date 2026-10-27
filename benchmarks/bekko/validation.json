@@ -1,0 +1,639 @@
+{
+  "canister_id": "lxzze-o7777-77777-aaaaa-cai",
+  "cases": [
+    {
+      "case": "ja-2",
+      "cosine_to_fp32": 0.9948286089164147,
+      "cosine_to_w8a8": 0.9999999999999669,
+      "instructions": 14601420,
+      "tokens": 2
+    },
+    {
+      "case": "ja-32",
+      "cosine_to_fp32": 0.9988050992202073,
+      "cosine_to_w8a8": 0.9994300683959351,
+      "instructions": 169790796,
+      "tokens": 32
+    },
+    {
+      "case": "ja-64",
+      "cosine_to_fp32": 0.998752891062741,
+      "cosine_to_w8a8": 0.9994915854713491,
+      "instructions": 355441288,
+      "tokens": 64
+    },
+    {
+      "case": "ja-128",
+      "cosine_to_fp32": 0.9983178293217194,
+      "cosine_to_w8a8": 0.9997136604976848,
+      "instructions": 811303976,
+      "tokens": 128
+    },
+    {
+      "case": "ja-256",
+      "cosine_to_fp32": 0.9972072133261348,
+      "cosine_to_w8a8": 0.9998616462322405,
+      "instructions": 1943374468,
+      "tokens": 256
+    },
+    {
+      "case": "en-2",
+      "cosine_to_fp32": 0.9948286089164147,
+      "cosine_to_w8a8": 0.9999999999999669,
+      "instructions": 14601420,
+      "tokens": 2
+    },
+    {
+      "case": "en-32",
+      "cosine_to_fp32": 0.9985672748545755,
+      "cosine_to_w8a8": 0.999488561071088,
+      "instructions": 169790796,
+      "tokens": 32
+    },
+    {
+      "case": "en-64",
+      "cosine_to_fp32": 0.9986506203453684,
+      "cosine_to_w8a8": 0.999879892901887,
+      "instructions": 355441288,
+      "tokens": 64
+    },
+    {
+      "case": "en-128",
+      "cosine_to_fp32": 0.9975565527584555,
+      "cosine_to_w8a8": 0.9996589411134637,
+      "instructions": 811303976,
+      "tokens": 128
+    },
+    {
+      "case": "en-256",
+      "cosine_to_fp32": 0.9961973871890845,
+      "cosine_to_w8a8": 0.9998198710004189,
+      "instructions": 1943374468,
+      "tokens": 256
+    },
+    {
+      "case": "mixed-2",
+      "cosine_to_fp32": 0.9948286089164147,
+      "cosine_to_w8a8": 0.9999999999999669,
+      "instructions": 14601420,
+      "tokens": 2
+    },
+    {
+      "case": "mixed-32",
+      "cosine_to_fp32": 0.9984605377698519,
+      "cosine_to_w8a8": 0.9999999999999886,
+      "instructions": 169790796,
+      "tokens": 32
+    },
+    {
+      "case": "mixed-64",
+      "cosine_to_fp32": 0.9979961621009138,
+      "cosine_to_w8a8": 0.9996058172109803,
+      "instructions": 355441288,
+      "tokens": 64
+    },
+    {
+      "case": "mixed-128",
+      "cosine_to_fp32": 0.997080759807767,
+      "cosine_to_w8a8": 0.999689522379381,
+      "instructions": 811303976,
+      "tokens": 128
+    },
+    {
+      "case": "mixed-256",
+      "cosine_to_fp32": 0.9951949292277606,
+      "cosine_to_w8a8": 0.999762368816471,
+      "instructions": 1943374468,
+      "tokens": 256
+    }
+  ],
+  "checks": [
+    "controller-only weight mutation",
+    "offset and incomplete activation rejected",
+    "incomplete upload discarded on upgrade",
+    "wrong weight checksum rejected without advancing progress",
+    "bad frames, padding, vocabulary and 257-token inputs rejected",
+    "verified weights survive upgrade; controller activation restores identical embedding"
+  ],
+  "model": {
+    "active": true,
+    "dimensions": 384,
+    "last_error": null,
+    "max_tokens": 256,
+    "model_id": "hotchpotch/bekko-embedding-v1-a8m",
+    "revision": "c721113d59a1d91b447450324f51c4b3332c924a",
+    "uploaded_bytes": 400967494,
+    "weight_pack_sha256": "1feddfa11f8e232a30b39c4965328a396fa9388dc65bb06cad043045e2dc56ef",
+    "weights_verified": true
+  },
+  "retrieval": {
+    "documents": 160,
+    "fp32": {
+      "ndcg@10": 0.988466554799108,
+      "ranks": [
+        {
+          "query_id": "51",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "204",
+          "rank": 2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "246",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "777",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "840",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "936",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "1192",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "1259",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "1315",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "1434",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "1603",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2004",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2140",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2150",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2341",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2458",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2732",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3242",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3304",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3387",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3407",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3682",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3761",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3821",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3868",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3976",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4253",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4337",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4484",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4676",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4832",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4938",
+          "rank": 1,
+          "recall@5": 1.0
+        }
+      ],
+      "recall@5": 1.0
+    },
+    "inputs": 252,
+    "maximum_query_instructions": 1943055918,
+    "queries": 32,
+    "vectors_sha256": "696f494d1e078530367ac0373a48062a5ed91876179883c11c77adfb0ed9bfc1",
+    "w8a8_reference": {
+      "ndcg@10": 0.988466554799108,
+      "ranks": [
+        {
+          "query_id": "51",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "204",
+          "rank": 2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "246",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "777",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "840",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "936",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "1192",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "1259",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "1315",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "1434",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "1603",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2004",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2140",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2150",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2341",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2458",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2732",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3242",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3304",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3387",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3407",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3682",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3761",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3821",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3868",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3976",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4253",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4337",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4484",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4676",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4832",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4938",
+          "rank": 1,
+          "recall@5": 1.0
+        }
+      ],
+      "recall@5": 1.0
+    },
+    "wasm": {
+      "ndcg@10": 0.988466554799108,
+      "ranks": [
+        {
+          "query_id": "51",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "204",
+          "rank": 2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "246",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "777",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "840",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "936",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "1192",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "1259",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "1315",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "1434",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "1603",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2004",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2140",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2150",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2341",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2458",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "2732",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3242",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3304",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3387",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3407",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3682",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3761",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3821",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3868",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "3976",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4253",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4337",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4484",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4676",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4832",
+          "rank": 1,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "4938",
+          "rank": 1,
+          "recall@5": 1.0
+        }
+      ],
+      "recall@5": 1.0
+    }
+  },
+  "setup_seconds": 113.894272208,
+  "stable_memory_bytes": "401_014_784",
+  "subnet": "Application/Production",
+  "wasm_memory_bytes": "837_877_760",
+  "wasm_sha256": "9edf15e8fe2d5d0bf88ada0ebc6a9deaeec52df9a1bf9a350b997c2ddd6ce95b"
+}

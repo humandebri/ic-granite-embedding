@@ -1,0 +1,26 @@
+type Embedding = record {
+  instructions : nat64;
+  tokens : nat32;
+  embedding : vec float32;
+};
+type ModelInfo = record {
+  last_error : opt text;
+  active : bool;
+  weights_verified : bool;
+  weight_pack_sha256 : text;
+  max_tokens : nat32;
+  model_id : text;
+  revision : text;
+  dimensions : nat32;
+  uploaded_bytes : nat64;
+};
+type Result = variant { Ok; Err : text };
+type Result_1 = variant { Ok : Embedding; Err : text };
+type Result_2 = variant { Ok : nat64; Err : text };
+service : () -> {
+  activate : () -> (Result);
+  beginUpload : () -> (Result);
+  embed : (vec nat32) -> (Result_1) query;
+  modelInfo : () -> (ModelInfo) query;
+  upload : (nat64, blob) -> (Result_2);
+}

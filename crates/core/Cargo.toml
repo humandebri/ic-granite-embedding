@@ -19,3 +19,6 @@ strassen-wo = ["strassen"]
 
 strassen-qkv = ["strassen"]
 strassen-out = ["strassen"]
+
+[build-dependencies]
+embedding-kernel-gen = { path = "../kernel-gen" }

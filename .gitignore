@@ -1,7 +1,7 @@
 # Local model downloads, references, and build outputs
 /.cache/
-/target/
-/.icp/
+target/
+/.icp/cache/
 /*.log
 *.wasm
 *.pack
@@ -14,11 +14,19 @@
 .env
 .env.*
 !.env.example
+!.env.*.example
 *.pem
 *.key
 
-# Python and macOS generated files
+# Python environments and tool caches
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
 __pycache__/
 *.py[cod]
+
+# macOS generated files
 .DS_Store
 ._*

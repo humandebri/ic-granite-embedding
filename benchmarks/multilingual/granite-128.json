@@ -1,0 +1,1433 @@
+{
+  "model": {
+    "id": "ibm-granite/granite-embedding-97m-multilingual-r2",
+    "revision": "835ad14087e140460703cf0fae09f97d469d65c2",
+    "pooling": "cls"
+  },
+  "config": {
+    "transformers_version": "5.20.2",
+    "architectures": [
+      "ModernBertModel"
+    ],
+    "output_hidden_states": false,
+    "return_dict": true,
+    "dtype": "float32",
+    "chunk_size_feed_forward": 0,
+    "is_encoder_decoder": false,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "problem_type": null,
+    "vocab_size": 180000,
+    "hidden_size": 384,
+    "intermediate_size": 1536,
+    "num_hidden_layers": 12,
+    "num_attention_heads": 12,
+    "hidden_activation": "silu",
+    "max_position_embeddings": 32768,
+    "initializer_range": 0.02,
+    "initializer_cutoff_factor": 2.0,
+    "norm_eps": 1e-05,
+    "norm_bias": false,
+    "pad_token_id": 179935,
+    "eos_token_id": 179938,
+    "bos_token_id": 179934,
+    "cls_token_id": 179934,
+    "sep_token_id": 179938,
+    "attention_bias": false,
+    "attention_dropout": 0.0,
+    "layer_types": [
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention"
+    ],
+    "rope_parameters": {
+      "sliding_attention": {
+        "rope_type": "default",
+        "rope_theta": 160000.0
+      },
+      "full_attention": {
+        "rope_type": "default",
+        "rope_theta": 150000.0
+      }
+    },
+    "local_attention": 128,
+    "embedding_dropout": 0.0,
+    "mlp_bias": false,
+    "mlp_dropout": 0.0,
+    "decoder_bias": true,
+    "classifier_pooling": "cls",
+    "classifier_dropout": 0.0,
+    "classifier_bias": false,
+    "classifier_activation": "silu",
+    "deterministic_flash_attn": false,
+    "sparse_prediction": false,
+    "sparse_pred_ignore_index": -100,
+    "tie_word_embeddings": true,
+    "_name_or_path": "/Users/0xhude/.cache/huggingface/hub/models--ibm-granite--granite-embedding-97m-multilingual-r2/snapshots/835ad14087e140460703cf0fae09f97d469d65c2",
+    "global_attn_every_n_layers": 3,
+    "gradient_checkpointing": false,
+    "layer_norm_eps": 1e-05,
+    "model_type": "modernbert",
+    "position_embedding_type": "absolute",
+    "repad_logits_with_grad": false,
+    "output_attentions": false
+  },
+  "parameters": 97441152,
+  "environment": {
+    "torch": "2.14.1",
+    "transformers": "5.20.2",
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "threads": 4
+  },
+  "max_tokens": 128,
+  "query_count": 128,
+  "corpus_count": 635,
+  "dataset_revision": "5713cd1b76a22b79c3595827c717c72b6cab8852",
+  "selection_sha256": "8399f992a79e5e7a791fd5b2943f45f06ccb65ec2004c7ed75695b7da7e9abeb",
+  "runs": {
+    "fp32": {
+      "metrics": {
+        "hit@1": 0.7265625,
+        "recall@5": 0.953125,
+        "recall@10": 0.953125,
+        "mrr": 0.8280719816335625,
+        "ndcg@10": 0.8579920097185278
+      },
+      "encoding": {
+        "seconds": 38.9815117912367,
+        "tokens_p50": 128.0,
+        "tokens_p95": 128.0,
+        "truncated": 0,
+        "retained_characters_p50": 145.0
+      },
+      "crosslingual_handwritten_hit@1": 1.0,
+      "ranks": [
+        {
+          "query_id": "42",
+          "rank": 2,
+          "top1": "2923"
+        },
+        {
+          "query_id": "48",
+          "rank": 2,
+          "top1": "226"
+        },
+        {
+          "query_id": "54",
+          "rank": 22,
+          "top1": "1454"
+        },
+        {
+          "query_id": "63",
+          "rank": 5,
+          "top1": "3817"
+        },
+        {
+          "query_id": "96",
+          "rank": 1,
+          "top1": "97"
+        },
+        {
+          "query_id": "132",
+          "rank": 1,
+          "top1": "133"
+        },
+        {
+          "query_id": "141",
+          "rank": 1,
+          "top1": "142"
+        },
+        {
+          "query_id": "195",
+          "rank": 14,
+          "top1": "2702"
+        },
+        {
+          "query_id": "234",
+          "rank": 1,
+          "top1": "235"
+        },
+        {
+          "query_id": "270",
+          "rank": 1,
+          "top1": "271"
+        },
+        {
+          "query_id": "279",
+          "rank": 2,
+          "top1": "440"
+        },
+        {
+          "query_id": "318",
+          "rank": 1,
+          "top1": "319"
+        },
+        {
+          "query_id": "389",
+          "rank": 1,
+          "top1": "390"
+        },
+        {
+          "query_id": "574",
+          "rank": 1,
+          "top1": "575"
+        },
+        {
+          "query_id": "593",
+          "rank": 2,
+          "top1": "2743"
+        },
+        {
+          "query_id": "640",
+          "rank": 1,
+          "top1": "641"
+        },
+        {
+          "query_id": "741",
+          "rank": 1,
+          "top1": "581"
+        },
+        {
+          "query_id": "743",
+          "rank": 1,
+          "top1": "744"
+        },
+        {
+          "query_id": "801",
+          "rank": 1,
+          "top1": "802"
+        },
+        {
+          "query_id": "804",
+          "rank": 1,
+          "top1": "805"
+        },
+        {
+          "query_id": "888",
+          "rank": 1,
+          "top1": "889"
+        },
+        {
+          "query_id": "1090",
+          "rank": 1,
+          "top1": "1091"
+        },
+        {
+          "query_id": "1136",
+          "rank": 1,
+          "top1": "1137"
+        },
+        {
+          "query_id": "1173",
+          "rank": 1,
+          "top1": "1098"
+        },
+        {
+          "query_id": "1203",
+          "rank": 1,
+          "top1": "1204"
+        },
+        {
+          "query_id": "1216",
+          "rank": 1,
+          "top1": "1217"
+        },
+        {
+          "query_id": "1259",
+          "rank": 1,
+          "top1": "1260"
+        },
+        {
+          "query_id": "1371",
+          "rank": 1,
+          "top1": "1366"
+        },
+        {
+          "query_id": "1426",
+          "rank": 1,
+          "top1": "1427"
+        },
+        {
+          "query_id": "1459",
+          "rank": 1,
+          "top1": "1460"
+        },
+        {
+          "query_id": "1530",
+          "rank": 15,
+          "top1": "214"
+        },
+        {
+          "query_id": "1609",
+          "rank": 1,
+          "top1": "1610"
+        },
+        {
+          "query_id": "1652",
+          "rank": 1,
+          "top1": "1653"
+        },
+        {
+          "query_id": "1693",
+          "rank": 1,
+          "top1": "357"
+        },
+        {
+          "query_id": "1742",
+          "rank": 1,
+          "top1": "1743"
+        },
+        {
+          "query_id": "1752",
+          "rank": 1,
+          "top1": "1753"
+        },
+        {
+          "query_id": "1787",
+          "rank": 1,
+          "top1": "1788"
+        },
+        {
+          "query_id": "1790",
+          "rank": 1,
+          "top1": "378"
+        },
+        {
+          "query_id": "1865",
+          "rank": 1,
+          "top1": "485"
+        },
+        {
+          "query_id": "1907",
+          "rank": 1,
+          "top1": "1908"
+        },
+        {
+          "query_id": "1919",
+          "rank": 1,
+          "top1": "345"
+        },
+        {
+          "query_id": "1969",
+          "rank": 1,
+          "top1": "1970"
+        },
+        {
+          "query_id": "1972",
+          "rank": 3,
+          "top1": "1703"
+        },
+        {
+          "query_id": "1995",
+          "rank": 1,
+          "top1": "1996"
+        },
+        {
+          "query_id": "2047",
+          "rank": 2,
+          "top1": "4888"
+        },
+        {
+          "query_id": "2058",
+          "rank": 1,
+          "top1": "2008"
+        },
+        {
+          "query_id": "2088",
+          "rank": 1,
+          "top1": "578"
+        },
+        {
+          "query_id": "2103",
+          "rank": 1,
+          "top1": "2104"
+        },
+        {
+          "query_id": "2134",
+          "rank": 1,
+          "top1": "2135"
+        },
+        {
+          "query_id": "2174",
+          "rank": 1,
+          "top1": "2175"
+        },
+        {
+          "query_id": "2233",
+          "rank": 1,
+          "top1": "2234"
+        },
+        {
+          "query_id": "2309",
+          "rank": 1,
+          "top1": "2310"
+        },
+        {
+          "query_id": "2328",
+          "rank": 1,
+          "top1": "2329"
+        },
+        {
+          "query_id": "2331",
+          "rank": 1,
+          "top1": "283"
+        },
+        {
+          "query_id": "2351",
+          "rank": 1,
+          "top1": "2352"
+        },
+        {
+          "query_id": "2458",
+          "rank": 1,
+          "top1": "348"
+        },
+        {
+          "query_id": "2520",
+          "rank": 1,
+          "top1": "946"
+        },
+        {
+          "query_id": "2555",
+          "rank": 1,
+          "top1": "70"
+        },
+        {
+          "query_id": "2557",
+          "rank": 2,
+          "top1": "1508"
+        },
+        {
+          "query_id": "2609",
+          "rank": 1,
+          "top1": "1508"
+        },
+        {
+          "query_id": "2701",
+          "rank": 2,
+          "top1": "1184"
+        },
+        {
+          "query_id": "2715",
+          "rank": 3,
+          "top1": "2743"
+        },
+        {
+          "query_id": "2719",
+          "rank": 2,
+          "top1": "2199"
+        },
+        {
+          "query_id": "2795",
+          "rank": 1,
+          "top1": "2796"
+        },
+        {
+          "query_id": "2798",
+          "rank": 1,
+          "top1": "2799"
+        },
+        {
+          "query_id": "3049",
+          "rank": 17,
+          "top1": "2296"
+        },
+        {
+          "query_id": "3057",
+          "rank": 2,
+          "top1": "3217"
+        },
+        {
+          "query_id": "3085",
+          "rank": 1,
+          "top1": "467"
+        },
+        {
+          "query_id": "3111",
+          "rank": 1,
+          "top1": "1712"
+        },
+        {
+          "query_id": "3133",
+          "rank": 1,
+          "top1": "3134"
+        },
+        {
+          "query_id": "3165",
+          "rank": 2,
+          "top1": "1242"
+        },
+        {
+          "query_id": "3196",
+          "rank": 2,
+          "top1": "667"
+        },
+        {
+          "query_id": "3204",
+          "rank": 1,
+          "top1": "2036"
+        },
+        {
+          "query_id": "3242",
+          "rank": 2,
+          "top1": "1979"
+        },
+        {
+          "query_id": "3262",
+          "rank": 3,
+          "top1": "3479"
+        },
+        {
+          "query_id": "3348",
+          "rank": 3,
+          "top1": "1560"
+        },
+        {
+          "query_id": "3362",
+          "rank": 1,
+          "top1": "865"
+        },
+        {
+          "query_id": "3451",
+          "rank": 1,
+          "top1": "1549"
+        },
+        {
+          "query_id": "3483",
+          "rank": 2,
+          "top1": "2608"
+        },
+        {
+          "query_id": "3515",
+          "rank": 1,
+          "top1": "3516"
+        },
+        {
+          "query_id": "3535",
+          "rank": 1,
+          "top1": "972"
+        },
+        {
+          "query_id": "3549",
+          "rank": 1,
+          "top1": "3550"
+        },
+        {
+          "query_id": "3593",
+          "rank": 1,
+          "top1": "3594"
+        },
+        {
+          "query_id": "3606",
+          "rank": 1,
+          "top1": "2320"
+        },
+        {
+          "query_id": "3657",
+          "rank": 1,
+          "top1": "2307"
+        },
+        {
+          "query_id": "3704",
+          "rank": 1,
+          "top1": "1049"
+        },
+        {
+          "query_id": "3718",
+          "rank": 1,
+          "top1": "3719"
+        },
+        {
+          "query_id": "3730",
+          "rank": 2,
+          "top1": "3217"
+        },
+        {
+          "query_id": "3735",
+          "rank": 1,
+          "top1": "3594"
+        },
+        {
+          "query_id": "3761",
+          "rank": 1,
+          "top1": "2504"
+        },
+        {
+          "query_id": "3777",
+          "rank": 1,
+          "top1": "121"
+        },
+        {
+          "query_id": "3779",
+          "rank": 1,
+          "top1": "3780"
+        },
+        {
+          "query_id": "3825",
+          "rank": 1,
+          "top1": "3826"
+        },
+        {
+          "query_id": "3864",
+          "rank": 1,
+          "top1": "3865"
+        },
+        {
+          "query_id": "3894",
+          "rank": 34,
+          "top1": "2705"
+        },
+        {
+          "query_id": "3934",
+          "rank": 14,
+          "top1": "527"
+        },
+        {
+          "query_id": "3937",
+          "rank": 5,
+          "top1": "172"
+        },
+        {
+          "query_id": "3941",
+          "rank": 3,
+          "top1": "4132"
+        },
+        {
+          "query_id": "3967",
+          "rank": 1,
+          "top1": "1610"
+        },
+        {
+          "query_id": "3968",
+          "rank": 4,
+          "top1": "2638"
+        },
+        {
+          "query_id": "4081",
+          "rank": 2,
+          "top1": "4888"
+        },
+        {
+          "query_id": "4131",
+          "rank": 1,
+          "top1": "4132"
+        },
+        {
+          "query_id": "4158",
+          "rank": 2,
+          "top1": "770"
+        },
+        {
+          "query_id": "4172",
+          "rank": 1,
+          "top1": "4161"
+        },
+        {
+          "query_id": "4177",
+          "rank": 1,
+          "top1": "1560"
+        },
+        {
+          "query_id": "4288",
+          "rank": 3,
+          "top1": "265"
+        },
+        {
+          "query_id": "4306",
+          "rank": 1,
+          "top1": "3645"
+        },
+        {
+          "query_id": "4375",
+          "rank": 1,
+          "top1": "2986"
+        },
+        {
+          "query_id": "4389",
+          "rank": 1,
+          "top1": "4390"
+        },
+        {
+          "query_id": "4417",
+          "rank": 2,
+          "top1": "3645"
+        },
+        {
+          "query_id": "4454",
+          "rank": 1,
+          "top1": "2733"
+        },
+        {
+          "query_id": "4478",
+          "rank": 1,
+          "top1": "3840"
+        },
+        {
+          "query_id": "4484",
+          "rank": 1,
+          "top1": "1607"
+        },
+        {
+          "query_id": "4493",
+          "rank": 1,
+          "top1": "1922"
+        },
+        {
+          "query_id": "4542",
+          "rank": 1,
+          "top1": "1166"
+        },
+        {
+          "query_id": "4543",
+          "rank": 1,
+          "top1": "1460"
+        },
+        {
+          "query_id": "4601",
+          "rank": 1,
+          "top1": "4602"
+        },
+        {
+          "query_id": "4633",
+          "rank": 1,
+          "top1": "844"
+        },
+        {
+          "query_id": "4669",
+          "rank": 2,
+          "top1": "375"
+        },
+        {
+          "query_id": "4732",
+          "rank": 1,
+          "top1": "4491"
+        },
+        {
+          "query_id": "4815",
+          "rank": 2,
+          "top1": "196"
+        },
+        {
+          "query_id": "4864",
+          "rank": 1,
+          "top1": "638"
+        },
+        {
+          "query_id": "4899",
+          "rank": 1,
+          "top1": "4900"
+        },
+        {
+          "query_id": "4913",
+          "rank": 2,
+          "top1": "1012"
+        },
+        {
+          "query_id": "4950",
+          "rank": 1,
+          "top1": "3936"
+        },
+        {
+          "query_id": "5005",
+          "rank": 1,
+          "top1": "2441"
+        },
+        {
+          "query_id": "5050",
+          "rank": 1,
+          "top1": "5051"
+        },
+        {
+          "query_id": "5053",
+          "rank": 1,
+          "top1": "5054"
+        }
+      ]
+    },
+    "w8a8-bf16kv": {
+      "metrics": {
+        "hit@1": 0.7109375,
+        "recall@5": 0.953125,
+        "recall@10": 0.96875,
+        "mrr": 0.8181651271150353,
+        "ndcg@10": 0.8548350738860416
+      },
+      "encoding": {
+        "seconds": 64.23099337518215,
+        "tokens_p50": 128.0,
+        "tokens_p95": 128.0,
+        "truncated": 0,
+        "retained_characters_p50": 145.0
+      },
+      "crosslingual_handwritten_hit@1": 1.0,
+      "ranks": [
+        {
+          "query_id": "42",
+          "rank": 2,
+          "top1": "2923"
+        },
+        {
+          "query_id": "48",
+          "rank": 1,
+          "top1": "49"
+        },
+        {
+          "query_id": "54",
+          "rank": 24,
+          "top1": "1454"
+        },
+        {
+          "query_id": "63",
+          "rank": 5,
+          "top1": "3817"
+        },
+        {
+          "query_id": "96",
+          "rank": 2,
+          "top1": "357"
+        },
+        {
+          "query_id": "132",
+          "rank": 1,
+          "top1": "133"
+        },
+        {
+          "query_id": "141",
+          "rank": 1,
+          "top1": "142"
+        },
+        {
+          "query_id": "195",
+          "rank": 10,
+          "top1": "2702"
+        },
+        {
+          "query_id": "234",
+          "rank": 1,
+          "top1": "235"
+        },
+        {
+          "query_id": "270",
+          "rank": 1,
+          "top1": "271"
+        },
+        {
+          "query_id": "279",
+          "rank": 2,
+          "top1": "440"
+        },
+        {
+          "query_id": "318",
+          "rank": 1,
+          "top1": "319"
+        },
+        {
+          "query_id": "389",
+          "rank": 1,
+          "top1": "390"
+        },
+        {
+          "query_id": "574",
+          "rank": 1,
+          "top1": "575"
+        },
+        {
+          "query_id": "593",
+          "rank": 2,
+          "top1": "2743"
+        },
+        {
+          "query_id": "640",
+          "rank": 1,
+          "top1": "641"
+        },
+        {
+          "query_id": "741",
+          "rank": 1,
+          "top1": "581"
+        },
+        {
+          "query_id": "743",
+          "rank": 1,
+          "top1": "744"
+        },
+        {
+          "query_id": "801",
+          "rank": 1,
+          "top1": "802"
+        },
+        {
+          "query_id": "804",
+          "rank": 1,
+          "top1": "805"
+        },
+        {
+          "query_id": "888",
+          "rank": 1,
+          "top1": "889"
+        },
+        {
+          "query_id": "1090",
+          "rank": 1,
+          "top1": "1091"
+        },
+        {
+          "query_id": "1136",
+          "rank": 1,
+          "top1": "1137"
+        },
+        {
+          "query_id": "1173",
+          "rank": 1,
+          "top1": "1098"
+        },
+        {
+          "query_id": "1203",
+          "rank": 1,
+          "top1": "1204"
+        },
+        {
+          "query_id": "1216",
+          "rank": 1,
+          "top1": "1217"
+        },
+        {
+          "query_id": "1259",
+          "rank": 1,
+          "top1": "1260"
+        },
+        {
+          "query_id": "1371",
+          "rank": 1,
+          "top1": "1366"
+        },
+        {
+          "query_id": "1426",
+          "rank": 1,
+          "top1": "1427"
+        },
+        {
+          "query_id": "1459",
+          "rank": 1,
+          "top1": "1460"
+        },
+        {
+          "query_id": "1530",
+          "rank": 17,
+          "top1": "214"
+        },
+        {
+          "query_id": "1609",
+          "rank": 1,
+          "top1": "1610"
+        },
+        {
+          "query_id": "1652",
+          "rank": 1,
+          "top1": "1653"
+        },
+        {
+          "query_id": "1693",
+          "rank": 1,
+          "top1": "357"
+        },
+        {
+          "query_id": "1742",
+          "rank": 1,
+          "top1": "1743"
+        },
+        {
+          "query_id": "1752",
+          "rank": 1,
+          "top1": "1753"
+        },
+        {
+          "query_id": "1787",
+          "rank": 1,
+          "top1": "1788"
+        },
+        {
+          "query_id": "1790",
+          "rank": 1,
+          "top1": "378"
+        },
+        {
+          "query_id": "1865",
+          "rank": 1,
+          "top1": "485"
+        },
+        {
+          "query_id": "1907",
+          "rank": 1,
+          "top1": "1908"
+        },
+        {
+          "query_id": "1919",
+          "rank": 1,
+          "top1": "345"
+        },
+        {
+          "query_id": "1969",
+          "rank": 1,
+          "top1": "1970"
+        },
+        {
+          "query_id": "1972",
+          "rank": 3,
+          "top1": "1585"
+        },
+        {
+          "query_id": "1995",
+          "rank": 1,
+          "top1": "1996"
+        },
+        {
+          "query_id": "2047",
+          "rank": 3,
+          "top1": "4888"
+        },
+        {
+          "query_id": "2058",
+          "rank": 1,
+          "top1": "2008"
+        },
+        {
+          "query_id": "2088",
+          "rank": 1,
+          "top1": "578"
+        },
+        {
+          "query_id": "2103",
+          "rank": 1,
+          "top1": "2104"
+        },
+        {
+          "query_id": "2134",
+          "rank": 1,
+          "top1": "2135"
+        },
+        {
+          "query_id": "2174",
+          "rank": 1,
+          "top1": "2175"
+        },
+        {
+          "query_id": "2233",
+          "rank": 1,
+          "top1": "2234"
+        },
+        {
+          "query_id": "2309",
+          "rank": 1,
+          "top1": "2310"
+        },
+        {
+          "query_id": "2328",
+          "rank": 1,
+          "top1": "2329"
+        },
+        {
+          "query_id": "2331",
+          "rank": 1,
+          "top1": "283"
+        },
+        {
+          "query_id": "2351",
+          "rank": 1,
+          "top1": "2352"
+        },
+        {
+          "query_id": "2458",
+          "rank": 1,
+          "top1": "348"
+        },
+        {
+          "query_id": "2520",
+          "rank": 1,
+          "top1": "946"
+        },
+        {
+          "query_id": "2555",
+          "rank": 1,
+          "top1": "70"
+        },
+        {
+          "query_id": "2557",
+          "rank": 2,
+          "top1": "1508"
+        },
+        {
+          "query_id": "2609",
+          "rank": 1,
+          "top1": "1508"
+        },
+        {
+          "query_id": "2701",
+          "rank": 3,
+          "top1": "1184"
+        },
+        {
+          "query_id": "2715",
+          "rank": 3,
+          "top1": "2743"
+        },
+        {
+          "query_id": "2719",
+          "rank": 2,
+          "top1": "2199"
+        },
+        {
+          "query_id": "2795",
+          "rank": 1,
+          "top1": "2796"
+        },
+        {
+          "query_id": "2798",
+          "rank": 1,
+          "top1": "2799"
+        },
+        {
+          "query_id": "3049",
+          "rank": 21,
+          "top1": "2296"
+        },
+        {
+          "query_id": "3057",
+          "rank": 2,
+          "top1": "3217"
+        },
+        {
+          "query_id": "3085",
+          "rank": 1,
+          "top1": "467"
+        },
+        {
+          "query_id": "3111",
+          "rank": 1,
+          "top1": "1712"
+        },
+        {
+          "query_id": "3133",
+          "rank": 1,
+          "top1": "3134"
+        },
+        {
+          "query_id": "3165",
+          "rank": 2,
+          "top1": "1242"
+        },
+        {
+          "query_id": "3196",
+          "rank": 2,
+          "top1": "667"
+        },
+        {
+          "query_id": "3204",
+          "rank": 1,
+          "top1": "2036"
+        },
+        {
+          "query_id": "3242",
+          "rank": 2,
+          "top1": "1979"
+        },
+        {
+          "query_id": "3262",
+          "rank": 2,
+          "top1": "3479"
+        },
+        {
+          "query_id": "3348",
+          "rank": 3,
+          "top1": "1560"
+        },
+        {
+          "query_id": "3362",
+          "rank": 1,
+          "top1": "865"
+        },
+        {
+          "query_id": "3451",
+          "rank": 2,
+          "top1": "4602"
+        },
+        {
+          "query_id": "3483",
+          "rank": 2,
+          "top1": "2608"
+        },
+        {
+          "query_id": "3515",
+          "rank": 1,
+          "top1": "3516"
+        },
+        {
+          "query_id": "3535",
+          "rank": 1,
+          "top1": "972"
+        },
+        {
+          "query_id": "3549",
+          "rank": 1,
+          "top1": "3550"
+        },
+        {
+          "query_id": "3593",
+          "rank": 1,
+          "top1": "3594"
+        },
+        {
+          "query_id": "3606",
+          "rank": 2,
+          "top1": "563"
+        },
+        {
+          "query_id": "3657",
+          "rank": 1,
+          "top1": "2307"
+        },
+        {
+          "query_id": "3704",
+          "rank": 1,
+          "top1": "1049"
+        },
+        {
+          "query_id": "3718",
+          "rank": 1,
+          "top1": "3719"
+        },
+        {
+          "query_id": "3730",
+          "rank": 2,
+          "top1": "3217"
+        },
+        {
+          "query_id": "3735",
+          "rank": 1,
+          "top1": "3594"
+        },
+        {
+          "query_id": "3761",
+          "rank": 1,
+          "top1": "2504"
+        },
+        {
+          "query_id": "3777",
+          "rank": 1,
+          "top1": "121"
+        },
+        {
+          "query_id": "3779",
+          "rank": 1,
+          "top1": "3780"
+        },
+        {
+          "query_id": "3825",
+          "rank": 1,
+          "top1": "3826"
+        },
+        {
+          "query_id": "3864",
+          "rank": 1,
+          "top1": "3865"
+        },
+        {
+          "query_id": "3894",
+          "rank": 37,
+          "top1": "2705"
+        },
+        {
+          "query_id": "3934",
+          "rank": 10,
+          "top1": "527"
+        },
+        {
+          "query_id": "3937",
+          "rank": 5,
+          "top1": "172"
+        },
+        {
+          "query_id": "3941",
+          "rank": 5,
+          "top1": "4132"
+        },
+        {
+          "query_id": "3967",
+          "rank": 1,
+          "top1": "1610"
+        },
+        {
+          "query_id": "3968",
+          "rank": 4,
+          "top1": "2638"
+        },
+        {
+          "query_id": "4081",
+          "rank": 2,
+          "top1": "4888"
+        },
+        {
+          "query_id": "4131",
+          "rank": 1,
+          "top1": "4132"
+        },
+        {
+          "query_id": "4158",
+          "rank": 2,
+          "top1": "770"
+        },
+        {
+          "query_id": "4172",
+          "rank": 1,
+          "top1": "4161"
+        },
+        {
+          "query_id": "4177",
+          "rank": 1,
+          "top1": "1560"
+        },
+        {
+          "query_id": "4288",
+          "rank": 3,
+          "top1": "2265"
+        },
+        {
+          "query_id": "4306",
+          "rank": 1,
+          "top1": "3645"
+        },
+        {
+          "query_id": "4375",
+          "rank": 1,
+          "top1": "2986"
+        },
+        {
+          "query_id": "4389",
+          "rank": 1,
+          "top1": "4390"
+        },
+        {
+          "query_id": "4417",
+          "rank": 2,
+          "top1": "3645"
+        },
+        {
+          "query_id": "4454",
+          "rank": 1,
+          "top1": "2733"
+        },
+        {
+          "query_id": "4478",
+          "rank": 1,
+          "top1": "3840"
+        },
+        {
+          "query_id": "4484",
+          "rank": 1,
+          "top1": "1607"
+        },
+        {
+          "query_id": "4493",
+          "rank": 1,
+          "top1": "1922"
+        },
+        {
+          "query_id": "4542",
+          "rank": 1,
+          "top1": "1166"
+        },
+        {
+          "query_id": "4543",
+          "rank": 1,
+          "top1": "1460"
+        },
+        {
+          "query_id": "4601",
+          "rank": 1,
+          "top1": "4602"
+        },
+        {
+          "query_id": "4633",
+          "rank": 1,
+          "top1": "844"
+        },
+        {
+          "query_id": "4669",
+          "rank": 2,
+          "top1": "375"
+        },
+        {
+          "query_id": "4732",
+          "rank": 1,
+          "top1": "4491"
+        },
+        {
+          "query_id": "4815",
+          "rank": 2,
+          "top1": "196"
+        },
+        {
+          "query_id": "4864",
+          "rank": 1,
+          "top1": "638"
+        },
+        {
+          "query_id": "4899",
+          "rank": 1,
+          "top1": "4900"
+        },
+        {
+          "query_id": "4913",
+          "rank": 2,
+          "top1": "1012"
+        },
+        {
+          "query_id": "4950",
+          "rank": 1,
+          "top1": "3936"
+        },
+        {
+          "query_id": "5005",
+          "rank": 1,
+          "top1": "2441"
+        },
+        {
+          "query_id": "5050",
+          "rank": 1,
+          "top1": "5051"
+        },
+        {
+          "query_id": "5053",
+          "rank": 1,
+          "top1": "5054"
+        }
+      ],
+      "cosine_to_fp32": {
+        "min": 0.9949938058853149,
+        "mean": 0.9985410571098328
+      }
+    }
+  },
+  "chunking": {
+    "overlap_tokens": 32,
+    "chunks": 2282,
+    "aggregation": "maximum chunk cosine per document",
+    "original_document_tokens_p50": 305.0,
+    "first_chunk_characters_p50": 149.0
+  }
+}

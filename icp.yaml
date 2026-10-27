@@ -1,0 +1,13 @@
+canisters:
+  - name: bekko
+    recipe:
+      type: "@dfinity/rust@v3.2.0"
+      configuration:
+        package: bekko-canister
+        candid: crates/bekko-canister/bekko.did
+networks:
+  - name: local
+    mode: managed
+    gateway:
+      bind: 127.0.0.1
+      port: 0

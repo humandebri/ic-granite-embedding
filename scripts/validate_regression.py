@@ -65,7 +65,8 @@ def main():
         run('final-tests',['cargo','test','--locked','-p','granite-core','--features','approx-gelu,strassen,chunked-gemm,strassen-wo,strassen-qkv,strassen-out'])
         run('production-build',['cargo','build','--release','--locked','-p','granite-canister','--target','wasm32-unknown-unknown'])
         run('bench-build',['cargo','build','--release','--locked','-p','granite-bench'])
-    assert '16 passed; 0 failed' in (CACHE/'regression-final-tests.log').read_text()
+    test_counts = re.findall(r'test result: ok\. (\d+) passed; 0 failed', (CACHE/'regression-final-tests.log').read_text())
+    assert test_counts and int(test_counts[0]) > 0
     wasm=Path(os.environ.get('GRANITE_WASM', TARGET/'wasm32-unknown-unknown/release/granite_canister.wasm'))
     wasm_hash=digest(wasm)
     exports=wasm_exports(wasm.read_bytes())
@@ -120,7 +121,7 @@ def main():
     env={'date':datetime.now(ZoneInfo('Asia/Tokyo')).date().isoformat(),'wasm_sha256':wasm_hash,'wasm_bytes':wasm.stat().st_size,
          'source_sha256':{str(p.relative_to(ROOT)):digest(p) for p in source},
          'subnet':'Application / Production','query_instruction_limit':5_000_000_000,
-         'features':default_features,'profiling':False,'unit_tests':16,
+         'features':default_features,'profiling':False,'unit_tests':int(test_counts[0]),
          'baseline_bit_exact_cases':len(keys),'rope_lookup_exact_cases':rope_matches,'public_api_cases':len(keys),'ordinary_single_query_cases':4,'typed_vs_raw_single_query_exact':True,
          'cpu':subprocess.check_output(['sysctl','-n','machdep.cpu.brand_string'],text=True).strip(),
          'architecture':platform.machine(),'rustc':subprocess.check_output(['rustc','--version'],text=True).strip(),

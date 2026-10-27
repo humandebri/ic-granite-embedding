@@ -1,0 +1,21 @@
+{
+  ".cargo/config.toml": "91a502066e179b2525929d903b188b1b6bb10e6b105a81b33a834497c50481a4",
+  "Cargo.lock": "e6c1c8d791f63bb01bac78edc702482499e45155030abc7c3044723ed878f334",
+  "crates/bekko-bench/Cargo.toml": "43b7cf6e6140cff13b05498531e0a4b317d756900ee9e06ebc7daeaddbe5ae27",
+  "crates/bekko-bench/src/bin/bekko-load.rs": "ff609365b82d84eafccaff0473c1a338427fb3c1fa4e3ede9a1a1f0b6fe9ab78",
+  "crates/bekko-bench/src/main.rs": "d6d57076ab3284f3b5dd2251c113ba7475c921f403ad53ef6498510ee4ae5b44",
+  "crates/bekko-canister/Cargo.toml": "31849357b65bdd89da0ac6cb8d0e048acafd71dd5b6c62630fd7620f5c79234d",
+  "crates/bekko-canister/bekko.did": "b4148b4af27b9b2e4a9c27221519bfe7f0b9da7b8a649b98d039f98bf419a4e5",
+  "crates/bekko-canister/examples/export_candid.rs": "e14926c9932fe1b5922b29298407389daf9d90683b8ee4ef77867a25e7eb4d76",
+  "crates/bekko-canister/src/lib.rs": "408e6361e0dde8381a8a7a8090484b5d9a9f0c492962354809475aee53c6d628",
+  "crates/bekko-core/Cargo.toml": "8a85a8b2a361a4319c604d78c9964d79a47d3ef4187f017899e9b4200df263ae",
+  "crates/bekko-core/build.rs": "5d032e688e0630842328b11a4c54b9ecae58a33906a04ec58f0d8d42ac781908",
+  "crates/bekko-core/src/lib.rs": "7fbbc1b88f40c86b844033eaf792515fb2fd7a9bc82c948a992190de03e5c0d3",
+  "crates/core/src/strassen.rs": "da6bf87b49bfc22b6b05e578afa857635ae6d5ce258190cccb47ed103d85d492",
+  "crates/kernel-gen/Cargo.toml": "68c94f54354e26a5aa8a78a5e7d2a181ae6e08d1055b9199722c4c12585c9461",
+  "crates/kernel-gen/src/lib.rs": "5d3385e532dcefd2a835bcbae22b9e16392e52cfd5dc20b38c6a9039e6caaf3a",
+  "icp.yaml": "f1a34a4af264204a13efab431997d72e3de9d35e2162b541eb27469de83facbd",
+  "rust-toolchain.toml": "ae90ff053fadbe8e68cca6c2bef6d3705166557d830f319547b5f8511c8dfd5d",
+  "scripts/bekko_tokens.py": "8a6e437ad595bd831fbcf63d1028fefc2aeebc3fbdfc1e2cbe43dd490f28285f",
+  "scripts/prepare_bekko.py": "7138447b6bd641be10f7ea8232071ceef61d21e37d5507b617c2840d289e59ab"
+}

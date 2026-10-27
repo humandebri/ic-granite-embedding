@@ -163,6 +163,9 @@ impl Prepared {
         }
     }
 }
+#[cfg(all(target_arch = "wasm32", feature = "strassen-wo"))]
+use super::packed_768 as packed_half;
+
 fn leaf(q: &[i16], w: &[i16], n: usize, rows: usize, cols: usize) -> Vec<i32> {
     assert!(q.len() == n * cols && w.len() == rows * cols);
     let mut out = Vec::<i32>::with_capacity(n * rows);
@@ -175,7 +178,7 @@ fn leaf(q: &[i16], w: &[i16], n: usize, rows: usize, cols: usize) -> Vec<i32> {
             } else {
                 64
             };
-            assert!([192, 768].contains(&cols) && n % tile == 0 && rows % outputs == 0);
+            assert!([192, super::I / 2].contains(&cols) && n % tile == 0 && rows % outputs == 0);
             for t in (0..n).step_by(tile) {
                 for r in (0..rows).step_by(outputs) {
                     let xp = q.as_ptr().add(t * cols);
@@ -186,7 +189,7 @@ fn leaf(q: &[i16], w: &[i16], n: usize, rows: usize, cols: usize) -> Vec<i32> {
                         #[cfg(any(feature = "strassen-qkv", feature = "strassen-out"))]
                         192 => super::packed_192_64(xp, wp, yp, rows),
                         #[cfg(feature = "strassen-wo")]
-                        768 => super::packed_768(xp, wp, yp, rows),
+                        c if c == super::I / 2 => packed_half(xp, wp, yp, rows),
                         _ => unreachable!(),
                     }
                 }

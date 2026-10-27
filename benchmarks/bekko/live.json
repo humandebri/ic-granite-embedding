@@ -1,0 +1,14 @@
+{
+  "canister_id": "4caro-hl777-77775-aaaba-cai",
+  "api_url": "http://localhost:56619/",
+  "tokens": 256,
+  "instructions": 1954894606,
+  "dimensions": 384,
+  "norm": 0.9999998515996378,
+  "cosine_to_fp32": 0.9972072133513897,
+  "cosine_to_w8a8": 0.9998616462359236,
+  "active_after_upgrade_and_activation": true,
+  "deployed_module_hash": "0x1cf0d89356a105283cf9a11f5a685c4dbdd8b85366e3b074ec01e266781476aa",
+  "network_launcher": "16.0.0-2026-09-25-03-28",
+  "icp_cli": "1.0.2"
+}

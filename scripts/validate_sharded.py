@@ -35,6 +35,7 @@ def main():
     target = Path(os.environ.get('CARGO_TARGET_DIR', ROOT/'target'))
     wasm = Path(os.environ.get('GRANITE_WASM', target/'wasm32-unknown-unknown/release/granite_canister.wasm')).resolve()
     sha = digest(wasm)
+    os.environ['GRANITE_WASM'] = str(wasm)
     (CACHE/"fusion").mkdir(parents=True,exist_ok=True)
     assert 'canister_query profileStep' not in wasm_exports(wasm.read_bytes())
     reference_dir = CACHE/'next/references'

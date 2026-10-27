@@ -1,0 +1,7 @@
+{
+  "english": {"id":"ibm-granite/granite-embedding-small-english-r2","revision":"2ab6fa8ea2d674564defd37171ae19079b864b33","pooling":"cls"},
+  "granite": {"id":"ibm-granite/granite-embedding-97m-multilingual-r2","revision":"835ad14087e140460703cf0fae09f97d469d65c2","pooling":"cls"},
+  "bekko8": {"id":"hotchpotch/bekko-embedding-v1-a8m","revision":"c721113d59a1d91b447450324f51c4b3332c924a","pooling":"mean"},
+  "bekko25": {"id":"hotchpotch/bekko-embedding-v1-a25m","revision":"44f0b8af0f487acd0ccf1a7cb7ae7a29a6dfc09c","pooling":"mean"},
+  "e5": {"id":"intfloat/multilingual-e5-small","revision":"614241f622f53c4eeff9890bdc4f31cfecc418b3","pooling":"mean","prefix":true}
+}

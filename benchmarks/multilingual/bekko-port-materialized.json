@@ -1,0 +1,21 @@
+{
+  "Cargo.toml": "695b650210c8b6097c2ca97ff79faedfd3a320f03c793dd57cbc84d7bb7d9dad",
+  "Cargo.lock": "0ed761ff26f4479a90c6d4a1c6e98d3c561f65dc599d39157e8e3eaed4bf8cfc",
+  "rust-toolchain.toml": "ae90ff053fadbe8e68cca6c2bef6d3705166557d830f319547b5f8511c8dfd5d",
+  ".cargo/config.toml": "91a502066e179b2525929d903b188b1b6bb10e6b105a81b33a834497c50481a4",
+  "crates/bench/Cargo.toml": "b2b7cf4afcdf6c6770cf0d85cb263aaf21d5ab2bcc53ec2614e3356fab81740a",
+  "crates/bench/src/main.rs": "fe2ff927bd5c98403e65844b375d2428d77863258904068b413ed58f2079e791",
+  "crates/canister/Cargo.toml": "806f8a27197d0da601c8f154e242698f17ce40e5007178a1ccf39f188b9b3428",
+  "crates/canister/examples/export_candid.rs": "3bbfe306e8b21bb1820bb4ab6219003bfe932fc4f225471526550fd20aea8829",
+  "crates/canister/granite.did": "14c75e96713f38895c4cb2099f9b94058ed9084c9d1e8dbab7aad19ee69b5df8",
+  "crates/canister/src/lib.rs": "7d425a3b2f53c2305d9e1419b357f5f3c36a50cef17ea654cd3e8d33d062be0d",
+  "crates/core/Cargo.toml": "4e4437a5661bc030aa066d9a109f159c15154a94115985e960e8656fe51048c0",
+  "crates/core/build.rs": "15ca659383b2f99501c159fae9fd4fd679829683731398148f09c4d45620e333",
+  "crates/core/src/attention_rows.rs": "cbd9e9975fbfc0b3a7207b3b48a28347632b060e4a9a661140f7ab3264ac8e69",
+  "crates/core/src/carry.rs": "0dc35abdac9bc019249749174e2f5263fc3c178763917c9b8e2f22a6694d57b0",
+  "crates/core/src/integer_attention.rs": "153b5f668db98782cd52c81b1424b49332b11da89ecc20be02a49aed5eaf00e4",
+  "crates/core/src/lib.rs": "75babcdf574fb288492fe9f4bfb5ccc4f2e58b9732cc31396850d9feb9449cea",
+  "crates/core/src/packed.rs": "ab745b3080582fdec7f5887b254524c952d98c39b13cd2bb090ed3248415f18b",
+  "crates/core/src/profile.rs": "af83b5ecfcbb98f1a9c35d755fbbe5b18272f8baf0549d6b30a5c07682bfd637",
+  "crates/core/src/strassen.rs": "e4a47bfff781a9753e827bcaec41e563a5cf6f990136e52321d303c08146f24f"
+}

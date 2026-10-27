@@ -1,0 +1,939 @@
+{
+  "datasets": {
+    "scifact": {
+      "queries": 128,
+      "documents": 642,
+      "source": {
+        "repo": "BeIR/scifact",
+        "revision": "b3b5335604bf5ee3c4447671af975ea25143d4f5",
+        "qrels": "BeIR/scifact-qrels",
+        "qrels_revision": "2938d17dc3b09882fdb8c12bbbe2e2dc0e75a029"
+      }
+    },
+    "fiqa": {
+      "queries": 128,
+      "documents": 844,
+      "source": {
+        "repo": "BeIR/fiqa",
+        "revision": "979c07a7cb5ccc6ca009792241fa1250b98055dd",
+        "qrels": "BeIR/fiqa-qrels",
+        "qrels_revision": "252958f2d646e22cab6d0c72dd3f0d5de6d0655a"
+      }
+    },
+    "jaquad": {
+      "queries": 128,
+      "documents": 635,
+      "source": {
+        "repo": "mteb/JaQuADRetrieval",
+        "revision": "5713cd1b76a22b79c3595827c717c72b6cab8852",
+        "filter": "text length >=80 Unicode characters"
+      }
+    }
+  },
+  "models": {
+    "english": {
+      "id": "ibm-granite/granite-embedding-small-english-r2",
+      "revision": "2ab6fa8ea2d674564defd37171ae19079b864b33",
+      "tasks": {
+        "scifact": {
+          "fp32": {
+            "hit@1": 0.7578125,
+            "recall@5": 0.890625,
+            "recall@10": 0.9296875,
+            "mrr": 0.8196309004383728,
+            "ndcg@10": 0.8417838654076906
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.7578125,
+            "recall@5": 0.890625,
+            "recall@10": 0.921875,
+            "mrr": 0.8201091565940456,
+            "ndcg@10": 0.8398906887863876
+          }
+        },
+        "fiqa": {
+          "fp32": {
+            "hit@1": 0.78125,
+            "recall@5": 0.7579844200937951,
+            "recall@10": 0.8255236516955267,
+            "mrr": 0.8370573699189083,
+            "ndcg@10": 0.7796927301434512
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.765625,
+            "recall@5": 0.7584184478715729,
+            "recall@10": 0.8235705266955267,
+            "mrr": 0.8348819041890634,
+            "ndcg@10": 0.7767265602555912
+          }
+        },
+        "jaquad": {
+          "fp32": {
+            "hit@1": 0.390625,
+            "recall@5": 0.6328125,
+            "recall@10": 0.7265625,
+            "mrr": 0.5063020404299167,
+            "ndcg@10": 0.553400049179708
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.3828125,
+            "recall@5": 0.625,
+            "recall@10": 0.703125,
+            "mrr": 0.4959883492041,
+            "ndcg@10": 0.5394634077186671
+          }
+        }
+      },
+      "parameters": 47662464,
+      "active_parameters": 28321152,
+      "dimensions": 384
+    },
+    "granite": {
+      "id": "ibm-granite/granite-embedding-97m-multilingual-r2",
+      "revision": "835ad14087e140460703cf0fae09f97d469d65c2",
+      "tasks": {
+        "scifact": {
+          "fp32": {
+            "hit@1": 0.71875,
+            "recall@5": 0.8359375,
+            "recall@10": 0.87109375,
+            "mrr": 0.7736151158375006,
+            "ndcg@10": 0.792595887792339
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.703125,
+            "recall@5": 0.8359375,
+            "recall@10": 0.87109375,
+            "mrr": 0.7659427056869278,
+            "ndcg@10": 0.7866096815233795
+          }
+        },
+        "fiqa": {
+          "fp32": {
+            "hit@1": 0.71875,
+            "recall@5": 0.6989442415223667,
+            "recall@10": 0.7817178481240982,
+            "mrr": 0.7827316091563519,
+            "ndcg@10": 0.721236801168812
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.7109375,
+            "recall@5": 0.6997812950937952,
+            "recall@10": 0.7713011814574314,
+            "mrr": 0.7767546561148381,
+            "ndcg@10": 0.7133884951028727
+          }
+        },
+        "jaquad": {
+          "fp32": {
+            "hit@1": 0.6640625,
+            "recall@5": 0.8828125,
+            "recall@10": 0.953125,
+            "mrr": 0.7726906861611338,
+            "ndcg@10": 0.8153063247803491
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.65625,
+            "recall@5": 0.8984375,
+            "recall@10": 0.9453125,
+            "mrr": 0.7622173219746734,
+            "ndcg@10": 0.805351281862629
+          }
+        }
+      },
+      "parameters": 97441152,
+      "active_parameters": 28321152,
+      "dimensions": 384
+    },
+    "bekko8": {
+      "id": "hotchpotch/bekko-embedding-v1-a8m",
+      "revision": "c721113d59a1d91b447450324f51c4b3332c924a",
+      "tasks": {
+        "scifact": {
+          "fp32": {
+            "hit@1": 0.7109375,
+            "recall@5": 0.86328125,
+            "recall@10": 0.89453125,
+            "mrr": 0.7891496612937104,
+            "ndcg@10": 0.8110410926637824
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.71875,
+            "recall@5": 0.86328125,
+            "recall@10": 0.88671875,
+            "mrr": 0.7916949833338339,
+            "ndcg@10": 0.8108494967029
+          }
+        },
+        "fiqa": {
+          "fp32": {
+            "hit@1": 0.65625,
+            "recall@5": 0.7030148020382395,
+            "recall@10": 0.7889351100288601,
+            "mrr": 0.7491877518470723,
+            "ndcg@10": 0.702373529016866
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.65625,
+            "recall@5": 0.6952023020382395,
+            "recall@10": 0.7889351100288601,
+            "mrr": 0.7463379531782756,
+            "ndcg@10": 0.6994946188086066
+          }
+        },
+        "jaquad": {
+          "fp32": {
+            "hit@1": 0.796875,
+            "recall@5": 0.9609375,
+            "recall@10": 0.9765625,
+            "mrr": 0.8706217202129265,
+            "ndcg@10": 0.8963042128358139
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.796875,
+            "recall@5": 0.9609375,
+            "recall@10": 0.9765625,
+            "mrr": 0.8684158348277462,
+            "ndcg@10": 0.8945760636751715
+          }
+        }
+      },
+      "parameters": 105975168,
+      "active_parameters": 7671168,
+      "dimensions": 384
+    },
+    "bekko25": {
+      "id": "hotchpotch/bekko-embedding-v1-a25m",
+      "revision": "44f0b8af0f487acd0ccf1a7cb7ae7a29a6dfc09c",
+      "tasks": {
+        "scifact": {
+          "fp32": {
+            "hit@1": 0.6953125,
+            "recall@5": 0.84375,
+            "recall@10": 0.8828125,
+            "mrr": 0.7735652551693849,
+            "ndcg@10": 0.7970911000452366
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.6796875,
+            "recall@5": 0.84375,
+            "recall@10": 0.890625,
+            "mrr": 0.7688431011209728,
+            "ndcg@10": 0.7946365058868887
+          }
+        },
+        "fiqa": {
+          "fp32": {
+            "hit@1": 0.734375,
+            "recall@5": 0.7236187206890332,
+            "recall@10": 0.8172957251082251,
+            "mrr": 0.8011220708054785,
+            "ndcg@10": 0.7499405392920306
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.7265625,
+            "recall@5": 0.7255718456890332,
+            "recall@10": 0.8246431953463204,
+            "mrr": 0.7966879665246943,
+            "ndcg@10": 0.7473352226810418
+          }
+        },
+        "jaquad": {
+          "fp32": {
+            "hit@1": 0.75,
+            "recall@5": 0.9375,
+            "recall@10": 0.953125,
+            "mrr": 0.834459287266043,
+            "ndcg@10": 0.8621070867976353
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.75,
+            "recall@5": 0.9375,
+            "recall@10": 0.9609375,
+            "mrr": 0.8346596868575012,
+            "ndcg@10": 0.8645191737190862
+          }
+        }
+      },
+      "parameters": 123234432,
+      "active_parameters": 24930432,
+      "dimensions": 384
+    },
+    "e5": {
+      "id": "intfloat/multilingual-e5-small",
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "tasks": {
+        "scifact": {
+          "fp32": {
+            "hit@1": 0.6875,
+            "recall@5": 0.849609375,
+            "recall@10": 0.89453125,
+            "mrr": 0.769571759480572,
+            "ndcg@10": 0.7943948110226008
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.703125,
+            "recall@5": 0.857421875,
+            "recall@10": 0.88671875,
+            "mrr": 0.7781638168106856,
+            "ndcg@10": 0.7989471757530144
+          }
+        },
+        "fiqa": {
+          "fp32": {
+            "hit@1": 0.7109375,
+            "recall@5": 0.6968764091810967,
+            "recall@10": 0.7710810673701299,
+            "mrr": 0.7851491424329573,
+            "ndcg@10": 0.7081326330091015
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.6953125,
+            "recall@5": 0.6973414389430014,
+            "recall@10": 0.7758553729256853,
+            "mrr": 0.7788230238652031,
+            "ndcg@10": 0.7086455509055137
+          }
+        },
+        "jaquad": {
+          "fp32": {
+            "hit@1": 0.796875,
+            "recall@5": 0.9609375,
+            "recall@10": 0.9609375,
+            "mrr": 0.8654512623732312,
+            "ndcg@10": 0.8881908844739635
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.796875,
+            "recall@5": 0.9609375,
+            "recall@10": 0.9609375,
+            "mrr": 0.8669197358337908,
+            "ndcg@10": 0.8892137731737404
+          }
+        }
+      },
+      "parameters": 117653760,
+      "active_parameters": 21639552,
+      "dimensions": 384
+    },
+    "bge": {
+      "id": "BAAI/bge-small-en-v1.5",
+      "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+      "tasks": {
+        "scifact": {
+          "fp32": {
+            "hit@1": 0.7265625,
+            "recall@5": 0.87890625,
+            "recall@10": 0.8984375,
+            "mrr": 0.7933929055506126,
+            "ndcg@10": 0.8135032995702755
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.734375,
+            "recall@5": 0.86328125,
+            "recall@10": 0.8984375,
+            "mrr": 0.7959917263727045,
+            "ndcg@10": 0.8149533728950669
+          }
+        },
+        "fiqa": {
+          "fp32": {
+            "hit@1": 0.7421875,
+            "recall@5": 0.716075937950938,
+            "recall@10": 0.8250524215367966,
+            "mrr": 0.8065530796479335,
+            "ndcg@10": 0.7525509748327641
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.734375,
+            "recall@5": 0.729747812950938,
+            "recall@10": 0.8250524215367966,
+            "mrr": 0.8019743955801788,
+            "ndcg@10": 0.7524461385031734
+          }
+        },
+        "jaquad": {
+          "fp32": {
+            "hit@1": 0.3125,
+            "recall@5": 0.5390625,
+            "recall@10": 0.6328125,
+            "mrr": 0.4111398427610803,
+            "ndcg@10": 0.45659131663252933
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.328125,
+            "recall@5": 0.5390625,
+            "recall@10": 0.625,
+            "mrr": 0.42232470205549666,
+            "ndcg@10": 0.4629387525810951
+          }
+        }
+      },
+      "parameters": 33360000,
+      "active_parameters": 21639552,
+      "dimensions": 384
+    },
+    "e5en": {
+      "id": "intfloat/e5-small-v2",
+      "revision": "ffb93f3bd4047442299a41ebb6fa998a38507c52",
+      "tasks": {
+        "scifact": {
+          "fp32": {
+            "hit@1": 0.6953125,
+            "recall@5": 0.80078125,
+            "recall@10": 0.8515625,
+            "mrr": 0.7542149325792834,
+            "ndcg@10": 0.7704837318493015
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.6875,
+            "recall@5": 0.79296875,
+            "recall@10": 0.8515625,
+            "mrr": 0.7522179186021842,
+            "ndcg@10": 0.7691791040303692
+          }
+        },
+        "fiqa": {
+          "fp32": {
+            "hit@1": 0.6875,
+            "recall@5": 0.6889244002525251,
+            "recall@10": 0.7932410037878788,
+            "mrr": 0.7748832302254584,
+            "ndcg@10": 0.7220444082225593
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.6875,
+            "recall@5": 0.6987210272366522,
+            "recall@10": 0.7758674918831169,
+            "mrr": 0.7713248488572539,
+            "ndcg@10": 0.7124072886983436
+          }
+        },
+        "jaquad": {
+          "fp32": {
+            "hit@1": 0.2890625,
+            "recall@5": 0.5546875,
+            "recall@10": 0.6171875,
+            "mrr": 0.4079060611870838,
+            "ndcg@10": 0.4495467588219373
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.3125,
+            "recall@5": 0.546875,
+            "recall@10": 0.625,
+            "mrr": 0.4141536836684135,
+            "ndcg@10": 0.45624332347780744
+          }
+        }
+      },
+      "parameters": 33360000,
+      "active_parameters": 21639552,
+      "dimensions": 384
+    },
+    "minilm": {
+      "id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "tasks": {
+        "scifact": {
+          "fp32": {
+            "hit@1": 0.703125,
+            "recall@5": 0.8359375,
+            "recall@10": 0.875,
+            "mrr": 0.7670052637099531,
+            "ndcg@10": 0.7873675886315918
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.703125,
+            "recall@5": 0.8359375,
+            "recall@10": 0.8671875,
+            "mrr": 0.7637819669938827,
+            "ndcg@10": 0.7828137914735231
+          }
+        },
+        "fiqa": {
+          "fp32": {
+            "hit@1": 0.765625,
+            "recall@5": 0.7208192415223666,
+            "recall@10": 0.8489828530844156,
+            "mrr": 0.8185807875772195,
+            "ndcg@10": 0.7689497682983907
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.7578125,
+            "recall@5": 0.7247254915223666,
+            "recall@10": 0.8546562161796537,
+            "mrr": 0.8161854067766772,
+            "ndcg@10": 0.7690919351995513
+          }
+        },
+        "jaquad": {
+          "fp32": {
+            "hit@1": 0.1171875,
+            "recall@5": 0.2109375,
+            "recall@10": 0.25,
+            "mrr": 0.15916672060182202,
+            "ndcg@10": 0.17395733230527582
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.1015625,
+            "recall@5": 0.21875,
+            "recall@10": 0.2421875,
+            "mrr": 0.1565188785315551,
+            "ndcg@10": 0.17081842328123464
+          }
+        }
+      },
+      "parameters": 22713216,
+      "active_parameters": 10992768,
+      "dimensions": 384
+    },
+    "granite107": {
+      "id": "ibm-granite/granite-embedding-107m-multilingual",
+      "revision": "d6cffd338414d6a1c1f5decfad5fec62eebc90d5",
+      "tasks": {
+        "scifact": {
+          "fp32": {
+            "hit@1": 0.6640625,
+            "recall@5": 0.83203125,
+            "recall@10": 0.87890625,
+            "mrr": 0.7452617000429157,
+            "ndcg@10": 0.7725049588005803
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.6640625,
+            "recall@5": 0.84375,
+            "recall@10": 0.87890625,
+            "mrr": 0.747426318515507,
+            "ndcg@10": 0.7752308131575538
+          }
+        },
+        "fiqa": {
+          "fp32": {
+            "hit@1": 0.6875,
+            "recall@5": 0.6620456800144301,
+            "recall@10": 0.7419113005050505,
+            "mrr": 0.7651713041936542,
+            "ndcg@10": 0.6823780983873503
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.6796875,
+            "recall@5": 0.6620456800144301,
+            "recall@10": 0.7451665088383839,
+            "mrr": 0.7616371261120023,
+            "ndcg@10": 0.6812232083855221
+          }
+        },
+        "jaquad": {
+          "fp32": {
+            "hit@1": 0.703125,
+            "recall@5": 0.8828125,
+            "recall@10": 0.9453125,
+            "mrr": 0.7893756645715376,
+            "ndcg@10": 0.8257254833894452
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.703125,
+            "recall@5": 0.875,
+            "recall@10": 0.9453125,
+            "mrr": 0.7889481653687856,
+            "ndcg@10": 0.825307362499592
+          }
+        }
+      },
+      "parameters": 106994304,
+      "active_parameters": 10993536,
+      "dimensions": 384
+    },
+    "horizon": {
+      "id": "Horizon-Labs/multilingual-embedding-small",
+      "revision": "6418071ac0a526fea6f72230390298d5e1a5c7b7",
+      "tasks": {
+        "scifact": {
+          "fp32": {
+            "hit@1": 0.6015625,
+            "recall@5": 0.779296875,
+            "recall@10": 0.828125,
+            "mrr": 0.6852350712038552,
+            "ndcg@10": 0.7107984774361767
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.5859375,
+            "recall@5": 0.763671875,
+            "recall@10": 0.8125,
+            "mrr": 0.6753167921142379,
+            "ndcg@10": 0.7017111195472848
+          }
+        },
+        "fiqa": {
+          "fp32": {
+            "hit@1": 0.671875,
+            "recall@5": 0.6632485569985571,
+            "recall@10": 0.7590646983225108,
+            "mrr": 0.7557336828014611,
+            "ndcg@10": 0.6864035885341002
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.6796875,
+            "recall@5": 0.6782225153318904,
+            "recall@10": 0.7515126149891775,
+            "mrr": 0.7659102515029488,
+            "ndcg@10": 0.6873622856330414
+          }
+        },
+        "jaquad": {
+          "fp32": {
+            "hit@1": 0.7265625,
+            "recall@5": 0.9296875,
+            "recall@10": 0.9453125,
+            "mrr": 0.8113633159224286,
+            "ndcg@10": 0.8431885992844278
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.734375,
+            "recall@5": 0.9296875,
+            "recall@10": 0.9453125,
+            "mrr": 0.8116068669851764,
+            "ndcg@10": 0.8429430044049935
+          }
+        }
+      },
+      "parameters": 140886912,
+      "active_parameters": 42582912,
+      "dimensions": 1024
+    },
+    "granite311": {
+      "id": "ibm-granite/granite-embedding-311m-multilingual-r2",
+      "revision": "44399559930365213510b1ee2eb15ded83374f0e",
+      "tasks": {
+        "scifact": {
+          "fp32": {
+            "hit@1": 0.75,
+            "recall@5": 0.890625,
+            "recall@10": 0.90625,
+            "mrr": 0.8072128399974876,
+            "ndcg@10": 0.8254886870099801
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.75,
+            "recall@5": 0.8828125,
+            "recall@10": 0.91015625,
+            "mrr": 0.8068201871204324,
+            "ndcg@10": 0.8262695026518543
+          }
+        },
+        "fiqa": {
+          "fp32": {
+            "hit@1": 0.7734375,
+            "recall@5": 0.7384717712842714,
+            "recall@10": 0.8170260078463204,
+            "mrr": 0.8251503832160296,
+            "ndcg@10": 0.7638903313188147
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.7578125,
+            "recall@5": 0.7394483337842714,
+            "recall@10": 0.8209322578463204,
+            "mrr": 0.8137584552849303,
+            "ndcg@10": 0.7559708254637242
+          }
+        },
+        "jaquad": {
+          "fp32": {
+            "hit@1": 0.71875,
+            "recall@5": 0.921875,
+            "recall@10": 0.9375,
+            "mrr": 0.8085390090201979,
+            "ndcg@10": 0.8392443639928769
+          },
+          "w8a8-bf16kv": {
+            "hit@1": 0.7109375,
+            "recall@5": 0.9140625,
+            "recall@10": 0.9375,
+            "mrr": 0.8031727950744058,
+            "ndcg@10": 0.8352828805104606
+          }
+        }
+      },
+      "parameters": 311664384,
+      "active_parameters": 110331648,
+      "dimensions": 768
+    }
+  },
+  "comparisons": {
+    "scifact:bekko8-minus-english:recall@5": {
+      "delta": -0.02734375,
+      "query_bootstrap_95_interval": [
+        -0.0625,
+        0.00390625
+      ],
+      "queries_better": 1,
+      "queries_worse": 5
+    },
+    "scifact:bekko8-minus-english:ndcg@10": {
+      "delta": -0.029041192083487443,
+      "query_bootstrap_95_interval": [
+        -0.058393763120819786,
+        0.0002613248204183595
+      ],
+      "queries_better": 8,
+      "queries_worse": 19
+    },
+    "scifact:bekko8-minus-granite:recall@5": {
+      "delta": 0.02734375,
+      "query_bootstrap_95_interval": [
+        -0.015625,
+        0.07421875
+      ],
+      "queries_better": 7,
+      "queries_worse": 3
+    },
+    "scifact:bekko8-minus-granite:ndcg@10": {
+      "delta": 0.024239815179520563,
+      "query_bootstrap_95_interval": [
+        -0.014844518910055794,
+        0.0663480983117761
+      ],
+      "queries_better": 18,
+      "queries_worse": 15
+    },
+    "scifact:bekko8-minus-bekko25:recall@5": {
+      "delta": 0.01953125,
+      "query_bootstrap_95_interval": [
+        -0.0234375,
+        0.0625
+      ],
+      "queries_better": 6,
+      "queries_worse": 3
+    },
+    "scifact:bekko8-minus-bekko25:ndcg@10": {
+      "delta": 0.0162129908160109,
+      "query_bootstrap_95_interval": [
+        -0.013002640288780874,
+        0.045558008602949236
+      ],
+      "queries_better": 16,
+      "queries_worse": 11
+    },
+    "scifact:bekko8-minus-e5:recall@5": {
+      "delta": 0.005859375,
+      "query_bootstrap_95_interval": [
+        -0.025390625,
+        0.0390625
+      ],
+      "queries_better": 4,
+      "queries_worse": 2
+    },
+    "scifact:bekko8-minus-e5:ndcg@10": {
+      "delta": 0.011902320949885437,
+      "query_bootstrap_95_interval": [
+        -0.022644762045448838,
+        0.04531485609423013
+      ],
+      "queries_better": 17,
+      "queries_worse": 13
+    },
+    "scifact:bekko8-minus-granite311:recall@5": {
+      "delta": -0.01953125,
+      "query_bootstrap_95_interval": [
+        -0.0625,
+        0.01953125
+      ],
+      "queries_better": 3,
+      "queries_worse": 5
+    },
+    "scifact:bekko8-minus-granite311:ndcg@10": {
+      "delta": -0.015420005948954082,
+      "query_bootstrap_95_interval": [
+        -0.042493230420758865,
+        0.010853412543070094
+      ],
+      "queries_better": 10,
+      "queries_worse": 15
+    },
+    "fiqa:bekko8-minus-english:recall@5": {
+      "delta": -0.06321614583333333,
+      "query_bootstrap_95_interval": [
+        -0.11777506510416666,
+        -0.011000976562500023
+      ],
+      "queries_better": 9,
+      "queries_worse": 23
+    },
+    "fiqa:bekko8-minus-english:ndcg@10": {
+      "delta": -0.07723194144698449,
+      "query_bootstrap_95_interval": [
+        -0.11516785384682582,
+        -0.04060986716654287
+      ],
+      "queries_better": 20,
+      "queries_worse": 54
+    },
+    "fiqa:bekko8-minus-granite:recall@5": {
+      "delta": -0.004578993055555553,
+      "query_bootstrap_95_interval": [
+        -0.052626953125,
+        0.0454861111111111
+      ],
+      "queries_better": 15,
+      "queries_worse": 18
+    },
+    "fiqa:bekko8-minus-granite:ndcg@10": {
+      "delta": -0.013893876294266059,
+      "query_bootstrap_95_interval": [
+        -0.0495172089453088,
+        0.02300295806541134
+      ],
+      "queries_better": 22,
+      "queries_worse": 42
+    },
+    "fiqa:bekko8-minus-bekko25:recall@5": {
+      "delta": -0.030369543650793654,
+      "query_bootstrap_95_interval": [
+        -0.0804456535218254,
+        0.017578125
+      ],
+      "queries_better": 11,
+      "queries_worse": 18
+    },
+    "fiqa:bekko8-minus-bekko25:ndcg@10": {
+      "delta": -0.0478406038724352,
+      "query_bootstrap_95_interval": [
+        -0.07876962502356279,
+        -0.01715804401645698
+      ],
+      "queries_better": 20,
+      "queries_worse": 49
+    },
+    "fiqa:bekko8-minus-e5:recall@5": {
+      "delta": -0.0021391369047619093,
+      "query_bootstrap_95_interval": [
+        -0.05794363839285715,
+        0.05312499999999999
+      ],
+      "queries_better": 19,
+      "queries_worse": 18
+    },
+    "fiqa:bekko8-minus-e5:ndcg@10": {
+      "delta": -0.009150932096907306,
+      "query_bootstrap_95_interval": [
+        -0.04938970539941692,
+        0.030117531489414446
+      ],
+      "queries_better": 38,
+      "queries_worse": 41
+    },
+    "fiqa:bekko8-minus-granite311:recall@5": {
+      "delta": -0.04424603174603174,
+      "query_bootstrap_95_interval": [
+        -0.09178462921626984,
+        0.00021732390873015515
+      ],
+      "queries_better": 10,
+      "queries_worse": 23
+    },
+    "fiqa:bekko8-minus-granite311:ndcg@10": {
+      "delta": -0.05647620665511764,
+      "query_bootstrap_95_interval": [
+        -0.09375275760752823,
+        -0.018916250210514126
+      ],
+      "queries_better": 21,
+      "queries_worse": 54
+    },
+    "jaquad:bekko8-minus-english:recall@5": {
+      "delta": 0.3359375,
+      "query_bootstrap_95_interval": [
+        0.25,
+        0.421875
+      ],
+      "queries_better": 44,
+      "queries_worse": 1
+    },
+    "jaquad:bekko8-minus-english:ndcg@10": {
+      "delta": 0.3551126559565049,
+      "query_bootstrap_95_interval": [
+        0.2817462458371352,
+        0.42868500985409075
+      ],
+      "queries_better": 74,
+      "queries_worse": 7
+    },
+    "jaquad:bekko8-minus-granite:recall@5": {
+      "delta": 0.0625,
+      "query_bootstrap_95_interval": [
+        0.015625,
+        0.1171875
+      ],
+      "queries_better": 10,
+      "queries_worse": 2
+    },
+    "jaquad:bekko8-minus-granite:ndcg@10": {
+      "delta": 0.08922478181254268,
+      "query_bootstrap_95_interval": [
+        0.04337845025422519,
+        0.13750901264449128
+      ],
+      "queries_better": 31,
+      "queries_worse": 11
+    },
+    "jaquad:bekko8-minus-bekko25:recall@5": {
+      "delta": 0.0234375,
+      "query_bootstrap_95_interval": [
+        -0.0078125,
+        0.0625
+      ],
+      "queries_better": 4,
+      "queries_worse": 1
+    },
+    "jaquad:bekko8-minus-bekko25:ndcg@10": {
+      "delta": 0.030056889956085374,
+      "query_bootstrap_95_interval": [
+        -0.002811031042073954,
+        0.06511123924542579
+      ],
+      "queries_better": 18,
+      "queries_worse": 14
+    },
+    "jaquad:bekko8-minus-e5:recall@5": {
+      "delta": 0.0,
+      "query_bootstrap_95_interval": [
+        -0.0234375,
+        0.0234375
+      ],
+      "queries_better": 1,
+      "queries_worse": 1
+    },
+    "jaquad:bekko8-minus-e5:ndcg@10": {
+      "delta": 0.005362290501431189,
+      "query_bootstrap_95_interval": [
+        -0.028780526538262075,
+        0.03926085433940132
+      ],
+      "queries_better": 12,
+      "queries_worse": 12
+    },
+    "jaquad:bekko8-minus-granite311:recall@5": {
+      "delta": 0.046875,
+      "query_bootstrap_95_interval": [
+        0.0078125,
+        0.09375
+      ],
+      "queries_better": 7,
+      "queries_worse": 1
+    },
+    "jaquad:bekko8-minus-granite311:ndcg@10": {
+      "delta": 0.059293183164711036,
+      "query_bootstrap_95_interval": [
+        0.016539100295259943,
+        0.10596718669531252
+      ],
+      "queries_better": 23,
+      "queries_worse": 14
+    }
+  },
+  "validation": {
+    "vector_recomputed": 28,
+    "reused_earlier_japanese": 5,
+    "sentence_transformers_adapter_checks": 11
+  }
+}

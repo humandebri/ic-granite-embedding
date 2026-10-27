@@ -18,7 +18,8 @@ def main():
     endings={'/quantize':'linear.quantize','/gemm_and_scale':'linear.gemm_and_scale','/gelu':'gelu',
              '/qk_scores':'attention.qk','/softmax':'attention.softmax','/av_weighted_sum':'attention.av',
              '/wire':'attention.wire','/rope':'rope','/prepare_attention':'attention.prepare',
-             '/quantize_qk':'attention.quantize_qk','/transpose_quantize_v':'attention.quantize_v'}
+             '/quantize_qk':'attention.quantize_qk','/quantize_q':'attention.quantize_q',
+             '/quantize_k':'attention.quantize_k','/transpose_quantize_v':'attention.quantize_v'}
     for query in report['trace']:
         for name,instructions,calls in query.get('phases',[]):
             for ending,key in endings.items():

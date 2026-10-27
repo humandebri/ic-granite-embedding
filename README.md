@@ -12,6 +12,8 @@ INT8重みと動的INT8活性値（W8A8）を使い、CLS pooling・L2正規化�
 - [5,000 tokensの分割クライアント](docs/SHARDED.md)
 - [最新の性能・検証](benchmarks/query-fusion/RESULTS.md) / [計測の履歴](benchmarks/README.md)
 
+多言語の **Bekko a8mを256 tokens・1 queryで使う専用canister** も追加しています。[Bekkoの起動・API・検証結果](docs/BEKKO.md)を参照してください。
+
 ## 対応する入力長
 
 | 入力tokens（CLS/SEP込み） | query数 | 実行する層数の分割 |

@@ -1,0 +1,11 @@
+{
+  "bytes": 305076350,
+  "sha256": "7de952b3384afd1bfadf05376736e9ebabfe7ac015043250ffc93e579bab3546",
+  "weights_sha256": "f3ea88b230492811046145513710e76b4cc8c2ad49e8708da0e7247e548903be",
+  "cases_sha256": "86a63ee77ce4e8276ee79c7f32460c5a19973c189dde24729fca2abfece3139e",
+  "model": {
+    "id": "ibm-granite/granite-embedding-97m-multilingual-r2",
+    "revision": "835ad14087e140460703cf0fae09f97d469d65c2",
+    "pooling": "cls"
+  }
+}

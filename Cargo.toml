@@ -1,5 +1,5 @@
 [workspace]
-members = ["crates/core", "crates/canister", "crates/bench"]
+members = ["crates/core", "crates/canister", "crates/bench", "crates/kernel-gen", "crates/bekko-core", "crates/bekko-canister", "crates/bekko-bench"]
 resolver = "2"
 
 [workspace.dependencies]

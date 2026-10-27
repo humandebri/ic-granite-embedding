@@ -74,6 +74,29 @@ struct Descriptor {
     kind: String,
 }
 
+fn tensor_bytes<'a>(
+    data: &'a [u8],
+    descriptor: &Descriptor,
+    shape: &[usize],
+    kind: &str,
+) -> Result<&'a [u8], String> {
+    if descriptor.shape != shape || descriptor.kind != kind {
+        return Err("tensor shape/kind".into());
+    }
+    let bytes = match (kind, shape) {
+        ("f32", _) => shape.iter().try_fold(4usize, |n, d| n.checked_mul(*d)),
+        ("i8", [rows, cols]) => cols.checked_add(4).and_then(|n| rows.checked_mul(n)),
+        _ => None,
+    }
+    .ok_or("tensor size overflow")?;
+    if descriptor.bytes != bytes {
+        return Err("tensor length".into());
+    }
+    let end = descriptor.offset.checked_add(bytes).ok_or("tensor range")?;
+    data.get(descriptor.offset..end)
+        .ok_or("tensor range".into())
+}
+
 pub struct Linear {
     #[cfg(feature = "strassen")]
     prepared: Option<strassen::Prepared>,
@@ -228,39 +251,24 @@ impl Model {
         })
     }
     pub fn load(pack: &[u8]) -> Result<Self, String> {
-        let len =
-            u64::from_le_bytes(pack.get(..8).ok_or("pack header")?.try_into().unwrap()) as usize;
+        let len = usize::try_from(u64::from_le_bytes(
+            pack.get(..8).ok_or("pack header")?.try_into().unwrap(),
+        ))
+        .map_err(|_| "pack metadata length")?;
+        let end = 8usize.checked_add(len).ok_or("pack metadata length")?;
         let header: BTreeMap<String, Descriptor> =
-            serde_json::from_slice(pack.get(8..8 + len).ok_or("pack metadata")?)
+            serde_json::from_slice(pack.get(8..end).ok_or("pack metadata")?)
                 .map_err(|e| e.to_string())?;
-        let data = &pack[8 + len..];
-        let get = |name: &str| -> Result<(&Descriptor, &[u8]), String> {
+        let data = &pack[end..];
+        let get = |name: &str, shape: &[usize], kind: &str| -> Result<&[u8], String> {
             let d = header.get(name).ok_or_else(|| format!("missing {name}"))?;
-            Ok((
-                d,
-                data.get(d.offset..d.offset + d.bytes)
-                    .ok_or("tensor range")?,
-            ))
+            tensor_bytes(data, d, shape, kind).map_err(|e| format!("{name}: {e}"))
         };
-        let f = |name: &str| -> Result<Vec<f32>, String> {
-            let (d, b) = get(name)?;
-            if d.kind != "f32" {
-                return Err("expected f32".into());
-            }
-            floats(b)
+        let f = |name: &str, shape: &[usize]| -> Result<Vec<f32>, String> {
+            floats(get(name, shape, "f32")?)
         };
-        let linear = |name: &str| -> Result<Linear, String> {
-            let (d, b) = get(name)?;
-            if d.kind != "i8" || d.shape.len() != 2 {
-                return Err("linear format".into());
-            }
-            let (rows, cols) = (d.shape[0], d.shape[1]);
-            if ![H, 3 * H, I, 2 * I].contains(&rows) || ![H, I].contains(&cols) {
-                return Err("unsupported linear shape".into());
-            }
-            if b.len() != rows * cols + rows * 4 {
-                return Err("linear length".into());
-            }
+        let linear = |name: &str, rows: usize, cols: usize| -> Result<Linear, String> {
+            let b = get(name, &[rows, cols], "i8")?;
             let weights: Vec<i16> = b[..rows * cols].iter().map(|x| *x as i8 as i16).collect();
             if weights.iter().any(|v| !(-127..=127).contains(v)) {
                 return Err("INT8 range".into());
@@ -284,22 +292,22 @@ impl Model {
         for l in 0..12 {
             let p = format!("layers.{l}");
             layers.push(Layer {
-                qkv: linear(&format!("{p}.attn.Wqkv.weight"))?,
-                out: linear(&format!("{p}.attn.Wo.weight"))?,
-                wi: linear(&format!("{p}.mlp.Wi.weight"))?,
-                wo: linear(&format!("{p}.mlp.Wo.weight"))?,
+                qkv: linear(&format!("{p}.attn.Wqkv.weight"), 3 * H, H)?,
+                out: linear(&format!("{p}.attn.Wo.weight"), H, H)?,
+                wi: linear(&format!("{p}.mlp.Wi.weight"), 2 * I, H)?,
+                wo: linear(&format!("{p}.mlp.Wo.weight"), H, I)?,
                 attn_norm: if l == 0 {
                     Vec::new()
                 } else {
-                    f(&format!("{p}.attn_norm.weight"))?
+                    f(&format!("{p}.attn_norm.weight"), &[H])?
                 },
-                mlp_norm: f(&format!("{p}.mlp_norm.weight"))?,
+                mlp_norm: f(&format!("{p}.mlp_norm.weight"), &[H])?,
             });
         }
         Ok(Self {
-            embeddings: f("embeddings.tok_embeddings.weight")?,
-            embedding_norm: f("embeddings.norm.weight")?,
-            final_norm: f("final_norm.weight")?,
+            embeddings: f("embeddings.tok_embeddings.weight", &[50368, H])?,
+            embedding_norm: f("embeddings.norm.weight", &[H])?,
+            final_norm: f("final_norm.weight", &[H])?,
             layers,
             rope: [80000f32, 10000f32].map(|theta| {
                 let frequencies: [f32; 16] =
@@ -1738,6 +1746,47 @@ pub fn decode_floats(b: &[u8]) -> Result<Vec<f32>, String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn loader_rejects_wrong_tensor_shapes_lengths_and_ranges() {
+        let mut d = Descriptor {
+            shape: vec![H],
+            offset: 0,
+            bytes: H * 4,
+            kind: "f32".into(),
+        };
+        let data = vec![0; H * 4];
+        assert!(tensor_bytes(&data, &d, &[H], "f32").is_ok());
+        d.bytes = 0;
+        assert!(tensor_bytes(&data, &d, &[H], "f32").is_err());
+        d.bytes = H * 4;
+        d.shape = vec![1, H];
+        assert!(tensor_bytes(&data, &d, &[H], "f32").is_err());
+        d.shape = vec![H];
+        d.offset = usize::MAX;
+        assert!(tensor_bytes(&data, &d, &[H], "f32").is_err());
+        d.offset = 1;
+        assert!(tensor_bytes(&data, &d, &[H], "f32").is_err());
+
+        let linear = Descriptor {
+            shape: vec![H, H],
+            offset: 0,
+            bytes: H * (H + 4),
+            kind: "i8".into(),
+        };
+        let data = vec![0; linear.bytes];
+        assert!(tensor_bytes(&data, &linear, &[H, H], "i8").is_ok());
+        // An otherwise valid output projection cannot be used as QKV.
+        assert!(tensor_bytes(&data, &linear, &[3 * H, H], "i8").is_err());
+        assert!(tensor_bytes(&data, &linear, &[H, H], "f32").is_err());
+        assert!(tensor_bytes(&data[..data.len() - 1], &linear, &[H, H], "i8").is_err());
+    }
+
+    #[test]
+    fn loader_rejects_overflowing_pack_header_without_panicking() {
+        assert!(Model::load(&u64::MAX.to_le_bytes()).is_err());
+        assert!(Model::load(&[0; 7]).is_err());
+    }
 
     #[cfg(feature = "approx-gelu")]
     #[test]

@@ -1,0 +1,101 @@
+[
+  {
+    "model": "bge",
+    "shape": [
+      4,
+      384
+    ],
+    "max_abs_difference": 2.9802322387695312e-08,
+    "min_cosine": 1.0
+  },
+  {
+    "model": "e5en",
+    "shape": [
+      4,
+      384
+    ],
+    "max_abs_difference": 1.4901161193847656e-08,
+    "min_cosine": 1.0
+  },
+  {
+    "model": "minilm",
+    "shape": [
+      4,
+      384
+    ],
+    "max_abs_difference": 1.4901161193847656e-08,
+    "min_cosine": 1.0
+  },
+  {
+    "model": "english",
+    "shape": [
+      4,
+      384
+    ],
+    "max_abs_difference": 0.0,
+    "min_cosine": 0.9999998211860657
+  },
+  {
+    "model": "granite",
+    "shape": [
+      4,
+      384
+    ],
+    "max_abs_difference": 0.0,
+    "min_cosine": 0.9999998807907104
+  },
+  {
+    "model": "bekko8",
+    "shape": [
+      4,
+      384
+    ],
+    "max_abs_difference": 0.0,
+    "min_cosine": 1.0
+  },
+  {
+    "model": "bekko25",
+    "shape": [
+      4,
+      384
+    ],
+    "max_abs_difference": 0.0,
+    "min_cosine": 1.0
+  },
+  {
+    "model": "e5",
+    "shape": [
+      4,
+      384
+    ],
+    "max_abs_difference": 2.9802322387695312e-08,
+    "min_cosine": 0.9999998807907104
+  },
+  {
+    "model": "granite107",
+    "shape": [
+      4,
+      384
+    ],
+    "max_abs_difference": 1.4901161193847656e-08,
+    "min_cosine": 0.9999998807907104
+  },
+  {
+    "model": "horizon",
+    "shape": [
+      4,
+      1024
+    ],
+    "max_abs_difference": 2.9802322387695312e-08,
+    "min_cosine": 1.0
+  },
+  {
+    "model": "granite311",
+    "shape": [
+      4,
+      768
+    ],
+    "max_abs_difference": 2.9802322387695312e-08,
+    "min_cosine": 0.9999998807907104
+  }
+]

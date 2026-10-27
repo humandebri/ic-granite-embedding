@@ -1,0 +1,67 @@
+{
+  "english": {
+    "id": "ibm-granite/granite-embedding-small-english-r2",
+    "revision": "2ab6fa8ea2d674564defd37171ae19079b864b33",
+    "pooling": "cls"
+  },
+  "granite": {
+    "id": "ibm-granite/granite-embedding-97m-multilingual-r2",
+    "revision": "835ad14087e140460703cf0fae09f97d469d65c2",
+    "pooling": "cls"
+  },
+  "bekko8": {
+    "id": "hotchpotch/bekko-embedding-v1-a8m",
+    "revision": "c721113d59a1d91b447450324f51c4b3332c924a",
+    "pooling": "mean"
+  },
+  "bekko25": {
+    "id": "hotchpotch/bekko-embedding-v1-a25m",
+    "revision": "44f0b8af0f487acd0ccf1a7cb7ae7a29a6dfc09c",
+    "pooling": "mean"
+  },
+  "e5": {
+    "id": "intfloat/multilingual-e5-small",
+    "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "pooling": "mean",
+    "prefix": true
+  },
+  "bge": {
+    "id": "BAAI/bge-small-en-v1.5",
+    "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+    "pooling": "cls",
+    "query_prefix": "Represent this sentence for searching relevant passages: ",
+    "languages": "English"
+  },
+  "e5en": {
+    "id": "intfloat/e5-small-v2",
+    "revision": "ffb93f3bd4047442299a41ebb6fa998a38507c52",
+    "pooling": "mean",
+    "prefix": true,
+    "languages": "English"
+  },
+  "minilm": {
+    "id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "pooling": "mean",
+    "languages": "English"
+  },
+  "granite107": {
+    "id": "ibm-granite/granite-embedding-107m-multilingual",
+    "revision": "d6cffd338414d6a1c1f5decfad5fec62eebc90d5",
+    "pooling": "cls",
+    "languages": "multilingual (12 languages including Japanese)"
+  },
+  "horizon": {
+    "id": "Horizon-Labs/multilingual-embedding-small",
+    "revision": "6418071ac0a526fea6f72230390298d5e1a5c7b7",
+    "pooling": "mean",
+    "projection": "2_Dense",
+    "languages": "multilingual"
+  },
+  "granite311": {
+    "id": "ibm-granite/granite-embedding-311m-multilingual-r2",
+    "revision": "44399559930365213510b1ee2eb15ded83374f0e",
+    "pooling": "cls",
+    "languages": "multilingual"
+  }
+}

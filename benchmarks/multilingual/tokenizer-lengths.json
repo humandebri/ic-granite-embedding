@@ -1,0 +1,76 @@
+{
+  "text": "文書を意味で検索するために埋め込みを使います。日本語の文章を小さな段落に分割して保存し、質問に関連する情報を検索します。暗号化されたバックアップから障害時にデータを復元できます。",
+  "repetitions": 100,
+  "models": {
+    "english": {
+      "128": {
+        "tokens": 128,
+        "characters": 115
+      },
+      "256": {
+        "tokens": 256,
+        "characters": 230
+      },
+      "512": {
+        "tokens": 512,
+        "characters": 467
+      }
+    },
+    "granite": {
+      "128": {
+        "tokens": 128,
+        "characters": 183
+      },
+      "256": {
+        "tokens": 256,
+        "characters": 370
+      },
+      "512": {
+        "tokens": 512,
+        "characters": 742
+      }
+    },
+    "bekko8": {
+      "128": {
+        "tokens": 128,
+        "characters": 239
+      },
+      "256": {
+        "tokens": 256,
+        "characters": 488
+      },
+      "512": {
+        "tokens": 512,
+        "characters": 984
+      }
+    },
+    "bekko25": {
+      "128": {
+        "tokens": 128,
+        "characters": 239
+      },
+      "256": {
+        "tokens": 256,
+        "characters": 488
+      },
+      "512": {
+        "tokens": 512,
+        "characters": 984
+      }
+    },
+    "e5": {
+      "128": {
+        "tokens": 128,
+        "characters": 239
+      },
+      "256": {
+        "tokens": 256,
+        "characters": 488
+      },
+      "512": {
+        "tokens": 512,
+        "characters": 985
+      }
+    }
+  }
+}
