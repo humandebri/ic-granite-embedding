@@ -396,14 +396,14 @@
     3,
     3
   ],
-  "seconds": 1.747174875,
+  "seconds": 1.7578683339999999,
   "stats": {
-    "instructions": 13573048636,
-    "max_instructions": 4310249512,
+    "instructions": 13293671842,
+    "max_instructions": 4222022185,
     "max_request_bytes": 1179682,
     "max_response_bytes": 1179735,
     "queries": 4,
-    "query_seconds": 1.746840958,
+    "query_seconds": 1.7575505829999998,
     "request_bytes": 3542129,
     "response_bytes": 3540815
   },
@@ -411,33 +411,33 @@
   "trace": [
     {
       "first_layer": 0,
-      "instructions": 4304211096,
+      "instructions": 4215983959,
       "method": "startEmbedding",
       "next_layer": 3,
-      "seconds": 0.54214975
+      "seconds": 0.505784625
     },
     {
       "first_layer": 3,
-      "instructions": 4310249500,
+      "instructions": 4222022173,
       "method": "continueEmbedding",
       "next_layer": 6,
-      "seconds": 0.529311875
+      "seconds": 0.560030375
     },
     {
       "first_layer": 6,
-      "instructions": 4310249512,
+      "instructions": 4222022185,
       "method": "continueEmbedding",
       "next_layer": 9,
-      "seconds": 0.497299416
+      "seconds": 0.580337542
     },
     {
       "first_layer": 9,
-      "instructions": 648338528,
+      "instructions": 633643525,
       "method": "continueEmbedding",
       "next_layer": 12,
-      "seconds": 0.178079917
+      "seconds": 0.111398041
     }
   ],
   "validation_checks": 3,
-  "wasm_sha256": "6c56483bfd1b669971b15a76f2c2a58491593fed28988759822ad3eec84679b3"
+  "wasm_sha256": "4591daf010e1722026cb334120b8d4b7ffa2f723431d2387a95ad6c8033f182b"
 }

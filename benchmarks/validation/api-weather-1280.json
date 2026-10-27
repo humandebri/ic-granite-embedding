@@ -399,14 +399,14 @@
     2,
     3
   ],
-  "seconds": 3.161722875,
+  "seconds": 2.986753459,
   "stats": {
-    "instructions": 25301536665,
-    "max_instructions": 4094883625,
+    "instructions": 24548587556,
+    "max_instructions": 4044883153,
     "max_request_bytes": 1966114,
     "max_response_bytes": 1966167,
     "queries": 7,
-    "query_seconds": 3.160865292,
+    "query_seconds": 2.985927583,
     "request_bytes": 11801815,
     "response_bytes": 11798612
   },
@@ -414,54 +414,54 @@
   "trace": [
     {
       "first_layer": 0,
-      "instructions": 4084816766,
+      "instructions": 3841925128,
       "method": "startEmbedding",
       "next_layer": 1,
-      "seconds": 0.431779792
+      "seconds": 0.414348458
     },
     {
       "first_layer": 1,
       "instructions": 4044883108,
       "method": "continueEmbedding",
       "next_layer": 3,
-      "seconds": 0.55671225
+      "seconds": 0.549961583
     },
     {
       "first_layer": 3,
-      "instructions": 4094883604,
+      "instructions": 3851991603,
       "method": "continueEmbedding",
       "next_layer": 4,
-      "seconds": 0.462683708
+      "seconds": 0.433617625
     },
     {
       "first_layer": 4,
       "instructions": 4044883129,
       "method": "continueEmbedding",
       "next_layer": 6,
-      "seconds": 0.5490605
+      "seconds": 0.518862917
     },
     {
       "first_layer": 6,
-      "instructions": 4094883625,
+      "instructions": 3851991624,
       "method": "continueEmbedding",
       "next_layer": 7,
-      "seconds": 0.459286333
+      "seconds": 0.426332875
     },
     {
       "first_layer": 7,
       "instructions": 4044883153,
       "method": "continueEmbedding",
       "next_layer": 9,
-      "seconds": 0.575464625
+      "seconds": 0.5158455
     },
     {
       "first_layer": 9,
-      "instructions": 892303280,
+      "instructions": 868029811,
       "method": "continueEmbedding",
       "next_layer": 12,
-      "seconds": 0.125878084
+      "seconds": 0.126958625
     }
   ],
   "validation_checks": 3,
-  "wasm_sha256": "6c56483bfd1b669971b15a76f2c2a58491593fed28988759822ad3eec84679b3"
+  "wasm_sha256": "4591daf010e1722026cb334120b8d4b7ffa2f723431d2387a95ad6c8033f182b"
 }

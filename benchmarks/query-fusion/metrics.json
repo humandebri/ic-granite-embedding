@@ -1,0 +1,39 @@
+{
+  "baseline_sha256": "6c56483bfd1b669971b15a76f2c2a58491593fed28988759822ad3eec84679b3",
+  "adopted_sha256": "4591daf010e1722026cb334120b8d4b7ffa2f723431d2387a95ad6c8033f182b",
+  "before": {
+    "instructions": 177813740538,
+    "max_instructions": 2936313152,
+    "max_request_bytes": 2093356,
+    "max_response_bytes": 3072047,
+    "queries": 182,
+    "query_seconds": 24.321734850000006,
+    "request_bytes": 288952687,
+    "response_bytes": 300724965
+  },
+  "after": {
+    "instructions": 164741174056,
+    "max_instructions": 2628934924,
+    "max_request_bytes": 1969580,
+    "max_response_bytes": 2949167,
+    "queries": 161,
+    "query_seconds": 24.157074338,
+    "request_bytes": 211852239,
+    "response_bytes": 300722492
+  },
+  "query_reduction_percent": 11.538461538461542,
+  "instruction_reduction_percent": 7.351831440274048,
+  "transfer_before_bytes": 589677652,
+  "transfer_after_bytes": 512574731,
+  "transfer_saved_bytes": 77102921,
+  "transfer_reduction_percent": 13.075435492339126,
+  "client_payload_clone_removed_bytes": 288952687,
+  "client_hidden_resend_removed_payload_bytes": 77097984,
+  "timing": {
+    "before_wall_seconds": 19.050920625,
+    "after_wall_seconds": 18.850899208,
+    "samples_per_protocol": 1,
+    "mode": "One fresh PocketIC instance per protocol, sequential after builds and other validation suites completed; model setup and malformed-request checks excluded from timer.",
+    "limitations": "Single localhost run per protocol; no statistical claim or mainnet latency estimate."
+  }
+}

@@ -4,13 +4,13 @@
 INT8重みと動的INT8活性値（W8A8）を使い、CLS pooling・L2正規化済みの384次元embeddingを返します。
 入力全体を参照して全12層を実行し、独立した短文embeddingの平均で全文推論を代用しません。
 
-**通常APIは304 tokensまで1 query、1,365 tokensを7 queryで処理します。追加の分割クライアントは5,000 tokensを182 queryで処理します。**
+**通常APIは304 tokensまで1 query、1,365 tokensを7 queryで処理します。追加の分割クライアントは5,000 tokensを161 queryで処理します。**
 長さには先頭CLSと末尾SEPを含みます。通常の推論はすべてqueryで、モデルのロードだけcontroller用updateを使います。
 
 - [API・モデルのロード・クライアント例](docs/API.md)
 - [ビルド・参照データ生成・検証・profiling](docs/DEVELOPMENT.md)
 - [5,000 tokensの分割クライアント](docs/SHARDED.md)
-- [最新の性能・検証](benchmarks/full-context/RESULTS.md) / [計測の履歴](benchmarks/README.md)
+- [最新の性能・検証](benchmarks/query-fusion/RESULTS.md) / [計測の履歴](benchmarks/README.md)
 
 ## 対応する入力長
 
@@ -23,7 +23,7 @@ INT8重みと動的INT8活性値（W8A8）を使い、CLS pooling・L2正規化�
 | 1,025〜1,365 | 7 | `[1, 2, 1, 2, 1, 2, 3]` |
 
 各planは合計12層です。複数queryでは、返された中間stateをクライアントが次のqueryへ渡します。
-1 queryの境界を複数入力で測定し、公開上限は304にしています。境界での成功・失敗は[最新の性能レポート](benchmarks/full-context/RESULTS.md)を参照してください。
+1 queryの境界を複数入力で測定し、公開上限は304にしています。境界での成功・失敗は[最新の性能レポート](benchmarks/query-fusion/RESULTS.md)を参照してください。
 `startEmbedding`は1,365を超える入力を拒否し、暗黙に切り捨てません。1,366〜5,000 tokensは[分割query経路](docs/SHARDED.md)を使います。
 
 1,365 tokensの最大requestは2,096,674 bytesでした。
@@ -37,23 +37,23 @@ INT8重みと動的INT8活性値（W8A8）を使い、CLS pooling・L2正規化�
 
 | tokens | query数 | 合計命令 | 最大/query |
 | --- | ---: | ---: | ---: |
-| 256 | 1 | 4,064,727,088 | 4,064,727,088 |
-| 304 | 1 | 4,884,196,028 | 4,884,196,028 |
-| 512 | 2 | 8,351,228,889 | 4,431,624,066 |
-| 768 | 4 | 13,573,048,636 | 4,310,249,512 |
-| 1,024 | 5 | 19,127,642,077 | 4,509,708,541 |
-| 1,365 | 7 | 27,523,652,347 | 4,543,682,065 |
-| 5,000（分割client） | 182 | 177,813,740,538 | 2,936,313,152 |
+| 256 | 1 | 4,064,748,620 | 4,064,748,620 |
+| 304 | 1 | 4,884,221,016 | 4,884,221,016 |
+| 512 | 2 | 8,351,268,853 | 4,431,648,644 |
+| 768 | 4 | 13,293,671,842 | 4,222,022,185 |
+| 1,024 | 5 | 18,640,233,102 | 4,353,733,502 |
+| 1,365 | 7 | 26,670,559,915 | 4,322,917,417 |
+| 5,000（分割client） | 161 | 164,741,174,056 | 2,628,934,924 |
 
 304 tokensは固定seedの走査入力、ほかはtokenizerで生成した文書です。
-通常版の`step`を4文書×5回、キャッシュを避けて順次比較し、256 tokensの中央値0.593秒→0.490秒（約17.4%短縮）を観測しました。
-OS・熱状態は未制御で、時間はlocalhostの観測値です。mainnetのレイテンシを保証しません。
-5,000 tokensの転送はCandid request/reply合計約590 MBです。
+5,000 tokensの順次1回比較では、前版19.05秒・今回18.85秒でした。
+速度差の再現性は未検証で、OS・熱状態も未制御です。mainnetのレイテンシを示す値ではありません。
+5,000 tokensの転送はCandid request/reply合計約513 MBです。
 
-旧入力域2〜512の全511長は前版と出力がbit単位で一致しました。
+旧入力域2〜512の全511長は前版と出力がbit単位で一致しました。分割clientの境界54ケースと、680行replyの上限2ケースも照合しています。
 長文は32長×3入力の96ケースとFP32参照11ケースを検証し、長文参照との最小cosineは0.999592611でした。
 これは検索のRecall@kなどを測ったretrieval benchmarkではありません。
-5,000 tokensは4文書を検証し、FP32との最小cosineは0.999508387でした。最新のソース・Wasm・分割方式は[性能レポート](benchmarks/full-context/RESULTS.md)にまとめています。
+5,000 tokensは4文書を検証し、FP32との最小cosineは0.999508387でした。最新のソース・Wasm・分割方式は[性能レポート](benchmarks/query-fusion/RESULTS.md)にまとめています。
 
 ## ビルドして使う
 
@@ -98,7 +98,7 @@ query結果とクライアントが返すstateに、replicated consensusや改�
 stateは推論ごとに分け、モデルやmoduleの更新をまたいで再利用しないでください。
 
 `startEmbedding` / `continueEmbedding`の対応上限は1,365です。追加の[分割クライアント](docs/SHARDED.md)は`step`を使い、5,000 tokensを処理します。
-[初版の687 query](benchmarks/RESULTS.md)から、現在は182 queryへ削減しました。
+[初版の687 query](benchmarks/RESULTS.md)から、現在は161 queryへ削減しました。
 
 ## 参照
 

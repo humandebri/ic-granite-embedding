@@ -1,5 +1,5 @@
 {
-  "wasm_sha256": "6c56483bfd1b669971b15a76f2c2a58491593fed28988759822ad3eec84679b3",
+  "wasm_sha256": "4591daf010e1722026cb334120b8d4b7ffa2f723431d2387a95ad6c8033f182b",
   "exports": [
     "memory",
     "canister_query continueEmbedding",

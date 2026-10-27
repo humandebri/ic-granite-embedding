@@ -394,14 +394,14 @@
     5,
     7
   ],
-  "seconds": 1.008233167,
+  "seconds": 0.954980542,
   "stats": {
-    "instructions": 8351228889,
-    "max_instructions": 4431624066,
+    "instructions": 8351268853,
+    "max_instructions": 4431648644,
     "max_request_bytes": 786466,
     "max_response_bytes": 786519,
     "queries": 2,
-    "query_seconds": 1.008049583,
+    "query_seconds": 0.954866541,
     "request_bytes": 788525,
     "response_bytes": 788129
   },
@@ -409,21 +409,21 @@
   "trace": [
     {
       "first_layer": 0,
-      "instructions": 4431624066,
+      "instructions": 4431648644,
       "method": "startEmbedding",
       "next_layer": 5,
-      "seconds": 0.503582292
+      "seconds": 0.505722416
     },
     {
       "first_layer": 5,
-      "instructions": 3919604823,
+      "instructions": 3919620209,
       "method": "continueEmbedding",
       "next_layer": 12,
-      "seconds": 0.504467291
+      "seconds": 0.449144125
     }
   ],
   "validation_checks": 3,
-  "wasm_sha256": "6c56483bfd1b669971b15a76f2c2a58491593fed28988759822ad3eec84679b3",
+  "wasm_sha256": "4591daf010e1722026cb334120b8d4b7ffa2f723431d2387a95ad6c8033f182b",
   "baseline_instructions": 10271590508,
-  "instructions_saved": 1920361619
+  "instructions_saved": 1920321655
 }

@@ -1,75 +1,85 @@
 # 5,000 tokensの分割query
 
-`startEmbedding` / `continueEmbedding`は1,365 tokensまでです。それ以上の入力には、クライアントがhidden stateとQKVを分割保持し、通常の`step` queryを呼ぶ経路を追加しました。全文を12層に通し、全域Attentionでは各headが入力全体のK/Vを参照します。
+`startEmbedding` / `continueEmbedding`は1,365 tokensまでです。それ以上はクライアントがhidden stateとQKVを保持し、通常の`step` queryを呼びます。全12層を実行し、全域Attentionは入力全体を参照します。
 
-参照クライアントは[crates/bench/src/sharded.rs](../crates/bench/src/sharded.rs)です。PocketICによるロード・測定を含むハーネスで、ブラウザSDKではありません。Candidのメソッド型は変えていません。
+[参照クライアント](../crates/bench/src/sharded.rs)はPocketICによるロード・測定を含むハーネスです。Candidメソッド型は変えていません。
 
-## 実行する
+## 実行
 
-通常版Wasmとnativeハーネスをビルドし、参照データを準備します。`POCKET_IC_BIN`の指定は[開発手順](DEVELOPMENT.md)を参照してください。
+[開発手順](DEVELOPMENT.md)に従って依存・`POCKET_IC_BIN`を準備します。
 
 ```sh
 cargo build --release --locked -p granite-canister --target wasm32-unknown-unknown
 cargo build --release --locked -p granite-bench
 .cache/venv/bin/python scripts/prepare.py --lengths=256,5000
-# 専用PocketICへインストール・ロードして、全文の分割queryを実行
 target/release/granite-bench 5000 --sharded
 ```
 
-`--case=space`などは対応する`.cache/tokens-space-5000.json`と参照ファイルが必要です。8ケースの検証に必要な生成・照合手順は次のとおりです。
+通常版を指定すると、専用PocketICへのインストール・モデルロード・推論まで実行します。`GRANITE_WASM`でWasm、`CARGO_TARGET_DIR`でビルド先を指定できます。
+
+8ケースを検証する場合は、通常の[参照生成](DEVELOPMENT.md#モデルと参照データを準備する)に加え、次のfixtureを用意します。
 
 ```sh
 mkdir -p .cache/next/references
 .cache/venv/bin/python scripts/prepare.py --output .cache/next/references \
   --lengths=1366,2048,4096,5000 --stress --stress-lengths=5000
-# 生成したtokens-*.json / reference-*.f32 / reference-int8-*.f32を.cache/にも配置。
-# 既存ファイルがある場合は同一内容を確認する。
+# tokens-*.json / reference-*.f32 / reference-int8-*.f32を.cache/にも配置。
+# 既存ファイルは内容の一致を確認する。1,365の既存fixtureも必要。
 python3 scripts/validate_sharded.py
 ```
 
-この8ケースには既存の1,365 tokensのfixtureも必要です。通常の[参照生成手順](DEVELOPMENT.md#モデルと参照データを準備する)で準備します。
-`GRANITE_WASM`で通常版のパス、`CARGO_TARGET_DIR`でハーネスのビルド先を指定できます。`--summarize-only`は保存済みの同一SHAの結果を再検査します。
+`--summarize-only`は保存済みの同一SHAの結果を再検査します。結果は`benchmarks/query-fusion/sharded/`に保存します。
 
-## 分割と数値の維持
+## 現在の実行手順
 
-1. 1,984 tokensずつembeddingを取得する。
-2. 1,000行ずつQKVを計算し、QをF32、K/VをBF16で受け取る。
-3. Attentionをhead群に分割する。5,000 tokensの全域Attentionは1 head/query、局所Attentionは2 heads/query。どちらも全入力のK/Vを渡す。
-4. contextを既存の出力射影と同じper-token INT8へ量子化し、residual F32とともに1,088行ずつ送る。
-5. 次の層へ進む。第9層の後は129行、第10層の後は65行、第11層の後はCLSの1行に絞り、最後に正規化する。
+1. token IDを640行ずつ送信し、embeddingと初層QKVを同じqueryで計算する。
+2. hidden stateはF32のバイト列、QKVはQ:F32・K/V:BF16の形式でclientに保持する。
+3. Attentionをhead群に分割する。5,000 tokensの全域Attentionは1 head/query、局所Attentionは2 heads/query。各head群に全キーを渡してV scaleを維持する。
+4. contextを既存のper-token INT8へ量子化し、residual F32とともに640行ずつ送る。同じquery内で出力射影・MLP・次層QKVまで計算する。
+5. 第9層の後は129行、第10層の後は65行へ絞る。第11層のCLS計算と最終正規化も同じqueryで完了する。
 
-K/VのBF16は従来からAttention境界で使っていた形式です。contextと局所AttentionのQは、従来query内で行っていた量子化を送信前に行います。新たな量子化精度は導入しません。
+5,000 tokensは161 inference queriesです。層境界を返送して再送する前版の182 queriesから21回減らしました。転送は約590 MBから約513 MBです。[最新の測定結果](../benchmarks/query-fusion/RESULTS.md)を参照してください。
 
-Vのscaleはheadごとの各channelについてキー全体から決まります。局所Attentionも全入力のK/Vを送ることで、haloだけに切り出した場合のscale変化を避けています。RoPEは元の絶対位置を使います。
+K/VのBF16と、context・局所Qの量子化精度は従来のままです。`PackedQkv`はBF16をF32へ展開せずに転送用データへ並べ替えます。RoPEは元の絶対位置を使います。
 
-5,000 tokensは182 inference queriesです。初期の687 queriesとの比較では、query数を約73.5%削減しました。転送量・命令数・精度の最新値は[測定結果](../benchmarks/full-context/RESULTS.md)を参照してください。モデルアップロードはこのquery数に含みません。
+V scaleは各channelのキー全体から求めます。局所Attentionも全キーをhead方向に分割することで、この値を変えずに実行します。
 
 ## バイナリ形式
 
-requestは8個のlittle-endian `u32`、続いてpayloadです。
+requestは8個のlittle-endian `u32`とpayloadです。
 
 ```text
 [op, layer, start, total, head, heads, kstart, rows]
 ```
 
-`total`は1〜5,000、`layer`は0〜11、`rows`は正、`start + rows <= total`です。request本体は`2 MiB - 128 bytes`以下です。queryの返り値はCandidの`Result<{ data: blob; instructions: nat64 }, text>`です。
+`total`は1〜5,000、`layer`は0〜11、`rows`は正で`start + rows <= total`です。request本体は`2 MiB - 128 bytes`以下です。返り値はCandidの`Result<{ data: blob; instructions: nat64 }, text>`です。
 
 | op | payload | data |
 | --- | --- | --- |
-| 0 | `total`個のtoken ID。`rows == total` | embedding norm後の`rows × 384` F32 |
-| 1 | `rows × 384` F32 | RoPE後の`rows × 1152` QKV F32 |
+| 15 | `rows`個のtoken ID。layer 0、最大680行 | hidden F32全行、続いてpacked QKV全行 |
 | 2 | Q F32、K BF16、V BF16 | `rows × heads × 32` context F32 |
-| 3 | residual F32、context F32 | 次層hiddenの`rows × 384` F32 |
-| 4 | CLSの384 F32 | 最終384 F32 embedding |
-| 11 | op 1と同じ。最大1,023行 | 行ごとにQ:384 F32、K:384 BF16、V:384 BF16 |
-| 12 | residual F32全行、scale F32全行、context INT8全行。最大1,088行 | 次層hidden F32 |
-| 13 | 局所層のみ。Q INT16全行、Q scale F32全行、K BF16、V BF16 | context F32 |
+| 13 | 局所層のみ。Q INT16、Q scale F32、K BF16、V BF16 | context F32 |
+| 16 | residual F32全行、context scale F32全行、context INT8全行。最大680行 | 第0〜10層ではhidden F32と次層packed QKV。第11層では最終384 F32 embedding |
 
-op 2/13のQはtoken→head→32 channelsの順、K/Vもkey→head→32 channelsの順です。K/Vは`key_range(layer,start,rows,total)`で決まるキー範囲を含みます。各配列はQ、K、Vの順で連結します。op 13だけQの直後に`rows × heads`個のscaleがあります。
+op 15/16の通常replyは`rows × 384` F32 hiddenを先に連結し、その後にpacked QKVを置きます。packed QKVは行ごとにQ:384 F32、K:384 BF16、V:384 BF16です。計4,608 bytes/行で、680行でも3 MiB以内です。
+op 16の第11層だけは`start == 0 && rows == 1`が必要で、hidden/QKVの連結形式ではなく最終embeddingを返します。
 
-op 12のscaleは`max(max(abs(context[token])) / 127, 1e-12)`、符号付きINT8はround-to-nearest-ties-to-even後に±127へclampします。`-128`は拒否します。
-op 13のQ scaleはheadの32 channelsごとに`max(max(abs(Q)) / 8191, 1e-12)`、INT16は同じ丸めで±8191です。scaleはF32で計算・転送します。
+op 2/13はtoken→head→32 channelsの順です。K/Vはkey→head→32 channelsの順で、`key_range(layer,start,rows,total)`の範囲を含みます。Q、K、Vを順に連結し、op 13ではQの直後に`rows × heads`個のscaleを置きます。
 
-実際のcodecは[coreのpack関数](../crates/core/src/lib.rs)を参照してください。検証ハーネスは上限超過・不正なscale・整数範囲外・非有限値など9件の拒否も確認します。
+context scaleは`max(max(abs(context[token])) / 127, 1e-12)`、符号付きINT8はround-to-nearest-ties-to-even後に±127へclampします。`-128`は拒否します。
+局所Qは32 channelsごとに`max(max(abs(Q)) / 8191, 1e-12)`でscaleを求め、同じ丸めで±8191のINT16にします。scaleはF32です。
 
-`--sharded-raw`はパック前のop 0〜4による比較経路です。新規クライアントは`--sharded`のパック形式を参照してください。
+[codec実装](../crates/core/src/packed.rs)と[演算・request検査](../crates/core/src/lib.rs)が実際の仕様です。検証ハーネスは不正request 15種類の拒否も確認します。
+
+## 比較用の経路
+
+`--sharded-split`は融合前のpacked経路、`--sharded-raw`はF32 wireによる比較経路です。通常は`--sharded`を使います。既存の低水準opも維持しています。
+
+| op | 内容 |
+| --- | --- |
+| 0 | ID列からembedding norm後のhiddenを返す。`rows == total` |
+| 1 | hidden F32からRoPE後のQKV F32を返す |
+| 3 | residual F32とcontext F32から次層hiddenを返す |
+| 4 | CLSの384 F32から最終embeddingを返す |
+| 11 | op 1と同じ入力からpacked QKVを返す。最大1,023行 |
+| 12 | op 16と同じpayloadからhiddenだけを返す。最大1,088行 |
