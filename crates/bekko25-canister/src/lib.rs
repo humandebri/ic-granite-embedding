@@ -1,5 +1,5 @@
 //! Fixed-model Bekko a25m canister. Durable weights; bounded stateless queries.
-use bekko25_core::{Model, PACK_BYTES, PACK_SHA256};
+use bekko25_core::{ExternalModel, PACK_BYTES, PACK_SHA256};
 use candid::{CandidType, Deserialize};
 use ic_cdk::stable::{stable_grow, stable_read, stable_size, stable_write};
 use sha2::{Digest, Sha256};
@@ -8,7 +8,7 @@ const HEADER: u64 = 64;
 const PAGE: u64 = 65536;
 const MAGIC: &[u8; 8] = b"BEK25001";
 thread_local! {
-    static MODEL: RefCell<Option<Model>> = const { RefCell::new(None) };
+    static MODEL: RefCell<Option<ExternalModel>> = const { RefCell::new(None) };
     static HASH: RefCell<Option<Sha256>> = const { RefCell::new(None) };
     static LAST_ERROR: RefCell<Option<String>> = const { RefCell::new(None) };
 }
@@ -113,17 +113,24 @@ fn upload(offset: u64, bytes: serde_bytes::ByteBuf) -> Result<u64, String> {
     HASH.with_borrow_mut(|h| *h = if done { None } else { Some(hash) });
     Ok(end)
 }
+fn read_pack(offset: usize, dest: &mut [u8]) -> Result<(), String> {
+    let end = offset
+        .checked_add(dest.len())
+        .ok_or("pack offset overflow")?;
+    if end > PACK_BYTES {
+        return Err("pack read out of bounds".into());
+    }
+    let offset = u64::try_from(offset).map_err(|_| "pack offset overflow")?;
+    let start = HEADER.checked_add(offset).ok_or("pack offset overflow")?;
+    stable_read(start, dest);
+    Ok(())
+}
 fn activate_model() -> Result<(), String> {
     let (n, verified) = header()?;
     if !verified || n != PACK_BYTES as u64 {
         return Err("upload the complete verified weight pack first".into());
     }
-    let model = Model::load_from(PACK_BYTES, |offset, dest| {
-        let offset = u64::try_from(offset).map_err(|_| "pack offset overflow")?;
-        let start = HEADER.checked_add(offset).ok_or("pack offset overflow")?;
-        stable_read(start, dest);
-        Ok(())
-    })?;
+    let model = ExternalModel::load_from(PACK_BYTES, read_pack)?;
     MODEL.with_borrow_mut(|m| *m = Some(model));
     LAST_ERROR.with_borrow_mut(|e| *e = None);
     Ok(())
@@ -171,7 +178,7 @@ fn embed(token_ids: Vec<u32>) -> Result<Embedding, String> {
     let embedding = MODEL.with_borrow(|m| {
         m.as_ref()
             .ok_or("model is not active".to_string())?
-            .full(&token_ids)
+            .full(&token_ids, read_pack)
     })?;
     if embedding.len() != 384 || embedding.iter().any(|v| !v.is_finite()) {
         return Err("nonfinite embedding".into());

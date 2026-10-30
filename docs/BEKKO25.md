@@ -62,20 +62,22 @@ Both query and document vectors must have the same `embedding_space`:
 bekko-a25m-44f0b8af-w8a8-bf16kv-qk13-v1
 ```
 
-Store that ID with the document index and reject query vectors from another space. Rebuild the index when the model/revision or numerical semantics change; equal vector dimensions are insufficient. Bit-equivalent runtime optimizations keep the space ID. `runtime_id` identifies the implementation separately.
+Store that ID with the document index and reject query vectors from another space. Rebuild the index when the model/revision or numerical semantics change; equal vector dimensions are insufficient. Bit-equivalent runtime optimizations keep the space ID. `runtime_id` identifies the implementation separately: `bekko25-runtime-2` reads vocabulary rows from stable memory.
 
 For RAG, split documents by sentences/paragraphs before tokenization, with up to 254 body tokens plus BOS/EOS and a modest overlap such as 32 source tokens. Use the same pinned tokenizer for both sides. The CLI refuses oversized inputs; the server rejects oversized vectors, missing framing, PAD 0 and out-of-vocabulary IDs. It never silently truncates. A lower chunk limit is available to the client without changing the embedding space, but changing document chunks requires re-embedding those chunks. Search normalized vectors by dot product/cosine and deduplicate parent documents after taking each parent's best chunk score.
 
 ## Upgrades and recovery
 
-Activation reads the verified pack from stable memory into the final model allocations in bounded chunks. It does not allocate a second full pack in Wasm heap. The stable format and embedding API are unchanged. A local old-to-new upgrade measured a 417,660,928-byte heap reduction and bit-identical output for 313 cases; query instruction counts changed slightly. See [streamed activation verification](../benchmarks/bekko25-stream/RESULTS.md) for the exact artifacts and limits.
+Activation reads the verified pack metadata and non-vocabulary weights from stable memory into the model allocations. The F32 vocabulary remains in stable memory; inference reads the required 1,536-byte row for each token, at most 393,216 bytes for 256 tokens. The vocabulary descriptor's shape, type and bounds are checked when loading; rows are checked for finite values when read. The pack layout, stable header, Candid interface and `embedding_space` are unchanged.
+
+The earlier [streamed activation verification](../benchmarks/bekko25-stream/RESULTS.md) measured the removal of the full-pack copy. The vocabulary change additionally removes the resident vocabulary allocation. [Product verification](../benchmarks/bekko25-stable-read/PRODUCT.md) compares recipe-processed Wasm, records memory and instruction counts, and checks bit-identical outputs across upgrades. Results depend on the build and platform. Stable-memory accesses can affect query latency independently of the instruction counter.
 
 ```sh
 CARGO_TARGET_DIR=.cache/bekko25-prod-target icp deploy bekko25 -e local --mode upgrade
 .cache/bekko25-prod-target/release/bekko25-load --environment local --activate-only
 ```
 
-Verified weights remain in stable memory; the heap cache intentionally starts inactive after upgrade. Schedule the upgrade plus activation as a maintenance operation and confirm `modelInfo.active`, `weights_verified`, revision and embedding space before routing queries. Activation is idempotent. An incomplete upload is discarded on upgrade because its hash is transient; restart the loader afterward. A failed checksum leaves progress at the previous chunk, so the correct final chunk can be retried.
+Verified weights remain in stable memory; the heap model intentionally starts inactive after upgrade. Schedule the upgrade plus activation as a maintenance operation and confirm `modelInfo.active`, `weights_verified`, revision, runtime ID and embedding space before routing queries. Activation is idempotent. An incomplete upload is discarded on upgrade because its hash is transient; restart the loader afterward. A failed checksum leaves progress at the previous chunk, so the correct final chunk can be retried.
 
 Storage ownership is exclusive: `BEK25001` at bytes 0–7, uploaded length at 8–15 (little endian), verified flag at 16, reserved header through byte 63, then the pinned pack. This magic identifies this fixed model revision. Unsupported storage versions produce an error; `beginUpload` does not overwrite them. **Deploy a new canister for a8m → a25m**, rather than upgrading an a8m ID. The isolated tests also check that a wrong-model upgrade refuses reinterpretation and the original loader works again after downgrade.
 

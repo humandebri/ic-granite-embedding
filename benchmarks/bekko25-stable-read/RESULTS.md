@@ -1,5 +1,7 @@
 # Bekko a25m: 語彙表をstable memoryから直接読む試作
 
+追記: この実験を基にした製品実装と、recipe処理後Wasmでの再検証は [PRODUCT.md](PRODUCT.md) を参照。以下は固定offsetを使った旧試作の記録。
+
 ## レビュー対応後の再検証
 
 既存 `load_from` の挙動を保ち、外部行モードの `embed` / `full` が panic ではなくエラーを返すよう修正した。検証ツールは Wasm の hash、heap の削減量、各 query の成功と bit 一致を確認し、失敗時は非ゼロ終了する。
