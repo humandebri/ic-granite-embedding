@@ -1,0 +1,7 @@
+{
+  "recipe": "@dfinity/rust@v3.2.0",
+  "raw_cargo_sha256": "22e396d7536d0274d15872bbfc1766849588448d678f43412bfaf9a06a1a106f",
+  "deployed_sha256": "c7df05a8ecb2f6d114293ed663415fd2cdb23028803e7311b957cd57c9b194de",
+  "metadata_transform_reproduces_deployed_artifact": true,
+  "ic_wasm_version": "ic-wasm 0.10.0"
+}

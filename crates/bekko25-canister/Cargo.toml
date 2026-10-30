@@ -1,0 +1,13 @@
+[package]
+name = "bekko25-canister"
+version = "0.1.0"
+edition = "2024"
+[lib]
+crate-type = ["cdylib", "rlib"]
+[dependencies]
+bekko25-core = { path = "../bekko25-core" }
+ic-cdk = "=0.20.3"
+candid.workspace = true
+serde.workspace = true
+serde_bytes.workspace = true
+sha2 = "=0.10.9"

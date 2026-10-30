@@ -1,0 +1,1022 @@
+[
+  {
+    "instructions": 46936662,
+    "tokens": 2
+  },
+  {
+    "instructions": 70348930,
+    "tokens": 3
+  },
+  {
+    "instructions": 68077071,
+    "tokens": 4
+  },
+  {
+    "instructions": 91743654,
+    "tokens": 5
+  },
+  {
+    "instructions": 115321761,
+    "tokens": 6
+  },
+  {
+    "instructions": 138957031,
+    "tokens": 7
+  },
+  {
+    "instructions": 130410638,
+    "tokens": 8
+  },
+  {
+    "instructions": 154361119,
+    "tokens": 9
+  },
+  {
+    "instructions": 178154694,
+    "tokens": 10
+  },
+  {
+    "instructions": 202016284,
+    "tokens": 11
+  },
+  {
+    "instructions": 199957118,
+    "tokens": 12
+  },
+  {
+    "instructions": 224188871,
+    "tokens": 13
+  },
+  {
+    "instructions": 248205777,
+    "tokens": 14
+  },
+  {
+    "instructions": 272286340,
+    "tokens": 15
+  },
+  {
+    "instructions": 263955486,
+    "tokens": 16
+  },
+  {
+    "instructions": 288471590,
+    "tokens": 17
+  },
+  {
+    "instructions": 312709329,
+    "tokens": 18
+  },
+  {
+    "instructions": 337010716,
+    "tokens": 19
+  },
+  {
+    "instructions": 335166664,
+    "tokens": 20
+  },
+  {
+    "instructions": 359964867,
+    "tokens": 21
+  },
+  {
+    "instructions": 384423424,
+    "tokens": 22
+  },
+  {
+    "instructions": 408946979,
+    "tokens": 23
+  },
+  {
+    "instructions": 400826830,
+    "tokens": 24
+  },
+  {
+    "instructions": 425909323,
+    "tokens": 25
+  },
+  {
+    "instructions": 450588660,
+    "tokens": 26
+  },
+  {
+    "instructions": 475334114,
+    "tokens": 27
+  },
+  {
+    "instructions": 473706763,
+    "tokens": 28
+  },
+  {
+    "instructions": 499069394,
+    "tokens": 29
+  },
+  {
+    "instructions": 523969587,
+    "tokens": 30
+  },
+  {
+    "instructions": 548937305,
+    "tokens": 31
+  },
+  {
+    "instructions": 518732443,
+    "tokens": 32
+  },
+  {
+    "instructions": 544381372,
+    "tokens": 33
+  },
+  {
+    "instructions": 569502413,
+    "tokens": 34
+  },
+  {
+    "instructions": 594695349,
+    "tokens": 35
+  },
+  {
+    "instructions": 593278078,
+    "tokens": 36
+  },
+  {
+    "instructions": 619210225,
+    "tokens": 37
+  },
+  {
+    "instructions": 644552054,
+    "tokens": 38
+  },
+  {
+    "instructions": 669963771,
+    "tokens": 39
+  },
+  {
+    "instructions": 662272882,
+    "tokens": 40
+  },
+  {
+    "instructions": 688488247,
+    "tokens": 41
+  },
+  {
+    "instructions": 714051622,
+    "tokens": 42
+  },
+  {
+    "instructions": 739684544,
+    "tokens": 43
+  },
+  {
+    "instructions": 738481149,
+    "tokens": 44
+  },
+  {
+    "instructions": 764979733,
+    "tokens": 45
+  },
+  {
+    "instructions": 790763198,
+    "tokens": 46
+  },
+  {
+    "instructions": 816619178,
+    "tokens": 47
+  },
+  {
+    "instructions": 809140214,
+    "tokens": 48
+  },
+  {
+    "instructions": 835922038,
+    "tokens": 49
+  },
+  {
+    "instructions": 861926320,
+    "tokens": 50
+  },
+  {
+    "instructions": 888004105,
+    "tokens": 51
+  },
+  {
+    "instructions": 887014586,
+    "tokens": 52
+  },
+  {
+    "instructions": 914079582,
+    "tokens": 53
+  },
+  {
+    "instructions": 940304815,
+    "tokens": 54
+  },
+  {
+    "instructions": 966604777,
+    "tokens": 55
+  },
+  {
+    "instructions": 959340132,
+    "tokens": 56
+  },
+  {
+    "instructions": 986689384,
+    "tokens": 57
+  },
+  {
+    "instructions": 1013102491,
+    "tokens": 58
+  },
+  {
+    "instructions": 1039624463,
+    "tokens": 59
+  },
+  {
+    "instructions": 1038848820,
+    "tokens": 60
+  },
+  {
+    "instructions": 1066480275,
+    "tokens": 61
+  },
+  {
+    "instructions": 1093196718,
+    "tokens": 62
+  },
+  {
+    "instructions": 1119940831,
+    "tokens": 63
+  },
+  {
+    "instructions": 1034799477,
+    "tokens": 64
+  },
+  {
+    "instructions": 1832071961,
+    "tokens": 65
+  },
+  {
+    "instructions": 1837633973,
+    "tokens": 66
+  },
+  {
+    "instructions": 1843263773,
+    "tokens": 67
+  },
+  {
+    "instructions": 1846988736,
+    "tokens": 68
+  },
+  {
+    "instructions": 1853707151,
+    "tokens": 69
+  },
+  {
+    "instructions": 1859331754,
+    "tokens": 70
+  },
+  {
+    "instructions": 1865003656,
+    "tokens": 71
+  },
+  {
+    "instructions": 1868921594,
+    "tokens": 72
+  },
+  {
+    "instructions": 1875717987,
+    "tokens": 73
+  },
+  {
+    "instructions": 1881410149,
+    "tokens": 74
+  },
+  {
+    "instructions": 1887149373,
+    "tokens": 75
+  },
+  {
+    "instructions": 1891129522,
+    "tokens": 76
+  },
+  {
+    "instructions": 1898002571,
+    "tokens": 77
+  },
+  {
+    "instructions": 1903752014,
+    "tokens": 78
+  },
+  {
+    "instructions": 1909550158,
+    "tokens": 79
+  },
+  {
+    "instructions": 1913620982,
+    "tokens": 80
+  },
+  {
+    "instructions": 1920589462,
+    "tokens": 81
+  },
+  {
+    "instructions": 1926430674,
+    "tokens": 82
+  },
+  {
+    "instructions": 1932318652,
+    "tokens": 83
+  },
+  {
+    "instructions": 1936494163,
+    "tokens": 84
+  },
+  {
+    "instructions": 1944006634,
+    "tokens": 85
+  },
+  {
+    "instructions": 1950306040,
+    "tokens": 86
+  },
+  {
+    "instructions": 1956260612,
+    "tokens": 87
+  },
+  {
+    "instructions": 1960518193,
+    "tokens": 88
+  },
+  {
+    "instructions": 1967693759,
+    "tokens": 89
+  },
+  {
+    "instructions": 1973693832,
+    "tokens": 90
+  },
+  {
+    "instructions": 1979733699,
+    "tokens": 91
+  },
+  {
+    "instructions": 1984091832,
+    "tokens": 92
+  },
+  {
+    "instructions": 1991374164,
+    "tokens": 93
+  },
+  {
+    "instructions": 1997420514,
+    "tokens": 94
+  },
+  {
+    "instructions": 2003502375,
+    "tokens": 95
+  },
+  {
+    "instructions": 2007956449,
+    "tokens": 96
+  },
+  {
+    "instructions": 2015301650,
+    "tokens": 97
+  },
+  {
+    "instructions": 2021405678,
+    "tokens": 98
+  },
+  {
+    "instructions": 2027511731,
+    "tokens": 99
+  },
+  {
+    "instructions": 2032057387,
+    "tokens": 100
+  },
+  {
+    "instructions": 2039389086,
+    "tokens": 101
+  },
+  {
+    "instructions": 2045603625,
+    "tokens": 102
+  },
+  {
+    "instructions": 2051835746,
+    "tokens": 103
+  },
+  {
+    "instructions": 2056472158,
+    "tokens": 104
+  },
+  {
+    "instructions": 2064003647,
+    "tokens": 105
+  },
+  {
+    "instructions": 2070256204,
+    "tokens": 106
+  },
+  {
+    "instructions": 2076550254,
+    "tokens": 107
+  },
+  {
+    "instructions": 2081284680,
+    "tokens": 108
+  },
+  {
+    "instructions": 2088888168,
+    "tokens": 109
+  },
+  {
+    "instructions": 2095204667,
+    "tokens": 110
+  },
+  {
+    "instructions": 2101571728,
+    "tokens": 111
+  },
+  {
+    "instructions": 2106405016,
+    "tokens": 112
+  },
+  {
+    "instructions": 2114140939,
+    "tokens": 113
+  },
+  {
+    "instructions": 2120514300,
+    "tokens": 114
+  },
+  {
+    "instructions": 2126955077,
+    "tokens": 115
+  },
+  {
+    "instructions": 2131879413,
+    "tokens": 116
+  },
+  {
+    "instructions": 2139674358,
+    "tokens": 117
+  },
+  {
+    "instructions": 2146129251,
+    "tokens": 118
+  },
+  {
+    "instructions": 2152635921,
+    "tokens": 119
+  },
+  {
+    "instructions": 2157663912,
+    "tokens": 120
+  },
+  {
+    "instructions": 2165527138,
+    "tokens": 121
+  },
+  {
+    "instructions": 2172032107,
+    "tokens": 122
+  },
+  {
+    "instructions": 2178615097,
+    "tokens": 123
+  },
+  {
+    "instructions": 2183732039,
+    "tokens": 124
+  },
+  {
+    "instructions": 2191705617,
+    "tokens": 125
+  },
+  {
+    "instructions": 2198292023,
+    "tokens": 126
+  },
+  {
+    "instructions": 2203698781,
+    "tokens": 127
+  },
+  {
+    "instructions": 2199776921,
+    "tokens": 128
+  },
+  {
+    "instructions": 3042186639,
+    "tokens": 129
+  },
+  {
+    "instructions": 3048841951,
+    "tokens": 130
+  },
+  {
+    "instructions": 3055548176,
+    "tokens": 131
+  },
+  {
+    "instructions": 3060819216,
+    "tokens": 132
+  },
+  {
+    "instructions": 3068990294,
+    "tokens": 133
+  },
+  {
+    "instructions": 3075730065,
+    "tokens": 134
+  },
+  {
+    "instructions": 3082523522,
+    "tokens": 135
+  },
+  {
+    "instructions": 3087836620,
+    "tokens": 136
+  },
+  {
+    "instructions": 3096111802,
+    "tokens": 137
+  },
+  {
+    "instructions": 3102937029,
+    "tokens": 138
+  },
+  {
+    "instructions": 3109815268,
+    "tokens": 139
+  },
+  {
+    "instructions": 3115168833,
+    "tokens": 140
+  },
+  {
+    "instructions": 3123557447,
+    "tokens": 141
+  },
+  {
+    "instructions": 3130467830,
+    "tokens": 142
+  },
+  {
+    "instructions": 3137435935,
+    "tokens": 143
+  },
+  {
+    "instructions": 3142821367,
+    "tokens": 144
+  },
+  {
+    "instructions": 3151325355,
+    "tokens": 145
+  },
+  {
+    "instructions": 3158322969,
+    "tokens": 146
+  },
+  {
+    "instructions": 3165374541,
+    "tokens": 147
+  },
+  {
+    "instructions": 3170811367,
+    "tokens": 148
+  },
+  {
+    "instructions": 3179419468,
+    "tokens": 149
+  },
+  {
+    "instructions": 3186499642,
+    "tokens": 150
+  },
+  {
+    "instructions": 3193633060,
+    "tokens": 151
+  },
+  {
+    "instructions": 3199110076,
+    "tokens": 152
+  },
+  {
+    "instructions": 3207826049,
+    "tokens": 153
+  },
+  {
+    "instructions": 3214989069,
+    "tokens": 154
+  },
+  {
+    "instructions": 3222207919,
+    "tokens": 155
+  },
+  {
+    "instructions": 3227728222,
+    "tokens": 156
+  },
+  {
+    "instructions": 3236555529,
+    "tokens": 157
+  },
+  {
+    "instructions": 3243806249,
+    "tokens": 158
+  },
+  {
+    "instructions": 3251110463,
+    "tokens": 159
+  },
+  {
+    "instructions": 3256667704,
+    "tokens": 160
+  },
+  {
+    "instructions": 3265603749,
+    "tokens": 161
+  },
+  {
+    "instructions": 3272938516,
+    "tokens": 162
+  },
+  {
+    "instructions": 3280330271,
+    "tokens": 163
+  },
+  {
+    "instructions": 3285931808,
+    "tokens": 164
+  },
+  {
+    "instructions": 3295075488,
+    "tokens": 165
+  },
+  {
+    "instructions": 3302495482,
+    "tokens": 166
+  },
+  {
+    "instructions": 3309971359,
+    "tokens": 167
+  },
+  {
+    "instructions": 3315612826,
+    "tokens": 168
+  },
+  {
+    "instructions": 3324760722,
+    "tokens": 169
+  },
+  {
+    "instructions": 3332263444,
+    "tokens": 170
+  },
+  {
+    "instructions": 3339825632,
+    "tokens": 171
+  },
+  {
+    "instructions": 3345509159,
+    "tokens": 172
+  },
+  {
+    "instructions": 3354769553,
+    "tokens": 173
+  },
+  {
+    "instructions": 3362360655,
+    "tokens": 174
+  },
+  {
+    "instructions": 3370006532,
+    "tokens": 175
+  },
+  {
+    "instructions": 3375717335,
+    "tokens": 176
+  },
+  {
+    "instructions": 3385095421,
+    "tokens": 177
+  },
+  {
+    "instructions": 3392770078,
+    "tokens": 178
+  },
+  {
+    "instructions": 3400501289,
+    "tokens": 179
+  },
+  {
+    "instructions": 3406266146,
+    "tokens": 180
+  },
+  {
+    "instructions": 3415744371,
+    "tokens": 181
+  },
+  {
+    "instructions": 3423504633,
+    "tokens": 182
+  },
+  {
+    "instructions": 3431322530,
+    "tokens": 183
+  },
+  {
+    "instructions": 3437131507,
+    "tokens": 184
+  },
+  {
+    "instructions": 3446727035,
+    "tokens": 185
+  },
+  {
+    "instructions": 3454571478,
+    "tokens": 186
+  },
+  {
+    "instructions": 3462476367,
+    "tokens": 187
+  },
+  {
+    "instructions": 3468322996,
+    "tokens": 188
+  },
+  {
+    "instructions": 3478018698,
+    "tokens": 189
+  },
+  {
+    "instructions": 3485207122,
+    "tokens": 190
+  },
+  {
+    "instructions": 3492141041,
+    "tokens": 191
+  },
+  {
+    "instructions": 3484400415,
+    "tokens": 192
+  },
+  {
+    "instructions": 4275630877,
+    "tokens": 193
+  },
+  {
+    "instructions": 4283650004,
+    "tokens": 194
+  },
+  {
+    "instructions": 4291721221,
+    "tokens": 195
+  },
+  {
+    "instructions": 4297643211,
+    "tokens": 196
+  },
+  {
+    "instructions": 4307513357,
+    "tokens": 197
+  },
+  {
+    "instructions": 4315603270,
+    "tokens": 198
+  },
+  {
+    "instructions": 4323757626,
+    "tokens": 199
+  },
+  {
+    "instructions": 4329729785,
+    "tokens": 200
+  },
+  {
+    "instructions": 4339754252,
+    "tokens": 201
+  },
+  {
+    "instructions": 4347937167,
+    "tokens": 202
+  },
+  {
+    "instructions": 4356215944,
+    "tokens": 203
+  },
+  {
+    "instructions": 4362226321,
+    "tokens": 204
+  },
+  {
+    "instructions": 4372362453,
+    "tokens": 205
+  },
+  {
+    "instructions": 4380630844,
+    "tokens": 206
+  },
+  {
+    "instructions": 4388953810,
+    "tokens": 207
+  },
+  {
+    "instructions": 4395005911,
+    "tokens": 208
+  },
+  {
+    "instructions": 4405252796,
+    "tokens": 209
+  },
+  {
+    "instructions": 4413605745,
+    "tokens": 210
+  },
+  {
+    "instructions": 4422022573,
+    "tokens": 211
+  },
+  {
+    "instructions": 4428118203,
+    "tokens": 212
+  },
+  {
+    "instructions": 4438459051,
+    "tokens": 213
+  },
+  {
+    "instructions": 4446901483,
+    "tokens": 214
+  },
+  {
+    "instructions": 4455401521,
+    "tokens": 215
+  },
+  {
+    "instructions": 4461533244,
+    "tokens": 216
+  },
+  {
+    "instructions": 4471979403,
+    "tokens": 217
+  },
+  {
+    "instructions": 4480504242,
+    "tokens": 218
+  },
+  {
+    "instructions": 4489087713,
+    "tokens": 219
+  },
+  {
+    "instructions": 4495265928,
+    "tokens": 220
+  },
+  {
+    "instructions": 4505839281,
+    "tokens": 221
+  },
+  {
+    "instructions": 4514444283,
+    "tokens": 222
+  },
+  {
+    "instructions": 4523114962,
+    "tokens": 223
+  },
+  {
+    "instructions": 4529333144,
+    "tokens": 224
+  },
+  {
+    "instructions": 4540036489,
+    "tokens": 225
+  },
+  {
+    "instructions": 4548735949,
+    "tokens": 226
+  },
+  {
+    "instructions": 4557495166,
+    "tokens": 227
+  },
+  {
+    "instructions": 4563739158,
+    "tokens": 228
+  },
+  {
+    "instructions": 4574520848,
+    "tokens": 229
+  },
+  {
+    "instructions": 4583308475,
+    "tokens": 230
+  },
+  {
+    "instructions": 4592150303,
+    "tokens": 231
+  },
+  {
+    "instructions": 4598446622,
+    "tokens": 232
+  },
+  {
+    "instructions": 4609351212,
+    "tokens": 233
+  },
+  {
+    "instructions": 4618205724,
+    "tokens": 234
+  },
+  {
+    "instructions": 4627134840,
+    "tokens": 235
+  },
+  {
+    "instructions": 4633475067,
+    "tokens": 236
+  },
+  {
+    "instructions": 4644480317,
+    "tokens": 237
+  },
+  {
+    "instructions": 4653431736,
+    "tokens": 238
+  },
+  {
+    "instructions": 4662448289,
+    "tokens": 239
+  },
+  {
+    "instructions": 4668831334,
+    "tokens": 240
+  },
+  {
+    "instructions": 4679922304,
+    "tokens": 241
+  },
+  {
+    "instructions": 4688956760,
+    "tokens": 242
+  },
+  {
+    "instructions": 4698050797,
+    "tokens": 243
+  },
+  {
+    "instructions": 4704462984,
+    "tokens": 244
+  },
+  {
+    "instructions": 4715687145,
+    "tokens": 245
+  },
+  {
+    "instructions": 4724815396,
+    "tokens": 246
+  },
+  {
+    "instructions": 4734000093,
+    "tokens": 247
+  },
+  {
+    "instructions": 4740463353,
+    "tokens": 248
+  },
+  {
+    "instructions": 4751791602,
+    "tokens": 249
+  },
+  {
+    "instructions": 4760992677,
+    "tokens": 250
+  },
+  {
+    "instructions": 4770260591,
+    "tokens": 251
+  },
+  {
+    "instructions": 4776764660,
+    "tokens": 252
+  },
+  {
+    "instructions": 4787209430,
+    "tokens": 253
+  },
+  {
+    "instructions": 4796494182,
+    "tokens": 254
+  },
+  {
+    "instructions": 4804462884,
+    "tokens": 255
+  },
+  {
+    "instructions": 4792879311,
+    "tokens": 256
+  }
+]

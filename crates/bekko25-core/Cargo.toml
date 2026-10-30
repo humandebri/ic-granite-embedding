@@ -1,0 +1,6 @@
+[package]
+name = "bekko25-core"
+version = "0.1.0"
+edition = "2024"
+[dependencies]
+bekko-core = { path = "../bekko-core" }

@@ -1,0 +1,149 @@
+{
+  "a8_regression_against_original_service": [
+    {
+      "bit_exact_old_service_vs_new_runtime": true,
+      "input_index": 0,
+      "instructions_old_service": 113157700,
+      "tokens": 19
+    },
+    {
+      "bit_exact_old_service_vs_new_runtime": true,
+      "input_index": 1,
+      "instructions_old_service": 105325911,
+      "tokens": 18
+    },
+    {
+      "bit_exact_old_service_vs_new_runtime": true,
+      "input_index": 31,
+      "instructions_old_service": 89585995,
+      "tokens": 16
+    },
+    {
+      "bit_exact_old_service_vs_new_runtime": true,
+      "input_index": 63,
+      "instructions_old_service": 379660514,
+      "tokens": 65
+    },
+    {
+      "bit_exact_old_service_vs_new_runtime": true,
+      "input_index": 127,
+      "instructions_old_service": 260169312,
+      "tokens": 45
+    },
+    {
+      "bit_exact_old_service_vs_new_runtime": true,
+      "input_index": 191,
+      "instructions_old_service": 574412794,
+      "tokens": 91
+    },
+    {
+      "bit_exact_old_service_vs_new_runtime": true,
+      "input_index": 250,
+      "instructions_old_service": 544863743,
+      "tokens": 88
+    },
+    {
+      "bit_exact_old_service_vs_new_runtime": true,
+      "input_index": 251,
+      "instructions_old_service": 1256523874,
+      "tokens": 177
+    }
+  ],
+  "cases": [
+    {
+      "case": "en-64",
+      "golden_bit_exact": true,
+      "instructions": 1063735270
+    },
+    {
+      "case": "en-128",
+      "golden_bit_exact": true,
+      "instructions": 2233965927
+    },
+    {
+      "case": "en-256",
+      "golden_bit_exact": true,
+      "instructions": 4828460086
+    },
+    {
+      "case": "ar-64",
+      "golden_bit_exact": true,
+      "instructions": 1063995270
+    },
+    {
+      "case": "ar-128",
+      "golden_bit_exact": true,
+      "instructions": 2234225927
+    },
+    {
+      "case": "ar-256",
+      "golden_bit_exact": true,
+      "instructions": 4828720086
+    },
+    {
+      "case": "ko-64",
+      "golden_bit_exact": true,
+      "instructions": 1063975270
+    },
+    {
+      "case": "ko-128",
+      "golden_bit_exact": true,
+      "instructions": 2234205927
+    },
+    {
+      "case": "ko-256",
+      "golden_bit_exact": true,
+      "instructions": 4828700086
+    }
+  ],
+  "embedding_space": "bekko-a25m-44f0b8af-w8a8-bf16kv-qk13-v1",
+  "network": {
+    "api_url": "http://localhost:56619/",
+    "candid_ui_principal": "4mc4g-43777-77775-aaaaa-cai",
+    "gateway_url": "http://localhost:56619/",
+    "managed": true,
+    "proxy_canister_principal": "4ld2s-rd777-77775-aaaaq-cai",
+    "root_key": "308182301d060d2b0601040182dc7c0503010201060c2b0601040182dc7c05030201036100a587ac27884f235a91ddd86927eec11e09872417231b41ab8fb95605c633af9702849c0ad6929613392b39c715fc232c0a0d8eb00a1ea91985b3e440bc9d0b78a5872f96dae753f395cd6602516ad58748d698958976c6c25b86c55aa30a3af9"
+  },
+  "status": {
+    "cycles": "8_605_801_182_466",
+    "id": "4fbx2-kt777-77775-aaabq-cai",
+    "idle_cycles_burned_per_day": "36_832_104_056",
+    "memory_size": "1_407_861_536",
+    "module_hash": "0xc7df05a8ecb2f6d114293ed663415fd2cdb23028803e7311b957cd57c9b194de",
+    "name": "bekko25",
+    "query_stats": {
+      "num_calls_total": "0",
+      "num_instructions_total": "48_766_804_385",
+      "request_payload_bytes_total": "10_946",
+      "response_payload_bytes_total": "31_265"
+    },
+    "reserved_cycles": "0",
+    "settings": {
+      "compute_allocation": "0",
+      "controllers": [
+        "r75h6-lqd7b-5jack-at55d-vvti2-lg5qy-ly73a-5ezve-odnkc-kagu3-nae"
+      ],
+      "environment_variables": [
+        {
+          "name": "PUBLIC_CANISTER_ID:bekko",
+          "value": "4caro-hl777-77775-aaaba-cai"
+        },
+        {
+          "name": "PUBLIC_CANISTER_ID:bekko25",
+          "value": "4fbx2-kt777-77775-aaabq-cai"
+        }
+      ],
+      "freezing_threshold": "2_592_000",
+      "log_memory_limit": "4_096",
+      "log_visibility": {
+        "type": "Controllers"
+      },
+      "memory_allocation": "0",
+      "reserved_cycles_limit": "5_000_000_000_000",
+      "wasm_memory_limit": "3_221_225_472",
+      "wasm_memory_threshold": "0"
+    },
+    "status": "Running"
+  }
+}

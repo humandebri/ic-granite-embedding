@@ -1,0 +1,47 @@
+{
+  "wasm_sha256": "22e396d7536d0274d15872bbfc1766849588448d678f43412bfaf9a06a1a106f",
+  "retrieval_input_sha256": "56b4fdfdd1ad87bd800ee35443983a192baeac6fe48fe06fbc026eaf55fef771",
+  "maximum_instructions": 4843751277,
+  "query_limit": 5000000000,
+  "margin_percent": 3.1249744599999962,
+  "lengths_checked": 255,
+  "deployed_artifact_lengths_checked": 255,
+  "deployed_sha256": "c7df05a8ecb2f6d114293ed663415fd2cdb23028803e7311b957cd57c9b194de",
+  "stress_cases": 102,
+  "natural_cases": 78,
+  "retrieval_queries": 600,
+  "retrieval_embeddings": 5691,
+  "languages": {
+    "en": {
+      "wasm_recall5": 0.8673412698412698,
+      "reference_recall5": 0.8673412698412698,
+      "qk13_reference_recall5": 0.8673412698412698
+    },
+    "de": {
+      "wasm_recall5": 0.8394920634920635,
+      "reference_recall5": 0.8328253968253969,
+      "qk13_reference_recall5": 0.8311587301587302
+    },
+    "es": {
+      "wasm_recall5": 0.8132420634920635,
+      "reference_recall5": 0.8232420634920634,
+      "qk13_reference_recall5": 0.8032420634920635
+    },
+    "fr": {
+      "wasm_recall5": 0.8180198412698414,
+      "reference_recall5": 0.8142698412698413,
+      "qk13_reference_recall5": 0.8113531746031747
+    },
+    "ar": {
+      "wasm_recall5": 0.7701984126984127,
+      "reference_recall5": 0.7651984126984127,
+      "qk13_reference_recall5": 0.7701984126984127
+    },
+    "ko": {
+      "wasm_recall5": 0.7572698412698413,
+      "reference_recall5": 0.7672698412698413,
+      "qk13_reference_recall5": 0.7622698412698413
+    }
+  },
+  "torch_references_checked": true
+}

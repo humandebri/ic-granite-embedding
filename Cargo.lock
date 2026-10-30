@@ -121,6 +121,38 @@ dependencies = [
 ]
 
 [[package]]
+name = "bekko25-bench"
+version = "0.1.0"
+dependencies = [
+ "bekko25-core",
+ "candid",
+ "pocket-ic",
+ "serde",
+ "serde_bytes",
+ "serde_json",
+ "sha2",
+]
+
+[[package]]
+name = "bekko25-canister"
+version = "0.1.0"
+dependencies = [
+ "bekko25-core",
+ "candid",
+ "ic-cdk",
+ "serde",
+ "serde_bytes",
+ "sha2",
+]
+
+[[package]]
+name = "bekko25-core"
+version = "0.1.0"
+dependencies = [
+ "bekko-core",
+]
+
+[[package]]
 name = "binrw"
 version = "0.15.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"

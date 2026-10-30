@@ -1,4 +1,4 @@
-//! Fixed Bekko a8m W8A8 encoder, full four-layer mean pooling.
+//! Shared fixed-shape Bekko encoder. Model aliases pin layer count and precision.
 use serde::Deserialize;
 use std::collections::BTreeMap;
 macro_rules! phase {
@@ -7,9 +7,9 @@ macro_rules! phase {
     };
 }
 include!(concat!(env!("OUT_DIR"), "/tree.rs"));
+mod optimized_attention;
 #[cfg(feature = "strassen")]
 #[allow(unexpected_cfgs)]
-#[path = "../../core/src/strassen.rs"]
 mod strassen;
 #[cfg(all(target_arch = "wasm32", feature = "strassen-wo"))]
 use self::packed_576 as packed_768;
@@ -72,6 +72,7 @@ pub struct Linear {
     scales: Vec<f32>,
     rows: usize,
     cols: usize,
+    bucketed: bool,
 }
 pub struct Layer {
     qkv: Linear,
@@ -81,13 +82,15 @@ pub struct Layer {
     attn_norm: Vec<f32>,
     mlp_norm: Vec<f32>,
 }
-pub struct Model {
+pub struct Encoder<const LAYERS: usize, const QK13: bool> {
     embeddings: Vec<f32>,
     embedding_norm: Vec<f32>,
     final_norm: Vec<f32>,
     layers: Vec<Layer>,
     rope: [Vec<[(f32, f32); 32]>; 2],
 }
+/// The existing a8m model retains its four-layer F32 Attention path.
+pub type Model = Encoder<4, false>;
 
 fn floats(b: &[u8]) -> Result<Vec<f32>, String> {
     if b.len() % 4 != 0 {
@@ -182,8 +185,11 @@ fn read_bf16(b: &[u8]) -> Vec<f32> {
         .collect()
 }
 
-impl Model {
+impl<const LAYERS: usize, const QK13: bool> Encoder<LAYERS, QK13> {
     pub fn load(pack: &[u8]) -> Result<Self, String> {
+        if !matches!(LAYERS, 4 | 13) || QK13 && LAYERS != 13 {
+            return Err("unsupported fixed Bekko configuration".into());
+        }
         let len = usize::try_from(u64::from_le_bytes(
             pack.get(..8).ok_or("pack header")?.try_into().unwrap(),
         ))
@@ -211,7 +217,14 @@ impl Model {
                 || cfg!(feature = "strassen-wo") && rows == H && cols == I
                 || cfg!(feature = "strassen-qkv") && rows == 3 * H && cols == H
                 || cfg!(feature = "strassen-out") && rows == H && cols == H)
-                .then(|| strassen::Prepared::new(&weights, rows, cols));
+                .then(|| {
+                    strassen::Prepared::new_depth(
+                        &weights,
+                        rows,
+                        cols,
+                        if LAYERS == 13 && cols == I { 2 } else { 1 },
+                    )
+                });
             Ok(Linear {
                 #[cfg(feature = "strassen")]
                 prepared,
@@ -219,10 +232,11 @@ impl Model {
                 scales: floats(&b[rows * cols..])?,
                 rows,
                 cols,
+                bucketed: LAYERS == 13,
             })
         };
         let mut layers = Vec::new();
-        for l in 0..4 {
+        for l in 0..LAYERS {
             let p = format!("layers.{l}");
             layers.push(Layer {
                 qkv: linear(&format!("{p}.attn.Wqkv.weight"), 3 * H, H)?,
@@ -315,8 +329,13 @@ impl Model {
 
     pub fn full(&self, ids: &[u32]) -> Result<Vec<f32>, String> {
         let mut x = self.embed(ids)?;
-        for layer in 0..4 {
+        for layer in 0..LAYERS {
             let qkv = self.qkv(layer, 0, &x);
+            if QK13 {
+                let context = optimized_attention::compute(layer, ids.len(), &qkv)?;
+                x = self.finish(layer, &x, &context);
+                continue;
+            }
             let mut context = vec![0.; ids.len() * H];
             for start in (0..ids.len()).step_by(128) {
                 let rows = 128.min(ids.len() - start);
@@ -512,6 +531,20 @@ impl Linear {
     fn apply_quantized(&self, quant: &[i16], scales: &[f32]) -> Vec<f32> {
         let n = scales.len();
         assert_eq!(quant.len(), n * self.cols);
+        // Quantization is per row. Zero rows cannot change any real token's
+        // product, and rounding up avoids expensive scalar/tiny GEMM tails.
+        // Padding exists only inside this linear operator, never in Attention
+        // or mean pooling. a8m keeps its existing execution path.
+        if self.bucketed && n >= 64 && n % 64 != 0 {
+            let padded = n.next_multiple_of(64);
+            let mut q = quant.to_vec();
+            q.resize(padded * self.cols, 0);
+            let mut s = scales.to_vec();
+            s.resize(padded, 1.);
+            let mut out = self.apply_quantized(&q, &s);
+            out.truncate(n * self.rows);
+            return out;
+        }
         let mut y = Vec::<f32>::with_capacity(n * self.rows);
         let mut t = 0;
         #[cfg(feature = "strassen")]
@@ -1200,6 +1233,7 @@ mod tests {
             scales: vec![1.; H],
             rows: H,
             cols: I,
+            bucketed: false,
         };
         let q: Vec<i16> = (0..4 * I)
             .map(|i| if i % 3 == 0 { -127 } else { 127 })
@@ -1215,6 +1249,47 @@ mod tests {
                 .map(|v| *v as i64 * 127)
                 .sum::<i64>() as f32;
             assert!(got[t * H..(t + 1) * H].iter().all(|v| *v == expected));
+        }
+    }
+
+    #[test]
+    fn padded_linear_preserves_every_real_row_at_bucket_boundaries() {
+        for (rows, cols) in [(3 * H, H), (H, H), (2 * I, H), (H, I)] {
+            let weights: Vec<i16> = (0..rows * cols)
+                .map(|i| ((i * 73 + 11) % 255) as i16 - 127)
+                .collect();
+            let mut linear = Linear {
+                #[cfg(feature = "strassen")]
+                prepared: Some(strassen::Prepared::new_depth(
+                    &weights,
+                    rows,
+                    cols,
+                    if cols == I { 2 } else { 1 },
+                )),
+                weights,
+                scales: vec![0.003; rows],
+                rows,
+                cols,
+                bucketed: false,
+            };
+            for n in [65, 127, 129, 193, 255] {
+                let q: Vec<i16> = (0..n * cols)
+                    .map(|i| ((i * 37 + 19) % 255) as i16 - 127)
+                    .collect();
+                let scales = vec![0.01; n];
+                linear.bucketed = false;
+                let reference = linear.apply_quantized(&q, &scales);
+                linear.bucketed = true;
+                let padded = linear.apply_quantized(&q, &scales);
+                assert_eq!(padded.len(), n * rows);
+                assert!(
+                    reference
+                        .iter()
+                        .zip(padded)
+                        .all(|(a, b)| a.to_bits() == b.to_bits()),
+                    "n={n} rows={rows} cols={cols}"
+                );
+            }
         }
     }
 }

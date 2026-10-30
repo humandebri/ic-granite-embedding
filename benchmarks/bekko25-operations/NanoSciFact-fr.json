@@ -1,0 +1,264 @@
+{
+  "inputs": 494,
+  "language": "fr",
+  "maximum_query_instructions": 4804462884,
+  "metrics": {
+    "ndcg@10": 0.8697482146284128,
+    "ranks": [
+      {
+        "query_id": "1014",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "1021",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "1132",
+        "rank": 2,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "1146",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "1180",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "1202",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "1213",
+        "rank": 33,
+        "recall@5": 0.0
+      },
+      {
+        "query_id": "124",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "1266",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "1271",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "1278",
+        "rank": 2,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "128",
+        "rank": 20,
+        "recall@5": 0.0
+      },
+      {
+        "query_id": "129",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "1335",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "1339",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "1370",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "148",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "180",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "217",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "230",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "269",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "300",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "324",
+        "rank": 6,
+        "recall@5": 0.0
+      },
+      {
+        "query_id": "343",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "380",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "410",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "421",
+        "rank": 5,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "437",
+        "rank": 64,
+        "recall@5": 0.0
+      },
+      {
+        "query_id": "475",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "501",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "514",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "551",
+        "rank": 2,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "589",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "598",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "628",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "641",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "659",
+        "rank": 10,
+        "recall@5": 0.0
+      },
+      {
+        "query_id": "691",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "692",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "72",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "723",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "743",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "770",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "800",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "823",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "907",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "913",
+        "rank": 3,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "971",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "982",
+        "rank": 1,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "993",
+        "rank": 1,
+        "recall@5": 1.0
+      }
+    ],
+    "recall@5": 0.9
+  },
+  "task": "NanoSciFact",
+  "vectors_file": "NanoSciFact-fr-wasm.f32",
+  "vectors_sha256": "9ca4e11030ac3999641be4dae4eb4c2a08f936cc460a4fef2a7f2f0653fb505b"
+}

@@ -14,6 +14,11 @@ INT8重みと動的INT8活性値（W8A8）を使い、CLS pooling・L2正規化�
 
 多言語の **Bekko a8mを256 tokens・1 queryで使う専用canister** も追加しています。[Bekkoの起動・API・検証結果](docs/BEKKO.md)を参照してください。
 
+[EmbeddingGemma 2の比較実験](benchmarks/embeddinggemma2/RESULTS.md)では、日英の検索精度と全24層のcanister実行を測定しています。
+[英語中心の6言語比較](benchmarks/multilingual-global/RESULTS.md)では、アラビア語を含む検索精度、Bekko a25mの1 query、Gemma 2の分割queryを比較しています。
+[Bekko a25mのランタイム改善](benchmarks/bekko25-runtime/RESULTS.md)では、追加のQK量子化を含む実験版で256 tokens・1 query（約49.22億命令）を確認しています。精度差と上限までの余裕も記録しています。
+[Bekko a25mの運用手順](docs/BEKKO25.md)では、専用canister・再開可能なローダー・アップグレードを提供しています。配布版の256 tokensは最大約48.33億命令、全入力長の最大は約48.44億命令でした。[全入力長と実Wasm検索の検証](benchmarks/bekko25-operations/RESULTS.md)も行っています。
+
 ## 対応する入力長
 
 | 入力tokens（CLS/SEP込み） | query数 | 実行する層数の分割 |
