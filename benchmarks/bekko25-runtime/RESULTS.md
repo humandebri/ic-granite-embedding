@@ -59,6 +59,8 @@ These are small, translated, bounded candidate sets, not six independent native-
 
 ## Reproduction and scope
 
+The tracked iteration records retain the baseline and the two comparison fixtures used below. Other regenerable iteration JSON files are ignored locally; the [complete historical records](https://github.com/humandebri/ic-granite-embedding/tree/3aaaea994534105e422cfaba6136fe984a5ad0d8/benchmarks/bekko25-runtime) remain available at the measured commit. Restore or regenerate those records to repeat checks over every historical iteration.
+
 Validation completed: seven native core tests pass, including direct-buffer/wire equality at local/global window boundaries and recursive integer products against i64; nine final PocketIC whole-query cases pass; all nine runtime artifact hashes and all 24 retrieval runs / 1,200 rankings were independently checked from saved artifacts. Python Ruff and Rust formatting checks pass for the new runtime scripts/fragments. Native tests use the scalar Attention path, while the actual PocketIC fixtures exercise Wasm SIMD. [Source hashes](source-hashes.json) distinguish the measured generated source from the formatted reproduction builder/fragments.
 
 First prepare the cached pinned model and original probe using [bekko25_probe.py](../../experiments/multilingual/bekko25_probe.py), as described in the multilingual report. The pack is 418,404,508 bytes, SHA-256 `8fc88d56d68f550d1a920bab7d1ec42af9449240048393bd6daabbfcfa861724`. Python dependencies and model/data caches are shared with that experiment.

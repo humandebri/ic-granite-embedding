@@ -10,6 +10,18 @@ target/
 *.pt
 *.pth
 
+# Regenerable per-run benchmark outputs. Keep pinned selections, golden
+# fixtures, aggregate reports, and runtime comparison baselines tracked.
+/benchmarks/multilingual-global/NanoSciFact-*.json
+!/benchmarks/multilingual-global/NanoSciFact-selection.json
+/benchmarks/multilingual-global/NanoFiQA2018-*.json
+!/benchmarks/multilingual-global/NanoFiQA2018-selection.json
+/benchmarks/multilingual-global/summary.json
+/benchmarks/bekko25-runtime/iteration-*.json
+!/benchmarks/bekko25-runtime/iteration-0.json
+!/benchmarks/bekko25-runtime/iteration-6.json
+!/benchmarks/bekko25-runtime/iteration-8.json
+
 # Local configuration and credentials
 .env
 .env.*
