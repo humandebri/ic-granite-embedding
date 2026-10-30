@@ -1,0 +1,8 @@
+{
+  "model": "google/embeddinggemma-2",
+  "revision": "21ad7b3a498496f5c3e5de0d9afecd706e172a04",
+  "pack_bytes": 137912256,
+  "pack_sha256": "2951c70dbd9e83c4e7a5d1c928b4cf55c1a1713752f0b880e8f7713c2e76fc3c",
+  "cases_sha256": "6029a68456cee768c5b62c49a89f27bd6f0b19cdea832f5d1a9d3c883e75ab53",
+  "note": "Fixture-specific scaled input embeddings replace the lookup table only; all 24 layers, PLE, projection and pooling execute at runtime. Synthetic repeated JA/EN text with exact lengths, not retrieval accuracy fixtures."
+}

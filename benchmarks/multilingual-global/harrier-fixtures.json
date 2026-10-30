@@ -1,0 +1,13 @@
+{
+  "model": {
+    "id": "microsoft/harrier-oss-v1-270m",
+    "revision": "31de22b673913c7d658c0f03f792d77c2dcf8ebd",
+    "pooling": "last",
+    "query_prefix": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: "
+  },
+  "pack_bytes": 101014923,
+  "pack_sha256": "7ce349f40efc2f65de9543443503988f725c3035deb938b13fa655e2686394a2",
+  "cases_sha256": "cda2e662816e2b316acee4a37847dba9a40f85883067a07ae1be1ae93fa09a17",
+  "fixture_only": true,
+  "note": "Scaled embedding lookup only is exported; all 18 causal encoder layers and last-token pooling run in the canister."
+}

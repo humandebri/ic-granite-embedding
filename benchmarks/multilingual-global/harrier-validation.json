@@ -1,0 +1,153 @@
+{
+  "accepted": false,
+  "cosine_floor": 0.99,
+  "en_64_layer_trace": [
+    {
+      "cosine": 0.999999999999998,
+      "layer": 0,
+      "max_abs_difference": 0.000152587890625
+    },
+    {
+      "cosine": 0.9999999691700666,
+      "layer": 1,
+      "max_abs_difference": 1.353189468383789
+    },
+    {
+      "cosine": 0.9999979465453519,
+      "layer": 2,
+      "max_abs_difference": 9.9412841796875
+    },
+    {
+      "cosine": 0.9999670683832375,
+      "layer": 3,
+      "max_abs_difference": 27.801025390625
+    },
+    {
+      "cosine": 0.9999667736738787,
+      "layer": 4,
+      "max_abs_difference": 64.7060546875
+    },
+    {
+      "cosine": 0.9999730598809692,
+      "layer": 5,
+      "max_abs_difference": 91.10302734375
+    },
+    {
+      "cosine": 0.9999698241137459,
+      "layer": 6,
+      "max_abs_difference": 125.035400390625
+    },
+    {
+      "cosine": 0.9999691139656934,
+      "layer": 7,
+      "max_abs_difference": 151.44384765625
+    },
+    {
+      "cosine": 0.9999626094463743,
+      "layer": 8,
+      "max_abs_difference": 234.5634765625
+    },
+    {
+      "cosine": 0.999946881652535,
+      "layer": 9,
+      "max_abs_difference": 260.5908203125
+    },
+    {
+      "cosine": 0.9999157080394009,
+      "layer": 10,
+      "max_abs_difference": 371.2763671875
+    },
+    {
+      "cosine": 0.9997345881268843,
+      "layer": 11,
+      "max_abs_difference": 401.8720703125
+    },
+    {
+      "cosine": 0.9993862247382296,
+      "layer": 12,
+      "max_abs_difference": 559.07666015625
+    },
+    {
+      "cosine": 0.9992662998456725,
+      "layer": 13,
+      "max_abs_difference": 566.0703125
+    },
+    {
+      "cosine": 0.9989350608555766,
+      "layer": 14,
+      "max_abs_difference": 1067.8134765625
+    },
+    {
+      "cosine": 0.9981797569993415,
+      "layer": 15,
+      "max_abs_difference": 1687.154296875
+    },
+    {
+      "cosine": 0.9969264021587129,
+      "layer": 16,
+      "max_abs_difference": 1559.5625
+    },
+    {
+      "cosine": 0.9934347413223732,
+      "layer": 17,
+      "max_abs_difference": 1998.466064453125
+    }
+  ],
+  "note": "Gate failed: no canister execution results should be inferred from this prototype.",
+  "results": [
+    {
+      "accepted": true,
+      "case": "en-16",
+      "cosine_to_w8a8": 0.9921104427184299,
+      "native_split_exact": true
+    },
+    {
+      "accepted": false,
+      "case": "en-64",
+      "cosine_to_w8a8": 0.9871586029014909,
+      "native_split_exact": true
+    },
+    {
+      "accepted": false,
+      "case": "en-128",
+      "cosine_to_w8a8": 0.9845477288344161,
+      "native_split_exact": true
+    },
+    {
+      "accepted": true,
+      "case": "ar-16",
+      "cosine_to_w8a8": 0.9921104427184299,
+      "native_split_exact": true
+    },
+    {
+      "accepted": false,
+      "case": "ar-64",
+      "cosine_to_w8a8": 0.989054625375542,
+      "native_split_exact": true
+    },
+    {
+      "accepted": true,
+      "case": "ar-128",
+      "cosine_to_w8a8": 0.9914696394128965,
+      "native_split_exact": true
+    },
+    {
+      "accepted": true,
+      "case": "ko-16",
+      "cosine_to_w8a8": 0.9921104427184299,
+      "native_split_exact": true
+    },
+    {
+      "accepted": false,
+      "case": "ko-64",
+      "cosine_to_w8a8": 0.9871278228515167,
+      "native_split_exact": true
+    },
+    {
+      "accepted": false,
+      "case": "ko-128",
+      "cosine_to_w8a8": 0.9704580305652364,
+      "native_split_exact": true
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "model": {
+    "id": "hotchpotch/bekko-embedding-v1-a8m",
+    "revision": "c721113d59a1d91b447450324f51c4b3332c924a",
+    "pooling": "mean"
+  },
+  "parameters": 105975168,
+  "embedding_parameters": 98304000,
+  "config": {
+    "transformers_version": "5.20.2",
+    "architectures": [
+      "ModernBertModel"
+    ],
+    "output_hidden_states": false,
+    "return_dict": true,
+    "dtype": "float32",
+    "chunk_size_feed_forward": 0,
+    "is_encoder_decoder": false,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "problem_type": null,
+    "vocab_size": 256000,
+    "hidden_size": 384,
+    "intermediate_size": 1152,
+    "num_hidden_layers": 4,
+    "num_attention_heads": 6,
+    "hidden_activation": "gelu",
+    "max_position_embeddings": 8192,
+    "initializer_range": 0.02,
+    "initializer_cutoff_factor": 2.0,
+    "norm_eps": 1e-05,
+    "norm_bias": false,
+    "pad_token_id": 0,
+    "eos_token_id": 1,
+    "bos_token_id": 2,
+    "cls_token_id": 1,
+    "sep_token_id": 1,
+    "attention_bias": false,
+    "attention_dropout": 0.0,
+    "layer_types": [
+      "full_attention",
+      "sliding_attention",
+      "sliding_attention",
+      "full_attention"
+    ],
+    "rope_parameters": {
+      "sliding_attention": {
+        "rope_type": "default",
+        "rope_theta": 160000
+      },
+      "full_attention": {
+        "rope_type": "default",
+        "rope_theta": 160000
+      }
+    },
+    "local_attention": 128,
+    "embedding_dropout": 0.0,
+    "mlp_bias": false,
+    "mlp_dropout": 0.0,
+    "decoder_bias": true,
+    "classifier_pooling": "mean",
+    "classifier_dropout": 0.0,
+    "classifier_bias": false,
+    "classifier_activation": "gelu",
+    "deterministic_flash_attn": false,
+    "sparse_prediction": false,
+    "sparse_pred_ignore_index": -100,
+    "tie_word_embeddings": true,
+    "_name_or_path": "/Users/0xhude/.cache/huggingface/hub/models--hotchpotch--bekko-embedding-v1-a8m/snapshots/c721113d59a1d91b447450324f51c4b3332c924a",
+    "global_attn_every_n_layers": 3,
+    "gradient_checkpointing": false,
+    "layer_norm_eps": 1e-05,
+    "mask_token_id": 4,
+    "model_type": "modernbert",
+    "position_embedding_type": "sans_pos",
+    "repad_logits_with_grad": false,
+    "output_attentions": false
+  },
+  "environment": {
+    "torch": "2.14.1",
+    "transformers": "5.20.2",
+    "threads": 3
+  }
+}
