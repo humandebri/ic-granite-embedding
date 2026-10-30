@@ -1,0 +1,56 @@
+[
+  {
+    "language": "en",
+    "query": "fp16",
+    "index": "original",
+    "recall_at_5": 0.94,
+    "worsened_queries": 0,
+    "improved_queries": 0,
+    "top5_set_changed": 8
+  },
+  {
+    "language": "en",
+    "query": "bf16",
+    "index": "original",
+    "recall_at_5": 0.94,
+    "worsened_queries": 0,
+    "improved_queries": 0,
+    "top5_set_changed": 7
+  },
+  {
+    "language": "en",
+    "query": "int8",
+    "index": "original",
+    "recall_at_5": 0.94,
+    "worsened_queries": 0,
+    "improved_queries": 0,
+    "top5_set_changed": 7
+  },
+  {
+    "language": "ar",
+    "query": "fp16",
+    "index": "original",
+    "recall_at_5": 0.86,
+    "worsened_queries": 0,
+    "improved_queries": 0,
+    "top5_set_changed": 14
+  },
+  {
+    "language": "ar",
+    "query": "bf16",
+    "index": "original",
+    "recall_at_5": 0.86,
+    "worsened_queries": 0,
+    "improved_queries": 0,
+    "top5_set_changed": 7
+  },
+  {
+    "language": "ar",
+    "query": "int8",
+    "index": "original",
+    "recall_at_5": 0.86,
+    "worsened_queries": 0,
+    "improved_queries": 0,
+    "top5_set_changed": 11
+  }
+]

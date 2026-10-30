@@ -1,0 +1,11 @@
+[package]
+name = "bekko-memory-study"
+version = "0.1.0"
+edition = "2024"
+
+[workspace]
+
+[dependencies]
+bekko25-core = { path = "../../crates/bekko25-core" }
+serde_json = "1"
+half = "=1.8.3"
