@@ -118,10 +118,12 @@ fn activate_model() -> Result<(), String> {
     if !verified || n != PACK_BYTES as u64 {
         return Err("upload the complete verified weight pack first".into());
     }
-    let mut pack = vec![0; PACK_BYTES];
-    stable_read(HEADER, &mut pack);
-    let model = Model::load(&pack)?;
-    drop(pack);
+    let model = Model::load_from(PACK_BYTES, |offset, dest| {
+        let offset = u64::try_from(offset).map_err(|_| "pack offset overflow")?;
+        let start = HEADER.checked_add(offset).ok_or("pack offset overflow")?;
+        stable_read(start, dest);
+        Ok(())
+    })?;
     MODEL.with_borrow_mut(|m| *m = Some(model));
     LAST_ERROR.with_borrow_mut(|e| *e = None);
     Ok(())

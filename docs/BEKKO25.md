@@ -68,6 +68,8 @@ For RAG, split documents by sentences/paragraphs before tokenization, with up to
 
 ## Upgrades and recovery
 
+Activation reads the verified pack from stable memory into the final model allocations in bounded chunks. It does not allocate a second full pack in Wasm heap. The stable format and embedding API are unchanged. A local old-to-new upgrade measured a 417,660,928-byte heap reduction and bit-identical output for 313 cases; query instruction counts changed slightly. See [streamed activation verification](../benchmarks/bekko25-stream/RESULTS.md) for the exact artifacts and limits.
+
 ```sh
 CARGO_TARGET_DIR=.cache/bekko25-prod-target icp deploy bekko25 -e local --mode upgrade
 .cache/bekko25-prod-target/release/bekko25-load --environment local --activate-only
