@@ -9,6 +9,26 @@ permissions:
   contents: read
 
 jobs:
+  bekko25-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install pinned toolchain
+        run: |
+          rustup toolchain install 1.97.1 --profile minimal --target wasm32-unknown-unknown
+          rustup show active-toolchain
+      - name: Test Bekko a25m loader and compile all host clients
+        run: cargo test --release --locked -p bekko25-bench --bins
+      - name: Test build provenance and report generation
+        run: python3 -m unittest discover -s scripts -p 'test_bekko25_provenance.py' -v
+      - name: Check Bekko a25m public Candid
+        run: |
+          cargo run --quiet --release --locked -p bekko25-canister --example export_candid > "$RUNNER_TEMP/bekko25.did"
+          diff -u crates/bekko25-canister/bekko25.did "$RUNNER_TEMP/bekko25.did"
+      - name: Build Bekko a25m production Wasm
+        run: cargo build --release --locked -p bekko25-canister --target wasm32-unknown-unknown
+
   check:
     runs-on: ubuntu-latest
     timeout-minutes: 30

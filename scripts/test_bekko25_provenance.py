@@ -177,6 +177,47 @@ class ProvenanceTests(unittest.TestCase):
         self.assertEqual((self.out / "release.json").read_text(), "previous release")
         self.assertEqual((self.out / "RESULTS.md").read_text(), "previous results")
 
+    def test_new_report_labels_old_shared_runtime_checks_as_historical(self):
+        # Exercise the complete renderer with saved inference data. Validation
+        # is stubbed because this test checks publication wording, not model
+        # inference or the separately tested provenance gate.
+        records = Path(__file__).resolve().parents[1] / "benchmarks/bekko25-operations"
+        report = json.loads((records / "validation.json").read_text())
+        verified = json.loads((records / "verification.json").read_text())
+        build = {**self.record, "rustc": "test rustc", "cargo": "test cargo"}
+        report["build_record_sha256"] = "new-build"
+        for name in [
+            "live.json",
+            "recipe-artifact.json",
+            "sweep.json",
+            "stress.json",
+            "live-sweep.json",
+        ]:
+            self.write(f"results/{name}", (records / name).read_text())
+        # Stale/unparseable mutable records must never become current success
+        # claims. The historical section links to immutable published records.
+        self.write("results/a8-regression.json", "old invalid record")
+        self.write("results/generator-regression.json", "old invalid record")
+        with (
+            patch.object(reporter, "ROOT", self.root),
+            patch.object(reporter, "OUT", self.out),
+            patch.object(
+                reporter,
+                "validate_release_inputs",
+                return_value=(report, build, verified),
+            ),
+        ):
+            reporter.main()
+        text = (self.out / "RESULTS.md").read_text()
+        self.assertIn("2026-10-29 release records", text)
+        self.assertIn("Historical shared-runtime regression records", text)
+        self.assertIn("do not establish regression success for the current build", text)
+        self.assertIn(f"/blob/{reporter.HISTORICAL_REVISION}/", text)
+        self.assertNotIn("Its 15 fixtures and lifecycle/retrieval smoke pass", text)
+        self.assertNotIn("[regression](a8-regression.json)", text)
+        published = json.loads((self.out / "release.json").read_text())
+        self.assertEqual(published["build_record"], build)
+
     def test_failed_build_removes_previous_attestation(self):
         with (
             patch.object(builder, "ROOT", self.root),

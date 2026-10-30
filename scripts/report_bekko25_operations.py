@@ -11,6 +11,14 @@ from bekko25_provenance import validate_release_inputs
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "benchmarks/bekko25-operations"
 
+# Keep these links tied to the published records. They are context, not gates
+# or evidence that regressions were checked for a subsequent build.
+HISTORICAL_REVISION = "0501a20f7ed42a6eb94829d56de12b38362dc24b"
+HISTORICAL_RECORDS = (
+    "https://github.com/humandebri/ic-granite-embedding/blob/"
+    f"{HISTORICAL_REVISION}/benchmarks/bekko25-operations"
+)
+
 
 def main():
     target = ROOT / os.environ.get("CARGO_TARGET_DIR", ".cache/bekko25-prod-target")
@@ -108,7 +116,11 @@ The loader verifies model/revision/embedding-space identity and the complete loc
 
 The `@dfinity/rust@v3.2.0` recipe re-encodes the Wasm while adding cargo/template/Candid metadata. [The recipe record](recipe-artifact.json) reproduces the deployed hash exactly. Raw-module retrieval results are identified separately from the deployed module's full length sweep and golden comparisons. [The release manifest](release.json) pins source hashes, compiler and metadata-tool versions.
 
-The original a8m service was left unchanged. Its 15 fixtures and lifecycle/retrieval smoke pass with the shared-code build ([regression](a8-regression.json)); eight vectors are bit-identical to the original running a8m service ([live comparison](live.json)). The ordinary Granite generator's six original output files across 1152/1536 widths match the previous source exactly ([generator comparison](generator-regression.json)). The historical exploratory a25m materializer now pins commit `e281da1a289060101a0bfceb3ecf48403415b8d0`, so production refactors cannot silently turn its 13-layer probe into an a8m model.
+### Historical shared-runtime regression records
+
+The **2026-10-29 release records**, preserved in repository snapshot `{HISTORICAL_REVISION}`, recorded 15 a8m fixtures and lifecycle/retrieval smoke for a8m Wasm `6d905c9bb6f68cabca0d7814caf0fd439efcd385fe22e74fa76d19509fef7987` ([historical a8m record]({HISTORICAL_RECORDS}/a8-regression.json)), and six unchanged Granite generator outputs across 1152/1536 widths ([historical generator comparison]({HISTORICAL_RECORDS}/generator-regression.json)). These checks are **not revalidated by this report generator and do not establish regression success for the current build**. The current release manifest's source fingerprints do not attest these historical checks. Shared-kernel changes require new a8m and Granite regression runs before claiming compatibility for the changed build.
+
+The live comparison checks eight cached a8m vectors against the original running service; it does not execute the newly built a8m Wasm. The historical exploratory a25m materializer pins commit `e281da1a289060101a0bfceb3ecf48403415b8d0`, so production refactors cannot silently turn its 13-layer probe into an a8m model.
 
 This work leaves the dedicated local canister active and includes deployment/recovery tooling. **No mainnet deployment or mainnet load test was performed.** For a release on another platform version, rerun the artifact-specific envelope and quality checks; local single-node tests do not establish multi-node consensus or a throughput SLA.
 """
