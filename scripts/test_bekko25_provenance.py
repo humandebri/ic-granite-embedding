@@ -178,22 +178,47 @@ class ProvenanceTests(unittest.TestCase):
         self.assertEqual((self.out / "RESULTS.md").read_text(), "previous results")
 
     def test_new_report_labels_old_shared_runtime_checks_as_historical(self):
-        # Exercise the complete renderer with saved inference data. Validation
-        # is stubbed because this test checks publication wording, not model
-        # inference or the separately tested provenance gate.
-        records = Path(__file__).resolve().parents[1] / "benchmarks/bekko25-operations"
-        report = json.loads((records / "validation.json").read_text())
-        verified = json.loads((records / "verification.json").read_text())
+        # Exercise the renderer with small synthetic data. Validation is
+        # stubbed because this test checks wording, not model inference.
+        report = {
+            **self.report,
+            "model": {
+                "runtime_id": "test",
+                "embedding_space": "test",
+                "weight_pack_sha256": "test",
+            },
+            "cases": [
+                {"tokens": n, "instructions": 1}
+                for n in [2, 31, 63, 64, 65, 128, 192, 255, 256]
+            ],
+            "checks": ["check"],
+            "final_checks": ["final check"],
+            "wasm_memory_bytes": 1,
+            "stable_memory_bytes": 1,
+        }
+        verified = {
+            **self.verified,
+            "torch_references_checked": True,
+            "languages": {
+                "en": {
+                    "reference_recall5": 0.5,
+                    "qk13_reference_recall5": 0.5,
+                    "wasm_recall5": 0.5,
+                }
+            },
+            "maximum_instructions": 1,
+            "margin_percent": 99.0,
+            "retrieval_embeddings": 1,
+        }
         build = {**self.record, "rustc": "test rustc", "cargo": "test cargo"}
         report["build_record_sha256"] = "new-build"
-        for name in [
-            "live.json",
-            "recipe-artifact.json",
-            "sweep.json",
-            "stress.json",
-            "live-sweep.json",
-        ]:
-            self.write(f"results/{name}", (records / name).read_text())
+        self.write(
+            "results/live.json",
+            json.dumps({"status": {"id": "test"}, "network": {"api_url": "test"}}),
+        )
+        self.write("results/sweep.json", "[]")
+        self.write("results/stress.json", "[]")
+        self.write("results/live-sweep.json", '{"results": []}')
         # Stale/unparseable mutable records must never become current success
         # claims. The historical section links to immutable published records.
         self.write("results/a8-regression.json", "old invalid record")

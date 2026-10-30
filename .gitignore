@@ -10,17 +10,24 @@ target/
 *.pt
 *.pth
 
-# Regenerable per-run benchmark outputs. Keep pinned selections, golden
-# fixtures, aggregate reports, and runtime comparison baselines tracked.
-/benchmarks/multilingual-global/NanoSciFact-*.json
-!/benchmarks/multilingual-global/NanoSciFact-selection.json
-/benchmarks/multilingual-global/NanoFiQA2018-*.json
-!/benchmarks/multilingual-global/NanoFiQA2018-selection.json
-/benchmarks/multilingual-global/summary.json
-/benchmarks/bekko25-runtime/iteration-*.json
+# Generated benchmark details are local; reports, reproducibility inputs and
+# the golden-vector / reference-hash fixtures remain in Git.
+/benchmarks/bekko25-memory-study/**/*.json
+/benchmarks/bekko25-operations/**/*.json
+/benchmarks/bekko25-stable-read/**/*.json
+/benchmarks/bekko25-stream/**/*.json
+/benchmarks/embeddinggemma2/**/*.json
+!/benchmarks/embeddinggemma2/fixtures.json
+/benchmarks/multilingual-global/**/*.json
+!/benchmarks/multilingual-global/*-selection.json
+!/benchmarks/multilingual-global/*-model.json
+!/benchmarks/multilingual-global/*-fixtures.json
+/benchmarks/bekko25-runtime/**/*.json
 !/benchmarks/bekko25-runtime/iteration-0.json
 !/benchmarks/bekko25-runtime/iteration-6.json
 !/benchmarks/bekko25-runtime/iteration-8.json
+!/benchmarks/bekko25-runtime/source-hashes.json
+!/benchmarks/bekko25-runtime/reference-sha256.json
 
 # Local configuration and credentials
 .env

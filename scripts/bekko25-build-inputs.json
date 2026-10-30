@@ -23,6 +23,7 @@
     "scripts/prepare_bekko25.py",
     "scripts/validate_bekko25_operations.py",
     "scripts/report_bekko25_operations.py",
+    "benchmarks/bekko25-runtime/reference-sha256.json",
     "experiments/multilingual/evaluate.py",
     "experiments/multilingual/global_eval.py",
     "requirements.txt",

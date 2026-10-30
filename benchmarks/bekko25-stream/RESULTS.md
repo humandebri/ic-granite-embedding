@@ -1,6 +1,6 @@
 # Bekko a25m streamed activation
 
-2026-10-30、PocketIC 11.0.0 の Application subnet で測定。既存の検証済み pack を保持したまま、旧Wasmから新Wasmへupgradeし、再アップロードせずに `activate()` した。[測定値](verification.json)
+2026-10-30、PocketIC 11.0.0 の Application subnet で測定。既存の検証済み pack を保持したまま、旧Wasmから新Wasmへupgradeし、再アップロードせずに `activate()` した。[測定値](https://github.com/humandebri/ic-granite-embedding/blob/3aaaea994534105e422cfaba6136fe984a5ad0d8/benchmarks/bekko25-stream/verification.json)
 
 | 指標 | 旧Wasm | 新Wasm | 差 |
 |---|---:|---:|---:|

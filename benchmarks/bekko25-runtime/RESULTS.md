@@ -55,7 +55,7 @@ The paired reference retrieval check uses 256-token chunks, the same aligned 50 
 | Arabic | 76.52% | 77.02% | +0.50 |
 | Korean | 76.73% | 76.23% | -0.50 |
 
-These are small, translated, bounded candidate sets, not six independent native-language evaluations. Training overlap was not audited. They establish neither unchanged retrieval quality nor a universal language ranking. Do not compare their absolute 256-token scores with the earlier 128-token table as an isolated runtime effect. [Raw quality records](quality/summary.json) retain per-query rankings and cache hashes; [verification.json](verification.json) records independent recomputation of all 24 runs / 1,200 rankings.
+These are small, translated, bounded candidate sets, not six independent native-language evaluations. Training overlap was not audited. They establish neither unchanged retrieval quality nor a universal language ranking. Do not compare their absolute 256-token scores with the earlier 128-token table as an isolated runtime effect. [Raw quality records](https://github.com/humandebri/ic-granite-embedding/blob/3aaaea994534105e422cfaba6136fe984a5ad0d8/benchmarks/bekko25-runtime/quality/summary.json) retain per-query rankings and cache hashes; [verification.json](https://github.com/humandebri/ic-granite-embedding/blob/3aaaea994534105e422cfaba6136fe984a5ad0d8/benchmarks/bekko25-runtime/verification.json) records independent recomputation of all 24 runs / 1,200 rankings.
 
 ## Reproduction and scope
 

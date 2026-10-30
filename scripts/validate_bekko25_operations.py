@@ -116,12 +116,10 @@ def main():
             with np.load(ref_path) as reference:
                 assert np.array_equal(reference["parents"], selection["parents"])
                 ref = normalize(reference["vectors"])
-            old = json.loads(
-                (ROOT / "benchmarks/bekko25-runtime/quality/summary.json").read_text()
+            reference_hashes = json.loads(
+                (ROOT / "benchmarks/bekko25-runtime/reference-sha256.json").read_text()
             )
-            expected = next(
-                r for r in old["results"] if r["task"] == task and r["language"] == lang
-            )["runs"][mode]["vectors_sha256"]
+            expected = reference_hashes[f"{task}/{lang}/{mode}"]
             assert hashlib.sha256(ref_path.read_bytes()).hexdigest() == expected
             rs, rr = metrics(ref[:nq], ref[nq:], qs, ds, rel, selection["parents"])
             modes[mode] = {

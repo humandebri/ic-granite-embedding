@@ -4,11 +4,11 @@
 
 既存 `load_from` の挙動を保ち、外部行モードの `embed` / `full` が panic ではなくエラーを返すよう修正した。検証ツールは Wasm の hash、heap の削減量、各 query の成功と bit 一致を確認し、失敗時は非ゼロ終了する。
 
-修正版 raw Wasm `0ce0de4b515a543a16a47d6f9ac34cc057261ebf317066bbc7010e83c4a15ef9` を PocketIC 11.0.0 で旧版から upgrade し、同じ314ケースを再実行した。[再検証結果](verification-reviewed.json)では全ケースが成功・bit 一致し、heap は 568,000,512 → 174,653,440 B、stable memory は 418,447,360 B のままだった。観測した最大命令数は 4,803,805,418、旧版との差の最大は +709,827 命令。実 pack を使った別の API 検証では、通常読み込みと外部行モードの推論結果も bit 単位で一致した。
+修正版 raw Wasm `0ce0de4b515a543a16a47d6f9ac34cc057261ebf317066bbc7010e83c4a15ef9` を PocketIC 11.0.0 で旧版から upgrade し、同じ314ケースを再実行した。[再検証結果](https://github.com/humandebri/ic-granite-embedding/blob/3aaaea994534105e422cfaba6136fe984a5ad0d8/benchmarks/bekko25-stable-read/verification-reviewed.json)では全ケースが成功・bit 一致し、heap は 568,000,512 → 174,653,440 B、stable memory は 418,447,360 B のままだった。観測した最大命令数は 4,803,805,418、旧版との差の最大は +709,827 命令。実 pack を使った別の API 検証では、通常読み込みと外部行モードの推論結果も bit 単位で一致した。
 
 以下はレビュー対応前の試作 Wasm による元の測定記録である。以下の未測定事項は修正版にも当てはまる。
 
-2026-10-30、PocketIC 11.0.0 / Application subnetで、現在の分割読み込み版と試作版を同じcanister・同じpackで比較した。隔離コピー上の試作であり、製品のcanisterコード・既存のローカルcanister・mainnetは変更していない。[全測定値](verification.json)・[試作コードと手順](../../experiments/bekko25-stable-read/README.md)
+2026-10-30、PocketIC 11.0.0 / Application subnetで、現在の分割読み込み版と試作版を同じcanister・同じpackで比較した。隔離コピー上の試作であり、製品のcanisterコード・既存のローカルcanister・mainnetは変更していない。[全測定値](https://github.com/humandebri/ic-granite-embedding/blob/3aaaea994534105e422cfaba6136fe984a5ad0d8/benchmarks/bekko25-stable-read/verification.json)・[試作コードと手順](../../experiments/bekko25-stable-read/README.md)
 
 試作は行列演算用の重みをheapに保持し、256,000行×384個のF32語彙表だけをheapに確保しない。queryごとに、入力tokenにつき1回、対応する1,536 bytesをstable memoryから読み、通常のF32推論に渡す。最大256 tokenでは最大256回・393,216 bytes。重複tokenのcacheやreadのまとめは行っていない。固定packの検証済みhashと固定offsetを前提とした試作であり、一般化した安全な実装ではない。
 

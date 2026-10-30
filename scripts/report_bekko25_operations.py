@@ -84,7 +84,7 @@ Both raw and deployed modules pass all **255 lengths, 2–256**. The raw-module 
 
 The recursive Strassen path is restricted to complete 128-row multiples. In particular, a 192-row bucket uses one level, preventing a partial 32-row leaf. Leaf shape assertions are retained before unsafe SIMD. Native padded/unpadded products and recursive products are checked against exact integer references; integer accumulation widens as documented in the core. Nine focused native tests pass.
 
-[Raw length sweep](sweep.json), [stress inputs](stress.json), [deployed-module sweep](live-sweep.json), [full validation](validation.json), [independent verification](verification.json).
+Raw length sweep (`sweep.json`, generated locally), stress inputs (`stress.json`, generated locally), deployed-module sweep (`live-sweep.json`, generated locally), full validation (`validation.json`, generated locally), independent verification (`verification.json`, generated locally).
 
 ## Retrieval from actual Wasm query outputs
 
@@ -114,7 +114,7 @@ The loader verifies model/revision/embedding-space identity and the complete loc
 - Local canister: `{live["status"]["id"]}`, API `{live["network"]["api_url"]}`.
 - Measured raw-module heap: {report["wasm_memory_bytes"]} bytes; stable memory: {report["stable_memory_bytes"]} bytes. These are not mainnet capacity/latency estimates.
 
-The `@dfinity/rust@v3.2.0` recipe re-encodes the Wasm while adding cargo/template/Candid metadata. [The recipe record](recipe-artifact.json) reproduces the deployed hash exactly. Raw-module retrieval results are identified separately from the deployed module's full length sweep and golden comparisons. [The release manifest](release.json) pins source hashes, compiler and metadata-tool versions.
+The `@dfinity/rust@v3.2.0` recipe re-encodes the Wasm while adding cargo/template/Candid metadata. The recipe record (`recipe-artifact.json`, generated locally) reproduces the deployed hash exactly. Raw-module retrieval results are identified separately from the deployed module's full length sweep and golden comparisons. The release manifest (`release.json`, generated locally) pins source hashes, compiler and metadata-tool versions.
 
 ### Historical shared-runtime regression records
 
