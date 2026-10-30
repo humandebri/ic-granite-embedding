@@ -1,0 +1,30 @@
+{
+  "files": {
+    "experiments/multilingual/bekko25_runtime.py": "df755a7aae912d52e11222880201f230844c0dd3670f55c684ae32731cfb70ab",
+    "experiments/multilingual/attention_direct_fragment.rs": "617c32282fed5fd6e250b9764666931c09a3c9db2c0a1ac605f3c74139795930",
+    "experiments/multilingual/qk13_fragment.rs": "3e4cf6f34d41817018e80fc071de9acff142fe91e76e08bfdb1e6f15b962b5f0",
+    "experiments/multilingual/strassen2_fragment.rs": "ca6965a025c99f2708fd6204daf87baaccac4d99232e105503aee77f70cc8a95",
+    "experiments/multilingual/strassen2_tests.rs": "59c80a9dd2312034dd01243d3ba1b64af7c1c7e263673d51a6f4e2e053d940e3",
+    "experiments/embeddinggemma2/src/bin/runtime25.rs": "52233d387e380250f121834f3fd379ec4964f0a5c751d5d2a5ab6de11b4c479e",
+    ".cache/bekko25-runtime/port/crates/bekko-core/src/lib.rs": "0ceb6705736a4ec0be8dab4346103be4ba7eb5a7f9bc8197abf9d4497126e3dd",
+    ".cache/bekko25-runtime/port/crates/core/src/strassen.rs": "ffb9d2d87579ccfd83443bb7076d25b937ef92e51ad5ae79eaa647179020f9d8",
+    ".cache/bekko25-runtime/port/crates/kernel-gen/src/lib.rs": "6b6146af4426a7b6c3694a7f1b1490039c51437b76d3b953b3114d13ec6b8159",
+    ".cache/bekko25-runtime/port/crates/probe/src/lib.rs": "0f27629d9dec815b599d4aa241619afc0859f5f274063c6c10178458cc7df5df"
+  },
+  "note": "Generated source hashes correspond to the measured final build; tracked generator/fragments are formatted reproduction sources.",
+  "qk13_direct_vs_final_bit_exact_cases": [
+    "en-64",
+    "en-128",
+    "en-256",
+    "ar-64",
+    "ar-128",
+    "ko-64",
+    "ko-128"
+  ],
+  "validation": {
+    "native_core_tests_passed": 7,
+    "pocketic_final_cases_passed": 9,
+    "retrieval_runs_recomputed": 24,
+    "rankings_recomputed": 1200
+  }
+}

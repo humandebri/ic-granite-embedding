@@ -10,11 +10,12 @@ Keep the models in one repository for now, with separate crates, Wasm artifacts 
 
 | Component | Purpose |
 | --- | --- |
-| `crates/bekko-core` | Fixed four-layer Bekko encoder, 6 × 64-dimensional heads, mean pooling |
+| `crates/bekko-core` | Shared fixed-shape Bekko encoder; a8m alias pins four layers and F32 Attention |
 | `crates/bekko-canister` | Dedicated API, controller-only weight loading, stable weight storage |
 | `crates/bekko-bench` | Disposable PocketIC tests and local weight-loading client |
 | `crates/kernel-gen` | SIMD GEMM generation shared by Granite and Bekko |
-| `crates/core/src/strassen.rs` | Exact Strassen arithmetic compiled for each model's dimensions |
+| `crates/core/src/strassen.rs` | Granite's exact packed Strassen arithmetic |
+| `crates/bekko-core/src/strassen.rs` | Bekko's packed Strassen arithmetic; optional second level for a25m Wo |
 
 Granite and Bekko have independent public APIs and build targets. Splitting repositories now would require publishing/versioning the shared kernel code or synchronizing copies. Consider a split if ownership, release schedules or licensing requirements diverge. This implementation shares the numerical kernels without introducing a runtime-selectable model framework.
 

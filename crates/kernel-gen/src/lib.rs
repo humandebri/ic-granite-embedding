@@ -278,6 +278,16 @@ fn score_four_kernel() -> String {
 }
 
 pub fn generate(intermediate: usize) {
+    generate_inner(intermediate, false);
+}
+
+/// Bekko's optional depth-two Wo and four-query AV kernels. Granite builds
+/// retain exactly their existing generated kernels.
+pub fn generate_bekko() {
+    generate_inner(1152, true);
+}
+
+fn generate_inner(intermediate: usize, bekko: bool) {
     assert!(matches!(intermediate, 1152 | 1536));
     let mut s = String::new();
     for (cols, tokens, outputs) in [
@@ -305,6 +315,24 @@ pub fn generate(intermediate: usize) {
             s.push_str(&kernel(intermediate / 2, 32, 64, true, intermediate));
         }
     }
+    if bekko {
+        for (cols, outputs) in [(96, 64), (96, 32), (288, 32)] {
+            s.push_str(&kernel(cols, 32, outputs, true, intermediate).replace(
+                &format!("packed_{cols}("),
+                &format!("packed_{cols}_{outputs}("),
+            ));
+        }
+        fs::write(
+            PathBuf::from(env::var_os("OUT_DIR").unwrap()).join("bekko_av.rs"),
+            bekko_av_kernel(),
+        )
+        .unwrap();
+        fs::write(
+            PathBuf::from(env::var_os("OUT_DIR").unwrap()).join("bekko_qk.rs"),
+            bekko_qk_kernel(),
+        )
+        .unwrap();
+    }
     fs::write(
         PathBuf::from(env::var_os("OUT_DIR").unwrap()).join("tree.rs"),
         s,
@@ -321,4 +349,96 @@ pub fn generate(intermediate: usize) {
     )
     .unwrap();
     println!("cargo:rerun-if-changed=build.rs");
+}
+
+fn bekko_av_kernel() -> String {
+    let mut s = String::from(
+        r#"
+#[cfg(target_arch="wasm32")]
+fn value_four(v:&[f32],kn:usize,h:usize,scores:&[f32],inverse:&[f32;4],first:&[usize;4],last:&[usize;4],count:usize,out:&mut[f32]) {
+    use core::arch::wasm32::*;
+    assert!((1..=4).contains(&count) && h<6 && kn<=MAX_TOKENS && v.len()==kn*H);
+    assert!(scores.len()==4*kn && out.len()>=count*H);
+    for a in 0..count {assert!(first[a]<=last[a] && last[a]<=kn);}
+    assert!(first[..count].windows(2).all(|w|w[0]<=w[1]) && last[..count].windows(2).all(|w|w[0]<=w[1]));
+    // SAFETY: bounds above cover all shared V loads, active score ranges and
+    // count disjoint output rows. Each accumulator retains increasing key order.
+    unsafe {
+"#,
+    );
+    for a in 0..4 {
+        for d in 0..16 {
+            s.push_str(&format!("let mut s{a}_{d}=f32x4_splat(0.);\n"));
+        }
+    }
+    s.push_str("for j in first[0]..last[count-1] {let src=v.as_ptr().add(j*H+h*D);\n");
+    for d in 0..16 {
+        s.push_str(&format!("let v{d}=v128_load(src.add({}).cast());\n", 4 * d));
+    }
+    for a in 0..4 {
+        s.push_str(&format!("if {a}<count && j>=first[{a}] && j<last[{a}] {{let prob=f32x4_splat(scores[{a}*kn+j]*inverse[{a}]);\n"));
+        for d in 0..16 {
+            s.push_str(&format!(
+                "s{a}_{d}=f32x4_add(s{a}_{d},f32x4_mul(prob,v{d}));\n"
+            ));
+        }
+        s.push_str("}\n");
+    }
+    s.push_str("}\n");
+    for a in 0..4 {
+        s.push_str(&format!(
+            "if {a}<count {{let dst=out.as_mut_ptr().add({a}*H+h*D);\n"
+        ));
+        for d in 0..16 {
+            s.push_str(&format!(
+                "v128_store(dst.add({}).cast(),s{a}_{d});\n",
+                4 * d
+            ));
+        }
+        s.push_str("}\n");
+    }
+    s.push_str("}}\n");
+    s
+}
+
+fn bekko_qk_kernel() -> String {
+    let mut s = String::from(
+        r#"
+#[cfg(target_arch="wasm32")]
+fn score_four13(q:&[f32],qstride:usize,k:&[i16],scales:&[f32],head:usize,heads:usize,kn:usize,first:&[usize;4],last:&[usize;4],count:usize,scores:&mut[f32])->[f32;4] {
+    use core::arch::wasm32::*;
+    assert!((1..=4).contains(&count) && heads==6 && head<heads && qstride==H && kn<=MAX_TOKENS);
+    assert!(q.len()>=(count-1)*qstride+D && k.len()==kn*heads*D && scales.len()==kn*heads && scores.len()==4*kn);
+    for a in 0..count {assert!(first[a]<=last[a] && last[a]<=kn);}
+    assert!(first[..count].windows(2).all(|w|w[0]<=w[1]) && last[..count].windows(2).all(|w|w[0]<=w[1]));
+    let mut quant=[0i16;256];let mut qs=[1e-12f32;4];let mut maximum=[f32::NEG_INFINITY;4];
+    for a in 0..count {qs[a]=quant13(&q[a*qstride..a*qstride+D],&mut quant[a*D..(a+1)*D]);}
+    // SAFETY: complete quantized heads and monotonic key windows were checked
+    // above. Each i32 lane sums <=16*8191^2; widen before combining the lanes.
+    unsafe {
+"#,
+    );
+    for a in 0..4 {
+        for d in 0..8 {
+            s.push_str(&format!(
+                "let q{a}_{d}=v128_load(quant.as_ptr().add({}).cast());\n",
+                a * 64 + d * 8
+            ));
+        }
+    }
+    s.push_str("for j in first[0]..last[count-1] {let key=k.as_ptr().add(j*heads*64+head*64);let ks=scales[j*heads+head];\n");
+    for d in 0..8 {
+        s.push_str(&format!("let k{d}=v128_load(key.add({}).cast());\n", d * 8));
+    }
+    for a in 0..4 {
+        s.push_str(&format!("let mut sum{a}=i32x4_dot_i16x8(q{a}_0,k0);\n"));
+        for d in 1..8 {
+            s.push_str(&format!(
+                "sum{a}=i32x4_add(sum{a},i32x4_dot_i16x8(q{a}_{d},k{d}));\n"
+            ));
+        }
+        s.push_str(&format!("if {a}<count && j>=first[{a}] && j<last[{a}] {{let total=i32x4_extract_lane::<0>(sum{a})as i64+i32x4_extract_lane::<1>(sum{a})as i64+i32x4_extract_lane::<2>(sum{a})as i64+i32x4_extract_lane::<3>(sum{a})as i64;let score=total as f32*(qs[{a}]*ks)*0.125;scores[{a}*kn+j]=score;maximum[{a}]=maximum[{a}].max(score);}}\n"));
+    }
+    s.push_str("}}maximum}\n");
+    s
 }

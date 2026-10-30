@@ -1,0 +1,23 @@
+{
+  "model": {
+    "id": "hotchpotch/bekko-embedding-v1-a25m",
+    "revision": "44f0b8af0f487acd0ccf1a7cb7ae7a29a6dfc09c",
+    "pooling": "mean"
+  },
+  "pack_bytes": 418404508,
+  "pack_sha256": "8fc88d56d68f550d1a920bab7d1ec42af9449240048393bd6daabbfcfa861724",
+  "cases_sha256": "522a68a2f4747880d147c058aada0e40e401bf41c05359b9bd6f866bbaf3316f",
+  "materialized_sources": {
+    "Cargo.toml": "b6e6bd01dd4cf9e895ff6565efd99316295ba1f855a5b4d21c8c30cfc3e6b4fa",
+    "rust-toolchain.toml": "ae90ff053fadbe8e68cca6c2bef6d3705166557d830f319547b5f8511c8dfd5d",
+    ".cargo/config.toml": "91a502066e179b2525929d903b188b1b6bb10e6b105a81b33a834497c50481a4",
+    "crates/kernel-gen/Cargo.toml": "68c94f54354e26a5aa8a78a5e7d2a181ae6e08d1055b9199722c4c12585c9461",
+    "crates/bekko-core/Cargo.toml": "8a85a8b2a361a4319c604d78c9964d79a47d3ef4187f017899e9b4200df263ae",
+    "crates/bekko-core/build.rs": "5d032e688e0630842328b11a4c54b9ecae58a33906a04ec58f0d8d42ac781908",
+    "crates/probe/Cargo.toml": "8ac922bae0674fe95b8c833e6a5acf3ea5dc43edb9eb18865894ebcef80b09c7",
+    "crates/kernel-gen/src/lib.rs": "5d3385e532dcefd2a835bcbae22b9e16392e52cfd5dc20b38c6a9039e6caaf3a",
+    "crates/core/src/strassen.rs": "da6bf87b49bfc22b6b05e578afa857635ae6d5ce258190cccb47ed103d85d492",
+    "crates/bekko-core/src/lib.rs": "f6021626c091a806ed3cfd72a577607fd13ef68192dac61cd35f5e4c0e7da279",
+    "crates/probe/src/lib.rs": "b6c3d37f51a8b60a6e6c04b293b13fb4f9c55a41030fff99df5133536c18a9b8"
+  }
+}

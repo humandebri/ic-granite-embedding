@@ -1,15 +1,15 @@
-//! Fixed Bekko a8m W8A8 encoder, full four-layer mean pooling.
+//! Shared fixed-shape Bekko encoder. Model aliases pin layer count and precision.
 use serde::Deserialize;
-use std::collections::BTreeMap;
+use std::{cell::RefCell, collections::BTreeMap};
 macro_rules! phase {
     ($name:expr, $body:expr) => {
         $body
     };
 }
 include!(concat!(env!("OUT_DIR"), "/tree.rs"));
+mod optimized_attention;
 #[cfg(feature = "strassen")]
 #[allow(unexpected_cfgs)]
-#[path = "../../core/src/strassen.rs"]
 mod strassen;
 #[cfg(all(target_arch = "wasm32", feature = "strassen-wo"))]
 use self::packed_576 as packed_768;
@@ -42,12 +42,12 @@ struct Descriptor {
     kind: String,
 }
 
-fn tensor_bytes<'a>(
-    data: &'a [u8],
+fn tensor_range(
+    data_len: usize,
     descriptor: &Descriptor,
     shape: &[usize],
     kind: &str,
-) -> Result<&'a [u8], String> {
+) -> Result<std::ops::Range<usize>, String> {
     if descriptor.shape != shape || descriptor.kind != kind {
         return Err("tensor shape/kind".into());
     }
@@ -61,8 +61,20 @@ fn tensor_bytes<'a>(
         return Err("tensor length".into());
     }
     let end = descriptor.offset.checked_add(bytes).ok_or("tensor range")?;
-    data.get(descriptor.offset..end)
-        .ok_or("tensor range".into())
+    if end > data_len {
+        return Err("tensor range".into());
+    }
+    Ok(descriptor.offset..end)
+}
+
+fn tensor_bytes<'a>(
+    data: &'a [u8],
+    descriptor: &Descriptor,
+    shape: &[usize],
+    kind: &str,
+) -> Result<&'a [u8], String> {
+    let range = tensor_range(data.len(), descriptor, shape, kind)?;
+    Ok(&data[range])
 }
 
 pub struct Linear {
@@ -72,6 +84,7 @@ pub struct Linear {
     scales: Vec<f32>,
     rows: usize,
     cols: usize,
+    bucketed: bool,
 }
 pub struct Layer {
     qkv: Linear,
@@ -81,13 +94,15 @@ pub struct Layer {
     attn_norm: Vec<f32>,
     mlp_norm: Vec<f32>,
 }
-pub struct Model {
+pub struct Encoder<const LAYERS: usize, const QK13: bool> {
     embeddings: Vec<f32>,
     embedding_norm: Vec<f32>,
     final_norm: Vec<f32>,
     layers: Vec<Layer>,
     rope: [Vec<[(f32, f32); 32]>; 2],
 }
+/// The existing a8m model retains its four-layer F32 Attention path.
+pub type Model = Encoder<4, false>;
 
 fn floats(b: &[u8]) -> Result<Vec<f32>, String> {
     if b.len() % 4 != 0 {
@@ -182,8 +197,11 @@ fn read_bf16(b: &[u8]) -> Vec<f32> {
         .collect()
 }
 
-impl Model {
+impl<const LAYERS: usize, const QK13: bool> Encoder<LAYERS, QK13> {
     pub fn load(pack: &[u8]) -> Result<Self, String> {
+        if !matches!(LAYERS, 4 | 13) || QK13 && LAYERS != 13 {
+            return Err("unsupported fixed Bekko configuration".into());
+        }
         let len = usize::try_from(u64::from_le_bytes(
             pack.get(..8).ok_or("pack header")?.try_into().unwrap(),
         ))
@@ -211,7 +229,14 @@ impl Model {
                 || cfg!(feature = "strassen-wo") && rows == H && cols == I
                 || cfg!(feature = "strassen-qkv") && rows == 3 * H && cols == H
                 || cfg!(feature = "strassen-out") && rows == H && cols == H)
-                .then(|| strassen::Prepared::new(&weights, rows, cols));
+                .then(|| {
+                    strassen::Prepared::new_depth(
+                        &weights,
+                        rows,
+                        cols,
+                        if LAYERS == 13 && cols == I { 2 } else { 1 },
+                    )
+                });
             Ok(Linear {
                 #[cfg(feature = "strassen")]
                 prepared,
@@ -219,10 +244,133 @@ impl Model {
                 scales: floats(&b[rows * cols..])?,
                 rows,
                 cols,
+                bucketed: LAYERS == 13,
             })
         };
         let mut layers = Vec::new();
-        for l in 0..4 {
+        for l in 0..LAYERS {
+            let p = format!("layers.{l}");
+            layers.push(Layer {
+                qkv: linear(&format!("{p}.attn.Wqkv.weight"), 3 * H, H)?,
+                out: linear(&format!("{p}.attn.Wo.weight"), H, H)?,
+                wi: linear(&format!("{p}.mlp.Wi.weight"), 2 * I, H)?,
+                wo: linear(&format!("{p}.mlp.Wo.weight"), H, I)?,
+                attn_norm: if l == 0 {
+                    Vec::new()
+                } else {
+                    f(&format!("{p}.attn_norm.weight"), &[H])?
+                },
+                mlp_norm: f(&format!("{p}.mlp_norm.weight"), &[H])?,
+            });
+        }
+        Ok(Self {
+            embeddings: f("embeddings.tok_embeddings.weight", &[256000, H])?,
+            embedding_norm: f("embeddings.norm.weight", &[H])?,
+            final_norm: f("final_norm.weight", &[H])?,
+            layers,
+            rope: [160000f32, 160000f32].map(|theta| {
+                let frequencies: [f32; 32] =
+                    std::array::from_fn(|i| theta.powf(-((2 * i) as f32) / D as f32));
+                (0..MAX_TOKENS)
+                    .map(|position| {
+                        std::array::from_fn(|i| (position as f32 * frequencies[i]).sin_cos())
+                    })
+                    .collect()
+            }),
+        })
+    }
+
+    /// Loads a verified pack through bounded reads without copying it into the heap.
+    /// Keep tensor validation and model construction equivalent to `load`.
+    pub fn load_from(
+        pack_len: usize,
+        read: impl FnMut(usize, &mut [u8]) -> Result<(), String>,
+    ) -> Result<Self, String> {
+        if !matches!(LAYERS, 4 | 13) || QK13 && LAYERS != 13 {
+            return Err("unsupported fixed Bekko configuration".into());
+        }
+        if pack_len < 8 {
+            return Err("pack header".into());
+        }
+        let read = RefCell::new(read);
+        let mut header_len = [0; 8];
+        read.borrow_mut()(0, &mut header_len)?;
+        let len =
+            usize::try_from(u64::from_le_bytes(header_len)).map_err(|_| "pack metadata length")?;
+        let end = 8usize.checked_add(len).ok_or("pack metadata length")?;
+        if end > pack_len || len > 1_048_576 {
+            return Err("pack metadata length".into());
+        }
+        let mut metadata = vec![0; len];
+        read.borrow_mut()(8, &mut metadata)?;
+        let header: BTreeMap<String, Descriptor> =
+            serde_json::from_slice(&metadata).map_err(|e| e.to_string())?;
+        let range =
+            |name: &str, shape: &[usize], kind: &str| -> Result<std::ops::Range<usize>, String> {
+                let d = header.get(name).ok_or_else(|| format!("missing {name}"))?;
+                let r = tensor_range(pack_len - end, d, shape, kind)
+                    .map_err(|e| format!("{name}: {e}"))?;
+                Ok(end + r.start..end + r.end)
+            };
+        let f = |name: &str, shape: &[usize]| -> Result<Vec<f32>, String> {
+            let r = range(name, shape, "f32")?;
+            let mut values = vec![0.0_f32; r.len() / 4];
+            #[cfg(target_endian = "little")]
+            {
+                // f32 accepts every bit pattern; the initialized allocation covers r.len() bytes.
+                let bytes = unsafe {
+                    std::slice::from_raw_parts_mut(values.as_mut_ptr().cast::<u8>(), r.len())
+                };
+                for (i, chunk) in bytes.chunks_mut(1_048_576).enumerate() {
+                    read.borrow_mut()(r.start + i * 1_048_576, chunk)?;
+                }
+            }
+            #[cfg(not(target_endian = "little"))]
+            for (i, chunk) in values.chunks_mut(16_384).enumerate() {
+                let mut bytes = vec![0; chunk.len() * 4];
+                read.borrow_mut()(r.start + i * 65_536, &mut bytes)?;
+                for (v, b) in chunk.iter_mut().zip(bytes.chunks_exact(4)) {
+                    *v = f32::from_le_bytes(b.try_into().unwrap());
+                }
+            }
+            if values.iter().any(|x| !x.is_finite()) {
+                return Err("nonfinite input".into());
+            }
+            Ok(values)
+        };
+        let linear = |name: &str, rows: usize, cols: usize| -> Result<Linear, String> {
+            let r = range(name, &[rows, cols], "i8")?;
+            let mut b = vec![0; r.len()];
+            read.borrow_mut()(r.start, &mut b)?;
+            let weights: Vec<i16> = b[..rows * cols].iter().map(|x| *x as i8 as i16).collect();
+            if weights.iter().any(|v| !(-127..=127).contains(v)) {
+                return Err("INT8 range".into());
+            }
+            #[cfg(feature = "strassen")]
+            let prepared = (rows == 2 * I && cols == H
+                || cfg!(feature = "strassen-wo") && rows == H && cols == I
+                || cfg!(feature = "strassen-qkv") && rows == 3 * H && cols == H
+                || cfg!(feature = "strassen-out") && rows == H && cols == H)
+                .then(|| {
+                    strassen::Prepared::new_depth(
+                        &weights,
+                        rows,
+                        cols,
+                        if LAYERS == 13 && cols == I { 2 } else { 1 },
+                    )
+                });
+            Ok(Linear {
+                #[cfg(feature = "strassen")]
+                prepared,
+                weights,
+                scales: floats(&b[rows * cols..])?,
+                rows,
+                cols,
+                bucketed: LAYERS == 13,
+            })
+        };
+        let mut layers = Vec::new();
+        for l in 0..LAYERS {
             let p = format!("layers.{l}");
             layers.push(Layer {
                 qkv: linear(&format!("{p}.attn.Wqkv.weight"), 3 * H, H)?,
@@ -315,8 +463,13 @@ impl Model {
 
     pub fn full(&self, ids: &[u32]) -> Result<Vec<f32>, String> {
         let mut x = self.embed(ids)?;
-        for layer in 0..4 {
+        for layer in 0..LAYERS {
             let qkv = self.qkv(layer, 0, &x);
+            if QK13 {
+                let context = optimized_attention::compute(layer, ids.len(), &qkv)?;
+                x = self.finish(layer, &x, &context);
+                continue;
+            }
             let mut context = vec![0.; ids.len() * H];
             for start in (0..ids.len()).step_by(128) {
                 let rows = 128.min(ids.len() - start);
@@ -512,6 +665,20 @@ impl Linear {
     fn apply_quantized(&self, quant: &[i16], scales: &[f32]) -> Vec<f32> {
         let n = scales.len();
         assert_eq!(quant.len(), n * self.cols);
+        // Quantization is per row. Zero rows cannot change any real token's
+        // product, and rounding up avoids expensive scalar/tiny GEMM tails.
+        // Padding exists only inside this linear operator, never in Attention
+        // or mean pooling. a8m keeps its existing execution path.
+        if self.bucketed && n >= 64 && n % 64 != 0 {
+            let padded = n.next_multiple_of(64);
+            let mut q = quant.to_vec();
+            q.resize(padded * self.cols, 0);
+            let mut s = scales.to_vec();
+            s.resize(padded, 1.);
+            let mut out = self.apply_quantized(&q, &s);
+            out.truncate(n * self.rows);
+            return out;
+        }
         let mut y = Vec::<f32>::with_capacity(n * self.rows);
         let mut t = 0;
         #[cfg(feature = "strassen")]
@@ -1167,14 +1334,24 @@ mod tests {
             bytes: H * 4,
             kind: "f32".into(),
         };
-        assert!(tensor_bytes(&[], &d, &[H], "f32").is_err());
+        assert!(tensor_range(0, &d, &[H], "f32").is_err());
         let d = Descriptor {
             shape: vec![H + 1],
             offset: 0,
             bytes: H * 4,
             kind: "f32".into(),
         };
-        assert!(tensor_bytes(&vec![0; H * 4], &d, &[H], "f32").is_err());
+        assert!(tensor_range(H * 4, &d, &[H], "f32").is_err());
+        assert!(Model::load_from(8, |_, _| Err("read failure".into())).is_err());
+        let too_large = (1_048_577_u64).to_le_bytes();
+        assert!(
+            Model::load_from(2_000_000, |offset, dest| {
+                assert_eq!(offset, 0);
+                dest.copy_from_slice(&too_large);
+                Ok(())
+            })
+            .is_err()
+        );
     }
     #[test]
     fn attention_includes_last_dimension_of_last_head() {
@@ -1200,6 +1377,7 @@ mod tests {
             scales: vec![1.; H],
             rows: H,
             cols: I,
+            bucketed: false,
         };
         let q: Vec<i16> = (0..4 * I)
             .map(|i| if i % 3 == 0 { -127 } else { 127 })
@@ -1215,6 +1393,47 @@ mod tests {
                 .map(|v| *v as i64 * 127)
                 .sum::<i64>() as f32;
             assert!(got[t * H..(t + 1) * H].iter().all(|v| *v == expected));
+        }
+    }
+
+    #[test]
+    fn padded_linear_preserves_every_real_row_at_bucket_boundaries() {
+        for (rows, cols) in [(3 * H, H), (H, H), (2 * I, H), (H, I)] {
+            let weights: Vec<i16> = (0..rows * cols)
+                .map(|i| ((i * 73 + 11) % 255) as i16 - 127)
+                .collect();
+            let mut linear = Linear {
+                #[cfg(feature = "strassen")]
+                prepared: Some(strassen::Prepared::new_depth(
+                    &weights,
+                    rows,
+                    cols,
+                    if cols == I { 2 } else { 1 },
+                )),
+                weights,
+                scales: vec![0.003; rows],
+                rows,
+                cols,
+                bucketed: false,
+            };
+            for n in [65, 127, 129, 193, 255] {
+                let q: Vec<i16> = (0..n * cols)
+                    .map(|i| ((i * 37 + 19) % 255) as i16 - 127)
+                    .collect();
+                let scales = vec![0.01; n];
+                linear.bucketed = false;
+                let reference = linear.apply_quantized(&q, &scales);
+                linear.bucketed = true;
+                let padded = linear.apply_quantized(&q, &scales);
+                assert_eq!(padded.len(), n * rows);
+                assert!(
+                    reference
+                        .iter()
+                        .zip(padded)
+                        .all(|(a, b)| a.to_bits() == b.to_bits()),
+                    "n={n} rows={rows} cols={cols}"
+                );
+            }
         }
     }
 }
