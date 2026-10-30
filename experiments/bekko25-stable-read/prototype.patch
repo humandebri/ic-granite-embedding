@@ -1,0 +1,105 @@
+--- a/crates/bekko-core/src/lib.rs
++++ b/crates/bekko-core/src/lib.rs
+@@ -286,6 +286,24 @@
+         pack_len: usize,
+         read: impl FnMut(usize, &mut [u8]) -> Result<(), String>,
+     ) -> Result<Self, String> {
++        Self::load_from_impl(pack_len, read, false)
++    }
++
++    /// Load a verified pack while obtaining vocabulary rows separately at inference time.
++    /// `embed` and `full` return an error for a model loaded this way; use
++    /// `full_from_rows` with rows read from the same verified pack instead.
++    pub fn load_from_external_embeddings(
++        pack_len: usize,
++        read: impl FnMut(usize, &mut [u8]) -> Result<(), String>,
++    ) -> Result<Self, String> {
++        Self::load_from_impl(pack_len, read, true)
++    }
++
++    fn load_from_impl(
++        pack_len: usize,
++        read: impl FnMut(usize, &mut [u8]) -> Result<(), String>,
++        external_embeddings: bool,
++    ) -> Result<Self, String> {
+         if !matches!(LAYERS, 4 | 13) || QK13 && LAYERS != 13 {
+             return Err("unsupported fixed Bekko configuration".into());
+         }
+@@ -386,7 +404,12 @@
+             });
+         }
+         Ok(Self {
+-            embeddings: f("embeddings.tok_embeddings.weight", &[256000, H])?,
++            embeddings: if external_embeddings {
++                range("embeddings.tok_embeddings.weight", &[256000, H], "f32")?;
++                Vec::new()
++            } else {
++                f("embeddings.tok_embeddings.weight", &[256000, H])?
++            },
+             embedding_norm: f("embeddings.norm.weight", &[H])?,
+             final_norm: f("final_norm.weight", &[H])?,
+             layers,
+@@ -404,6 +427,9 @@
+-
++
+     pub fn embed(&self, ids: &[u32]) -> Result<Vec<f32>, String> {
+         validate_tokens(ids)?;
++        if self.embeddings.is_empty() {
++            return Err("model requires external embedding rows".into());
++        }
+         let mut x = Vec::with_capacity(ids.len() * H);
+         for id in ids {
+             x.extend_from_slice(&self.embeddings[*id as usize * H..(*id as usize + 1) * H]);
+@@ -462,7 +488,20 @@
+     }
+-
++
+     pub fn full(&self, ids: &[u32]) -> Result<Vec<f32>, String> {
+-        let mut x = self.embed(ids)?;
++        let x = self.embed(ids)?;
++        self.full_from_normalized(ids, x)
++    }
++
++    pub fn full_from_rows(&self, ids: &[u32], mut x: Vec<f32>) -> Result<Vec<f32>, String> {
++        validate_tokens(ids)?;
++        if x.len() != ids.len() * H {
++            return Err("invalid embedding rows".into());
++        }
++        norm(&mut x, &self.embedding_norm);
++        self.full_from_normalized(ids, x)
++    }
++
++    fn full_from_normalized(&self, ids: &[u32], mut x: Vec<f32>) -> Result<Vec<f32>, String> {
+         for layer in 0..LAYERS {
+             let qkv = self.qkv(layer, 0, &x);
+             if QK13 {
+--- a/crates/bekko25-canister/src/lib.rs
++++ b/crates/bekko25-canister/src/lib.rs
+@@ -118,7 +118,7 @@
+     if !verified || n != PACK_BYTES as u64 {
+         return Err("upload the complete verified weight pack first".into());
+     }
+-    let model = Model::load_from(PACK_BYTES, |offset, dest| {
++    let model = Model::load_from_external_embeddings(PACK_BYTES, |offset, dest| {
+         let offset = u64::try_from(offset).map_err(|_| "pack offset overflow")?;
+         let start = HEADER.checked_add(offset).ok_or("pack offset overflow")?;
+         stable_read(start, dest);
+@@ -169,9 +169,15 @@
+     let before = ic_cdk::api::performance_counter(0);
+     bekko25_core::validate_tokens(&token_ids)?;
+     let embedding = MODEL.with_borrow(|m| {
+-        m.as_ref()
+-            .ok_or("model is not active".to_string())?
+-            .full(&token_ids)
++        let model = m.as_ref().ok_or("model is not active".to_string())?;
++        let mut rows = vec![0.0_f32; token_ids.len() * 384];
++        for (id, row) in token_ids.iter().zip(rows.chunks_exact_mut(384)) {
++            // Prototype only: the verified pinned pack has its vocabulary at offset 8860.
++            let bytes =
++                unsafe { std::slice::from_raw_parts_mut(row.as_mut_ptr().cast::<u8>(), 384 * 4) };
++            stable_read(HEADER + 8860 + u64::from(*id) * 384 * 4, bytes);
++        }
++        model.full_from_rows(&token_ids, rows)
+     })?;
+     if embedding.len() != 384 || embedding.iter().any(|v| !v.is_finite()) {
+         return Err("nonfinite embedding".into());
