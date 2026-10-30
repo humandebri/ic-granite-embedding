@@ -25,22 +25,25 @@ class ProvenanceTests(unittest.TestCase):
             json.dumps(
                 {
                     "runtime_roots": ["runtime"],
-                    "runtime_files": [provenance.CONFIG],
+                    "runtime_files": [provenance.CONFIG, "icp.yaml"],
                     "validation_roots": ["harness"],
                     "validation_files": [],
                 }
             ),
         )
         self.write("runtime/src/lib.rs", "runtime v1")
+        self.write("icp.yaml", "recipe v1")
         self.write("harness/src/main.rs", "harness v1")
         for name in ["model.pack", "cases.json", "retrieval.json"]:
             self.write(f".cache/bekko25/{name}", "[]")
         self.artifacts = [
             "wasm32-unknown-unknown/release/bekko25_canister.wasm",
+            "wasm32-unknown-unknown/release/bekko25_compact_canister.wasm",
             "wasm32-unknown-unknown/release/bekko_canister.wasm",
             "release/bekko25-bench",
             "release/bekko25-load",
             "release/bekko25-live",
+            "release/bekko25-compact-verify",
         ]
         for name in self.artifacts:
             self.write(f"target/{name}", name)
@@ -100,7 +103,7 @@ class ProvenanceTests(unittest.TestCase):
         self.assertEqual(verified, self.verified)
 
     def test_missing_a8_fails_before_build_record_or_network_is_needed(self):
-        (self.target / self.artifacts[1]).unlink()
+        (self.target / self.artifacts[2]).unlink()
         (self.target / "build-record.json").unlink()
         with self.assertRaisesRegex(
             ValueError, "missing validation prerequisite: .*bekko_canister.wasm"
@@ -116,6 +119,11 @@ class ProvenanceTests(unittest.TestCase):
 
     def test_runtime_edit_rejected(self):
         self.write("runtime/src/lib.rs", "runtime v2")
+        with self.assertRaisesRegex(ValueError, "runtime sources changed"):
+            self.preflight()
+
+    def test_recipe_config_edit_rejected(self):
+        self.write("icp.yaml", "recipe v2")
         with self.assertRaisesRegex(ValueError, "runtime sources changed"):
             self.preflight()
 

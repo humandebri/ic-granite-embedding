@@ -40,6 +40,8 @@ def main():
             "-p",
             "bekko25-canister",
             "-p",
+            "bekko25-compact-canister",
+            "-p",
             "bekko-canister",
             "--target",
             "wasm32-unknown-unknown",
@@ -59,10 +61,12 @@ def main():
         raise ValueError("sources changed during build; rerun from a stable checkout")
     names = [
         "wasm32-unknown-unknown/release/bekko25_canister.wasm",
+        "wasm32-unknown-unknown/release/bekko25_compact_canister.wasm",
         "wasm32-unknown-unknown/release/bekko_canister.wasm",
         "release/bekko25-bench",
         "release/bekko25-load",
         "release/bekko25-live",
+        "release/bekko25-compact-verify",
     ]
     record = {
         "schema": 1,

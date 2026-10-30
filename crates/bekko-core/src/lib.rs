@@ -53,7 +53,7 @@ fn tensor_range(
     }
     let bytes = match (kind, shape) {
         ("f32", _) => shape.iter().try_fold(4usize, |n, d| n.checked_mul(*d)),
-        ("i8", [rows, cols]) => cols.checked_add(4).and_then(|n| rows.checked_mul(n)),
+        ("i8" | "i8-row", [rows, cols]) => cols.checked_add(4).and_then(|n| rows.checked_mul(n)),
         _ => None,
     }
     .ok_or("tensor size overflow")?;
@@ -80,7 +80,10 @@ fn tensor_bytes<'a>(
 pub struct Linear {
     #[cfg(feature = "strassen")]
     prepared: Option<strassen::Prepared>,
+    #[cfg(not(target_arch = "wasm32"))]
     weights: Vec<i16>,
+    #[cfg(target_arch = "wasm32")]
+    weights: Vec<i8>,
     scales: Vec<f32>,
     rows: usize,
     cols: usize,
@@ -105,7 +108,11 @@ pub struct Encoder<const LAYERS: usize, const QK13: bool> {
 /// Each inference supplies a reader for that same pack.
 pub struct ExternalEncoder<const LAYERS: usize, const QK13: bool> {
     encoder: Encoder<LAYERS, QK13>,
-    embeddings: std::ops::Range<usize>,
+    embeddings: Vocabulary,
+}
+enum Vocabulary {
+    F32(std::ops::Range<usize>),
+    I8Rows(std::ops::Range<usize>),
 }
 /// The existing a8m model retains its four-layer F32 Attention path.
 pub type Model = Encoder<4, false>;
@@ -246,7 +253,10 @@ impl<const LAYERS: usize, const QK13: bool> Encoder<LAYERS, QK13> {
             Ok(Linear {
                 #[cfg(feature = "strassen")]
                 prepared,
+                #[cfg(not(target_arch = "wasm32"))]
                 weights,
+                #[cfg(target_arch = "wasm32")]
+                weights: weights.iter().map(|v| *v as i8).collect(),
                 scales: floats(&b[rows * cols..])?,
                 rows,
                 cols,
@@ -299,7 +309,7 @@ impl<const LAYERS: usize, const QK13: bool> Encoder<LAYERS, QK13> {
         pack_len: usize,
         read: impl FnMut(usize, &mut [u8]) -> Result<(), String>,
         external_embeddings: bool,
-    ) -> Result<(Self, std::ops::Range<usize>), String> {
+    ) -> Result<(Self, Vocabulary), String> {
         if !matches!(LAYERS, 4 | 13) || QK13 && LAYERS != 13 {
             return Err("unsupported fixed Bekko configuration".into());
         }
@@ -326,11 +336,15 @@ impl<const LAYERS: usize, const QK13: bool> Encoder<LAYERS, QK13> {
                     .map_err(|e| format!("{name}: {e}"))?;
                 Ok(end + r.start..end + r.end)
             };
-        let embedding_range = range(
-            "embeddings.tok_embeddings.weight",
-            &[VOCAB as usize, H],
-            "f32",
-        )?;
+        let embedding_name = "embeddings.tok_embeddings.weight";
+        let embedding_kind = &header.get(embedding_name).ok_or("missing vocabulary")?.kind;
+        let embedding_range = match embedding_kind.as_str() {
+            "f32" => Vocabulary::F32(range(embedding_name, &[VOCAB as usize, H], "f32")?),
+            "i8-row" if external_embeddings => {
+                Vocabulary::I8Rows(range(embedding_name, &[VOCAB as usize, H], "i8-row")?)
+            }
+            _ => return Err("unsupported vocabulary kind".into()),
+        };
         let f = |name: &str, shape: &[usize]| -> Result<Vec<f32>, String> {
             let r = range(name, shape, "f32")?;
             let mut values = vec![0.0_f32; r.len() / 4];
@@ -381,7 +395,10 @@ impl<const LAYERS: usize, const QK13: bool> Encoder<LAYERS, QK13> {
             Ok(Linear {
                 #[cfg(feature = "strassen")]
                 prepared,
+                #[cfg(not(target_arch = "wasm32"))]
                 weights,
+                #[cfg(target_arch = "wasm32")]
+                weights: weights.iter().map(|v| *v as i8).collect(),
                 scales: floats(&b[rows * cols..])?,
                 rows,
                 cols,
@@ -578,6 +595,47 @@ fn read_embedding_rows(
     Ok(rows)
 }
 
+fn read_i8_embedding_rows(
+    ids: &[u32],
+    range: &std::ops::Range<usize>,
+    mut read: impl FnMut(usize, &mut [u8]) -> Result<(), String>,
+) -> Result<Vec<f32>, String> {
+    validate_tokens(ids)?;
+    const ROW_BYTES: usize = H + 4;
+    if range.end.checked_sub(range.start) != Some(VOCAB as usize * ROW_BYTES) {
+        return Err("invalid vocabulary range".into());
+    }
+    let mut result = vec![0.0_f32; ids.len() * H];
+    for (&id, row) in ids.iter().zip(result.chunks_exact_mut(H)) {
+        let offset = (id as usize)
+            .checked_mul(ROW_BYTES)
+            .and_then(|n| range.start.checked_add(n))
+            .ok_or("vocabulary offset overflow")?;
+        if offset
+            .checked_add(ROW_BYTES)
+            .is_none_or(|end| end > range.end)
+        {
+            return Err("vocabulary row out of bounds".into());
+        }
+        let mut bytes = [0u8; ROW_BYTES];
+        read(offset, &mut bytes)?;
+        let scale = f32::from_le_bytes(bytes[H..].try_into().unwrap());
+        if !scale.is_finite() || scale <= 0.0 {
+            return Err("invalid vocabulary scale".into());
+        }
+        for (value, &q) in row.iter_mut().zip(&bytes[..H]) {
+            if q == 128 {
+                return Err("invalid vocabulary value".into());
+            }
+            *value = (q as i8 as f32) * scale;
+            if !value.is_finite() {
+                return Err("nonfinite vocabulary row".into());
+            }
+        }
+    }
+    Ok(result)
+}
+
 impl<const LAYERS: usize, const QK13: bool> ExternalEncoder<LAYERS, QK13> {
     /// Load from a verified pack without retaining its vocabulary in heap.
     pub fn load_from(
@@ -597,7 +655,10 @@ impl<const LAYERS: usize, const QK13: bool> ExternalEncoder<LAYERS, QK13> {
         ids: &[u32],
         read: impl FnMut(usize, &mut [u8]) -> Result<(), String>,
     ) -> Result<Vec<f32>, String> {
-        let mut x = read_embedding_rows(ids, &self.embeddings, read)?;
+        let mut x = match &self.embeddings {
+            Vocabulary::F32(range) => read_embedding_rows(ids, range, read)?,
+            Vocabulary::I8Rows(range) => read_i8_embedding_rows(ids, range, read)?,
+        };
         norm(&mut x, &self.encoder.embedding_norm);
         self.encoder.full_from_normalized(ids, x)
     }
@@ -1407,6 +1468,41 @@ pub fn attention(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn compact_vocabulary_reads_checked_rows_and_rejects_corruption() {
+        let row_bytes = H + 4;
+        let start = 123usize;
+        let range = start..start + VOCAB as usize * row_bytes;
+        let ids = [2, VOCAB - 1, 1];
+        let rows = read_i8_embedding_rows(&ids, &range, |offset, dest| {
+            let id = (offset - start) / row_bytes;
+            dest[..H].fill(if id == VOCAB as usize - 1 { 255 } else { 2 });
+            dest[H..].copy_from_slice(&0.5_f32.to_le_bytes());
+            Ok(())
+        })
+        .unwrap();
+        assert_eq!(rows[0], 1.0);
+        assert_eq!(rows[H], -0.5);
+        assert_eq!(rows[2 * H], 1.0);
+        assert!(
+            read_i8_embedding_rows(&[2, 1], &range, |_, dest| {
+                dest[H..].copy_from_slice(&f32::NAN.to_le_bytes());
+                Ok(())
+            })
+            .is_err()
+        );
+        assert!(
+            read_i8_embedding_rows(&[2, 1], &range, |_, dest| {
+                dest[0] = 128;
+                dest[H..].copy_from_slice(&1.0_f32.to_le_bytes());
+                Ok(())
+            })
+            .is_err()
+        );
+        assert!(read_i8_embedding_rows(&[2, VOCAB, 1], &range, |_, _| Ok(())).is_err());
+        assert!(read_i8_embedding_rows(&[2, 1], &(start..range.end - 1), |_, _| Ok(())).is_err());
+    }
 
     #[test]
     fn external_vocabulary_reads_requested_rows_with_checked_offsets() {

@@ -8,4 +8,9 @@ pub const PACK_BYTES: usize = 418404508;
 pub const PACK_SHA256: &str = "8fc88d56d68f550d1a920bab7d1ec42af9449240048393bd6daabbfcfa861724";
 /// Change when numerical semantics change; rebuild the document index then.
 pub const EMBEDDING_SPACE: &str = "bekko-a25m-44f0b8af-w8a8-bf16kv-qk13-v1";
-pub const RUNTIME_ID: &str = "bekko25-runtime-2";
+pub const RUNTIME_ID: &str = "bekko25-runtime-3";
+pub const COMPACT_PACK_BYTES: usize = 124516506;
+pub const COMPACT_PACK_SHA256: &str =
+    "71b8c47a0a508dd5cd3e704d83934e900c8e634d2c52e7a02a85e882fa5be9c4";
+pub const COMPACT_EMBEDDING_SPACE: &str = "bekko-a25m-44f0b8af-vocab-i8row-w8a8-bf16kv-qk13-v1";
+pub const COMPACT_RUNTIME_ID: &str = "bekko25-compact-runtime-1";

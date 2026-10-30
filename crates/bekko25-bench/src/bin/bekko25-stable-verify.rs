@@ -99,6 +99,9 @@ fn read_fixture(path: &str, expected: &str) -> Vec<u8> {
 }
 
 fn main() {
+    // The same lifecycle and bit-exact sweep also verifies the subsequent
+    // INT8-resident linear-weight optimization against runtime 2.
+    let verify_linear_i8 = std::env::var("BEKKO25_VERIFY_LINEAR_I8").as_deref() == Ok("1");
     let old = fs::read(std::env::var("BEKKO25_BASELINE_WASM").expect("baseline Wasm path"))
         .expect("read baseline Wasm");
     let new =
@@ -161,7 +164,14 @@ fn main() {
     let initial = info(&pic, id);
     assert!(initial.weights_verified);
     assert_eq!(initial.embedding_space, bekko25_core::EMBEDDING_SPACE);
-    assert_eq!(initial.runtime_id, "bekko25-runtime-1");
+    assert_eq!(
+        initial.runtime_id,
+        if verify_linear_i8 {
+            "bekko25-runtime-2"
+        } else {
+            "bekko25-runtime-1"
+        }
+    );
     let start = Instant::now();
     let b = pic
         .update_call(id, Principal::anonymous(), "activate", Encode!().unwrap())
@@ -315,11 +325,19 @@ fn main() {
         before.memory_metrics.stable_memory_size,
         after.memory_metrics.stable_memory_size
     );
-    check_heap_reduction(
-        memory_bytes(&before.memory_metrics.wasm_memory_size),
-        memory_bytes(&after.memory_metrics.wasm_memory_size),
-    )
-    .expect("new Wasm did not reduce heap as expected");
+    let before_heap = memory_bytes(&before.memory_metrics.wasm_memory_size);
+    let after_heap = memory_bytes(&after.memory_metrics.wasm_memory_size);
+    if verify_linear_i8 {
+        assert!(
+            before_heap
+                .checked_sub(after_heap)
+                .is_some_and(|n| n >= 10_000_000),
+            "linear weights did not reduce heap sufficiently"
+        );
+    } else {
+        check_heap_reduction(before_heap, after_heap)
+            .expect("new Wasm did not reduce heap as expected");
+    }
     for (ids, expected) in invalid.iter().zip(&old_errors) {
         assert_eq!(
             &try_query(&pic, id, ids)

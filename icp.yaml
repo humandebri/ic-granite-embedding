@@ -11,6 +11,12 @@ canisters:
       configuration:
         package: bekko25-canister
         candid: crates/bekko25-canister/bekko25.did
+  - name: bekko25_compact
+    recipe:
+      type: "@dfinity/rust@v3.2.0"
+      configuration:
+        package: bekko25-compact-canister
+        candid: crates/bekko25-canister/bekko25.did
 networks:
   - name: local
     mode: managed

@@ -146,6 +146,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "bekko25-compact-canister"
+version = "0.1.0"
+dependencies = [
+ "bekko25-core",
+ "candid",
+ "ic-cdk",
+ "serde",
+ "serde_bytes",
+ "sha2",
+]
+
+[[package]]
 name = "bekko25-core"
 version = "0.1.0"
 dependencies = [
