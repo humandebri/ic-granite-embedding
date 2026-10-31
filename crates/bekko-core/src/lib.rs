@@ -101,6 +101,12 @@ pub struct Encoder<const LAYERS: usize, const QK13: bool> {
     layers: Vec<Layer>,
     rope: [Vec<[(f32, f32); 32]>; 2],
 }
+/// An encoder whose vocabulary remains in the verified source pack.
+/// Each inference supplies a reader for that same pack.
+pub struct ExternalEncoder<const LAYERS: usize, const QK13: bool> {
+    encoder: Encoder<LAYERS, QK13>,
+    embeddings: std::ops::Range<usize>,
+}
 /// The existing a8m model retains its four-layer F32 Attention path.
 pub type Model = Encoder<4, false>;
 
@@ -286,6 +292,14 @@ impl<const LAYERS: usize, const QK13: bool> Encoder<LAYERS, QK13> {
         pack_len: usize,
         read: impl FnMut(usize, &mut [u8]) -> Result<(), String>,
     ) -> Result<Self, String> {
+        Self::load_from_impl(pack_len, read, false).map(|(model, _)| model)
+    }
+
+    fn load_from_impl(
+        pack_len: usize,
+        read: impl FnMut(usize, &mut [u8]) -> Result<(), String>,
+        external_embeddings: bool,
+    ) -> Result<(Self, std::ops::Range<usize>), String> {
         if !matches!(LAYERS, 4 | 13) || QK13 && LAYERS != 13 {
             return Err("unsupported fixed Bekko configuration".into());
         }
@@ -312,6 +326,11 @@ impl<const LAYERS: usize, const QK13: bool> Encoder<LAYERS, QK13> {
                     .map_err(|e| format!("{name}: {e}"))?;
                 Ok(end + r.start..end + r.end)
             };
+        let embedding_range = range(
+            "embeddings.tok_embeddings.weight",
+            &[VOCAB as usize, H],
+            "f32",
+        )?;
         let f = |name: &str, shape: &[usize]| -> Result<Vec<f32>, String> {
             let r = range(name, shape, "f32")?;
             let mut values = vec![0.0_f32; r.len() / 4];
@@ -385,21 +404,28 @@ impl<const LAYERS: usize, const QK13: bool> Encoder<LAYERS, QK13> {
                 mlp_norm: f(&format!("{p}.mlp_norm.weight"), &[H])?,
             });
         }
-        Ok(Self {
-            embeddings: f("embeddings.tok_embeddings.weight", &[256000, H])?,
-            embedding_norm: f("embeddings.norm.weight", &[H])?,
-            final_norm: f("final_norm.weight", &[H])?,
-            layers,
-            rope: [160000f32, 160000f32].map(|theta| {
-                let frequencies: [f32; 32] =
-                    std::array::from_fn(|i| theta.powf(-((2 * i) as f32) / D as f32));
-                (0..MAX_TOKENS)
-                    .map(|position| {
-                        std::array::from_fn(|i| (position as f32 * frequencies[i]).sin_cos())
-                    })
-                    .collect()
-            }),
-        })
+        Ok((
+            Self {
+                embeddings: if external_embeddings {
+                    Vec::new()
+                } else {
+                    f("embeddings.tok_embeddings.weight", &[VOCAB as usize, H])?
+                },
+                embedding_norm: f("embeddings.norm.weight", &[H])?,
+                final_norm: f("final_norm.weight", &[H])?,
+                layers,
+                rope: [160000f32, 160000f32].map(|theta| {
+                    let frequencies: [f32; 32] =
+                        std::array::from_fn(|i| theta.powf(-((2 * i) as f32) / D as f32));
+                    (0..MAX_TOKENS)
+                        .map(|position| {
+                            std::array::from_fn(|i| (position as f32 * frequencies[i]).sin_cos())
+                        })
+                        .collect()
+                }),
+            },
+            embedding_range,
+        ))
     }
 
     pub fn embed(&self, ids: &[u32]) -> Result<Vec<f32>, String> {
@@ -462,7 +488,11 @@ impl<const LAYERS: usize, const QK13: bool> Encoder<LAYERS, QK13> {
     }
 
     pub fn full(&self, ids: &[u32]) -> Result<Vec<f32>, String> {
-        let mut x = self.embed(ids)?;
+        let x = self.embed(ids)?;
+        self.full_from_normalized(ids, x)
+    }
+
+    fn full_from_normalized(&self, ids: &[u32], mut x: Vec<f32>) -> Result<Vec<f32>, String> {
         for layer in 0..LAYERS {
             let qkv = self.qkv(layer, 0, &x);
             if QK13 {
@@ -502,6 +532,77 @@ impl<const LAYERS: usize, const QK13: bool> Encoder<LAYERS, QK13> {
         }
     }
 }
+
+fn read_embedding_rows(
+    ids: &[u32],
+    range: &std::ops::Range<usize>,
+    mut read: impl FnMut(usize, &mut [u8]) -> Result<(), String>,
+) -> Result<Vec<f32>, String> {
+    validate_tokens(ids)?;
+    const ROW_BYTES: usize = H * std::mem::size_of::<f32>();
+    if range.end.checked_sub(range.start) != Some(VOCAB as usize * ROW_BYTES) {
+        return Err("invalid vocabulary range".into());
+    }
+    let mut rows = vec![0.0f32; ids.len() * H];
+    for (&id, row) in ids.iter().zip(rows.chunks_exact_mut(H)) {
+        let offset = (id as usize)
+            .checked_mul(ROW_BYTES)
+            .and_then(|n| range.start.checked_add(n))
+            .ok_or("vocabulary offset overflow")?;
+        if offset
+            .checked_add(ROW_BYTES)
+            .is_none_or(|end| end > range.end)
+        {
+            return Err("vocabulary row out of bounds".into());
+        }
+        #[cfg(target_endian = "little")]
+        {
+            // SAFETY: the initialized f32 row is exclusively borrowed, covers
+            // exactly ROW_BYTES, and every bit pattern is a valid f32.
+            let bytes =
+                unsafe { std::slice::from_raw_parts_mut(row.as_mut_ptr().cast::<u8>(), ROW_BYTES) };
+            read(offset, bytes)?;
+        }
+        #[cfg(not(target_endian = "little"))]
+        {
+            let mut bytes = [0u8; ROW_BYTES];
+            read(offset, &mut bytes)?;
+            for (value, chunk) in row.iter_mut().zip(bytes.chunks_exact(4)) {
+                *value = f32::from_le_bytes(chunk.try_into().unwrap());
+            }
+        }
+        if row.iter().any(|v| !v.is_finite()) {
+            return Err("nonfinite vocabulary row".into());
+        }
+    }
+    Ok(rows)
+}
+
+impl<const LAYERS: usize, const QK13: bool> ExternalEncoder<LAYERS, QK13> {
+    /// Load from a verified pack without retaining its vocabulary in heap.
+    pub fn load_from(
+        pack_len: usize,
+        read: impl FnMut(usize, &mut [u8]) -> Result<(), String>,
+    ) -> Result<Self, String> {
+        let (encoder, embeddings) = Encoder::load_from_impl(pack_len, read, true)?;
+        Ok(Self {
+            encoder,
+            embeddings,
+        })
+    }
+
+    /// Read each input token's row from the same verified pack used at load time.
+    pub fn full(
+        &self,
+        ids: &[u32],
+        read: impl FnMut(usize, &mut [u8]) -> Result<(), String>,
+    ) -> Result<Vec<f32>, String> {
+        let mut x = read_embedding_rows(ids, &self.embeddings, read)?;
+        norm(&mut x, &self.encoder.embedding_norm);
+        self.encoder.full_from_normalized(ids, x)
+    }
+}
+
 fn norm(x: &mut [f32], weight: &[f32]) {
     for row in x.chunks_exact_mut(H) {
         let mean = row.iter().sum::<f32>() / H as f32;
@@ -1306,6 +1407,62 @@ pub fn attention(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn external_vocabulary_reads_requested_rows_with_checked_offsets() {
+        const ROW_BYTES: usize = H * 4;
+        let start = 12_345usize;
+        let range = start..start + VOCAB as usize * ROW_BYTES;
+        let ids = [2, VOCAB - 1, 2, 1];
+        let mut offsets = Vec::new();
+        let rows = read_embedding_rows(&ids, &range, |offset, dest| {
+            offsets.push(offset);
+            let value = ((offset - start) / ROW_BYTES) as f32;
+            for chunk in dest.chunks_exact_mut(4) {
+                chunk.copy_from_slice(&value.to_le_bytes());
+            }
+            Ok(())
+        })
+        .unwrap();
+        assert_eq!(offsets, ids.map(|id| start + id as usize * ROW_BYTES));
+        for (row, id) in rows.chunks_exact(H).zip(ids) {
+            assert!(row.iter().all(|v| *v == id as f32));
+        }
+    }
+
+    #[test]
+    fn external_vocabulary_rejects_invalid_input_range_and_data() {
+        const ROW_BYTES: usize = H * 4;
+        let range = 100..100 + VOCAB as usize * ROW_BYTES;
+        let mut reads = 0;
+        assert!(
+            read_embedding_rows(&[2, VOCAB, 1], &range, |_, _| {
+                reads += 1;
+                Ok(())
+            })
+            .is_err()
+        );
+        assert_eq!(reads, 0);
+        assert!(
+            read_embedding_rows(&[2, 1], &(range.start..range.end - 1), |_, _| {
+                panic!("invalid ranges must not be read")
+            })
+            .is_err()
+        );
+        assert!(
+            read_embedding_rows(&[2, 1], &range, |_, _| Err("read failed".into()))
+                .unwrap_err()
+                .contains("read failed")
+        );
+        assert!(
+            read_embedding_rows(&[2, 1], &range, |_, dest| {
+                dest[..4].copy_from_slice(&f32::NAN.to_le_bytes());
+                Ok(())
+            })
+            .unwrap_err()
+            .contains("nonfinite")
+        );
+    }
     #[test]
     fn rejects_invalid_frames_and_lengths() {
         assert!(validate_tokens(&[2, 1]).is_ok());
