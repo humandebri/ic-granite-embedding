@@ -2,6 +2,8 @@
 
 The dedicated `bekko25` canister accepts **2–256 token IDs including BOS (2) and EOS (1)**, executes all 13 layers and returns a normalized 384-dimensional vector in one query. It has a separate Wasm artifact, canister ID and stable-storage version from a8m. The a8m service remains available independently.
 
+For a smaller model footprint with an INT8 vocabulary, see the separate [compact canister and index migration guide](BEKKO25-COMPACT.md). Its embedding space differs from this F32-vocabulary service.
+
 Model: `hotchpotch/bekko-embedding-v1-a25m`, revision `44f0b8af0f487acd0ccf1a7cb7ae7a29a6dfc09c`. Linear operators use W8A8, the vocabulary table is F32, K/V are BF16-rounded, QK uses per-head QK13 integers with i64 final reduction, and AV accumulation is F32. Approximate GELU and softmax follow the existing Bekko runtime. The AV integer experiment was slower and is **not** part of this release.
 
 The [operational validation report](../benchmarks/bekko25-operations/RESULTS.md) records the exact artifact, all input lengths, upload/upgrade checks and retrieval measured from actual Wasm outputs. [Earlier runtime experiments](../benchmarks/bekko25-runtime/RESULTS.md) explain the additional QK13 precision tradeoff; they are not substitutes for the public API tests.
@@ -62,7 +64,7 @@ Both query and document vectors must have the same `embedding_space`:
 bekko-a25m-44f0b8af-w8a8-bf16kv-qk13-v1
 ```
 
-Store that ID with the document index and reject query vectors from another space. Rebuild the index when the model/revision or numerical semantics change; equal vector dimensions are insufficient. Bit-equivalent runtime optimizations keep the space ID. `runtime_id` identifies the implementation separately: `bekko25-runtime-2` reads vocabulary rows from stable memory.
+Store that ID with the document index and reject query vectors from another space. Rebuild the index when the model/revision or numerical semantics change; equal vector dimensions are insufficient. Bit-equivalent runtime optimizations keep the space ID. `runtime_id` identifies the implementation separately: `bekko25-runtime-3` reads vocabulary rows from stable memory and keeps linear weights as INT8 in Wasm heap.
 
 For RAG, split documents by sentences/paragraphs before tokenization, with up to 254 body tokens plus BOS/EOS and a modest overlap such as 32 source tokens. Use the same pinned tokenizer for both sides. The CLI refuses oversized inputs; the server rejects oversized vectors, missing framing, PAD 0 and out-of-vocabulary IDs. It never silently truncates. A lower chunk limit is available to the client without changing the embedding space, but changing document chunks requires re-embedding those chunks. Search normalized vectors by dot product/cosine and deduplicate parent documents after taking each parent's best chunk score.
 

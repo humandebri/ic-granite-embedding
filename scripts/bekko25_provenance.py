@@ -6,6 +6,10 @@ import json
 from pathlib import Path
 
 CONFIG = "scripts/bekko25-build-inputs.json"
+COMPACT_RAW = "wasm32-unknown-unknown/release/bekko25_compact_canister.wasm"
+COMPACT_RECIPE = "compact-recipe/bekko25_compact.wasm"
+COMPACT_RECIPE_RECORD = "compact-recipe/record.json"
+COMPACT_INPUTS = {".cache/bekko25/cases.json", ".cache/bekko-memory-study/retrieval-ja-hard.json"}
 
 
 def digest(path):
@@ -42,10 +46,12 @@ def validate_build(root, target, record):
         )
     required = {
         "wasm32-unknown-unknown/release/bekko25_canister.wasm",
+        "wasm32-unknown-unknown/release/bekko25_compact_canister.wasm",
         "wasm32-unknown-unknown/release/bekko_canister.wasm",
         "release/bekko25-bench",
         "release/bekko25-load",
         "release/bekko25-live",
+        "release/bekko25-compact-verify",
     }
     require_equal(
         set(record["artifacts"]), required, "incomplete build artifact record"
@@ -56,7 +62,19 @@ def validate_build(root, target, record):
         )
 
 
-def preflight(root, target, executable, retrieval=False):
+def validate_compact_recipe(root, target, record):
+    """Bind the ICP recipe artifact to the recorded raw build and configuration."""
+    path = target / COMPACT_RECIPE_RECORD
+    recipe = json.loads(path.read_text())
+    require_equal(recipe.get("schema"), 1, "unsupported compact recipe record")
+    require_equal(recipe["build_record_sha256"], digest(target / "build-record.json"), "compact recipe belongs to another build")
+    require_equal(recipe["icp_yaml_sha256"], digest(root / "icp.yaml"), "ICP configuration changed after recipe build")
+    require_equal(recipe["raw_cargo_sha256"], record["artifacts"][COMPACT_RAW], "compact recipe/raw Wasm mismatch")
+    require_equal(recipe["recipe_wasm_sha256"], digest(target / COMPACT_RECIPE), "compact recipe Wasm changed")
+    return recipe, digest(path)
+
+
+def preflight(root, target, executable, retrieval=False, compact=False):
     # Check inexpensive prerequisites before reading the 418MB pack or starting
     # PocketIC. The a8m artifact is used by the final wrong-model upgrade test.
     required = [
@@ -73,19 +91,25 @@ def preflight(root, target, executable, retrieval=False):
             raise ValueError(f"missing validation prerequisite: {path}")
     record = json.loads((target / "build-record.json").read_text())
     validate_build(root, target, record)
+    binary = "release/bekko25-compact-verify" if compact else "release/bekko25-bench"
     require_equal(
         digest(executable),
-        record["artifacts"]["release/bekko25-bench"],
+        record["artifacts"][binary],
         "running harness differs from recorded build",
     )
     inputs = [".cache/bekko25/cases.json"] + (
         [".cache/bekko25/retrieval.json"] if retrieval else []
     )
-    return {
+    if compact:
+        inputs.append(".cache/bekko-memory-study/retrieval-ja-hard.json")
+    result = {
         "build_record": record,
         "build_record_sha256": digest(target / "build-record.json"),
         "input_sha256": {name: digest(root / name) for name in inputs},
     }
+    if compact:
+        result["compact_recipe"], result["compact_recipe_record_sha256"] = validate_compact_recipe(root, target, record)
+    return result
 
 
 def validate_report_inputs(root, out, target):
@@ -160,6 +184,7 @@ if __name__ == "__main__":
     parser.add_argument("--target-dir", type=Path, required=True)
     parser.add_argument("--executable", type=Path, required=True)
     parser.add_argument("--retrieval", action="store_true")
+    parser.add_argument("--compact", action="store_true")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
-    print(json.dumps(preflight(root, args.target_dir, args.executable, args.retrieval)))
+    print(json.dumps(preflight(root, args.target_dir, args.executable, args.retrieval, args.compact)))

@@ -2,7 +2,7 @@
 
 2026-10-30, PocketIC 11.0.0, application subnet. This tests the ICP recipe-processed Wasm, not a mainnet deployment. A single disposable canister was installed with the prior release, populated with the pinned pack, activated, then upgraded to the new release without reuploading weights. The verified flag and byte count survived; the model was inactive until the controller reactivated it. Non-controller activation, upload and reset were rejected. Invalid input errors matched the prior release; reset invalidated the model and duplicate first-chunk retries were idempotent.
 
-The new model validates the vocabulary descriptor and reads each requested F32 row from stable memory. The pack bytes and stable header do not change. A separate type keeps the existing heap-backed model API intact. `embedding_space` is unchanged; `runtime_id` is `bekko25-runtime-2`.
+The model in this historical comparison validates the vocabulary descriptor and reads each requested F32 row from stable memory. The pack bytes and stable header do not change. A separate type keeps the existing heap-backed model API intact. `embedding_space` is unchanged; the tested `runtime_id` was `bekko25-runtime-2`. A subsequent bit-equivalent linear-weight optimization uses `bekko25-runtime-3`; see [the compact canister guide](../../docs/BEKKO25-COMPACT.md).
 
 | Metric after activation | Previous | New | Difference |
 |---|---:|---:|---:|

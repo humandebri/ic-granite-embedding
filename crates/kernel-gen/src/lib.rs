@@ -11,7 +11,13 @@ fn tree(parts: &[String]) -> String {
 }
 // Store four completed output channels immediately. The caller's x/w/y
 // allocations are disjoint, so writes need not wait for unrelated weight loads.
-fn streamed_body(cols: usize, tokens: usize, outputs: usize, integer: bool) -> String {
+fn streamed_body(
+    cols: usize,
+    tokens: usize,
+    outputs: usize,
+    integer: bool,
+    compact_weights: bool,
+) -> String {
     let mut s = String::new();
     s.push_str("#[inline(always)]\nfn sum4(a:v128,b:v128,c:v128,d:v128)->v128 { let ab=i32x4_add(i32x4_shuffle::<0,1,4,5>(a,b),i32x4_shuffle::<2,3,6,7>(a,b));let cd=i32x4_add(i32x4_shuffle::<0,1,4,5>(c,d),i32x4_shuffle::<2,3,6,7>(c,d));i32x4_add(i32x4_shuffle::<0,2,4,6>(ab,cd),i32x4_shuffle::<1,3,5,7>(ab,cd)) }\n");
     for a in 0..tokens {
@@ -50,10 +56,14 @@ fn streamed_body(cols: usize, tokens: usize, outputs: usize, integer: bool) -> S
         s.push_str("{\n");
         for b in group..group + 4 {
             for k in 0..cols / 8 {
-                s.push_str(&format!(
-                    "let w{b}_{k}=v128_load(w.add({}).cast());\n",
-                    b * cols + k * 8
-                ));
+                if compact_weights && !integer {
+                    s.push_str(&format!("let w{b}_{k}=i16x8_extend_low_i8x16(v128_load64_zero(w.add({}).cast()));\n", b * cols + k * 8));
+                } else {
+                    s.push_str(&format!(
+                        "let w{b}_{k}=v128_load(w.add({}).cast());\n",
+                        b * cols + k * 8
+                    ));
+                }
             }
         }
         if !integer {
@@ -99,13 +109,15 @@ fn kernel(
     outputs: usize,
     integer: bool,
     intermediate: usize,
+    compact_weights: bool,
 ) -> String {
     let mut s = String::new();
     let declaration = if integer {
         format!("unsafe fn packed_{cols}(x:*const i16,w:*const i16,y:*mut i32,stride:usize)")
     } else {
+        let wt = if compact_weights { "i8" } else { "i16" };
         format!(
-            "unsafe fn tree_{cols}_{tokens}(x:*const i16,w:*const i16,y:*mut f32,stride:usize,sx:*const f32,sw:*const f32)"
+            "unsafe fn tree_{cols}_{tokens}(x:*const i16,w:*const {wt},y:*mut f32,stride:usize,sx:*const f32,sw:*const f32)"
         )
     };
     s.push_str(&format!("#[cfg(target_arch=\"wasm32\")]\n#[inline(never)]\n#[allow(unsafe_op_in_unsafe_fn)]\n{declaration} {{\nuse core::arch::wasm32::*;\n"));
@@ -119,7 +131,13 @@ fn kernel(
     };
     let chunked = width < cols;
     if !chunked && outputs >= 32 {
-        s.push_str(&streamed_body(cols, tokens, outputs, integer));
+        s.push_str(&streamed_body(
+            cols,
+            tokens,
+            outputs,
+            integer,
+            compact_weights,
+        ));
         return s;
     }
     if chunked {
@@ -136,10 +154,14 @@ fn kernel(
     for prefix in ["x", "w"] {
         for a in 0..if prefix == "x" { tokens } else { outputs } {
             for k in 0..width / 8 {
-                s.push_str(&format!(
-                    "let {prefix}{a}_{k}=v128_load({prefix}.add({}).cast());\n",
-                    a * cols + k * 8
-                ));
+                if compact_weights && !integer && prefix == "w" {
+                    s.push_str(&format!("let {prefix}{a}_{k}=i16x8_extend_low_i8x16(v128_load64_zero({prefix}.add({}).cast()));\n", a * cols + k * 8));
+                } else {
+                    s.push_str(&format!(
+                        "let {prefix}{a}_{k}=v128_load({prefix}.add({}).cast());\n",
+                        a * cols + k * 8
+                    ));
+                }
             }
         }
     }
@@ -300,27 +322,30 @@ fn generate_inner(intermediate: usize, bekko: bool) {
         (384, 32, 64),
         (intermediate, 32, 32),
     ] {
-        s.push_str(&kernel(cols, tokens, outputs, false, intermediate));
+        s.push_str(&kernel(cols, tokens, outputs, false, intermediate, bekko));
     }
     if env::var_os("CARGO_FEATURE_STRASSEN").is_some() {
-        s.push_str(&kernel(192, 32, 128, true, intermediate));
+        s.push_str(&kernel(192, 32, 128, true, intermediate, false));
         if env::var_os("CARGO_FEATURE_STRASSEN_QKV").is_some()
             || env::var_os("CARGO_FEATURE_STRASSEN_OUT").is_some()
         {
             s.push_str(
-                &kernel(192, 32, 64, true, intermediate).replace("packed_192(", "packed_192_64("),
+                &kernel(192, 32, 64, true, intermediate, false)
+                    .replace("packed_192(", "packed_192_64("),
             );
         }
         if env::var_os("CARGO_FEATURE_STRASSEN_WO").is_some() {
-            s.push_str(&kernel(intermediate / 2, 32, 64, true, intermediate));
+            s.push_str(&kernel(intermediate / 2, 32, 64, true, intermediate, false));
         }
     }
     if bekko {
         for (cols, outputs) in [(96, 64), (96, 32), (288, 32)] {
-            s.push_str(&kernel(cols, 32, outputs, true, intermediate).replace(
-                &format!("packed_{cols}("),
-                &format!("packed_{cols}_{outputs}("),
-            ));
+            s.push_str(
+                &kernel(cols, 32, outputs, true, intermediate, false).replace(
+                    &format!("packed_{cols}("),
+                    &format!("packed_{cols}_{outputs}("),
+                ),
+            );
         }
         fs::write(
             PathBuf::from(env::var_os("OUT_DIR").unwrap()).join("bekko_av.rs"),

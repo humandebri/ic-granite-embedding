@@ -4,6 +4,7 @@
     "crates/bekko-canister",
     "crates/bekko25-core",
     "crates/bekko25-canister",
+    "crates/bekko25-compact-canister",
     "crates/kernel-gen"
   ],
   "runtime_files": [
@@ -11,6 +12,7 @@
     "Cargo.lock",
     "rust-toolchain.toml",
     ".cargo/config.toml",
+    "icp.yaml",
     "scripts/bekko25-build-inputs.json"
   ],
   "validation_roots": [
@@ -19,8 +21,13 @@
   "validation_files": [
     "scripts/bekko25-build-inputs.json",
     "scripts/build_bekko25.py",
+    "scripts/build_bekko25_compact_recipe.py",
     "scripts/bekko25_provenance.py",
     "scripts/prepare_bekko25.py",
+    "scripts/prepare_bekko25_compact.py",
+    "scripts/report_bekko25_compact.py",
+    "scripts/verify_bekko25_compact_deployment.py",
+    "scripts/test_bekko25_compact.py",
     "scripts/validate_bekko25_operations.py",
     "scripts/report_bekko25_operations.py",
     "benchmarks/bekko25-runtime/reference-sha256.json",

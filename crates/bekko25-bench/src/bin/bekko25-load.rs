@@ -116,23 +116,25 @@ fn main() {
     let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
     std::env::set_current_dir(&root).unwrap();
     let mut environment = "local".to_string();
-    let mut canister = "bekko25".to_string();
+    let mut canister = None;
     let mut identity = None;
-    let mut pack_path = root.join(".cache/bekko25/model.pack");
+    let mut pack_path = None;
+    let mut compact = false;
     let mut restart = false;
     let mut activate_only = false;
     let mut args = std::env::args().skip(1);
     while let Some(arg) = args.next() {
         match arg.as_str() {
             "--environment" => environment = args.next().expect("environment"),
-            "--canister" => canister = args.next().expect("canister name or ID"),
+            "--canister" => canister = Some(args.next().expect("canister name or ID")),
             "--identity" => identity = Some(args.next().expect("identity")),
-            "--pack" => pack_path = PathBuf::from(args.next().expect("pack path")),
+            "--pack" => pack_path = Some(PathBuf::from(args.next().expect("pack path"))),
+            "--compact" => compact = true,
             "--restart" => restart = true,
             "--activate-only" => activate_only = true,
             "--help" => {
                 println!(
-                    "bekko25-load [--environment local] [--canister bekko25] [--identity NAME] [--pack PATH] [--restart | --activate-only]"
+                    "bekko25-load [--compact] [--environment local] [--canister NAME_OR_ID] [--identity NAME] [--pack PATH] [--restart | --activate-only]"
                 );
                 return;
             }
@@ -143,6 +145,34 @@ fn main() {
         !(restart && activate_only),
         "--restart conflicts with --activate-only"
     );
+    let canister = canister.unwrap_or_else(|| {
+        if compact {
+            "bekko25_compact"
+        } else {
+            "bekko25"
+        }
+        .into()
+    });
+    let pack_path = pack_path.unwrap_or_else(|| {
+        root.join(if compact {
+            ".cache/bekko25/model-int8.pack"
+        } else {
+            ".cache/bekko25/model.pack"
+        })
+    });
+    let (expected_space, expected_sha, expected_bytes) = if compact {
+        (
+            bekko25_core::COMPACT_EMBEDDING_SPACE,
+            bekko25_core::COMPACT_PACK_SHA256,
+            bekko25_core::COMPACT_PACK_BYTES,
+        )
+    } else {
+        (
+            bekko25_core::EMBEDDING_SPACE,
+            bekko25_core::PACK_SHA256,
+            bekko25_core::PACK_BYTES,
+        )
+    };
     fs::create_dir_all(root.join(".cache/bekko25")).unwrap();
     let file = root.join(format!(".cache/bekko25/upload-{}.bin", std::process::id()));
     fs::OpenOptions::new()
@@ -160,8 +190,8 @@ fn main() {
     let info = client.info();
     assert_eq!(info.model_id, bekko25_core::MODEL_ID);
     assert_eq!(info.revision, bekko25_core::REVISION);
-    assert_eq!(info.embedding_space, bekko25_core::EMBEDDING_SPACE);
-    assert_eq!(info.weight_pack_sha256, bekko25_core::PACK_SHA256);
+    assert_eq!(info.embedding_space, expected_space);
+    assert_eq!(info.weight_pack_sha256, expected_sha);
     assert!(
         info.last_error
             .as_deref()
@@ -172,11 +202,8 @@ fn main() {
     );
     if !activate_only {
         let pack = fs::read(&pack_path).expect("read fixed weight pack");
-        assert_eq!(pack.len(), bekko25_core::PACK_BYTES);
-        assert_eq!(
-            format!("{:x}", Sha256::digest(&pack)),
-            bekko25_core::PACK_SHA256
-        );
+        assert_eq!(pack.len(), expected_bytes);
+        assert_eq!(format!("{:x}", Sha256::digest(&pack)), expected_sha);
         upload_pack(&client, &pack, info.uploaded_bytes, restart);
     }
     client.update("activate");
